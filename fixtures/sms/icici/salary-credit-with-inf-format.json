@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0161",
+    "address": "VM-ICICIT",
+    "body": "ICICI Bank Account XX566 credited:Rs. 18,832.00 on 28-Feb-25. Info INF*000169831922*IQBO SAL FE. Available Balance is Rs. 28,076.14.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1883200,
+    "direction": "credit",
+    "counterparty": "Salary",
+    "balance": 2807614,
+    "accountLast4": "566"
+  },
+  "expectedStatus": "parsed",
+  "note": "Salary credit with INF format [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

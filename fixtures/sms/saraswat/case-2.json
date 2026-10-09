@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0265",
+    "address": "SARBNK",
+    "body": "Dear Customer, Your account no. ending with 5678 is debited with INR 500.00 on 02-01-2025 for SI. Current Bal is INR 2,000.00CR. - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "Standing Instruction",
+    "balance": 200000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

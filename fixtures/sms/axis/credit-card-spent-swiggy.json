@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0053",
+    "address": "AX-AXISBK-S",
+    "body": "Spent INR 131\nAxis Bank Card no. XX0818\n05-10-25 09:43:27 IST\nSwiggy Limi\nAvl Limit: INR 217162.72\nNot you? SMS BLOCK 0818 to 919951860002",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 13100,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Swiggy",
+    "availableLimit": 21716272,
+    "accountLast4": "0818"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - Swiggy [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

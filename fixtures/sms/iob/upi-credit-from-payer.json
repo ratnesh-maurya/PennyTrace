@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "iob-kdoc-01",
+    "address": "VA-IOBCHN-S",
+    "body": "Your a/c no. XXXXX92 is credited by Rs.906.00 on 2025-08-28 17, from JOHN DOE-9999999999@su(UPI Ref no 123456789012).Payer Remark - Paid via Supe -IOB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 90600,
+    "direction": "credit",
+    "counterparty": "UPI - JOHN DOE (9999999999@su)",
+    "refs": { "upi": "123456789012" }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit, KDoc SMS format (anonymised) [upstream IndianOverseasBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

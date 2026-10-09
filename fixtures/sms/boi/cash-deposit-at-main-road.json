@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "boi-0086",
+    "address": "BOIIND",
+    "body": "BOI -  Cash Rs. 500 deposited in your account XX5468 from Cash Acceptor Machine R0807030 at  MAIN ROAD ON 14-10-2025. Available balance Rs. 15000.50",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "Cash Deposit",
+    "balance": 1500050,
+    "accountLast4": "5468"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cash Deposit at MAIN ROAD [upstream TestBankOfIndiaParser.kt]",
+  "source": "upstream-test"
+}

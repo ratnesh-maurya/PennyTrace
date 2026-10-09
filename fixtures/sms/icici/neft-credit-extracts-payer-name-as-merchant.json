@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0171",
+    "address": "VK-ICICIT-S",
+    "body": "ICICI Bank Account XX378 credited:Rs. 6,000.00 on 24-Jun-26. Info NEFT-FDRLM4175907234-JOHN JOSE. Available Balance is Rs. 16,079.44.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 600000,
+    "direction": "credit",
+    "counterparty": "JOHN JOSE",
+    "balance": 1607944,
+    "accountLast4": "378"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT credit extracts payer name as merchant [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

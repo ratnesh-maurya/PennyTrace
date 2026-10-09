@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "icici-0164",
+    "address": "JD-ICICIT-S",
+    "body": "ICICI BANK NEFT Transaction with reference number IN12603221231681 for Rs. 22050.00 has been credited to the beneficiary account on 01-02-2026 at 10:32:51",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2205000,
+    "direction": "debit",
+    "counterparty": "NEFT Transfer"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT credited to beneficiary is EXPENSE [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "equitas-0101",
+    "address": "CP-EQUTAS-S",
+    "body": "INR 10.00 debited via UPI from Equitas A/c 3456 -Ref:111222333444 on 19-01-26 to CHAI WALA. Avl Bal is INR 500.00.Not U?Call 18001031222.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "debit",
+    "counterparty": "CHAI WALA",
+    "refs": {
+      "upi": "111222333444"
+    },
+    "balance": 50000,
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Small Amount UPI Debit [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

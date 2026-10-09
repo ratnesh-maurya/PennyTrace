@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0220",
+    "address": "APAY",
+    "body": "Payment of Rs 85.25 using Apay Balance successful at Zepto. Updated Balance is Rs 1,200.00 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 8525,
+    "direction": "debit",
+    "counterparty": "Zepto"
+  },
+  "expectedStatus": "parsed",
+  "note": "Zepto delivery via Apay [upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

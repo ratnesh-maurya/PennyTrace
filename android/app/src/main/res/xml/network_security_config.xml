@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PennyTrace network policy. The only network use is the AI model download from Hugging Face
+  that the user starts by tapping (src/llm/download.ts).
+
+  - Cleartext (http://) is disabled everywhere.
+  - HTTPS is trusted (system CAs only, never user-installed CAs) for Hugging Face hosts. Verified
+    2026-10: huggingface.co/.../resolve/... 302-redirects to us.aws.cdn.hf.co (Xet bridge);
+    older LFS/Xet hosts are cdn-lfs.huggingface.co, cdn-lfs.hf.co, cas-bridge.xethub.hf.co.
+    All are covered by includeSubdomains on huggingface.co and hf.co.
+  - Every other domain gets an EMPTY trust-anchor set in base-config, so a TLS handshake with any
+    non-Hugging-Face host fails certificate validation.
+
+  Limits (documented honestly): this config governs the platform TLS stack (HttpURLConnection,
+  OkHttp, Android DownloadManager does NOT use our config because it runs in another process).
+  It cannot stop raw sockets or native code with its own TLS/CA store (e.g. a bundled libcurl).
+  The real guarantees are: no SDK that phones home, ESLint bans fetch/XHR/WebSocket outside
+  src/llm/download.ts, and scripts/audit-permissions.js on the release APK.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors />
+    </base-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">huggingface.co</domain>
+        <domain includeSubdomains="true">hf.co</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

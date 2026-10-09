@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "bob-0075",
+    "address": "VM-BOBTXN",
+    "body": "Rs.80.00 Dr. from A/c XX123456 on 12-11-2024. AvlBal:Rs1234.56cx. Ref:52211012345 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 8000,
+    "direction": "debit",
+    "refs": {
+      "other": "52211012345"
+    },
+    "balance": 123456,
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit from Account [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

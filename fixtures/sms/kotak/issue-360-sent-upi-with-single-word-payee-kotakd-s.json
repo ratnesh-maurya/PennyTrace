@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0244",
+    "address": "JD-KOTAKD-S",
+    "body": "Sent Rs.90.00 from XXXXXX9886 to RAMESH on 25/05/2026. UPI ref no. 653114209367. Not you? Tap https://kotk.in/KOTAKD/S6ztop to report -Kotak",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 9000,
+    "direction": "debit",
+    "counterparty": "RAMESH",
+    "refs": {
+      "upi": "653114209367"
+    },
+    "accountLast4": "9886"
+  },
+  "expectedStatus": "parsed",
+  "note": "Issue #360 - Sent UPI with single-word payee (KOTAKD-S) [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

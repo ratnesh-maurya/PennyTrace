@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "kerala-bank-0341",
+    "address": "VM-KELBNK-S",
+    "body": "Dear Customer Your A/c no XXXX0024 is credited with 15000.00 on 06-06-2026 by Loan Recovery From : 139451061. Balance is -579822.00 - Kerala Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "credit",
+    "counterparty": "Loan Recovery",
+    "balance": -57982200,
+    "accountLast4": "0024"
+  },
+  "expectedStatus": "parsed",
+  "note": "Loan recovery credit with negative balance [upstream KeralaBankParserTest.kt] — fixture corrected: upstream expects balance BigDecimal(\"-579822.00\"); the generator emitted null for the negative value",
+  "source": "upstream-test"
+}

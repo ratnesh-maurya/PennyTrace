@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "central-bank-0089",
+    "address": "JD-CENTBK-S",
+    "body": "Rs. 5.000 credited to your A/c xxxxxx1234 on 03/01/2026 through NEFT vide Ref No./XUTR/IN22XX...XX24 By.NEXTBILLION TECHNOLOGY PRIVATE LIMI-CBoI",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500,
+    "direction": "credit",
+    "counterparty": "NEXTBILLION TECHNOLOGY PRIVATE LIMI",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT credit with By. prefix [upstream TestCentralBankOfIndiaParser.kt]",
+  "source": "upstream-test"
+}

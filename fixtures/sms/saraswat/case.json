@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0264",
+    "address": "JD-SARBNK-S",
+    "body": "Your A/c no. 1234 is credited with INR 100.00 on 01-01-2025 towards Payment. Current Bal is INR 1,000.00 CR - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "credit",
+    "counterparty": "Payment",
+    "balance": 100000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

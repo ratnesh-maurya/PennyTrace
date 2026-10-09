@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hdfc-0045",
+    "address": "AD-HDFCBK-S",
+    "body": "Rs 1368.00 used on HDFC Bank PIXEL Card at TEST MERCHANT on 05/10/26 09:03.Not You? SMS BLOCKPCC 2222 to 1800000000 or https://example.invalid/b",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 136800,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "TEST MERCHANT",
+    "accountLast4": "2222"
+  },
+  "expectedStatus": "parsed",
+  "note": "HDFC PIXEL credit card spend (#861) [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jiopay-0333",
+    "address": "JIOPAY",
+    "body": "Recharge Successful for Jio Number : 9876543210. Rs. 249.00 paid. Transaction ID : BR000CAUBYON",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 24900,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Jio Recharge - 9876****",
+    "refs": {
+      "other": "BR000CAUBYON"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "JioPay recharge successful [upstream JioPayParserTest.kt]",
+  "source": "upstream-test"
+}

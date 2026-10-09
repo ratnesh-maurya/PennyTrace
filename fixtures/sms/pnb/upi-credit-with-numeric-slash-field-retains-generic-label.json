@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "pnb-0017",
+    "address": "VM-PNBSMS-S",
+    "body": "A/c X0000 credited INR 125.00 From 000000/UPI:000000000004. Bal INR 9000.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "credit",
+    "counterparty": "UPI Transaction"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit with numeric slash field retains generic label [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

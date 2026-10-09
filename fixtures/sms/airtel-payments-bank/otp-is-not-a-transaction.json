@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "airtel-payments-bank-a04",
+    "address": "AD-AIRBNK-S",
+    "body": "123456 is the OTP for your Airtel Payments Bank a/c transaction of Rs.100.00. Do not share it with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP must not parse [upstream AirtelPaymentsBankParser.kt isTransactionMessage]",
+  "source": "upstream-kdoc"
+}

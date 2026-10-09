@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0023",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX0000 Debited by INR 125.00 thru Debitcard XXXX0000 at Example Shop on 01-01-2026. Aval Bal INR 9000.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "debit",
+    "counterparty": "Example Shop",
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Named debitcard merchant precedes the generic fallback [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

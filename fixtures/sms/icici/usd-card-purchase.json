@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0149",
+    "address": "JM-ICICIT-S",
+    "body": "USD 11.80 spent using ICICI Bank Card XX7004 on 03-Sep-25 on 1xJetBrains AI . Avl Limit: INR 17,95,899.53. If not you, call 1800 2662/SMS BLOCK 7004 to 9215676766.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1180,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "1xJetBrains AI",
+    "accountLast4": "7004"
+  },
+  "expectedStatus": "parsed",
+  "note": "USD card purchase [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

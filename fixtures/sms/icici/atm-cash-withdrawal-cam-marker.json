@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0170",
+    "address": "VM-ICICIT-S",
+    "body": "ICICI Bank Acc XX611 debited Rs. 6,500.00 on 19-Jun-26 CAM*62712SRY*. Avb Bal Rs. 10,079.44. To dispute Call 18002662 or SMS BLOCK 611 to 9215676766",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 650000,
+    "direction": "debit",
+    "counterparty": "ATM Withdrawal",
+    "balance": 1007944,
+    "accountLast4": "611"
+  },
+  "expectedStatus": "parsed",
+  "note": "ATM cash withdrawal (CAM* marker) [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

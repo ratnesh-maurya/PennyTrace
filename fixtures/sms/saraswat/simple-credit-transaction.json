@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0258",
+    "address": "SARBNK",
+    "body": "Your A/c no. 9012 is credited with INR 500.00 on 01-11-2025 towards Salary. Current Bal is INR 15,000.00 CR - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "Salary",
+    "balance": 1500000,
+    "accountLast4": "9012"
+  },
+  "expectedStatus": "parsed",
+  "note": "Simple credit transaction [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

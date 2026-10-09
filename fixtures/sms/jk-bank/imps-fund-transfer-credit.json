@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "jk-bank-0002",
+    "address": "AD-JKBANK-S",
+    "body": "Your A/c XXXXXXXX1111 has been Credited by INR 5,000.00 at 14:05 by IMPS Fund transfer. Amt received from TEST MERCHANT having A/C No. XXXXXXXX9876 RRN No.123456789012. Available Bal is INR 25,000.00 Cr -JK Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "TEST MERCHANT",
+    "accountLast4": "1111",
+    "balance": 2500000,
+    "refs": {
+      "upi": "123456789012"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS Fund transfer \"Amt received from X having A/C No.\" with RRN No. [JKBankParser.kt comments]",
+  "source": "synthetic"
+}

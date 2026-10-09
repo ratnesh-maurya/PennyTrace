@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0109",
+    "address": "AD-FEDBNK",
+    "body": "Rs 3500.00 debited via UPI on 20-08-2024 12:30:45 to VPA indigo.paytm@hdfcbank.Ref No 987654321099.Small txns?Use UPI Lite!-Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 350000,
+    "direction": "debit",
+    "counterparty": "Indigo",
+    "refs": {
+      "upi": "987654321099"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Payment to Indigo via Paytm [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

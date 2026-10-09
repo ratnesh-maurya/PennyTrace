@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "jk-bank-0005",
+    "address": "JKBANK",
+    "body": "Your A/c XXXXXXXX1111 has been Debited by INR 250.00 on 17-Sep-24 to testmerchant@ybl via UPI. UPI Ref: 115458170728. Available Bal is INR 24,250.00 Cr -JK Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "counterparty": "testmerchant",
+    "accountLast4": "1111",
+    "balance": 2425000,
+    "refs": {
+      "upi": "115458170728"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit to VPA with \"UPI Ref: 115458170728\" [JKBankParser.kt comments]",
+  "source": "synthetic"
+}

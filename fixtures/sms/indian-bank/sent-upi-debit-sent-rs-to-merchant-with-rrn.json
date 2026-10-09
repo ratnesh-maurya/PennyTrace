@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "indian-bank-0193",
+    "address": "AD-INDBNK-S",
+    "body": "Sent Rs.440.00 from A/c *4512 on 17-07-26 to NARMADA FOODS.RRN 213416112187.Avl Bal Rs.4585.65.Not you? SMS BLOCK to 9289592895-Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 44000,
+    "direction": "debit",
+    "counterparty": "NARMADA FOODS",
+    "refs": {
+      "upi": "213416112187"
+    },
+    "balance": 458565,
+    "accountLast4": "4512"
+  },
+  "expectedStatus": "parsed",
+  "note": "Sent UPI debit - Sent Rs to merchant with RRN [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

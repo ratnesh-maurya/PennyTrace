@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "pnb-0013",
+    "address": "VA-PNBCCD-S",
+    "body": "PNB Credit Card 1234 debited with Rs.1,499 [CODE:AB1234] at AMAZON INDIA on 05-10-2026 10:12 through UPI: 123456789012 Avl limit Rs. 47383.5. -PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 149900,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "AMAZON INDIA",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit card spend at a multi-word merchant [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

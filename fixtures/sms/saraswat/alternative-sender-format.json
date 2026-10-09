@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0263",
+    "address": "SARASWATBANK",
+    "body": "Your A/c no. 9753 is credited with INR 750.00 on 24-10-2025 towards Refund. Current Bal is INR 5,000.00 CR - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 75000,
+    "direction": "credit",
+    "counterparty": "Refund",
+    "balance": 500000,
+    "accountLast4": "9753"
+  },
+  "expectedStatus": "parsed",
+  "note": "Alternative sender format [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

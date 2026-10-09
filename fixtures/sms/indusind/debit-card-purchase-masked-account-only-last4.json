@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "indusind-0205",
+    "address": "AD-INDUSIND-S",
+    "body": "INR 1,101.53 debited from your A/C 201***123456 towards Debit Card Purchase. Avl BAL INR 400.20 - Not you? Call 18602677777 to report issue - IndusInd Bank.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 110153,
+    "direction": "debit",
+    "balance": 40020,
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit card purchase masked account - only last4 [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

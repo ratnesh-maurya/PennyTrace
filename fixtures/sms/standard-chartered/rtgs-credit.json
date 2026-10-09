@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "standard-chartered-0278",
+    "address": "SCBANK",
+    "body": "Dear Customer, there is an RTGS credit of INR 100,000.00 in your account 456xxxx1234 on 15/12/2025.Available Balance:INR 250,000.00 -StanChart",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000000,
+    "direction": "credit",
+    "counterparty": "RTGS Credit",
+    "balance": 25000000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "RTGS Credit [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

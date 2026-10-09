@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "navi-mf-0248",
+    "address": "VK-NAVAMC-T",
+    "body": "Unit Allotment Update:\nYour SIP purchase of Rs. 1,49,999.98 in Navi Largecap Fund DG has been processed at applicable NAV. The units will be alloted in 1-2 working days.\nTeam Navi Mutual Fund",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 14999998,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "Navi Largecap Fund DG"
+  },
+  "expectedStatus": "parsed",
+  "note": "SIP unit allotment — Largecap with Indian-style commas [upstream TestNaviMutualFundParser.kt]",
+  "source": "upstream-test"
+}

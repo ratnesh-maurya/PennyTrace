@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "federal-0127",
+    "address": "AD-FEDBNK",
+    "body": "Rs 5000.00 deposited to your A/c XX1234 via CDM on 19JAN2026 10:30:15. Bal:Rs 25000.00 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "Cash Deposit",
+    "balance": 2500000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cash Deposit via CDM [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

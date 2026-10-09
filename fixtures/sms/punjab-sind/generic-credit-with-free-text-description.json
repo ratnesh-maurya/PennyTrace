@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "punjab-sind-0345",
+    "address": "VM-PSBANK-S",
+    "body": "PSB000000000000001\nA/C No **1111 Credited with Rs 500--Vendor Amount (CLR BAL 1250.63CR)(18-03-2026 16:51:51) Punjab&Sind Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "Vendor Amount",
+    "balance": 125063,
+    "accountLast4": "1111"
+  },
+  "expectedStatus": "parsed",
+  "note": "Generic credit with free-text description [upstream PunjabSindBankParserTest.kt]",
+  "source": "upstream-test"
+}

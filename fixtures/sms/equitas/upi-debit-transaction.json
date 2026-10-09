@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "equitas-0098",
+    "address": "CP-EQUTAS-S",
+    "body": "INR 500.00 debited via UPI from Equitas A/c 1234 -Ref:571987071234 on 19-12-25 to JOHN DOE. Avl Bal is INR 15,000.50.Not U?Call 18001031222/SMS BLOCK UPI/BLOCK ACT 1233 to 7045030000.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "JOHN DOE",
+    "refs": {
+      "upi": "571987071234"
+    },
+    "balance": 1500050,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit Transaction [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

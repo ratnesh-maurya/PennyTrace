@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0105",
+    "address": "VM-FEDBNK-S",
+    "body": "Nippon India Mutual Fund has received Rs 1000.00 from your A/c 3363 via NEFT on 02-Jan-2026 06:50:32. Ref no. FBBT260023158681 - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "Nippon India Mutual Fund"
+  },
+  "expectedStatus": "parsed",
+  "note": "Mutual Fund outgoing transfer - should be INVESTMENT [upstream TestFederalBankOutgoingParser.kt]",
+  "source": "upstream-test"
+}

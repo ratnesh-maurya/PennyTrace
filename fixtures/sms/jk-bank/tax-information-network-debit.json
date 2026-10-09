@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "jk-bank-0004",
+    "address": "AD-JKBANK-S",
+    "body": "Your A/c XXXXXXXX1111 has been Debited by INR 2,000.00 on 17-Sep-24 towards TIN/Tax Information Network. Available Bal is INR 24,500.00 Cr -JK Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "counterparty": "Tax Information Network",
+    "accountLast4": "1111",
+    "balance": 2450000
+  },
+  "expectedStatus": "parsed",
+  "note": "\"towards TIN/Tax Information Network\" [JKBankParser.kt comments]",
+  "source": "synthetic"
+}

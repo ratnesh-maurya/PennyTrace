@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0260",
+    "address": "SARASWAT",
+    "body": "Your A/c no. 7890 is credited with INR 10.00 on 20-10-2025 towards Cashback. Current Bal is INR 1,200.50 CR - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "credit",
+    "counterparty": "Cashback",
+    "balance": 120050,
+    "accountLast4": "7890"
+  },
+  "expectedStatus": "parsed",
+  "note": "Small amount credit [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

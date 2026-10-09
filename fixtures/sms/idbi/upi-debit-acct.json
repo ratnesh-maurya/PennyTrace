@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "idbi-kdoc-02",
+    "address": "JD-IDBIBK-S",
+    "body": "IDBI Bank Acct XX1234 debited for Rs 1040.00 on 05-Feb-25; TEST STORE credited. UPI:521687538121. Bal Rs 3694.38. To block UPI send SMS BLOCKUPI to 9999999999 -IDBI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 104000,
+    "direction": "debit",
+    "counterparty": "TEST STORE",
+    "accountLast4": "1234",
+    "balance": 369438
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit built from KDoc/comment samples (\"IDBI Bank Acct XX1234 debited for Rs 1040.00\", \"; <merchant> credited.\", \"UPI:521687538121\", \"Bal Rs 3694.38\") [upstream IDBIBankParser.kt]",
+  "source": "upstream-kdoc"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0118",
+    "address": "AD-FEDBNK",
+    "body": "Hi, payment of INR 2500.00 for LifeInsurance via e-mandate ID: LI789GHI456 on Federal Bank Debit Card 1234 is processed successfully. To manage, visit: https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 250000,
+    "direction": "debit",
+    "counterparty": "LifeInsurance via e-mandate ID: LI789GHI456",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Successful E-mandate Payment - Insurance [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "slice-0367",
+    "address": "slice",
+    "body": "Your transaction of Rs. 2.07 at FamAppbyTriO from a/c xx2743 is successful. If not you, call 080-4832-9999 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 207,
+    "direction": "debit",
+    "counterparty": "FamAppbyTriO",
+    "accountLast4": "2743"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice SFB card transaction success is EXPENSE from card [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

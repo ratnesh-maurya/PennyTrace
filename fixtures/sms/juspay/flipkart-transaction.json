@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0221",
+    "address": "JUSPAY",
+    "body": "Payment of Rs 2,999.00 using Apay Balance successful at Flipkart. Updated Balance is Rs 5,000.00 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 299900,
+    "direction": "debit",
+    "counterparty": "Flipkart"
+  },
+  "expectedStatus": "parsed",
+  "note": "Flipkart transaction [upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

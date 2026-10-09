@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "karnataka-kdoc-03",
+    "address": "VM-KBLBNK-S",
+    "body": "Your OTP for transaction of Rs.1,500.00 at TEST MERCHANT is 123456. Do not share it with anyone -Karnataka Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP message (should not parse) [upstream KarnatakaBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "hdfc-0043",
+    "address": "AD-HDFCBK-S",
+    "body": "Sent Rs.5000.00 From HDFC Bank A/C *1111 To TEST MERCHANT for EMI due on 05-10-26 Ref 123456789012",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "A payment sent for an EMI due on a date still parses [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

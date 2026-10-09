@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "bob-0074",
+    "address": "VM-BOBTXN-S",
+    "body": "Rs.1500.00 transferred from A/c ...1234 to:John Smith. Total Bal:Rs.15000.00CR. Avlbl Amt:Rs.15000.00(10-11-2025 10:30:00) - Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "debit",
+    "counterparty": "John Smith",
+    "balance": 1500000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Account Transfer to Individual [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

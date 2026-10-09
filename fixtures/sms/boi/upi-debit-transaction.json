@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "boi-0087",
+    "address": "JM-BOIIND-S",
+    "body": "Rs.200.00 debited A/cXX5468 and credited to SAI MISAL via UPI Ref No 315439383341 on 23Aug25. Call 18001031906, if not done by you. -BOI",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 20000,
+    "direction": "debit",
+    "counterparty": "SAI MISAL",
+    "refs": {
+      "upi": "315439383341"
+    },
+    "accountLast4": "5468"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit Transaction [upstream TestBankOfIndiaParser.kt]",
+  "source": "upstream-test"
+}

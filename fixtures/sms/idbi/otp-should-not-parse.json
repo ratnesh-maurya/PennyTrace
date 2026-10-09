@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "idbi-kdoc-04",
+    "address": "AD-IDBIBK-S",
+    "body": "123456 is the OTP for your transaction of Rs 1040.00 at TEST MERCHANT. Do not share it with anyone. -IDBI Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP message (should not parse) [upstream IDBIBankParser.kt / BankParser.isNonTransactionMessage]",
+  "source": "upstream-kdoc"
+}

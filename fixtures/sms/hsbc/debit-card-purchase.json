@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "hsbc-0146",
+    "address": "HSBC",
+    "body": "Thank you for using HSBC Debit Card XXXXX71xx at IKEA INDIA . for INR 49.00 on 12-04-25.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 4900,
+    "direction": "debit",
+    "counterparty": "IKEA INDIA"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit Card Purchase [upstream TestHSBCBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "india-post-0322",
+    "address": "BV-DOPBNK-S",
+    "body": "Account  No. XXXXXXXX1234 CREDIT with amount Rs. 5550.00 on 02-01-2026. Balance: Rs.32000.00. [S92247102]",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 555000,
+    "direction": "credit",
+    "refs": {
+      "other": "S92247102"
+    },
+    "balance": 3200000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit with S suffix sender [upstream DOPBankParserTest.kt]",
+  "source": "upstream-test"
+}

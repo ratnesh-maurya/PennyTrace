@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "karnataka-0338",
+    "address": "VA-KBLBNK-T",
+    "body": "Your a/c XX1111 debited for Rs.500.00 on 06-10-26 trf to Test Distributor. UPI:6*********39.For dispute SMS BLOCK 1111 to 1800000000 -KarnatakaBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "Test Distributor",
+    "accountLast4": "1111"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI transfer names the payee, not \"UPI Transaction\" (#868) [upstream KarnatakaBankParserTest.kt]",
+  "source": "upstream-test"
+}

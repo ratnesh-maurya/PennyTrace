@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "generic-0008",
+    "address": "VK-ZETAFB-S",
+    "body": "UPI txn of Rs.600.00 from A/c XX1234 to shop@ybl failed on 15-01-26. Amount debited, if any, will be refunded.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 60000,
+    "direction": "debit",
+    "status": "failed"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace generic fallback case (synthetic)",
+  "source": "synthetic"
+}

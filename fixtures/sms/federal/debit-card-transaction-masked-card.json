@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "federal-0122",
+    "address": "AD-FEDBNK",
+    "body": "Rs 1500.00 debited via card XX**3456 at MERCHANT on 14-05-2025 15:30:45. Current Bal: Rs.250.75 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "debit",
+    "counterparty": "MERCHANT",
+    "balance": 25075,
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit Card Transaction - Masked Card [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

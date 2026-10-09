@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "airtel-payments-bank-a01",
+    "address": "AD-AIRBNK-S",
+    "body": "Airtel Payments Bank a/c is credited with Rs.20.00. Txn ID: 560992310006. Call 180023400 for help",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2000,
+    "direction": "credit",
+    "counterparty": "Airtel Payments Bank Transaction"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit with Txn ID [upstream AirtelPaymentsBankParser.kt KDoc format]",
+  "source": "upstream-kdoc"
+}

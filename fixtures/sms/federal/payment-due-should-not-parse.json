@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0202",
+    "address": "AX-FEDBNK-S",
+    "body": "Hi, payment due for Netflix,INR 199.00 on 05/09/2024 will be processed using Federal Bank Debit Card 3456. To cancel, visit https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Payment due (future debit) should not parse [upstream TestFederalBankParser.kt mandate test; added manually]",
+  "source": "upstream-test"
+}

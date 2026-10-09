@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "indian-bank-0186",
+    "address": "INDBNK",
+    "body": "Rs. 2000 withdrawn from ATM at MAIN STREET BRANCH on 09/10/2025.Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "counterparty": "ATM - MAIN STREET BRANCH"
+  },
+  "expectedStatus": "parsed",
+  "note": "ATM withdrawal [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

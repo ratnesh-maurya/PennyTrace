@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "navi-mf-0249",
+    "address": "AD-NAVAMC-S",
+    "body": "NAV updated for Navi Largecap Fund. Latest NAV: 12.3456. Visit the Navi app for details.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Non-allotment NAV update is rejected [upstream TestNaviMutualFundParser.kt]",
+  "source": "upstream-test"
+}

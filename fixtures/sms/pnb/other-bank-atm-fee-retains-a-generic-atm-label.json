@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0026",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX0000 debited with Rs.25.00,01-01-2026 12:00:00 through Debitcard XXXX0000 on other bank ATM. Balance Rs.9000.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2500,
+    "direction": "debit",
+    "counterparty": "ATM Transaction",
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Other bank ATM fee retains a generic ATM label [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "onecard-kdoc-04",
+    "address": "CP-ONECRD-S",
+    "body": "Your OneCard statement has been generated. Total amount Rs. 5,000.00. Due date 15-Oct-25.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Statement notice (should not parse; isTransactionMessage skips statement/due date) [upstream OneCardParser.kt KDoc]",
+  "source": "upstream-kdoc"
+}

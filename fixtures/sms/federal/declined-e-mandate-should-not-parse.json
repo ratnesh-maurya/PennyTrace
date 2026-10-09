@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0124",
+    "address": "AD-FEDBNK",
+    "body": "Hi, payment of INR 199.00 via e-mandate declined for ID: NX789XYZABC on Federal Bank Debit Card 3456. To manage, visit: https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Declined E-mandate Should Not Parse [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

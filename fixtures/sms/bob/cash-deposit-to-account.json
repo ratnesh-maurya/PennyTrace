@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "bob-0079",
+    "address": "VM-BOBSMS",
+    "body": "Rs.10000.00 deposited in cash to A/c XX234567 on 20-11-2024. AvlBal:Rs45000.00 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000000,
+    "direction": "credit",
+    "counterparty": "Cash Deposit",
+    "balance": 4500000,
+    "accountLast4": "4567"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cash Deposit to Account [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

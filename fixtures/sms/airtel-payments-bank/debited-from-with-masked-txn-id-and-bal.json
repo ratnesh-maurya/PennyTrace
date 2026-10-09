@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "airtel-payments-bank-a02",
+    "address": "AD-AIRBNK-S",
+    "body": "Rs. 5.00 debited from Airtel Payments Bank a/c Txn ID xxxxxxxx Bal:15.56 Call 180023400 for help",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500,
+    "direction": "debit",
+    "counterparty": "Airtel Payments Bank Transaction",
+    "balance": 1556
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit with masked Txn ID and Bal: [upstream AirtelPaymentsBankParser.kt KDoc format]",
+  "source": "upstream-kdoc"
+}

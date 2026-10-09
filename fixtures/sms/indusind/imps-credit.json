@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "indusind-0210",
+    "address": "JM-INDUSB-S",
+    "body": "Your IndusInd Account 15XXXXX0000 has been credited for INR 116.56 towards IMPS/500200000290. Call 18602677777 to report issue-IndusInd Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 11656,
+    "direction": "credit",
+    "counterparty": "IMPS",
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS credit [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

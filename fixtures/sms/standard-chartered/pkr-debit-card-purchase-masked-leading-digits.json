@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "standard-chartered-0287",
+    "address": "9220",
+    "body": "Dear Client, PKR 1,100.00 have been paid at Netflix.com on 31-01-26 using Debit Card no. 53119xxxxxxxx1640.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 110000,
+    "direction": "debit",
+    "counterparty": "Netflix.com",
+    "accountLast4": "1640"
+  },
+  "expectedStatus": "parsed",
+  "note": "PKR Debit card purchase masked leading digits [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

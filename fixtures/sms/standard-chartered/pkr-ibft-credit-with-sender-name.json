@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "standard-chartered-0282",
+    "address": "9220",
+    "body": "Dear Client, your account 01-01***9901 has been credited with amount PKR 1,083,503.58 from account 18-87xxxxx-9039959 PAYONEER from IBFT 04/12/202 on 04/12/25.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 108350358,
+    "direction": "credit",
+    "counterparty": "PAYONEER",
+    "accountLast4": "9901"
+  },
+  "expectedStatus": "parsed",
+  "note": "PKR IBFT credit with sender name [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

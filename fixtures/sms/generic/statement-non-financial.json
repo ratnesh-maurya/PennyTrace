@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "generic-0016",
+    "address": "VK-ZETAFB-S",
+    "body": "Your e-statement for December 2025 has been sent to your registered email id.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "ignored",
+  "note": "PennyTrace generic fallback case (synthetic)",
+  "source": "synthetic"
+}

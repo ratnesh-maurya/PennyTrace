@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "indian-bank-0195",
+    "address": "AD-INDBNK-S",
+    "body": "Sent Rs.500 from A/c *4512 on 17-07-26 to ZOMATO.RRN 213416112189.Avl Bal Rs.9085.65.Not you? SMS BLOCK to 9289592895-Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "ZOMATO",
+    "refs": {
+      "upi": "213416112189"
+    },
+    "balance": 908565,
+    "accountLast4": "4512"
+  },
+  "expectedStatus": "parsed",
+  "note": "Sent UPI debit - whole-number amount [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0238",
+    "address": "JD-KOTAKB-S",
+    "body": "Received Rs. 329.00 on 15-04-26 in your Kotak Bank A/C x2451 by an A/C linked to mobile x111. IMPS Ref no 610511412340.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 32900,
+    "direction": "credit",
+    "counterparty": "x111",
+    "refs": {
+      "utr": "610511412340"
+    },
+    "accountLast4": "2451"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS credit surfaces masked mobile as merchant [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

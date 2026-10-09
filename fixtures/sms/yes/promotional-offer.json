@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "yes-0299",
+    "address": "CP-YESBNK-S",
+    "body": "Get exciting offers on Yes Bank Credit Cards. Apply now! Visit yesbank.in",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Promotional offer [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

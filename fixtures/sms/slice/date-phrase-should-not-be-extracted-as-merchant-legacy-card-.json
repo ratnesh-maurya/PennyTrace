@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "slice-0362",
+    "address": "AD-SLCEIT-S",
+    "body": "Your slice credit card transaction of RS. 50000 on Feb 15 is successful.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "direction": "debit",
+    "instrument": "card"
+  },
+  "expectedStatus": "parsed",
+  "note": "Date phrase should not be extracted as merchant (legacy card path) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "karnataka-0340",
+    "address": "VA-KBLBNK-T",
+    "body": "Your a/c XX1111 debited for Rs.75.00 on 06-10-26 trf to M. K. STORES. UPI:6*********11.For dispute SMS BLOCK 1111 to 1800000000 -KarnatakaBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 7500,
+    "direction": "debit",
+    "counterparty": "M. K. STORES"
+  },
+  "expectedStatus": "parsed",
+  "note": "Payee with initials keeps its periods [upstream KarnatakaBankParserTest.kt]",
+  "source": "upstream-test"
+}

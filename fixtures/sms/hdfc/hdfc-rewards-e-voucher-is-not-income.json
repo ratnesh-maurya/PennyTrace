@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "hdfc-0032",
+    "address": "TX-HDFCBK-S",
+    "body": "Dear Customer, You have received Amazon Shopping E-voucher Rs.500/- from HDFC Bank My Rewards Redemption programme. Your E-Voucher [E-Voucher Code is XXXX-XXXXXX-XXX, Pin: , Valid till 02-Aug-2027 Value : INR 500.00] . For more details call 1800000000. HDFC Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "HDFC rewards e-voucher is not income [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

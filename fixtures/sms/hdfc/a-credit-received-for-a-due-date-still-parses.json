@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "hdfc-0044",
+    "address": "AD-HDFCBK-S",
+    "body": "Update! INR 2,000.00 deposited in HDFC Bank A/c XX1111 on 01-OCT-26 for rent due on 01-OCT-26.Avl bal INR 9,000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "credit"
+  },
+  "expectedStatus": "parsed",
+  "note": "A credit received for a due date still parses [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

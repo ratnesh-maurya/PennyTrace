@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&display=block">
+</helmet>
+<div style="width:380px;height:820px;border-radius:54px;background:linear-gradient(145deg,#2b2b2e,#0c0c0d 40%,#1c1c1e);padding:10px;box-sizing:border-box;box-shadow:0 0 0 1.5px #3a3a3d,0 40px 80px -30px rgba(0,0,0,0.45),0 18px 36px -18px rgba(0,0,0,0.35);position:relative;flex:none">
+<div style="position:absolute;right:-3px;top:170px;width:3px;height:64px;border-radius:0 2px 2px 0;background:#2a2a2c"></div>
+<div style="position:absolute;right:-3px;top:260px;width:3px;height:110px;border-radius:0 2px 2px 0;background:#2a2a2c"></div>
+<div style="{{ screenStyle }}">
+
+<div style="height:40px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 30px;position:relative;z-index:30;font-size:13.5px;font-weight:600;letter-spacing:0.01em;color:var(--ink)">
+<span style="font-variant-numeric:tabular-nums">9:41</span>
+<div style="position:absolute;left:50%;top:12px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:#050505;box-shadow:inset 0 0 0 3px #111,inset 2px 2px 3px rgba(80,90,120,0.6)"></div>
+<div style="display:flex;align-items:center;gap:4px">
+<span style="font-family:'Material Symbols Rounded';font-size:17px;line-height:1;font-variation-settings:'FILL' 1">signal_cellular_alt</span>
+<span style="font-family:'Material Symbols Rounded';font-size:17px;line-height:1;font-variation-settings:'FILL' 1">wifi</span>
+<span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;font-variation-settings:'FILL' 1;transform:rotate(90deg)">battery_5_bar</span>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;position:relative">
+
+<sc-if value="{{ isToday }}" hint-placeholder-val="{{ true }}">
+<div style="padding:6px 18px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:4px 2px 0">
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;align-items:center;gap:6px"><span style="font-size:13px;color:var(--ink3);font-weight:500">{{ dayLong }}</span><sc-if value="{{ isTodayDay }}" hint-placeholder-val="{{ true }}"><span style="height:18px;padding:0 6px;border-radius:5px;background:var(--accentSoft);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:0.04em;display:flex;align-items:center">TODAY</span></sc-if></div>
+<span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Daily close</span>
+</div>
+<div style="display:flex;align-items:center;gap:5px;height:30px;padding:0 11px 0 9px;border-radius:15px;background:var(--surface);box-shadow:var(--shadow);font-size:12px;font-weight:600;color:var(--ink2);margin-top:6px">
+<span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;color:var(--accent);font-variation-settings:'FILL' 1">lock</span>On-device</div>
+</div>
+
+<div style="display:flex;gap:4px;background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:6px">
+<sc-for list="{{ days }}" as="dy" hint-placeholder-count="7">
+<button onClick="{{ dy.pick }}" style="flex:1;height:60px;border:0;border-radius:15px;background:{{ dy.bg }};color:{{ dy.ink }};box-shadow:{{ dy.shadow }};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-family:Geist,system-ui;transition:background .2s">
+<span style="font-size:10px;font-weight:600;opacity:0.72;text-transform:uppercase;letter-spacing:0.05em">{{ dy.dow }}</span>
+<span style="font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1">{{ dy.dnum }}</span>
+<span style="width:5px;height:5px;border-radius:3px;background:{{ dy.dot }}"></span>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ scopes }}" as="s" hint-placeholder-count="3">
+<button onClick="{{ s.pick }}" style="height:32px;padding:0 13px;border-radius:10px;border:1px solid {{ s.border }};background:{{ s.bg }};color:{{ s.ink }};font:600 12.5px Geist,system-ui;cursor:pointer;white-space:nowrap">{{ s.label }}</button>
+</sc-for>
+</div>
+
+<div style="position:relative;overflow:hidden;background:var(--hero);color:#FFFFFF;border-radius:28px;box-shadow:var(--heroShadow);padding:20px 20px 16px;display:flex;flex-direction:column;gap:16px">
+<div style="position:absolute;right:-70px;top:-90px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.28),rgba(255,255,255,0) 65%);pointer-events:none"></div>
+<div style="position:absolute;left:-60px;bottom:-110px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(120,240,255,0.30),rgba(120,240,255,0) 65%);pointer-events:none"></div>
+<div style="display:flex;flex-direction:column;gap:6px;position:relative">
+<span style="font-size:12.5px;color:rgba(255,255,255,0.8);font-weight:500">Closing balance · {{ sc.label }}</span>
+<span style="font-size:40px;font-weight:600;letter-spacing:-0.035em;line-height:1;font-variant-numeric:tabular-nums">{{ sc.closingText }}</span>
+<div style="align-self:flex-start;display:flex;align-items:center;gap:5px;height:24px;padding:0 10px 0 7px;margin-top:4px;border-radius:12px;background:rgba(255,255,255,0.18);font-size:12px;color:#FFFFFF;font-weight:500">
+<span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;font-variation-settings:'FILL' 1">verified</span>{{ sc.recon }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;position:relative">
+<div style="display:flex;align-items:flex-end;gap:8px;height:84px;border-bottom:1px dashed rgba(255,255,255,0.35);">
+<sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
+<div style="flex:1;height:84px;position:relative"><div style="position:absolute;left:0;right:0;bottom:{{ b.bottom }};height:{{ b.height }};background:{{ b.color }};border-radius:6px"></div></div>
+</sc-for>
+</div>
+<div style="display:flex;gap:8px">
+<sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:10.5px;color:rgba(255,255,255,0.72);font-weight:500">{{ b.label }}</span><span style="font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.ink }}">{{ b.val }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<div style="background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:8px">
+<span style="width:28px;height:28px;border-radius:9px;background:var(--pos);color:#FFFFFF;box-shadow:0 6px 14px -6px var(--pos);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;line-height:1">south_west</span>
+<span style="font-size:11.5px;color:var(--ink3);font-weight:500">Received</span>
+<span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums">{{ sc.receivedText }}</span>
+</div>
+<div style="background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:8px">
+<span style="width:28px;height:28px;border-radius:9px;background:var(--out);color:#FFFFFF;box-shadow:0 6px 14px -6px var(--out);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;line-height:1">north_east</span>
+<span style="font-size:11.5px;color:var(--ink3);font-weight:500">Spent</span>
+<span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums">{{ sc.spentText }}</span>
+</div>
+<div style="background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:8px">
+<span style="width:28px;height:28px;border-radius:9px;background:var(--xfer);color:#FFFFFF;box-shadow:0 6px 14px -6px var(--xfer);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;line-height:1">swap_horiz</span>
+<span style="font-size:11.5px;color:var(--ink3);font-weight:500">Moved</span>
+<span style="font-size:16px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums">{{ sc.xferText }}</span>
+</div>
+</div>
+<span style="font-size:11.5px;color:var(--ink3);margin-top:-6px;padding:0 4px;text-wrap:pretty">{{ sc.xferNote }}</span>
+
+<sc-if value="{{ needsReview }}" hint-placeholder-val="{{ true }}">
+<div style="background:var(--warnSoft);border-radius:22px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:12px;align-items:flex-start">
+<span style="width:40px;height:40px;flex:none;border-radius:12px;background:#0B7A3E;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px">D</span>
+<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0">
+<span style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--warn)">Quick check · 62% sure</span>
+<span style="font-size:14px;font-weight:600;line-height:1.3;text-wrap:pretty">₹400 at DMART AVENUE — is this shopping?</span>
+</div>
+</div>
+<div style="display:flex;gap:8px">
+<button onClick="{{ confirmReview }}" style="flex:1;height:40px;border-radius:20px;border:0;background:var(--ink);color:var(--bg);font:600 13px Geist,system-ui;cursor:pointer">Yes, shopping</button>
+<button onClick="{{ openSheet }}" style="flex:1;height:40px;border-radius:20px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:600 13px Geist,system-ui;cursor:pointer">Change</button>
+</div>
+</div>
+</sc-if>
+
+<div style="background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:16px 16px 6px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:600">Where it went</span><span style="font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums">{{ sc.spentText }}</span></div>
+<sc-if value="{{ noCats }}" hint-placeholder-val="{{ false }}"><div style="padding:18px 0 22px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink3);font-size:13px"><span style="font-family:'Material Symbols Rounded';font-size:26px;line-height:1;color:var(--pos)">savings</span>No spending on this day</div></sc-if>
+<div style="display:flex;gap:3px;height:10px;border-radius:5px;overflow:hidden">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="3"><div style="width:{{ c.w }};background:{{ c.color }}"></div></sc-for>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)">
+<span style="width:34px;height:34px;border-radius:11px;background:{{ c.soft }};color:{{ c.color }};display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:19px;line-height:1;font-variation-settings:'FILL' 1">{{ c.icon }}</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:13.5px;font-weight:500">{{ c.n }}</span><span style="font-size:11.5px;color:var(--ink3)">{{ c.count }}</span></div>
+<span style="font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums">{{ c.vText }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:16px 16px 6px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6px"><span style="font-size:15px;font-weight:600">Accounts</span><button onClick="{{ goAccounts }}" style="border:0;background:none;color:var(--accent);font:600 12.5px Geist,system-ui;cursor:pointer;padding:0">Reconcile</button></div>
+<sc-for list="{{ homeAccts }}" as="a" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)">
+<span style="width:36px;height:36px;border-radius:11px;background:{{ a.tile }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;letter-spacing:0.02em">{{ a.initials }}</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:13.5px;font-weight:500">{{ a.name }}</span><span style="font-size:11.5px;color:{{ a.subInk }};display:flex;align-items:center;gap:3px"><span style="font-family:'Material Symbols Rounded';font-size:13px;line-height:1;font-variation-settings:'FILL' 1">{{ a.subIcon }}</span>{{ a.sub }}</span></div>
+<span style="font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;color:{{ a.balInk }}">{{ a.bal }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isActivity }}" hint-placeholder-val="{{ false }}">
+<div style="padding:6px 0 24px;display:flex;flex-direction:column;gap:12px">
+<div style="padding:4px 20px 0;display:flex;justify-content:space-between;align-items:center"><span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Activity</span>
+<span style="width:40px;height:40px;border-radius:20px;background:var(--surface);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:21px;line-height:1;color:var(--ink2)">tune</span></div>
+<div style="margin:0 18px;height:46px;border-radius:23px;background:var(--surface2);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--ink3);font-size:14px">
+<span style="font-family:'Material Symbols Rounded';font-size:21px;line-height:1">search</span>Search merchants, people, refs</div>
+<div style="display:flex;gap:6px;padding:0 18px;overflow-x:auto;scrollbar-width:none">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+<button onClick="{{ f.pick }}" style="flex:none;height:32px;padding:0 12px;border-radius:9px;border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.ink }};font:600 12.5px Geist,system-ui;cursor:pointer;display:flex;align-items:center;gap:5px">{{ f.label }}<span style="font-size:11px;opacity:0.7;font-variant-numeric:tabular-nums">{{ f.count }}</span></button>
+</sc-for>
+</div>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:6px;padding:0 18px">
+<div style="display:flex;justify-content:space-between;padding:8px 4px 2px"><span style="font-size:12.5px;font-weight:600;color:var(--ink2)">{{ g.label }}</span><span style="font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums">{{ g.total }}</span></div>
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);overflow:hidden">
+<sc-for list="{{ g.items }}" as="t" hint-placeholder-count="4">
+<div onClick="{{ t.open }}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line);cursor:pointer;margin-top:-1px" style-hover="background:var(--surface2)">
+<div style="width:42px;height:42px;flex:none;border-radius:13px;background:{{ t.tileBg }};color:{{ t.tileInk }};box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;position:relative">
+<span style="font-family:'Material Symbols Rounded';font-size:21px;line-height:1;font-weight:400">{{ t.icon }}</span>{{ t.initials }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+<div style="display:flex;align-items:center;gap:6px;min-width:0"><span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span>
+<sc-if value="{{ t.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="flex:none;height:18px;padding:0 6px;border-radius:5px;background:{{ t.badgeBg }};color:{{ t.badgeInk }};font-size:10.5px;font-weight:700;display:flex;align-items:center">{{ t.badge }}</span></sc-if></div>
+<span style="font-size:11.5px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.sub }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none">
+<span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:{{ t.amtColor }}">{{ t.amtText }}</span>
+<div style="display:flex;gap:2px;color:var(--ink3)"><sc-for list="{{ t.srcs }}" as="s"><span style="font-family:'Material Symbols Rounded';font-size:13px;line-height:1">{{ s.icon }}</span></sc-for></div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{ emptyList }}" hint-placeholder-val="{{ false }}">
+<div style="margin:24px 18px;padding:28px;border-radius:22px;border:1px dashed var(--line2);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);font-size:13px;text-align:center"><span style="font-family:'Material Symbols Rounded';font-size:28px;line-height:1;color:var(--accent)">task_alt</span>Nothing left to review.</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isInsights }}" hint-placeholder-val="{{ false }}">
+<div style="padding:6px 18px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="padding:4px 2px 0;display:flex;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:var(--ink3);font-weight:500">Spending by account</span><span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Insights</span></div>
+<div style="display:flex;padding:3px;border-radius:12px;background:var(--surface2)">
+<sc-for list="{{ ranges }}" as="r" hint-placeholder-count="2"><button onClick="{{ r.pick }}" style="height:30px;padding:0 12px;border:0;border-radius:9px;background:{{ r.bg }};color:{{ r.ink }};box-shadow:{{ r.shadow }};font:600 12.5px Geist,system-ui;cursor:pointer">{{ r.label }}</button></sc-for>
+</div>
+</div>
+<div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px">
+<sc-for list="{{ inScopes }}" as="s" hint-placeholder-count="4">
+<button onClick="{{ s.pick }}" style="flex:none;height:36px;padding:0 13px 0 6px;border-radius:18px;border:1px solid {{ s.border }};background:{{ s.bg }};color:{{ s.ink }};font:600 12.5px Geist,system-ui;cursor:pointer;display:flex;align-items:center;gap:7px"><span style="width:24px;height:24px;border-radius:12px;background:{{ s.tile }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700">{{ s.initials }}</span>{{ s.label }}</button>
+</sc-for>
+</div>
+<div style="background:var(--surface);border-radius:26px;box-shadow:var(--shadow);padding:18px 18px 14px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:12.5px;color:var(--ink3);font-weight:500">{{ ins.title }}</span><span style="font-size:32px;font-weight:600;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums">{{ ins.totalText }}</span><span style="font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums">{{ ins.avgText }}</span></div>
+<span style="height:26px;padding:0 9px;border-radius:13px;background:{{ ins.deltaBg }};color:{{ ins.deltaInk }};font-size:12px;font-weight:700;display:flex;align-items:center;white-space:nowrap">{{ ins.deltaText }}</span>
+</div>
+<div style="position:relative;height:120px;display:flex;align-items:flex-end;gap:8px">
+<div style="position:absolute;left:0;right:0;bottom:{{ ins.avgBottom }};border-top:1.5px dashed var(--ink3);opacity:0.45;pointer-events:none"></div>
+<sc-for list="{{ ibars }}" as="b" hint-placeholder-count="7"><div onClick="{{ b.pick }}" style="flex:1;height:{{ b.h }};background:{{ b.bg }};box-shadow:{{ b.shadow }};border-radius:8px 8px 4px 4px;cursor:pointer;transition:height .3s"></div></sc-for>
+</div>
+<div style="display:flex;gap:8px;margin-top:-6px">
+<sc-for list="{{ ibars }}" as="b" hint-placeholder-count="7"><div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font-size:10.5px;font-weight:{{ b.weight }};color:{{ b.labelInk }};white-space:nowrap">{{ b.label }}</span><span style="font-size:10.5px;color:var(--ink3);font-variant-numeric:tabular-nums">{{ b.val }}</span></div></sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:8px">
+<span style="width:30px;height:30px;border-radius:10px;background:var(--pos);color:#FFFFFF;box-shadow:0 6px 14px -6px var(--pos);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;line-height:1">south_west</span>
+<span style="font-size:11.5px;color:var(--ink3);font-weight:500">Money in</span>
+<span style="font-size:18px;font-weight:600;letter-spacing:-0.015em;font-variant-numeric:tabular-nums">{{ ins.incomeText }}</span>
+</div>
+<div style="background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:8px">
+<span style="width:30px;height:30px;border-radius:10px;background:var(--accent);color:#FFFFFF;box-shadow:0 6px 14px -6px var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;line-height:1;font-variation-settings:'FILL' 1">savings</span>
+<span style="font-size:11.5px;color:var(--ink3);font-weight:500">{{ ins.savedSub }}</span>
+<span style="font-size:18px;font-weight:600;letter-spacing:-0.015em;font-variant-numeric:tabular-nums">{{ ins.savedText }}</span>
+</div>
+</div>
+<sc-if value="{{ hasByAcct }}" hint-placeholder-val="{{ true }}">
+<div style="background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:16px 16px 8px;display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6px"><span style="font-size:15px;font-weight:600">By account</span><span style="font-size:12px;color:var(--ink3)">Tap a chip above to drill in</span></div>
+<sc-for list="{{ byAcct }}" as="a" hint-placeholder-count="3">
+<div onClick="{{ a.pick }}" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);cursor:pointer">
+<span style="width:36px;height:36px;flex:none;border-radius:11px;background:{{ a.tile }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">{{ a.initials }}</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:13.5px;font-weight:500">{{ a.name }}</span><span style="font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums">{{ a.vText }}</span></div>
+<div style="height:6px;border-radius:3px;background:var(--surface2);overflow:hidden"><div style="height:100%;width:{{ a.w }};background:{{ a.tile }};border-radius:3px"></div></div>
+<span style="font-size:11px;color:var(--ink3)">{{ a.sub }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:15px;font-weight:600">Categories</span>
+<div style="display:flex;gap:16px;align-items:center">
+<div style="width:124px;height:124px;flex:none;border-radius:50%;background:{{ ins.donut }};display:flex;align-items:center;justify-content:center">
+<div style="width:86px;height:86px;border-radius:50%;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px"><span style="font-size:10.5px;color:var(--ink3);font-weight:500">{{ ins.catCount }}</span><span style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums">{{ ins.totalShort }}</span></div>
+</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ icats }}" as="c" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="width:8px;height:8px;flex:none;border-radius:3px;background:{{ c.color }}"></span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink2)">{{ c.n }}</span><span style="font-weight:600;font-variant-numeric:tabular-nums">{{ c.pct }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:16px 16px 6px;display:flex;flex-direction:column">
+<span style="font-size:15px;font-weight:600;padding-bottom:10px">Top merchants</span>
+<sc-for list="{{ merchants }}" as="m" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)">
+<span style="width:36px;height:36px;flex:none;border-radius:11px;background:{{ m.tile }};color:#FFFFFF;box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">{{ m.initials }}</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:13.5px;font-weight:500">{{ m.name }}</span><span style="font-size:11.5px;color:var(--ink3)">{{ m.count }}</span></div>
+<span style="font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums">{{ m.vText }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAccounts }}" hint-placeholder-val="{{ false }}">
+<div style="padding:6px 18px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="padding:4px 2px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:var(--ink3);font-weight:500">Ledger vs. bank-reported balances</span><span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Reconciliation</span></div>
+
+<div style="background:var(--ink);color:var(--bg);border-radius:26px;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12.5px;font-weight:500;opacity:0.7">Full financial position</span><span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;opacity:0.7">info</span></div>
+<span style="font-size:34px;font-weight:600;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums">₹43,178</span>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid rgba(128,128,128,0.25)">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11.5px;opacity:0.65">Cash in 3 accounts</span><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums">₹55,558</span></div>
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11.5px;opacity:0.65">Card dues</span><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums">−₹12,380</span></div>
+</div>
+</div>
+
+<sc-for list="{{ accts }}" as="a" hint-placeholder-count="3">
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="width:38px;height:38px;border-radius:12px;background:{{ a.tile }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">{{ a.initials }}</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600">{{ a.name }}</span><span style="font-size:11.5px;color:var(--ink3)">{{ a.type }}</span></div>
+<span style="height:24px;padding:0 9px 0 6px;border-radius:12px;background:{{ a.stBg }};color:{{ a.stInk }};display:flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:15px;line-height:1;font-variation-settings:'FILL' 1">{{ a.stIcon }}</span>{{ a.status }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:var(--surface2);border-radius:14px;padding:10px 12px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:10.5px;color:var(--ink3);font-weight:500">Calculated</span><span style="font-size:13px;font-weight:600;font-variant-numeric:tabular-nums">{{ a.calc }}</span></div>
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:10.5px;color:var(--ink3);font-weight:500">Bank says</span><span style="font-size:13px;font-weight:600;font-variant-numeric:tabular-nums">{{ a.reported }}</span></div>
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:10.5px;color:var(--ink3);font-weight:500">Variance</span><span style="font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:{{ a.stInk }}">{{ a.variance }}</span></div>
+</div>
+<span style="font-size:11.5px;color:var(--ink3);line-height:1.45;text-wrap:pretty">{{ a.note }}</span>
+</div>
+</sc-for>
+
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 4px 0"><span style="font-size:15px;font-weight:600">Own-account transfers</span><span style="font-size:12px;color:var(--ink3)">Not income · not spending</span></div>
+
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:64px"><span style="width:38px;height:38px;border-radius:12px;background:#004C8F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">HD</span><span style="font-size:11px;color:var(--ink2);font-weight:500">••1234</span></div>
+<div style="flex:1;position:relative;height:38px;display:flex;align-items:center;justify-content:center;margin-top:-18px"><div style="position:absolute;left:0;right:0;top:50%;height:2px;background:var(--xfer);border-radius:1px"></div><span style="position:relative;height:26px;padding:0 10px;border-radius:13px;background:var(--xferSoft);color:var(--xfer);font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);font-variant-numeric:tabular-nums"><span style="font-family:'Material Symbols Rounded';font-size:15px;line-height:1">link</span>₹5,000</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:64px"><span style="width:38px;height:38px;border-radius:12px;background:#1E3F8F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">SB</span><span style="font-size:11px;color:var(--ink2);font-weight:500">••8821</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.45"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1.2;color:var(--xfer);font-variation-settings:'FILL' 1">check_circle</span><span style="text-wrap:pretty">Debit and credit matched by UTR <span style="font-family:'Geist Mono',monospace;font-size:11px">SBIN2262829114</span> · today 2:05 PM</span></div>
+</div>
+
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:8px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:64px"><span style="width:38px;height:38px;border-radius:12px;background:#1E3F8F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">SB</span><span style="font-size:11px;color:var(--ink2);font-weight:500">••8821</span></div>
+<div style="flex:1;position:relative;height:38px;display:flex;align-items:center;justify-content:center;margin-top:-18px"><div style="position:absolute;left:0;right:0;top:50%;border-top:2px dashed var(--warn)"></div><span style="position:relative;height:26px;padding:0 10px;border-radius:13px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--warn);color:var(--warn);font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums"><span style="font-family:'Material Symbols Rounded';font-size:15px;line-height:1">schedule</span>₹2,000</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:64px"><span style="width:38px;height:38px;border-radius:12px;background:var(--surface2);color:var(--ink3);box-shadow:inset 0 0 0 1.5px var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px;line-height:1">hourglass_top</span><span style="font-size:11px;color:var(--ink2);font-weight:500">Kotak ••0193</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.45"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1.2;color:var(--warn);font-variation-settings:'FILL' 1">pending</span><span style="text-wrap:pretty">Debit seen yesterday 7:48 PM. Held as in transit until the Kotak credit arrives — never counted as spending.</span></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+<div style="padding:6px 18px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="padding:4px 2px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:var(--ink3);font-weight:500">Sources, storage &amp; permissions</span><span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Privacy</span></div>
+
+<div style="background:var(--accentSoft);border-radius:26px;padding:20px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden">
+<div style="position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;border:1.5px solid var(--accent);opacity:0.18"></div>
+<div style="position:absolute;right:-6px;top:-6px;width:102px;height:102px;border-radius:50%;border:1.5px solid var(--accent);opacity:0.25"></div>
+<span style="width:48px;height:48px;border-radius:16px;background:var(--accent);color:var(--accentInk);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:28px;line-height:1;font-variation-settings:'FILL' 1">wifi_off</span>
+<span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:pretty">Nothing leaves this phone.</span>
+<span style="font-size:13px;line-height:1.5;color:var(--ink2);text-wrap:pretty">This app doesn't request internet access, so it can't connect to a network — not to sync, not for analytics, not for AI.</span>
+</div>
+
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:4px 16px">
+<sc-for list="{{ guarantees }}" as="g" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);margin-top:-1px">
+<span style="font-family:'Material Symbols Rounded';font-size:21px;line-height:1;color:var(--ink2)">{{ g.icon }}</span>
+<span style="flex:1;font-size:13.5px;font-weight:500">{{ g.label }}</span>
+<span style="font-size:12px;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:3px">{{ g.value }}<span style="font-family:'Material Symbols Rounded';font-size:15px;line-height:1;font-variation-settings:'FILL' 1">check_circle</span></span>
+</div>
+</sc-for>
+</div>
+
+<span style="font-size:15px;font-weight:600;padding:6px 4px 0">Sources</span>
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:4px 16px">
+<sc-for list="{{ toggles }}" as="o" hint-placeholder-count="3">
+<div onClick="{{ o.flip }}" style="display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line);margin-top:-1px;cursor:pointer">
+<span style="width:36px;height:36px;border-radius:11px;background:var(--surface2);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px;line-height:1">{{ o.icon }}</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:13.5px;font-weight:600">{{ o.label }}</span><span style="font-size:11.5px;color:var(--ink3);line-height:1.35;text-wrap:pretty">{{ o.sub }}</span></div>
+<div style="width:50px;height:30px;flex:none;border-radius:15px;box-sizing:border-box;background:{{ o.track }};border:2px solid {{ o.trackBorder }};position:relative;transition:background .2s"><div style="position:absolute;top:50%;left:{{ o.thumbLeft }};width:{{ o.thumbSize }};height:{{ o.thumbSize }};margin-top:{{ o.thumbMargin }};border-radius:50%;background:{{ o.thumb }};transition:all .2s;box-shadow:0 1px 2px rgba(0,0,0,0.2)"></div></div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button style="height:76px;border-radius:20px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:600 13px Geist,system-ui;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:0 14px"><span style="font-family:'Material Symbols Rounded';font-size:21px;line-height:1;color:var(--accent)">upload_file</span>Import statement</button>
+<button style="height:76px;border-radius:20px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:600 13px Geist,system-ui;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:0 14px"><span style="font-family:'Material Symbols Rounded';font-size:21px;line-height:1;color:var(--accent)">download</span>Export ledger</button>
+</div>
+<span style="font-size:11.5px;color:var(--ink3);text-align:center;padding:0 12px;line-height:1.45;text-wrap:pretty">Imports and exports use the system file picker. Ledger encrypted with SQLCipher · key held in Android Keystore.</span>
+</div>
+</sc-if>
+</div>
+
+<div style="flex:none;background:var(--navBg);border-top:1px solid var(--line);display:flex;padding:10px 6px 4px;position:relative;z-index:2">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+<button onClick="{{ n.go }}" style="flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:0;color:var(--ink)">
+<span style="width:56px;height:32px;border-radius:16px;background:{{ n.pill }};display:flex;align-items:center;justify-content:center;position:relative;transition:background .2s"><span style="font-family:'Material Symbols Rounded';font-size:23px;line-height:1;color:{{ n.iconInk }};font-variation-settings:{{ n.fvs }}">{{ n.icon }}</span>
+<sc-if value="{{ n.dot }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:3px;right:14px;width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 2px var(--navBg)"></span></sc-if></span>
+<span style="font:{{ n.weight }} 12px Geist,system-ui;color:{{ n.labelInk }}">{{ n.label }}</span>
+</button>
+</sc-for>
+</div>
+<div style="height:22px;flex:none;background:var(--navBg);display:flex;align-items:center;justify-content:center;position:relative;z-index:2"><div style="width:108px;height:4px;border-radius:2px;background:var(--ink);opacity:0.85"></div></div>
+
+<sc-if value="{{ hasDetail }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:var(--bg);z-index:20;display:flex;flex-direction:column;padding-top:40px">
+<div style="height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 8px">
+<button onClick="{{ closeDetail }}" style="width:48px;height:48px;border:0;background:none;border-radius:24px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--surface2)"><span style="font-family:'Material Symbols Rounded';font-size:24px;line-height:1">arrow_back</span></button>
+<span style="font-size:16px;font-weight:600">Transaction</span>
+<button style="width:48px;height:48px;border:0;background:none;border-radius:24px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:24px;line-height:1">more_vert</span></button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:4px 18px 24px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 6px">
+<div style="width:64px;height:64px;border-radius:20px;background:{{ d.tileBg }};color:{{ d.tileInk }};box-shadow:inset 0 0 0 1px var(--line),0 10px 24px -12px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px"><span style="font-family:'Material Symbols Rounded';font-size:30px;line-height:1;font-weight:400">{{ d.icon }}</span>{{ d.initials }}</div>
+<span style="font-size:15px;font-weight:600">{{ d.name }}</span>
+<span style="font-size:38px;font-weight:600;letter-spacing:-0.035em;line-height:1;font-variant-numeric:tabular-nums;color:{{ d.amtColor }}">{{ d.amtText }}</span>
+<span style="font-size:12.5px;color:var(--ink3)">{{ d.dateLine }}</span>
+</div>
+
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="width:36px;height:36px;border-radius:11px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px;line-height:1;font-variation-settings:'FILL' 1">{{ d.catIcon }}</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:11.5px;color:var(--ink3);font-weight:500">Category</span><span style="font-size:14px;font-weight:600">{{ d.cat }}</span></div>
+<span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;color:var(--ink3)">edit</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;font-size:11.5px"><span style="color:var(--ink3)">{{ d.rule }}</span><span style="font-weight:600;color:{{ d.confInk }}">{{ d.confLabel }}</span></div>
+<div style="height:6px;border-radius:3px;background:var(--surface2);overflow:hidden"><div style="height:100%;width:{{ d.confW }};background:{{ d.confInk }};border-radius:3px"></div></div>
+</div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 4px 0"><span style="font-size:15px;font-weight:600">Evidence</span><span style="font-size:12px;color:var(--ink3)">{{ d.evCount }}</span></div>
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:16px 16px 12px;display:flex;flex-direction:column">
+<sc-for list="{{ d.ev }}" as="e" hint-placeholder-count="3">
+<div style="display:flex;gap:12px">
+<div style="display:flex;flex-direction:column;align-items:center;width:30px;flex:none">
+<span style="width:30px;height:30px;border-radius:10px;background:var(--surface2);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:17px;line-height:1">{{ e.icon }}</span>
+<div style="flex:1;width:2px;background:var(--line2);margin:4px 0;opacity:{{ e.lineOp }}"></div>
+</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding-bottom:14px">
+<div style="display:flex;justify-content:space-between;gap:8px;padding-top:6px"><span style="font-size:13px;font-weight:600">{{ e.label }}</span><span style="font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums">{{ e.time }}</span></div>
+<span style="font-family:'Geist Mono',monospace;font-size:11px;line-height:1.5;color:var(--ink2);background:var(--surface2);border-radius:10px;padding:8px 10px;word-break:break-word">{{ e.text }}</span>
+</div>
+</div>
+</sc-for>
+<div style="display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--accentSoft);font-size:12px;line-height:1.45;color:var(--ink)"><span style="font-family:'Material Symbols Rounded';font-size:17px;line-height:1.1;color:var(--accent);font-variation-settings:'FILL' 1">join</span><span style="text-wrap:pretty">{{ d.matched }}</span></div>
+</div>
+
+<div style="background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:4px 16px">
+<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:13px"><span style="color:var(--ink3)">Reference</span><span style="font-family:'Geist Mono',monospace;font-size:12px">{{ d.ref }}</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:13px;border-top:1px solid var(--line)"><span style="color:var(--ink3)">Parser</span><span style="font-family:'Geist Mono',monospace;font-size:12px">{{ d.parser }}</span></div>
+</div>
+<div style="display:flex;gap:8px">
+<button onClick="{{ openSheet }}" style="flex:1;height:48px;border-radius:24px;border:0;background:var(--ink);color:var(--bg);font:600 14px Geist,system-ui;cursor:pointer">Change category</button>
+<button style="flex:1;height:48px;border-radius:24px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:600 14px Geist,system-ui;cursor:pointer">Mark as transfer</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.42);z-index:40"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:var(--sheet);border-radius:30px 30px 0 0;padding:10px 18px 30px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -20px 40px -20px rgba(0,0,0,0.4)">
+<div style="width:36px;height:4px;border-radius:2px;background:var(--ink3);opacity:0.5;align-self:center"></div>
+<div style="display:flex;gap:12px;align-items:center;padding-top:4px">
+<span style="width:44px;height:44px;border-radius:14px;background:#0B7A3E;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px">D</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;letter-spacing:-0.01em">What was this?</span><span style="font-size:12.5px;color:var(--ink3)">DMART AVENUE · −₹400 · SBI ••8821 · 7:41 PM</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<sc-for list="{{ sheetOpts }}" as="o" hint-placeholder-count="6">
+<button onClick="{{ o.pick }}" style="height:52px;border-radius:16px;border:{{ o.border }};background:{{ o.bg }};color:var(--ink);font:600 13px Geist,system-ui;cursor:pointer;display:flex;align-items:center;gap:9px;padding:0 12px;text-align:left"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;color:{{ o.iconInk }};font-variation-settings:'FILL' 1">{{ o.icon }}</span>{{ o.label }}</button>
+</sc-for>
+</div>
+<div onClick="{{ flipRemember }}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--surface2);cursor:pointer">
+<span style="width:22px;height:22px;border-radius:6px;background:{{ rememberBg }};border:2px solid {{ rememberBorder }};box-sizing:border-box;color:var(--accentInk);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:16px;line-height:1;font-weight:600">{{ rememberIcon }}</span>
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:13px;font-weight:600">Always use this for DMART AVENUE</span><span style="font-size:11.5px;color:var(--ink3)">Saved as an on-device rule</span></div>
+</div>
+<button onClick="{{ applySheet }}" style="height:52px;border-radius:26px;border:0;background:var(--accent);color:var(--accentInk);font:600 15px Geist,system-ui;cursor:pointer">Save</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:16px;right:16px;bottom:100px;z-index:50;background:var(--toast);color:var(--toastInk);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;box-shadow:0 12px 30px -10px rgba(0,0,0,0.45)"><span style="font-family:'Material Symbols Rounded';font-size:19px;line-height:1;color:var(--accent);font-variation-settings:'FILL' 1">check_circle</span>{{ toast }}</div>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:400,&quot;height&quot;:840},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;today&quot;,&quot;review&quot;,&quot;activity&quot;,&quot;detail&quot;,&quot;accounts&quot;,&quot;privacy&quot;],&quot;default&quot;:&quot;today&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;green&quot;,&quot;indigo&quot;,&quot;saffron&quot;],&quot;default&quot;:&quot;green&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  static THEMES = {
+    light: { bg:'#F4F6FB', surface:'#FFFFFF', surface2:'#EEF1F7', sheet:'#FFFFFF', ink:'#0B1324', ink2:'#46526B', ink3:'#8790A5', line:'rgba(11,19,36,0.07)', line2:'rgba(11,19,36,0.13)', pos:'#0EA371', posSoft:'#DBF5EA', out:'#EF3E4A', outSoft:'#FDE5E6', warn:'#B26B00', warnSoft:'#FFF0D4', xfer:'#7C3AED', xferSoft:'#EFE7FD', navBg:'#FFFFFF', toast:'#0B1324', toastInk:'#FFFFFF', shadow:'0 1px 2px rgba(16,32,72,0.04), 0 8px 24px -12px rgba(16,32,72,0.14)', barSoft:'#DDE6FF' },
+    dark: { bg:'#060A14', surface:'#0F1626', surface2:'#18213A', sheet:'#111A2E', ink:'#EEF2FB', ink2:'#A7B1C8', ink3:'#717C95', line:'rgba(255,255,255,0.06)', line2:'rgba(255,255,255,0.13)', pos:'#2FD69A', posSoft:'rgba(47,214,154,0.14)', out:'#FF5F6D', outSoft:'rgba(255,95,109,0.14)', warn:'#FFC24D', warnSoft:'rgba(255,194,77,0.13)', xfer:'#A887FF', xferSoft:'rgba(168,135,255,0.15)', navBg:'#0A1120', toast:'#EEF2FB', toastInk:'#0A1120', shadow:'0 0 0 1px rgba(255,255,255,0.045)', barSoft:'rgba(91,140,255,0.2)' }
+  };
+  static ACCENTS = {
+    blue: { light:{accent:'#1E5EFF', accentSoft:'#E3EBFF', accentInk:'#FFFFFF', hero:'linear-gradient(140deg,#1440DB 0%,#2563FF 52%,#4C95FF 100%)', heroShadow:'0 20px 36px -18px rgba(30,94,255,0.6)'}, dark:{accent:'#5B8EFF', accentSoft:'rgba(91,142,255,0.16)', accentInk:'#061230', hero:'linear-gradient(140deg,#1838D8 0%,#2E64FF 52%,#4F9BFF 100%)', heroShadow:'0 20px 44px -18px rgba(59,110,255,0.75)'} },
+    sky: { light:{accent:'#0284C7', accentSoft:'#DDF1FC', accentInk:'#FFFFFF', hero:'linear-gradient(140deg,#035E9C 0%,#0A8FE0 52%,#3CC4FF 100%)', heroShadow:'0 20px 36px -18px rgba(2,132,199,0.6)'}, dark:{accent:'#38BDF8', accentSoft:'rgba(56,189,248,0.15)', accentInk:'#03243A', hero:'linear-gradient(140deg,#0369A1 0%,#0EA5E9 52%,#48D3FF 100%)', heroShadow:'0 20px 44px -18px rgba(14,165,233,0.7)'} },
+    violet: { light:{accent:'#4F3BF0', accentSoft:'#E8E5FE', accentInk:'#FFFFFF', hero:'linear-gradient(140deg,#2E1FC4 0%,#4F3BF0 52%,#8A6CFF 100%)', heroShadow:'0 20px 36px -18px rgba(79,59,240,0.6)'}, dark:{accent:'#8F80FF', accentSoft:'rgba(143,128,255,0.16)', accentInk:'#120B3A', hero:'linear-gradient(140deg,#3422D6 0%,#5A45FF 52%,#957BFF 100%)', heroShadow:'0 20px 44px -18px rgba(90,69,255,0.75)'} }
+  };
+  static CAT = { 'Food & dining':['restaurant','#FF6B2C'], 'Travel':['local_taxi','#00A6FB'], 'Bills & utilities':['bolt','#8B5CF6'], 'Shopping':['shopping_bag','#FF3D81'], 'Groceries':['local_grocery_store','#12B886'], 'Entertainment':['movie','#F5B000'], 'Rent & home':['home','#3B6BFF'] };
+  static sp(p) { return p.cats.reduce((a, c) => a + c[1], 0); }
+  static merge(list) { const m = {}; list.forEach(c => { if (!m[c[0]]) m[c[0]] = [c[0], 0, 0]; m[c[0]][1] += c[1]; m[c[0]][2] += c[2]; }); return Object.values(m).sort((a, b) => b[1] - a[1]); }
+  static TX = [
+    { id:'t7', day:'today', name:'DMart Avenue', initials:'D', tile:'#0B7A3E', cat:'Shopping', catIcon:'shopping_bag', acct:'SBI ••8821', time:'7:41 PM', amt:-400, kind:'spend', review:true, conf:62, rule:'Guessed from merchant type', ref:'UPI 428217730985', parser:'sbi-upi-debit v2', src:['sms'],
+      ev:[{s:'sms', label:'SBI · SMS', time:'7:41 PM', text:'Dear UPI user A/C X8821 debited by 400.0 on date 09Oct26 trf to DMART AVENUE Refno 428217730985. -SBI'}], matched:'Single source. No duplicate found within ±10 min for this amount and account.' },
+    { id:'t3', day:'today', name:'Uber', initials:'U', tile:'#000000', cat:'Travel', catIcon:'local_taxi', acct:'HDFC ••1234', time:'6:20 PM', amt:-540, kind:'spend', conf:96, rule:'Rule · Uber → Travel', ref:'UPI 428215504412', parser:'hdfc-upi-debit v3', src:['sms','notif'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'6:20 PM', text:'Sent Rs.540.00 From HDFC Bank A/C *1234 To UBER INDIA On 09/10/26 Ref 428215504412'},{s:'notif', label:'Uber · notification', time:'6:21 PM', text:'Thanks for riding. Your trip total was ₹540.00'}], matched:'Merged by amount, account and a 2-minute window. Uber receipt confirms merchant.' },
+    { id:'t4', day:'today', name:'Self transfer', icon:'swap_horiz', cat:'HDFC → SBI', catIcon:'swap_horiz', acct:'own accounts', time:'2:05 PM', amt:5000, kind:'xfer', conf:99, rule:'Matched own-account pair', ref:'UTR SBIN2262829114', parser:'hdfc-neft v1 · sbi-credit v2', src:['sms','sms'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'2:05 PM', text:'Rs.5000.00 debited from A/c XX1234 to A/c XX8821 (IMPS). UTR SBIN2262829114'},{s:'sms', label:'SBI · SMS', time:'2:05 PM', text:'Your A/C XXXXX8821 Credited INR 5,000.00 on 09/10/26 -Deposit by transfer from SELF. UTR SBIN2262829114'}], matched:'Debit and credit share a UTR across two of your accounts. Excluded from income and spending.' },
+    { id:'t1', day:'today', name:'Swiggy', initials:'S', tile:'#FC8019', cat:'Food & dining', catIcon:'restaurant', acct:'HDFC ••1234', time:'1:12 PM', amt:-349, kind:'spend', conf:98, rule:'Rule · Swiggy → Food & dining', ref:'UPI 428193720116', parser:'hdfc-upi-debit v3', src:['sms','notif','mail'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'1:12 PM', text:'Sent Rs.349.00 From HDFC Bank A/C *1234 To SWIGGY On 09/10/26 Ref 428193720116'},{s:'notif', label:'Google Pay · notification', time:'1:12 PM', text:'₹349 paid to Swiggy · UPI ID swiggy@icici'},{s:'mail', label:'Gmail · notification', time:'1:14 PM', text:'Swiggy — Your order from Meghana Foods: ₹349.00'}], matched:'3 alerts merged into one transaction by UPI reference 428193720116. Counted once.' },
+    { id:'t5', day:'today', name:'Rohan Mehta', initials:'RM', tile:'#6A4FA3', cat:'From a person', catIcon:'person', acct:'SBI ••8821', time:'11:30 AM', amt:4000, kind:'in', conf:90, rule:'UPI credit from a contact', ref:'UPI 428177104238', parser:'sbi-upi-credit v2', src:['sms','notif'],
+      ev:[{s:'sms', label:'SBI · SMS', time:'11:30 AM', text:'Dear SBI User, your A/c X8821-credited by Rs.4000 on 09Oct26 transfer from ROHAN MEHTA Ref No 428177104238'},{s:'notif', label:'PhonePe · notification', time:'11:30 AM', text:'Received ₹4,000 from Rohan Mehta'}], matched:'Merged by UPI reference. Recognised as a person, not salary.' },
+    { id:'t6', day:'today', name:'BESCOM', initials:'BE', tile:'#B88A00', cat:'Utilities', catIcon:'bolt', acct:'SBI ••8821', time:'10:15 AM', amt:-840, kind:'spend', conf:99, rule:'Rule · Electricity biller', ref:'UPI 428169981230', parser:'sbi-upi-debit v2', src:['sms','mail'],
+      ev:[{s:'sms', label:'SBI · SMS', time:'10:15 AM', text:'A/C X8821 debited by 840.0 on 09Oct26 trf to BESCOM Refno 428169981230'},{s:'mail', label:'Outlook · notification', time:'10:17 AM', text:'BESCOM: Payment of ₹840 received for RR No. 5612-xxx'}], matched:'Merged by amount, account and biller name within 2 minutes.' },
+    { id:'t2', day:'today', name:'Blue Tokai Coffee', initials:'BT', tile:'#1F3A5F', cat:'Food & dining', catIcon:'local_cafe', acct:'HDFC ••1234', time:'9:04 AM', amt:-611, kind:'spend', conf:94, rule:'Rule · Café → Food & dining', ref:'UPI 428151127704', parser:'hdfc-upi-debit v3', src:['sms','notif'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'9:04 AM', text:'Sent Rs.611.00 From HDFC Bank A/C *1234 To BLUE TOKAI COFFEE On 09/10/26 Ref 428151127704'},{s:'notif', label:'Google Pay · notification', time:'9:04 AM', text:'₹611 paid to Blue Tokai Coffee Roasters'}], matched:'Merged by UPI reference. Counted once.' },
+    { id:'y1', day:'yest', name:'To Kotak ••0193', icon:'schedule_send', cat:'Awaiting credit', catIcon:'swap_horiz', acct:'SBI ••8821', time:'7:48 PM', amt:-2000, kind:'pending', conf:80, rule:'Likely own account (alias match)', ref:'UPI 428102291175', parser:'sbi-upi-debit v2', src:['sms'],
+      ev:[{s:'sms', label:'SBI · SMS', time:'Yesterday 7:48 PM', text:'A/C X8821 debited by 2000.0 on 08Oct26 trf to ANANYA K KOTAK Refno 428102291175'}], matched:'Beneficiary matches your Kotak alias. Held as in transit — not spending — until the credit arrives.' },
+    { id:'y2', day:'yest', name:'Amazon', initials:'a', tile:'#232F3E', cat:'Refund · order of 4 Oct', catIcon:'undo', acct:'ICICI Card ••4471', time:'4:10 PM', amt:1299, kind:'refund', conf:97, rule:'Reversal linked to original', ref:'ARN 74332246281', parser:'icici-card v4', src:['sms','mail'],
+      ev:[{s:'sms', label:'ICICI Bank · SMS', time:'Yesterday 4:10 PM', text:'Refund of INR 1,299.00 from AMAZON credited to your ICICI Bank Credit Card XX4471'},{s:'mail', label:'Gmail · notification', time:'Yesterday 4:12 PM', text:'Amazon.in: Your refund of ₹1,299.00 has been processed'}], matched:'Linked to the 4 Oct purchase. Recorded as a refund, not income.' },
+    { id:'y3', day:'yest', name:'ICICI card bill', icon:'credit_card', cat:'Liability settlement', catIcon:'credit_card', acct:'HDFC ••1234', time:'11:02 AM', amt:-8000, kind:'liability', conf:99, rule:'Card payment detected', ref:'BBPS HD0810445521', parser:'hdfc-bbps v1', src:['sms','sms'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'Yesterday 11:02 AM', text:'Rs.8000.00 debited from A/c XX1234 for ICICI CREDIT CARD XX4471 via BBPS'},{s:'sms', label:'ICICI Bank · SMS', time:'Yesterday 11:40 AM', text:'Payment of INR 8,000.00 received on Credit Card XX4471. Thank you.'}], matched:'Settles card dues. Original card purchases are already counted, so this is not a second expense.' },
+    { id:'y4', day:'yest', name:'ATM withdrawal', icon:'local_atm', cat:'Moved to cash', catIcon:'payments', acct:'HDFC ••1234', time:'9:15 AM', amt:-2000, kind:'cash', conf:99, rule:'ATM pattern', ref:'ATM 0812·S1AN4471', parser:'hdfc-atm v2', src:['sms'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'Yesterday 9:15 AM', text:'Rs.2000 withdrawn at ATM S1AN4471 from A/c XX1234 on 08-10-26'}], matched:'Tracked as money moved to your Cash account, not as consumption.' },
+    { id:'y5', day:'yest', name:'Airtel Postpaid', initials:'A', tile:'#D9001B', cat:'Utilities', catIcon:'smartphone', acct:'HDFC ••1234', time:'8:30 AM', amt:-599, kind:'spend', conf:99, rule:'Rule · Mobile biller', ref:'UPI 428088410034', parser:'hdfc-upi-debit v3', src:['sms','notif'],
+      ev:[{s:'sms', label:'HDFC Bank · SMS', time:'Yesterday 8:30 AM', text:'Sent Rs.599.00 From HDFC Bank A/C *1234 To AIRTEL On 08/10/26 Ref 428088410034'},{s:'notif', label:'Airtel Thanks · notification', time:'Yesterday 8:30 AM', text:'Payment of ₹599 successful for 98xxxxxx21'}], matched:'Merged by UPI reference.' }
+  ];
+  static DAYS = [
+    { dow:'Fri', dnum:3, long:'Friday, 3 October', x:10000, h:{ in:62000, moves:0, cats:[['Food & dining',380,1]] }, s:{ in:0, moves:0, cats:[['Groceries',940,1]] }, note:{ all:'Salary of ₹62,000 landed in HDFC. ₹10,000 parked in SBI — excluded from totals.', hdfc:'Salary credited. ₹10,000 sent to your SBI account — not spending.', sbi:'₹10,000 received from HDFC — not counted as income.' } },
+    { dow:'Sat', dnum:4, long:'Saturday, 4 October', x:0, h:{ in:0, moves:0, cats:[['Shopping',1120,1],['Food & dining',860,2]] }, s:{ in:0, moves:0, cats:[['Food & dining',680,1]] } },
+    { dow:'Sun', dnum:5, long:'Sunday, 5 October', x:0, h:{ in:0, moves:0, cats:[['Food & dining',1450,2],['Entertainment',798,1]] }, s:{ in:0, moves:0, cats:[['Travel',320,1]] } },
+    { dow:'Mon', dnum:6, long:'Monday, 6 October', x:0, h:{ in:0, moves:0, cats:[['Groceries',1860,1],['Food & dining',240,1]] }, s:{ in:0, moves:0, cats:[] } },
+    { dow:'Tue', dnum:7, long:'Tuesday, 7 October', x:0, h:{ in:0, moves:0, cats:[['Shopping',2310,1],['Food & dining',420,1]] }, s:{ in:1500, moves:0, cats:[['Travel',180,1]] } },
+    { dow:'Wed', dnum:8, long:'Wednesday, 8 October', x:0, h:{ in:0, moves:-10000, cats:[['Bills & utilities',599,1]] }, s:{ in:0, moves:-2000, cats:[] }, note:{ all:'₹12,000 left as non-spending: card bill ₹8,000, ATM cash ₹2,000 and ₹2,000 to Kotak Joint (in transit).', hdfc:'Card bill ₹8,000 and ATM cash ₹2,000 — moved, not spent.', sbi:'₹2,000 to Kotak Joint — waiting for the credit, not spending.' } },
+    { dow:'Thu', dnum:9, long:'Thursday, 9 October', x:5000, h:{ in:0, moves:0, cats:[['Food & dining',960,2],['Travel',540,1]] }, s:{ in:4000, moves:0, cats:[['Bills & utilities',840,1],['Shopping',400,1]] }, note:{ all:'₹5,000 moved HDFC → SBI today. Excluded from income and spending.', hdfc:'₹5,000 sent to your SBI account. Lowers this balance, not counted as spending.', sbi:'₹5,000 received from your HDFC account. Not counted as income.' } }
+  ];
+  static MONTH = {
+    all: { bars:[17320,19880,15430,8349], income:69500, prev:64210, cats:[['Rent & home',18000,1],['Food & dining',12460,24],['Shopping',10890,7],['Groceries',8215,9],['Bills & utilities',6214,6],['Travel',3820,14],['Entertainment',1380,3]] },
+    hdfc: { bars:[11240,14310,10980,6929], income:62000, prev:45880, cats:[['Rent & home',18000,1],['Food & dining',10120,19],['Shopping',8340,5],['Groceries',4180,4],['Bills & utilities',1439,3],['Entertainment',1380,3]] },
+    sbi: { bars:[6080,5570,4450,1420], income:7500, prev:18340, cats:[['Bills & utilities',4775,3],['Groceries',4035,5],['Travel',3820,14],['Shopping',2550,2],['Food & dining',2340,5]] },
+    kotak: { bars:[3880,2950,4120,1030], income:12000, prev:10400, cats:[['Groceries',7240,11],['Food & dining',2890,6],['Rent & home',1850,2]] }
+  };
+  static MERCH = {
+    all: [['Myntra','M','#E72C70',2310,1],['Nature’s Basket','NB','#5B8C2A',1860,1],['Swiggy','S','#FC8019',1810,4]],
+    hdfc: [['Myntra','M','#E72C70',2310,1],['Nature’s Basket','NB','#5B8C2A',1860,1],['Swiggy','S','#FC8019',1810,4]],
+    sbi: [['DMart','D','#0B7A3E',1340,2],['BESCOM','BE','#B88A00',840,1],['Zomato','Z','#E23744',680,1]],
+    kotak: [['BigBasket','BB','#6FA51B',1640,3],['Swiggy Instamart','SI','#FC8019',630,2]]
+  };
+  analytics(k, rg) {
+    const C = Component, D = C.DAYS;
+    let bars, cats, income, prev;
+    if (rg === 'week') {
+      if (k === 'kotak') { const v = [0,1240,0,650,0,0,380]; bars = D.map((d, i) => ({ l:d.dow, v:v[i] })); cats = [['Groceries',1640,3],['Food & dining',630,2]]; income = 0; prev = 3120; }
+      else {
+        const pick = d => k === 'hdfc' ? [d.h] : k === 'sbi' ? [d.s] : [d.h, d.s];
+        bars = D.map(d => ({ l:d.dow, v:pick(d).reduce((a, p) => a + C.sp(p), 0) }));
+        cats = C.merge(D.flatMap(d => pick(d).flatMap(p => p.cats)));
+        income = D.reduce((a, d) => a + pick(d).reduce((b, p) => b + p.in, 0), 0);
+        prev = { all:16240, hdfc:11980, sbi:4260 }[k];
+      }
+    } else { const M = C.MONTH[k]; bars = M.bars.map((v, i) => ({ l:['Sep 15','Sep 22','Sep 29','Oct 6'][i], v })); cats = M.cats; income = M.income; prev = M.prev; }
+    return { bars, cats, income, prev, total:bars.reduce((a, b) => a + b.v, 0) };
+  }
+
+  state = this.initState();
+  initState() {
+    const s = (this.props && this.props.startScreen) || 'today';
+    return {
+      screen: s === 'detail' ? 'activity' : s === 'review' ? 'today' : s,
+      detailId: s === 'detail' ? 't1' : null,
+      sheet: s === 'review',
+      scope: 'all', filter: 'all', dayIdx: 6, inScope: 'all', range: 'week', over: {}, pick: 'Groceries', remember: true, toast: null,
+      tg: { sms: true, mail: true, raw: false }
+    };
+  }
+  fmt(n) { return '₹' + Math.abs(n).toLocaleString('en-IN'); }
+  showToast(msg) { clearTimeout(this._t); this.setState({ toast: msg }); this._t = setTimeout(() => this.setState({ toast: null }), 2600); }
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  decorate(t) {
+    const k = t.kind, f = this.fmt(t.amt);
+    const amtText = k === 'in' || k === 'refund' ? '+' + f : k === 'xfer' ? f : '−' + f;
+    const amtColor = k === 'in' || k === 'refund' ? 'var(--pos)' : k === 'xfer' || k === 'pending' ? 'var(--xfer)' : 'var(--ink)';
+    const B = {
+      xfer: ['Matched', 'var(--xferSoft)', 'var(--xfer)'], pending: ['In transit', 'var(--warnSoft)', 'var(--warn)'],
+      liability: ['Not spending', 'var(--surface2)', 'var(--ink2)'], cash: ['To cash', 'var(--surface2)', 'var(--ink2)'], refund: ['Refund', 'var(--posSoft)', 'var(--pos)']
+    };
+    const b = t.review ? ['Review', 'var(--warnSoft)', 'var(--warn)'] : B[k];
+    const SI = { sms: 'sms', notif: 'notifications', mail: 'mail' };
+    return {
+      ...t, amtText, amtColor,
+      tileBg: t.icon ? (k === 'pending' ? 'var(--warnSoft)' : 'var(--surface2)') : t.tile,
+      tileInk: t.icon ? (k === 'pending' ? 'var(--warn)' : k === 'xfer' ? 'var(--xfer)' : 'var(--ink)') : '#FFFFFF',
+      icon: t.icon || '', initials: t.icon ? '' : t.initials,
+      hasBadge: !!b, badge: b ? b[0] : '', badgeBg: b ? b[1] : '', badgeInk: b ? b[2] : '',
+      sub: t.cat + ' · ' + t.time,
+      srcs: t.src.map(s => ({ icon: SI[s] })),
+      open: () => this.setState({ detailId: t.id })
+    };
+  }
+
+  renderVals() {
+    const C = Component, st = this.state;
+    const th = this.props.theme === 'dark' ? 'dark' : 'light';
+    const ac = C.ACCENTS[this.props.accent] ? this.props.accent : 'blue';
+    const T = { ...C.THEMES[th], ...C.ACCENTS[ac][th] };
+    const screenStyle = { position:'relative', width:'100%', height:'100%', borderRadius:'44px', overflow:'hidden', display:'flex', flexDirection:'column', background:T.bg, color:T.ink, fontFamily:"'Geist', system-ui, sans-serif", WebkitFontSmoothing:'antialiased' };
+    Object.entries(T).forEach(([k, v]) => { screenStyle['--' + k] = v; });
+
+    const txs = C.TX.map(t => st.over[t.id] ? { ...t, ...st.over[t.id] } : t).map(t => this.decorate(t));
+    const dm = txs.find(t => t.id === 't7');
+
+    const D = C.DAYS, di = st.dayIdx, day = D[di];
+    if (!C._bal) { let h = 31800, s = 17660; C._bal = []; for (let i = D.length - 1; i >= 0; i--) { const d = D[i]; const b = { hc:h, sc:s }; h = h - d.h.in + C.sp(d.h) - (d.h.moves - d.x); s = s - d.s.in + C.sp(d.s) - (d.s.moves + d.x); b.ho = h; b.so = s; C._bal[i] = b; } }
+    const bl = C._bal[di], k = st.scope;
+    const part = k === 'hdfc' ? [day.h] : k === 'sbi' ? [day.s] : [day.h, day.s];
+    const opening = k === 'hdfc' ? bl.ho : k === 'sbi' ? bl.so : bl.ho + bl.so;
+    const received = part.reduce((a, p) => a + p.in, 0);
+    const spent = part.reduce((a, p) => a + C.sp(p), 0);
+    const moved = k === 'hdfc' ? day.h.moves - day.x : k === 'sbi' ? day.s.moves + day.x : day.h.moves + day.s.moves;
+    const closing = opening + received - spent + moved;
+    const sgn = v => v === 0 ? '₹0' : (v > 0 ? '+' : '−') + this.fmt(v);
+    const S = {
+      label:{ all:'All accounts', hdfc:'HDFC ••1234', sbi:'SBI ••8821' }[k],
+      recon: di === 6 ? (k === 'all' ? 'Matches 2 bank balances · 6:42 PM' : k === 'hdfc' ? 'Matches bank · reported 6:42 PM' : 'Matches bank · reported 7:41 PM') : 'Matched bank balance at day end',
+      xferText: moved === 0 && k === 'all' && day.x ? this.fmt(day.x) : sgn(moved),
+      xferNote: (day.note && day.note[k]) || 'No transfers or card payments on this day.'
+    };
+    const L = [opening, opening + received, opening + received - spent, closing];
+    const mn = Math.min(...L), mx = Math.max(...L), rng = Math.max(mx - mn, 1500), lo = mn - rng * 0.55, H = 84, px = v => Math.max(2, ((v - lo) / (mx - lo)) * H);
+    const seg = (a, b) => ({ bottom: px(Math.min(a, b)) - (a === b ? 2 : 0) + 'px', height: Math.max(3, Math.abs(px(b) - px(a))) + 'px' });
+    const bars = [
+      { label:'Opening', val:this.fmt(opening), color:'rgba(255,255,255,0.3)', ink:'#FFFFFF', bottom:'0px', height:px(opening) + 'px' },
+      { label:'In', val:'+' + this.fmt(received), color:'#5BF2B8', ink:'#D2FFEE', ...seg(L[0], L[1]) },
+      { label:'Spent', val:'−' + this.fmt(spent), color:'#FF8FA6', ink:'#FFE0E6', ...seg(L[1], L[2]) },
+      { label:'Moved', val:moved === 0 ? 'net ₹0' : sgn(moved), color:'#FFD76A', ink:'#FFF1C7', ...seg(L[2], L[3]) },
+      { label:'Closing', val:this.fmt(closing), color:'#FFFFFF', ink:'#FFFFFF', bottom:'0px', height:px(closing) + 'px' }
+    ];
+    const merged = C.merge(part.flatMap(p => p.cats));
+    const tot = merged.reduce((a, c) => a + c[1], 0) || 1;
+    const cats = merged.map(c => { const m = C.CAT[c[0]]; return { n:c[0], vText:this.fmt(c[1]), icon:m[0], count:c[2] + (c[2] === 1 ? ' transaction' : ' transactions') + ' · ' + Math.round(c[1] / tot * 100) + '%', w:(c[1] / tot * 100) + '%', color:m[1], soft:m[1] + '24' }; });
+    const scopes = [['all', 'All'], ['hdfc', 'HDFC ••1234'], ['sbi', 'SBI ••8821']].map(([key, l]) => {
+      const a = k === key;
+      return { label:l, bg:a ? 'var(--ink)' : 'transparent', ink:a ? 'var(--bg)' : 'var(--ink2)', border:a ? 'var(--ink)' : 'var(--line2)', pick:() => this.setState({ scope:key }) };
+    });
+    const days = D.map((d, i) => { const a = i === di, s = C.sp(d.h) + C.sp(d.s); return { dow:d.dow, dnum:d.dnum, bg:a ? 'var(--hero)' : 'transparent', ink:a ? '#FFFFFF' : 'var(--ink)', shadow:a ? 'var(--heroShadow)' : 'none', dot:a ? 'rgba(255,255,255,0.9)' : s > 2600 ? 'var(--out)' : s > 1500 ? 'var(--warn)' : 'var(--pos)', pick:() => this.setState({ dayIdx:i }) }; });
+
+    const ik = st.inScope, rg = st.range, A = this.analytics(ik, rg);
+    const IS = [['all', 'All accounts', 'ALL', 'var(--accent)'], ['hdfc', 'HDFC', 'HD', '#004C8F'], ['sbi', 'SBI', 'SB', '#1E3F8F'], ['kotak', 'Kotak Joint', 'KJ', '#C8102E']];
+    const inScopes = IS.map(([key, l, ini, c]) => { const a = ik === key; return { label:l, initials:ini, tile:c, bg:a ? 'var(--ink)' : 'var(--surface)', ink:a ? 'var(--bg)' : 'var(--ink)', border:a ? 'var(--ink)' : 'var(--line2)', pick:() => this.setState({ inScope:key }) }; });
+    const ranges = [['week', 'Week'], ['month', 'Month']].map(([key, l]) => { const a = rg === key; return { label:l, bg:a ? 'var(--surface)' : 'transparent', ink:a ? 'var(--ink)' : 'var(--ink3)', shadow:a ? '0 1px 3px rgba(0,0,0,0.12)' : 'none', pick:() => this.setState({ range:key }) }; });
+    const bmx = Math.max(...A.bars.map(b => b.v), 1), BH = 120, avg = A.total / A.bars.length;
+    const ibars = A.bars.map((b, i) => { const sel = rg === 'week' ? i === di : i === A.bars.length - 1; return { h:Math.max(4, b.v / bmx * BH) + 'px', bg:sel ? 'var(--hero)' : 'var(--barSoft)', shadow:sel ? 'var(--heroShadow)' : 'none', label:b.l, val:b.v >= 1000 ? (b.v / 1000).toFixed(1) + 'k' : (b.v ? String(b.v) : '—'), labelInk:sel ? 'var(--accent)' : 'var(--ink3)', weight:sel ? 700 : 500, pick:() => { if (rg === 'week') this.setState({ dayIdx:i }); } }; });
+    const delta = (A.total - A.prev) / A.prev * 100;
+    const ct = A.cats.reduce((a, c) => a + c[1], 0) || 1;
+    let acc = 0; const stops = [];
+    A.cats.forEach(c => { const col = C.CAT[c[0]][1], a = acc / ct * 100, b = (acc + c[1]) / ct * 100; acc += c[1]; stops.push('transparent ' + a + '% ' + (a + 0.8) + '%', col + ' ' + (a + 0.8) + '% ' + b + '%'); });
+    const icats = A.cats.map(c => ({ n:c[0], color:C.CAT[c[0]][1], pct:Math.round(c[1] / ct * 100) + '%' }));
+    const ins = {
+      title:rg === 'week' ? 'Spent · 3–9 Oct' : 'Spent · last 4 weeks',
+      totalText:this.fmt(A.total), totalShort:'₹' + (A.total >= 1000 ? (A.total / 1000).toFixed(1) + 'k' : A.total),
+      avgText:'avg ' + this.fmt(Math.round(avg)) + (rg === 'week' ? ' / day' : ' / week'), avgBottom:(avg / bmx * BH) + 'px',
+      deltaText:(delta < 0 ? '↓ ' : '↑ ') + Math.abs(Math.round(delta)) + '% vs ' + (rg === 'week' ? 'last week' : 'prior 4 wks'),
+      deltaInk:delta < 0 ? 'var(--pos)' : 'var(--out)', deltaBg:delta < 0 ? 'var(--posSoft)' : 'var(--outSoft)',
+      incomeText:A.income ? '+' + this.fmt(A.income) : '₹0',
+      savedText:A.income ? Math.max(0, Math.round((A.income - A.total) / A.income * 100)) + '%' : '—',
+      savedSub:A.income ? 'Kept of money in' : 'No income this period',
+      donut:'conic-gradient(' + stops.join(', ') + ')', catCount:A.cats.length + ' categories'
+    };
+    const BA = rg === 'week' ? { hdfc:11537, sbi:3360, kotak:2270 } : { hdfc:43459, sbi:17520, kotak:11980 };
+    const bam = Math.max(BA.hdfc, BA.sbi, BA.kotak);
+    const byAcct = [['hdfc', 'HDFC Savings', 'HD', '#004C8F', 'Personal · ••1234'], ['sbi', 'SBI Savings', 'SB', '#1E3F8F', 'Personal · ••8821'], ['kotak', 'Kotak Joint', 'KJ', '#C8102E', 'Joint with Ananya K · tracked separately']].map(([key, n, ini, c, sub]) => ({ name:n, initials:ini, tile:c, sub, vText:this.fmt(BA[key]), w:(BA[key] / bam * 100) + '%', pick:() => this.setState({ inScope:key }) }));
+    const merchants = C.MERCH[ik].map(m => ({ name:m[0], initials:m[1], tile:m[2], vText:this.fmt(m[3]), count:m[4] + (m[4] === 1 ? ' payment' : ' payments') + ' this week' }));
+    const ok = 'var(--accent)';
+    const homeAccts = [
+      { name:'HDFC Savings', initials:'HD', tile:'#004C8F', sub:'Matches bank', subIcon:'check_circle', subInk:ok, bal:'₹31,800', balInk:'var(--ink)' },
+      { name:'SBI Savings', initials:'SB', tile:'#1E3F8F', sub:'Matches bank', subIcon:'check_circle', subInk:ok, bal:'₹17,660', balInk:'var(--ink)' },
+      { name:'ICICI Card ••4471', initials:'IC', tile:'#9E2A1F', sub:'Liability · shown separately', subIcon:'credit_card', subInk:'var(--ink3)', bal:'−₹12,380', balInk:'var(--out)' }
+    ];
+
+    const FIL = { all:t => true, spent:t => t.kind === 'spend', in:t => t.kind === 'in' || t.kind === 'refund', xfer:t => ['xfer', 'pending', 'liability', 'cash'].includes(t.kind), review:t => t.review };
+    const filters = [['all', 'All'], ['spent', 'Spent'], ['in', 'Received'], ['xfer', 'Moves'], ['review', 'Review']].map(([k, l]) => {
+      const a = st.filter === k, n = txs.filter(FIL[k]).length;
+      return { label:l, count:n, bg:a ? 'var(--ink)' : 'transparent', ink:a ? 'var(--bg)' : 'var(--ink2)', border:a ? 'var(--ink)' : 'var(--line2)', pick:() => this.setState({ filter:k }) };
+    });
+    const ft = txs.filter(FIL[st.filter]);
+    const groups = [['today', 'Today · Thu 9 Oct', '−₹2,740 spent'], ['yest', 'Yesterday · Wed 8 Oct', '−₹599 spent']]
+      .map(([k, l, tt]) => ({ label:l, total:tt, items:ft.filter(t => t.day === k) })).filter(g => g.items.length);
+
+    const dt = txs.find(t => t.id === st.detailId);
+    let d = null;
+    if (dt) {
+      const ci = dt.conf >= 90 ? ['var(--accent)', 'High confidence · ' + dt.conf + '%'] : dt.conf >= 75 ? ['var(--xfer)', 'Likely · ' + dt.conf + '%'] : ['var(--warn)', 'Unsure · ' + dt.conf + '%'];
+      d = { ...dt, dateLine:(dt.day === 'today' ? 'Thu 9 Oct' : 'Wed 8 Oct') + ' · ' + dt.time + ' · ' + dt.acct, confInk:ci[0], confLabel:ci[1], confW:dt.conf + '%',
+        evCount:dt.ev.length + (dt.ev.length === 1 ? ' alert' : ' alerts') + ' → 1 transaction',
+        ev:dt.ev.map((e, i) => ({ ...e, icon:{ sms:'sms', notif:'notifications', mail:'mail' }[e.s], lineOp:i === dt.ev.length - 1 ? 0 : 1 })) };
+    }
+
+    const OPTS = [['Groceries', 'local_grocery_store'], ['Shopping', 'shopping_bag'], ['Household', 'home'], ['Personal care', 'spa'], ['Gift', 'redeem'], ['Not an expense', 'block']];
+    const sheetOpts = OPTS.map(([l, i]) => {
+      const a = st.pick === l;
+      return { label:l, icon:i, bg:a ? 'var(--accentSoft)' : 'var(--surface)', border:a ? '1.5px solid var(--accent)' : '1px solid var(--line2)', iconInk:a ? 'var(--accent)' : 'var(--ink2)', pick:() => this.setState({ pick:l }) };
+    });
+    const resolve = (cat, icon) => {
+      this.setState(s => ({ over:{ ...s.over, t7:{ cat, catIcon:icon, review:false, conf:100, rule:s.remember ? 'Your rule · DMART AVENUE → ' + cat : 'Your correction' } }, sheet:false }));
+      this.showToast(this.state.remember ? 'Rule saved on-device: DMart → ' + cat : 'Category updated');
+    };
+
+    const TG = [['sms', 'sms', 'Bank & UPI SMS', '1,284 messages read · 6 banks recognised'], ['mail', 'mark_email_unread', 'Email notifications', 'Gmail, Outlook · new alerts only'], ['raw', 'delete_sweep', 'Discard raw messages', 'Keep only parsed fields after processing']];
+    const toggles = TG.map(([k, i, l, s]) => {
+      const on = st.tg[k];
+      return { icon:i, label:l, sub:s, track:on ? 'var(--accent)' : 'var(--surface2)', trackBorder:on ? 'var(--accent)' : 'var(--ink3)', thumb:on ? 'var(--accentInk)' : 'var(--ink3)', thumbSize:on ? '22px' : '14px', thumbMargin:on ? '-11px' : '-7px', thumbLeft:on ? '22px' : '5px', flip:() => this.setState(x => ({ tg:{ ...x.tg, [k]:!x.tg[k] } })) };
+    });
+
+    const NAV = [['today', 'Today', 'today'], ['activity', 'Activity', 'receipt_long'], ['insights', 'Insights', 'insights'], ['accounts', 'Accounts', 'account_balance'], ['privacy', 'Privacy', 'shield_lock']];
+    const nav = NAV.map(([k, l, i]) => {
+      const a = st.screen === k;
+      return { label:l, icon:i, pill:a ? 'var(--accentSoft)' : 'transparent', iconInk:a ? 'var(--accent)' : 'var(--ink2)', labelInk:a ? 'var(--ink)' : 'var(--ink2)', weight:a ? 600 : 500, fvs:a ? "'FILL' 1" : "'FILL' 0", dot:k === 'activity' && !!dm.review, go:() => this.setState({ screen:k, detailId:null }) };
+    });
+
+    return {
+      screenStyle, nav,
+      isToday:st.screen === 'today', isActivity:st.screen === 'activity', isAccounts:st.screen === 'accounts', isPrivacy:st.screen === 'privacy',
+      scopes, bars, cats, homeAccts,
+      sc:{ ...S, closingText:this.fmt(closing), receivedText:'+' + this.fmt(received), spentText:'−' + this.fmt(spent) },
+      needsReview:!!dm.review && di === 6, days, dayLong:day.long, isTodayDay:di === 6, noCats:cats.length === 0,
+      isInsights:st.screen === 'insights', inScopes, ranges, ibars, ins, icats, byAcct, hasByAcct:ik === 'all', merchants,
+      confirmReview:() => resolve('Shopping', 'shopping_bag'),
+      openSheet:() => this.setState({ sheet:true, pick:dm.review ? 'Groceries' : dm.cat }),
+      closeSheet:() => this.setState({ sheet:false }),
+      applySheet:() => resolve(st.pick, OPTS.find(o => o[0] === st.pick)[1]),
+      flipRemember:() => this.setState(s => ({ remember:!s.remember })),
+      rememberBg:st.remember ? 'var(--accent)' : 'transparent', rememberBorder:st.remember ? 'var(--accent)' : 'var(--ink3)', rememberIcon:st.remember ? 'check' : '',
+      sheetOpen:st.sheet, sheetOpts,
+      goAccounts:() => this.setState({ screen:'accounts' }),
+      filters, groups, emptyList:groups.length === 0,
+      hasDetail:!!d, d:d || {}, closeDetail:() => this.setState({ detailId:null }),
+      accts:[
+        { name:'HDFC Bank', type:'Savings ••1234', initials:'HD', tile:'#004C8F', calc:'₹31,800', reported:'₹31,800', variance:'₹0', status:'Reconciled', stIcon:'check_circle', stBg:'var(--accentSoft)', stInk:'var(--accent)', note:'Balance reported in the 6:20 PM debit SMS.' },
+        { name:'SBI', type:'Savings ••8821', initials:'SB', tile:'#1E3F8F', calc:'₹17,660', reported:'₹17,660', variance:'₹0', status:'Reconciled', stIcon:'check_circle', stBg:'var(--accentSoft)', stInk:'var(--accent)', note:'Balance reported in the 7:41 PM debit SMS.' },
+        { name:'Kotak Joint', type:'Joint ••0193 · with Ananya K', initials:'KO', tile:'#C8102E', calc:'₹6,216', reported:'₹6,098', variance:'−₹118', status:'Off by ₹118', stIcon:'error', stBg:'var(--warnSoft)', stInk:'var(--warn)', note:'Last confirmed 7 Oct. Could be a bank charge or an SMS we couldn’t read — we won’t rewrite your history to force a match.' }
+      ],
+      guarantees:[{ icon:'public_off', label:'Internet permission', value:'Not requested' }, { icon:'enhanced_encryption', label:'Ledger database', value:'Encrypted' }, { icon:'cloud_off', label:'Cloud backup', value:'Disabled' }, { icon:'monitoring', label:'Analytics & crash SDKs', value:'None' }],
+      toggles,
+      hasToast:!!st.toast, toast:st.toast || ''
+    };
+  }
+}
+</script>
+</body>
+</html>

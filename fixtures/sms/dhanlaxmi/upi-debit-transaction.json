@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "dhanlaxmi-0090",
+    "address": "TL-DHANBK-S",
+    "body": "INR 20.00 is debited from A/c XXXX1234 on 28-NOV-2025 - \"UPI TXN: /675325120952-MR /Payment from PhonePe/Q12345444@ybl/YESB0YBLUPI/4172120251128000100004392\". Aval Bal is INR 26,578.49. If not transacted call 044-42413000.-DhanlaxmiBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2000,
+    "direction": "debit",
+    "counterparty": "PhonePe",
+    "balance": 2657849,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit Transaction [upstream TestDhanlaxmiBankParser.kt]",
+  "source": "upstream-test"
+}

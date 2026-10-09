@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "axis-0041",
+    "address": "AX-AXISBK-S",
+    "body": "Airtel Postpaid Fetch and Pay bill of INR 293.82 due on 28-09-26. Pay on https://example.invalid/pay and get instant cashback - Axis Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Axis bill-due reminder is not a transaction [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

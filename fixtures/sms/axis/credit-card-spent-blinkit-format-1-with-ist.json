@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0056",
+    "address": "JX-AXISBK-S",
+    "body": "Spent INR 174\nAxis Bank Card no. XX7441\n13-09-25 21:35:56 IST\nBlinkit\nAvl Limit: INR 6652.78\nNot you? SMS BLOCK 7441 to 919951860002",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 17400,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Blinkit",
+    "availableLimit": 665278,
+    "accountLast4": "7441"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - Blinkit (Format 1 with IST) [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0125",
+    "address": "AD-FEDBNK",
+    "body": "Hi, your Federal Bank Savings Account is currently debit frozen due to incomplete Video KYC. Please complete the VKYC by 30/09/2024 to avoid account closure.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Account Notification Should Not Parse [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

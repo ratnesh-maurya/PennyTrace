@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "icici-0154",
+    "address": "AX-ICICIT-S",
+    "body": "Rs. 500.00 will be debited from your account on 05-Oct-25 for EMI payment",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Future debit variation 1 [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

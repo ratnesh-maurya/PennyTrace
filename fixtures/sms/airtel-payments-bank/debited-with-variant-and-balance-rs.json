@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "airtel-payments-bank-a03",
+    "address": "XX-AIRBNK-T",
+    "body": "Airtel Payments Bank a/c is debited with Rs.150.00. Txn ID: 560992310007. Balance: Rs. 15.56",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 15000,
+    "direction": "debit",
+    "balance": 1556
+  },
+  "expectedStatus": "parsed",
+  "note": "\"debited with Rs.\" variant and \"Balance: Rs.\" [upstream AirtelPaymentsBankParser.kt pattern comments]",
+  "source": "upstream-kdoc"
+}

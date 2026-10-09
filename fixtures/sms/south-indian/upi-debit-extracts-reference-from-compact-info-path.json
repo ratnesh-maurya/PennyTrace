@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "south-indian-0271",
+    "address": "VM-SIBSMS-S",
+    "body": "UPI debit:INR Rs.250.50 in A/c X2468. Info:UPI/ICIC/222333444555/Demo Merchant on 26-12-25 19:05:01. Final balance is Rs.34317.17 -South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25050,
+    "direction": "debit",
+    "counterparty": "Demo Merchant",
+    "refs": {
+      "upi": "222333444555"
+    },
+    "balance": 3431717,
+    "accountLast4": "2468"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit extracts reference from compact info path [upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

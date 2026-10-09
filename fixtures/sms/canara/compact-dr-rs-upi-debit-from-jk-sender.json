@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "canara-0304",
+    "address": "JK-CANBNK-S",
+    "body": "Dear Customer, Acct XXX456 Dr. Rs. 75.50 on 07/07/26 to CITY CAFE; UPI: 987654321098; Bal INR 9,876.54.Not you? SMS BLOCKUPI to XXXXXXXXXX-CanaraBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 7550,
+    "direction": "debit",
+    "counterparty": "CITY CAFE",
+    "refs": {
+      "upi": "987654321098"
+    },
+    "balance": 987654,
+    "accountLast4": "456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Compact Dr Rs UPI debit from JK sender [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

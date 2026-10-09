@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "jk-bank-0001",
+    "address": "AD-JKBANK-S",
+    "body": "Your A/c XXXXXXXX1111 has been Debited by INR 4,02,393.00 at 10:43 by RTGS-JAKAH25085024027. Available Bal is INR 1,23,456.00 Cr. To dispute call 18008901122 -JK Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 40239300,
+    "direction": "debit",
+    "counterparty": "RTGS Transfer",
+    "accountLast4": "1111",
+    "balance": 12345600
+  },
+  "expectedStatus": "parsed",
+  "note": "RTGS debit: \"Debited by INR ... at 10:43 by RTGS-...\" [JKBankParser.kt comments]",
+  "source": "synthetic"
+}

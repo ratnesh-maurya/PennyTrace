@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "indusind-0211",
+    "address": "VM-INDUSB-T",
+    "body": "Your account XXXXXXX1234 is credited by Rs.54321 on 07-11-25 received from account XXXXXXX4321/MADMONEY (IMPS Ref no. 123456789). Call 18602677777 to report issue-IndusInd Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5432100,
+    "direction": "credit",
+    "counterparty": "MADMONEY",
+    "refs": {
+      "utr": "123456789"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS credit with from account/merchant pattern [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

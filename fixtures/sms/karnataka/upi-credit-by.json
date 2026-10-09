@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "karnataka-kdoc-02",
+    "address": "VM-KBLBNK-S",
+    "body": "Your a/c XX1234 is credited by Rs.6600.00 on 05-01-2025 (UPI Ref no 123456789012). Balance is Rs.7,305.92 -Karnataka Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 660000,
+    "direction": "credit",
+    "counterparty": "UPI Transaction",
+    "accountLast4": "1234",
+    "balance": 730592,
+    "refs": { "upi": "123456789012" }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit (\"is credited by Rs.6600.00\", \"UPI Ref no\") [upstream KarnatakaBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

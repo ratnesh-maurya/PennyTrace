@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "au-0051",
+    "address": "VM-AUBANK-S",
+    "body": "Dr INR 10.00 - AU A/c X4541 12-MAY-2026\nUPI/DR/424941009000/ALADDIN SHAWARMA/Y\nBal INR 18,838.10\nFraud? Call 180012001200/SMS BLOCK UPI to 5676767",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "debit",
+    "counterparty": "ALADDIN SHAWARMA",
+    "balance": 1883810,
+    "accountLast4": "4541"
+  },
+  "expectedStatus": "parsed",
+  "note": "Short Dr form with merchant name [upstream TestAUBankParser.kt]",
+  "source": "upstream-test"
+}

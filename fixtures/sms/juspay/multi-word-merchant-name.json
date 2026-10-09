@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0225",
+    "address": "JUSPAY",
+    "body": "Payment of Rs 750 using Apay Balance successful at Big Bazaar. Updated Balance is Rs 2500 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 75000,
+    "direction": "debit",
+    "counterparty": "Big Bazaar"
+  },
+  "expectedStatus": "parsed",
+  "note": "Multi-word merchant name [upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

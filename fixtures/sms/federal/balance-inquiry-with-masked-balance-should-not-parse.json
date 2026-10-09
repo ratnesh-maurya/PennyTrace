@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0130",
+    "address": "VM-FEDBNK-S",
+    "body": "Your available balance for a/c no(s) SBA0001 is INR 1xxx,SBA3001 is INR 9xxx.9 .For detailed statement download FedMobile https://fedmobile.federalbank.co.in/download-fedmobile/ - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Balance Inquiry with Masked Balance Should Not Parse [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

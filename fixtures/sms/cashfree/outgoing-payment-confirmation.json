@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "cashfree-0309",
+    "address": "JX-CSHfre-S",
+    "body": "Payment INR 50.00 (ID:5448114171) confirmed for order #735571_428_1777162938185 on AuraGold.\nPowered by Cashfree",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000,
+    "direction": "debit",
+    "counterparty": "AuraGold",
+    "refs": {
+      "other": "5448114171"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "Outgoing payment confirmation [upstream CashfreeParserTest.kt]",
+  "source": "upstream-test"
+}

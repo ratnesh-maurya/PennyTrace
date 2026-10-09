@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "sbi-0254",
+    "address": "SBICRD",
+    "body": "Your payment of Rs.1,644.55 has been credited to your SBI Credit Card ending with 5667. Your available limit is Rs.48,355.45.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 164455,
+    "direction": "credit",
+    "availableLimit": 4835545,
+    "accountLast4": "5667"
+  },
+  "expectedStatus": "parsed",
+  "note": "SBI Card payment credited [upstream TestSBIParser.kt]",
+  "source": "upstream-test"
+}

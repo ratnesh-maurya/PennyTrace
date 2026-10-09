@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "slice-0364",
+    "address": "slice",
+    "body": "Rs. 250 sent from a/c xx2743 on 17-Jun-26 to Request Foods (UPI Ref: 616851070099). Not you? Call 08048329999 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "counterparty": "Request Foods",
+    "refs": {
+      "upi": "616851070099"
+    },
+    "accountLast4": "2743"
+  },
+  "expectedStatus": "parsed",
+  "note": "Payee name containing 'request' still parses (not dropped as a UPI request) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

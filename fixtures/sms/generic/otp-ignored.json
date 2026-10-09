@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "generic-0014",
+    "address": "VK-ZETAFB-S",
+    "body": "482910 is your OTP for txn of Rs.1,500.00 at AMAZON on card XX4321. Do not share it with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "ignored",
+  "note": "PennyTrace generic fallback case (synthetic)",
+  "source": "synthetic"
+}

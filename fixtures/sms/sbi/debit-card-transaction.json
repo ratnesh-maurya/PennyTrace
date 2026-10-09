@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "sbi-0250",
+    "address": "ATMSBI",
+    "body": "Dear Customer, transaction number 1234 for Rs.383.00 by SBI Debit Card 0000 done at merchant on 13Sep25 at 21:38:26. Your updated available balance is Rs.999999999. If not done by you, forward this SMS to 7400165218/ call 1800111109/9449112211 to block card. GOI helpline for cyber fraud 1930.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 38300,
+    "direction": "debit",
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit card transaction [upstream TestSBIParser.kt]",
+  "source": "upstream-test"
+}

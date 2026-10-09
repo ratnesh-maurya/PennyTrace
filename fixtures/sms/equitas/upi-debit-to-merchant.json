@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "equitas-0099",
+    "address": "CP-EQUTAS-S",
+    "body": "INR 1,250.00 debited via UPI from Equitas A/c 5678 -Ref:987654321098 on 15-01-26 to SWIGGY INDIA. Avl Bal is INR 8,500.25.Not U?Call 18001031222/SMS BLOCK UPI/BLOCK ACT 1233 to 7045030000.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 125000,
+    "direction": "debit",
+    "counterparty": "SWIGGY INDIA",
+    "refs": {
+      "upi": "987654321098"
+    },
+    "balance": 850025,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit to Merchant [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

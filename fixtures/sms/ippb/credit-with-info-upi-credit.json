@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "ippb-a03",
+    "address": "BX-IPBMSG-T",
+    "body": "A/C X1234 credit Rs.250.00 on 21-08-25. Info: UPI/CREDIT/523498793036. Avl Bal Rs.686.91",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "credit",
+    "refs": {
+      "upi": "523498793036"
+    },
+    "balance": 68691,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit identified by \"Info: UPI/CREDIT\" [upstream IPPBParser.kt extractTransactionType]",
+  "source": "upstream-kdoc"
+}

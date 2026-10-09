@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hsbc-0329",
+    "address": "HSBCIN",
+    "body": "HSBC: INR 1,234.56 is paid from your A/c 074-260***-006 to AMAZON on 20-Dec-25. Your Avl Bal is INR 98,765.44 .",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123456,
+    "direction": "debit",
+    "counterparty": "AMAZON",
+    "balance": 9876544,
+    "accountLast4": "0006"
+  },
+  "expectedStatus": "parsed",
+  "note": "Payment from Account [upstream HSBCBankParserTest.kt]",
+  "source": "upstream-test"
+}

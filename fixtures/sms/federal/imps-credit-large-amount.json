@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "federal-0115",
+    "address": "AD-FEDBNK",
+    "body": "Rs 15000.00 credited to your A/c XX7890 via IMPS on 19AUG2024 16:20:15 IMPS Ref no 543210987654 Bal:Rs 42500.80 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "credit",
+    "counterparty": "IMPS Credit",
+    "refs": {
+      "utr": "543210987654"
+    },
+    "balance": 4250080,
+    "accountLast4": "7890"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS Credit Large Amount [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

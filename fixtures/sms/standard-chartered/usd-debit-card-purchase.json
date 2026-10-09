@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "standard-chartered-0293",
+    "address": "9220",
+    "body": "Dear Client, USD 79.00 have been paid at Software Planet Group on 26-12-25 using Debit Card no. 53119xxxxxxxx1640.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 7900,
+    "direction": "debit",
+    "counterparty": "Software Planet Group",
+    "accountLast4": "1640"
+  },
+  "expectedStatus": "parsed",
+  "note": "USD Debit card purchase [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

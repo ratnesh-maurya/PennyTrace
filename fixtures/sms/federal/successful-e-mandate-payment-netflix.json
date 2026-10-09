@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0116",
+    "address": "AD-FEDBNK",
+    "body": "Hi, payment of INR 199.00 for Netflix via e-mandate ID: NX789XYZABC on Federal Bank Debit Card 3456 is processed successfully. To manage, visit: https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 19900,
+    "direction": "debit",
+    "counterparty": "Netflix via e-mandate ID: NX789XYZABC",
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Successful E-mandate Payment - Netflix [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

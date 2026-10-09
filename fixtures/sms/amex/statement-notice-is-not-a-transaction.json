@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "amex-a03",
+    "address": "AD-AMEXIN-S",
+    "body": "Your AMEX card ** 91234 statement for August 2025 has been generated. Total spent INR 12,345.00.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Statement notice must not parse [upstream AMEXBankParser.kt isTransactionMessage skip list]",
+  "source": "upstream-kdoc"
+}

@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "cred-0317",
+    "address": "AX-CRED-T",
+    "body": "Payment of Rs.5000 has been successfully credited towards your HDFC Credit Card.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "counterparty": "HDFC Credit Card"
+  },
+  "expectedStatus": "parsed",
+  "note": "CRED sender CRED-T pattern [upstream CredParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "indusind-0206",
+    "address": "JK-INDUSB-S",
+    "body": "A/C *XX0000 credited by Rs 300.00 from abcd@upiid. RRN:123456789098. Avl Bal:00.00. Not you? Call 18602677777 - IndusInd bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 30000,
+    "direction": "credit",
+    "counterparty": "abcd",
+    "refs": {
+      "upi": "123456789098"
+    },
+    "balance": 0,
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit from various sender IDs - JK [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

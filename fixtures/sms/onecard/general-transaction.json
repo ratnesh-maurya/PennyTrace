@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "onecard-kdoc-03",
+    "address": "VM-ONECARD",
+    "body": "You've made a transaction of Rs. 349.00 on TEST STORE on card ending XX1234",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 34900,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "TEST STORE",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "General transaction format [upstream OneCardParser.kt KDoc]",
+  "source": "upstream-kdoc"
+}

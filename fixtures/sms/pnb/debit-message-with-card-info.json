@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "pnb-0002",
+    "address": "VM-PNBSMS-S",
+    "body": "A/c XX1234 debited with Rs.5000.00,21-11-2025 13:23:22 thru card XX9239  . Out of 5 free txn on PNB ATM, you utilized 1 txn. Chrgs applicable as per policy. Bal 27000.00 CR. If not done, fwd SMS to 9264192641 to block card/call 18001800/18002021-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "debit",
+    "counterparty": "Card XX9239",
+    "balance": 2700000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit message with card info [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "au-0048",
+    "address": "VM-AUBANK",
+    "body": "Debited INR 500.00 from A/c 1234567890 on 15-FEB-2026. Bal INR 10000.00. -AU Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "balance": 1000000,
+    "accountLast4": "7890"
+  },
+  "expectedStatus": "parsed",
+  "note": "Basic debit without UPI [upstream TestAUBankParser.kt]",
+  "source": "upstream-test"
+}

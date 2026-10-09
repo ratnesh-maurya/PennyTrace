@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "slice-0355",
+    "address": "VA-SLCBNK-S",
+    "body": "Rs. 124 spent on your credit card xx1234 at Sample Merchant on 18-Jun-26 (UPI Ref: 100000000000). Not you? Call 080-0000-0000 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12400,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Sample Merchant",
+    "refs": {
+      "upi": "100000000000"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice SFB 'spent on credit card' from SLCBNK sender is CREDIT [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

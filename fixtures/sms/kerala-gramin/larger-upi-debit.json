@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kerala-gramin-0232",
+    "address": "BX-KGBANK-S",
+    "body": "Your a/c no. XXXX9876 is debited for Rs.1,250.50 on 01/8/25 03:15 PM and credited to a/c no. XXXXX11111 (UPI Ref no 987654321098)-Kerala Gramin Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 125050,
+    "direction": "debit",
+    "counterparty": "UPI Transfer",
+    "refs": {
+      "upi": "987654321098"
+    },
+    "accountLast4": "9876"
+  },
+  "expectedStatus": "parsed",
+  "note": "Larger UPI Debit [upstream TestKeralaGraminBankParser.kt]",
+  "source": "upstream-test"
+}

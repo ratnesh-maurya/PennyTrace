@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "indusind-0201",
+    "address": "AD-INDUSIND-S",
+    "body": "Net interest INR 248.07 paid on your IndusInd Deposit No 300***123456 on 17/09/25. Call 18602677777 for assistance - IndusInd Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Deposit interest - should not parse [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

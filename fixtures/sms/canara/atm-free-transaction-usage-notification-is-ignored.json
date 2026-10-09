@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "canara-0308",
+    "address": "JK-CANBNK-S",
+    "body": "Card ending 4321: Dear Customer, you have done 02 out of 06 free transactions at Canara ATMs in this month. Charges applicable beyond free transactions.-Canara Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "ATM free-transaction usage notification is ignored [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

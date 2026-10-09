@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "bob-0035",
+    "address": "VM-BOBTXN-S",
+    "body": "Rs..6 Credited to A/c ...4444 from:ACHCR/JIO FINANC. Total Bal:Rs.22976.31CR. Avlbl Amt:Rs.22976.31(26-08-2026 18:20:36) - Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 60,
+    "direction": "credit",
+    "balance": 2297631
+  },
+  "expectedStatus": "parsed",
+  "note": "BoB credit with no leading digit takes the credited amount, not the balance [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "canara-0302",
+    "address": "VA-CANBNK-S",
+    "body": "An amount of INR 13,30,614.75 has been credited to XXXX6785 on 02/12/2025 towards RTGS by Sender AXIS MUTUAL FUND REDEMPTION PO, IFSC UTIB0000004, Sender A/c XXXX9108, AXIS BANK, MUMBAI BRANCH, UTR UTIBR72025120200011461, Total Avail. Bal INR 2679815.88- Canara Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 133061475,
+    "direction": "credit",
+    "counterparty": "AXIS MUTUAL FUND REDEMPTION PO",
+    "accountLast4": "9108"
+  },
+  "expectedStatus": "parsed",
+  "note": "RTGS MF redemption credit typed as INCOME [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

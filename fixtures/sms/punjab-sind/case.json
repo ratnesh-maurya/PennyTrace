@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "punjab-sind-0349",
+    "address": "VM-PSBANK-S",
+    "body": "PSB000000000000005\nA/c No **4444 Credited with Rs 100--Test (CLR BAL 200.00CR)(13-04-2026 19:16:15)-Punjab&Sind Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "credit"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream PunjabSindBankParserTest.kt]",
+  "source": "upstream-test"
+}

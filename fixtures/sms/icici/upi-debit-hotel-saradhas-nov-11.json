@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "icici-0174",
+    "address": "ICICIB",
+    "body": "ICICI Bank Acct XX051 debited for Rs 210.00 on 11-Nov-25; HOTEL SARADHAS credited. UPI:531517664120. Call 18002662 for dispute. SMS BLOCK 051 to 9215676766. 06:57 PM",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 21000,
+    "direction": "debit",
+    "counterparty": "HOTEL SARADHAS",
+    "refs": {
+      "upi": "531517664120"
+    },
+    "accountLast4": "051"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit - HOTEL SARADHAS (Nov 11) [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

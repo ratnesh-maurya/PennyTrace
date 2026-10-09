@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "cred-0315",
+    "address": "JK-CREDIN-S",
+    "body": "Payment of Rs.50,000 has been successfully credited towards your ICICI Bank Credit Card. Your payment was settled in 3 seconds - CRED",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "counterparty": "ICICI Bank Credit Card"
+  },
+  "expectedStatus": "parsed",
+  "note": "CRED payment with comma-formatted amount [upstream CredParserTest.kt]",
+  "source": "upstream-test"
+}

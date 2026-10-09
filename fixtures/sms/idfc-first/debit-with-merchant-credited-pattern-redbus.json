@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "idfc-first-0180",
+    "address": "JM-IDFCFB-S",
+    "body": "Your A/c XX4614 debited by Rs. 1,172.06 on 15/01/26; REDBUS credited. RRN 060649915527. Available balance Rs. 9,134.15. Team IDFC FIRST Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 117206,
+    "direction": "debit",
+    "counterparty": "REDBUS",
+    "refs": {
+      "upi": "060649915527"
+    },
+    "balance": 913415,
+    "accountLast4": "4614"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit with Merchant Credited Pattern (REDBUS) [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

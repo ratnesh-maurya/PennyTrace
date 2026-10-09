@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "standard-chartered-0281",
+    "address": "9220",
+    "body": "Dear Client, an electronic funds transfer of PKR 5,000.00 has been made into your Account No. 0101xxx9901 on 31-01-26 via Online Banking.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "IBFT Transfer",
+    "accountLast4": "9901"
+  },
+  "expectedStatus": "parsed",
+  "note": "PKR IBFT credit with masked account [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

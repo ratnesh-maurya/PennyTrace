@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "canara-0306",
+    "address": "VK-CANBNK-S",
+    "body": "Dear Customer, Acct XXX321 Dr. INR 88.00 on 09/07/26 to CORNER STORE, UPI: 111222333444; Bal INR 5,000.00.Not you? SMS BLOCKUPI to XXXXXXXXXX-CanaraBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 8800,
+    "direction": "debit",
+    "counterparty": "CORNER STORE",
+    "refs": {
+      "upi": "111222333444"
+    },
+    "balance": 500000,
+    "accountLast4": "321"
+  },
+  "expectedStatus": "parsed",
+  "note": "Compact Dr INR UPI debit with comma-terminated merchant [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "hsbc-0144",
+    "address": "HSBC",
+    "body": "HSBC: A/c 074-260***-006 is credited with INR 5000.00 on 27NOV at 06.33.02 with UTR CHASH00007392391 as NEFT from CHAS A/c ***6983 of John Doe . Your Avl Bal is INR 15000.50.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "CHAS A/c ***6983 of John Doe",
+    "refs": {
+      "utr": "CHASH00007392391"
+    },
+    "balance": 1500050,
+    "accountLast4": "0006"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT Credit with UTR - Format A/c 074-260***-006 [upstream TestHSBCBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0359",
+    "address": "AD-SLCEIT-S",
+    "body": "Your slice credit card transaction of RS. 50000 on amazon.in was declined.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Declined transaction should NOT be parsed [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

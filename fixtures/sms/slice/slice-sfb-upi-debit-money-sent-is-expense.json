@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "slice-0363",
+    "address": "slice",
+    "body": "Rs. 100 sent from a/c xx2743 on 17-Jun-26 to Hussain Shaikh (UPI Ref: 616851070000). Not you? Call 08048329999 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "debit",
+    "counterparty": "Hussain Shaikh",
+    "refs": {
+      "upi": "616851070000"
+    },
+    "accountLast4": "2743"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice SFB UPI debit (money sent) is EXPENSE [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

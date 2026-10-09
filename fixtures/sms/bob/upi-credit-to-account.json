@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bob-0076",
+    "address": "VM-BOBSMS",
+    "body": "Rs.500.00 Cr. to redacted@ybl A/c XX789012 on 15-11-2024. AvlBal:Rs5678.90. Ref:987654321 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "UPI Payment",
+    "refs": {
+      "other": "987654321"
+    },
+    "balance": 567890,
+    "accountLast4": "9012"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Credit to Account [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

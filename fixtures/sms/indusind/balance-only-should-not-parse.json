@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "indusind-0203",
+    "address": "AD-INDUSIND-S",
+    "body": "Your A/C 2134***12345 has Avl BAL of INR 1,234.56 as on 05/10/25 04:10 AM. Download IndusMobile from PlayStore - IndusInd Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "balance",
+    "balance": 123456,
+    "accountLast4": "2345"
+  },
+  "expectedStatus": "parsed",
+  "note": "Balance-only - should not parse as a transaction [upstream TestIndusIndBankParser.kt]. Corrected: upstream only asserts parse()==null; IndusInd's own parseBalanceUpdate override turns it into a balance event in the pipeline.",
+  "source": "upstream-test"
+}

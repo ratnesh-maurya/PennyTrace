@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "idbi-kdoc-01",
+    "address": "AD-IDBIBK-S",
+    "body": "Dear Customer, Your account has been successfully debited with Rs 59.00 on 12-Jan-25 towards TEST MERCHANT for AutoPay MANDATE, RRN 519766155631. -IDBI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5900,
+    "direction": "debit",
+    "counterparty": "TEST MERCHANT"
+  },
+  "expectedStatus": "parsed",
+  "note": "AutoPay debit built from KDoc/comment samples (\"debited with Rs 59.00\", \"towards <merchant> for\", \"RRN 519766155631\") [upstream IDBIBankParser.kt]",
+  "source": "upstream-kdoc"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0203",
+    "address": "AD-FEDBNK-S",
+    "body": "Dear Customer, You have successfully created a mandate on Streaming Service for a MONTHLY frequency starting from 11-06-2025 for a maximum amount of Rs 299.00 Mandate Ref No- abc123def456@fifederal - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Mandate creation (Streaming Service) should not parse [upstream TestFederalBankMandateParsing.kt; added manually]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0112",
+    "address": "AD-FEDBNK",
+    "body": "John, you've received INR 10,509.09 in your Account XXXXXXXX1896. Woohoo! It was sent by TESTUSER on March 19, 2025. -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1050909,
+    "direction": "credit",
+    "counterparty": "TESTUSER",
+    "accountLast4": "1896"
+  },
+  "expectedStatus": "parsed",
+  "note": "You've Received from Individual [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

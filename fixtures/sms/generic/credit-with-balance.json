@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "generic-0002",
+    "address": "AD-ZETAFB-S",
+    "body": "Your A/c XX5678 is credited with INR 25,000.00 on 15-01-26 by NEFT from ACME TECHNOLOGIES. Avl Bal INR 1,02,345.50",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2500000,
+    "direction": "credit",
+    "accountLast4": "5678",
+    "balance": 10234550,
+    "parserId": "generic-v1"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace generic fallback case (synthetic)",
+  "source": "synthetic"
+}

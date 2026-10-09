@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0018",
+    "address": "VM-PNBSMS-S",
+    "body": "A/c X0000 credited ₹125.00 From Example Shop/UPI:000000000006. Bal INR 9000.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "credit",
+    "counterparty": "Example Shop",
+    "balance": 900000
+  },
+  "expectedStatus": "parsed",
+  "note": "Rupee credit amount is not replaced by later INR balance [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

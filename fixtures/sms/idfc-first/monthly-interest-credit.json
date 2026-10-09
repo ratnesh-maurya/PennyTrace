@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "idfc-first-0182",
+    "address": "BM-IDFCBK-S",
+    "body": "Your A/C XXXXXXX1234 is credited by INR 125.50 on 01/01/25 for monthly interest. New Bal :INR 15125.50",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12550,
+    "direction": "credit",
+    "counterparty": "Interest Credit",
+    "balance": 1512550,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Monthly Interest Credit [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

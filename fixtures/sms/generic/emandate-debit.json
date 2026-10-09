@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "generic-0010",
+    "address": "VK-ZETAFB-S",
+    "body": "Rs.199.00 debited from A/c XX1234 on 15-01-26 towards NETFLIX via e-mandate UMRN ZETA0000000000012345",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 19900,
+    "direction": "debit",
+    "hints": {
+      "isEmandate": true
+    },
+    "parserId": "generic-v1"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace generic fallback case (synthetic)",
+  "source": "synthetic"
+}

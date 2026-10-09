@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jiopay-0335",
+    "address": "JIOPAY",
+    "body": "Bill Payment of Rs. 1,234.56 for Electricity bill successful. Rs. 1,234.56 paid. Transaction ID : BR000CAUBYON",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123456,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Electricity Bill",
+    "refs": {
+      "other": "BR000CAUBYON"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "JioPay bill payment [upstream JioPayParserTest.kt]",
+  "source": "upstream-test"
+}

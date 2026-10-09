@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bob-0082",
+    "address": "VM-BOBSMS",
+    "body": "Your A/c XX987654 is credited with INR 70.00 on 30-11-2024. Total Bal:Rs.5000.00 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 7000,
+    "direction": "credit",
+    "balance": 500000,
+    "accountLast4": "7654"
+  },
+  "expectedStatus": "parsed",
+  "note": "Account Credited with INR [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

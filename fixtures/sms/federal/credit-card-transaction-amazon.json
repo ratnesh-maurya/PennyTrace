@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0119",
+    "address": "AD-FEDBNK",
+    "body": "INR 1200.00 spent on your credit card ending with 5678 at AMAZON on 09-05-2025 15:30:15. Available limit Rs.38000.00 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 120000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "AMAZON",
+    "availableLimit": 3800000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Transaction - Amazon [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

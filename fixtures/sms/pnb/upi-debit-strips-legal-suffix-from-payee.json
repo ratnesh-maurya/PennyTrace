@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "pnb-0011",
+    "address": "VM-PNBSMS-S",
+    "body": "A/c X0000 debited INR 250.00 Dt 02-01-26 12:00:00 to Swiggy Ltd thru UPI:000000000002.Bal INR 8750.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "counterparty": "Swiggy",
+    "refs": {
+      "upi": "000000000002"
+    },
+    "balance": 875000,
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit strips legal suffix from payee [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

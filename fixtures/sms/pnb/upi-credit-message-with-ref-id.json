@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "pnb-0009",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX7582 Credited with Rs.4750.00 11-07-2025 08:53:21 thru UPI . Aval Bal Rs.82431.67 CR. (UPI Ref ID:714628305917) Helpline 18001800/18002021-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 475000,
+    "direction": "credit",
+    "counterparty": "UPI Transaction",
+    "refs": {
+      "upi": "714628305917"
+    },
+    "balance": 8243167,
+    "accountLast4": "7582"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit message with Ref ID [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

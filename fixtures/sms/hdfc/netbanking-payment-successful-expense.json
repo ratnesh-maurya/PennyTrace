@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "hdfc-0142",
+    "address": "VM-HDFCBK-S",
+    "body": "Payment Successful! Rs. 12345.67 from A/c ****4321 to ACMEPAYMENTS via HDFC Bank NetBanking. Not you?Call 18002586161",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1234567,
+    "direction": "debit",
+    "counterparty": "ACMEPAYMENTS",
+    "accountLast4": "4321"
+  },
+  "expectedStatus": "parsed",
+  "note": "NetBanking Payment Successful - Expense [upstream TestHDFCBankParser.kt]",
+  "source": "upstream-test"
+}

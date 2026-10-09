@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "onecard-kdoc-02",
+    "address": "CP-ONECRD-S",
+    "body": "You've fueled up for Rs. 500.00 at TEST FUEL STATION on card ending XX1234",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "TEST FUEL STATION",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Fuel format [upstream OneCardParser.kt KDoc]",
+  "source": "upstream-kdoc"
+}

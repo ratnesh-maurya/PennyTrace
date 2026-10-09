@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "standard-chartered-0279",
+    "address": "VD-SCBANK-S",
+    "body": "Dear Customer, there is an IMPS credit of INR 5,000.00 in your account 789xxxx5555 on 10/12/2025.Available Balance:INR 15,000.00 -StanChart",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "IMPS Credit",
+    "balance": 1500000,
+    "accountLast4": "5555"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS Credit [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

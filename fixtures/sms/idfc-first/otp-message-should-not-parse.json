@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "idfc-first-0183",
+    "address": "BM-IDFCBK-S",
+    "body": "Your IDFC First Bank OTP is 123456. Do not share this code with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP Message (Should Not Parse) [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "equitas-0100",
+    "address": "CP-EQUTAS-S",
+    "body": "INR 2,000.00 credited via UPI to Equitas A/c 9012 -Ref:123456789012 on 18-01-26 from EMPLOYER NAME. Avl Bal is INR 25,000.00.Not U?Call 18001031222.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "credit",
+    "counterparty": "EMPLOYER NAME",
+    "refs": {
+      "upi": "123456789012"
+    },
+    "balance": 2500000,
+    "accountLast4": "9012"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Credit Transaction [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

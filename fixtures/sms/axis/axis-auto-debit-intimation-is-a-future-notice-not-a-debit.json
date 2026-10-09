@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "axis-0030",
+    "address": "AD-AXISBK-S",
+    "body": "INR 587.64 for Airtel Payments Bank Limited will be auto-debited via Axis Bank Card no. XXxxxx by 27-07-26. Please ensure sufficient limit/balance on your card/account to process the auto-debit. To deactivate the AutoPay facility for ID xxxxx, visit https://www.sihub.in/managesi/axisbank. TnC apply.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Axis auto-debit intimation is a future notice, not a debit [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

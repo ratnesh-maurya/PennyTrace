@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "axis-0063",
+    "address": "JD-AXISBK-S",
+    "body": "INR 500.00 debited from A/c no. XX312225 on MERCHANT ABC 02-12-2025 20:38:23 IST. Avl bal: INR 10000.00. Not you? SMS BLOCKCARD XX0023 to +919951860002 - Axis Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "MERCHANT ABC",
+    "balance": 1000000,
+    "accountLast4": "2225"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit Card - Numeric Account Pattern [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0110",
+    "address": "AD-FEDBNK",
+    "body": "Rs 1250.00 debited via UPI on 17-08-2024 09:15:45 to VPA merchant.store.98765@hdfcbank.Ref No 765432109876.Small txns?Use UPI Lite!-Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 125000,
+    "direction": "debit",
+    "counterparty": "merchant.store.98765@hdfcbank",
+    "refs": {
+      "upi": "765432109876"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit with Complex VPA [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

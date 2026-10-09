@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "pnb-0024",
+    "address": "VM-PNBSMS-S",
+    "body": "Your a/c no XX000 is credited by Rs 125.00 on 01-01-2026 (IMPS Ref no 000000000001)-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "credit",
+    "accountLast4": "000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Genuine three digit mask stays three digits [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "dbs-a03",
+    "address": "VM-DBSBNK-S",
+    "body": "123456 is your OTP for a transaction of INR 500.00 on your DBS account. Do not share it with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP must not parse [base BankParser non-transaction rule]",
+  "source": "upstream-kdoc"
+}

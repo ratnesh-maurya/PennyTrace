@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "icici-0167",
+    "address": "JD-ICICIT-S",
+    "body": "ICICI Bank Acct XX333 is debited with Rs 200 and Acct XX444 is credited. IMPS:LMNOPQ987654. -ICICI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 20000,
+    "counterparty": "IMPS Transfer",
+    "refs": {
+      "utr": "LMNOPQ987654"
+    },
+    "accountLast4": "333"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS dual-account with 'is debited' / 'is credited' variant [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

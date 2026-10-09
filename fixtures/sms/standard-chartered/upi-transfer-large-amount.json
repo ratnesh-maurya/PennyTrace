@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "standard-chartered-0277",
+    "address": "VM-SCBANK-S",
+    "body": "Your a/c XX5678 is debited for Rs. 1,250.00 on 01-12-2025 10:30 and credited to a/c XX9999 (UPI Ref no 123456789012).Plz call 18002586465 if not done by you.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 125000,
+    "direction": "debit",
+    "counterparty": "UPI Transfer to XX9999",
+    "refs": {
+      "upi": "123456789012"
+    },
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Transfer - Large Amount [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

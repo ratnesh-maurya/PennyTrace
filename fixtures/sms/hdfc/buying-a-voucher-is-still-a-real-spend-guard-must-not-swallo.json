@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "hdfc-0033",
+    "address": "TX-HDFCBK-S",
+    "body": "Rs.500.00 debited from A/c XX1111 on 09-Aug-26 to amazon evoucher (UPI Ref No 123456789012)",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "Buying a voucher is still a real spend (guard must not swallow it) [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

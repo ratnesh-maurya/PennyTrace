@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0004",
+    "address": "VK-PNBSMS-S",
+    "body": "Ac XXXXXXXX00341234 Debited with Rs.10000.00, 20-06-2025 08:18:35. Aval Bal Rs.27000.00 CR. Helpline 18001800/18002021-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000000,
+    "direction": "debit",
+    "balance": 2700000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit message with long account number [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

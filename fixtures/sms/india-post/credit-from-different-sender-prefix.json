@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "india-post-0321",
+    "address": "BZ-DOPBNK-G",
+    "body": "Account  No. XXXXXXXX1234 CREDIT with amount Rs. 5550.00 on 02-02-2026. Balance: Rs.37500.00. [S33475450]",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 555000,
+    "direction": "credit",
+    "refs": {
+      "other": "S33475450"
+    },
+    "balance": 3750000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit from different sender prefix [upstream DOPBankParserTest.kt]",
+  "source": "upstream-test"
+}

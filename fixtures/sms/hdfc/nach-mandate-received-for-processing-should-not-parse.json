@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "hdfc-0136",
+    "address": "VM-HDFCBK-S",
+    "body": "Auto Pay HDFC Bank NACH Mandate : Rs. 100000.00 UMRN:HDFC7031703262015557 To:NationalSecuritiesClearin Freq ADHO received today for processing.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "NACH Mandate Received for Processing - Should Not Parse [upstream TestHDFCBankParser.kt]",
+  "source": "upstream-test"
+}

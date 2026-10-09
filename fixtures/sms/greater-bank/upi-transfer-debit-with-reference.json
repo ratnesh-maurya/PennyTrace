@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "greater-bank-0325",
+    "address": "GREATERBNK",
+    "body": "Your a/c no. XXXXXXXX5207 is debited for Rs.100.00 on 19-04-26 and credited to a/c no. XXXXXXXX8364 (UPI Ref no 232135417634) If Not You? Call 18001217224 Greater Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "debit",
+    "counterparty": "Bank Transfer",
+    "refs": {
+      "upi": "232135417634"
+    },
+    "accountLast4": "5207"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI transfer debit with reference [upstream GreaterBankParserTest.kt]",
+  "source": "upstream-test"
+}

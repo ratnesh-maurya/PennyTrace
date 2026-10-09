@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "hsbc-0148",
+    "address": "HSBC",
+    "body": "HSBC: INR 1000.50 is paid from account XXXXXX4567 to ELECTRICITY BOARD on 20APR with ref 222222222222. Your available bal is INR 8000.00.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100050,
+    "direction": "debit",
+    "counterparty": "ELECTRICITY BOARD",
+    "refs": {
+      "upi": "222222222222"
+    },
+    "balance": 800000,
+    "accountLast4": "4567"
+  },
+  "expectedStatus": "parsed",
+  "note": "Payment Transaction [upstream TestHSBCBankParser.kt]",
+  "source": "upstream-test"
+}

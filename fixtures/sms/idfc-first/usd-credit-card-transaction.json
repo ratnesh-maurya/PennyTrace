@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "idfc-first-0177",
+    "address": "BM-IDFCBK-S",
+    "body": "Transaction Successful! USD 99.99 spent on your IDFC FIRST Bank Credit Card ending XX5678 at NETFLIX on 15-MAR-2025 at 10:00 AM Avbl Limit: INR 25000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 9999,
+    "direction": "debit",
+    "counterparty": "NETFLIX",
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "USD Credit Card Transaction [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

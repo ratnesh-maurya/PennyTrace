@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0234",
+    "address": "JD-KOTAKB-S",
+    "body": "Sent Rs.100.00 from Kotak Bank AC X5678 to phonepeqr123456789xyz@ybl on 15-10-25.UPI Ref 9876543210. Not you, https://kotak.com/KBANKT/Fraud",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "debit",
+    "counterparty": "PhonePe",
+    "refs": {
+      "other": "9876543210"
+    },
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "PhonePe QR code transaction [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

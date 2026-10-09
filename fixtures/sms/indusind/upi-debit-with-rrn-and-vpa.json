@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "indusind-0199",
+    "address": "AD-INDUSIND-S",
+    "body": "A/c *XX1234 debited by Rs 1234.00 towards xxxx.yyyy@icici. RRN: 510048508040. Not You? call 18602677777- IndusInd Bank.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123400,
+    "direction": "debit",
+    "counterparty": "xxxx.yyyy",
+    "refs": {
+      "upi": "510048508040"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit with RRN and VPA [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

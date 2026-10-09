@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0121",
+    "address": "TX-FEDSCP-S",
+    "body": "Your txn of ₹2,351.00 at Amazon on your Scapia Federal Visa credit card earned you 10% rewards! Not you? Call 18002961199. - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 235100,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Amazon"
+  },
+  "expectedStatus": "parsed",
+  "note": "Scapia Federal Credit Card Transaction - earned you rewards variant [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

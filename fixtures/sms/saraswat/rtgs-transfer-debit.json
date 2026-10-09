@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0261",
+    "address": "JD-SARBNK-S",
+    "body": "Dear Customer, Your account no. ending with 2468 is debited with INR 50,000.00 on 22-10-2025 for RTGS. Current Bal is INR 100,000.00CR. - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "direction": "debit",
+    "counterparty": "RTGS Transfer",
+    "balance": 10000000,
+    "accountLast4": "2468"
+  },
+  "expectedStatus": "parsed",
+  "note": "RTGS transfer debit [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

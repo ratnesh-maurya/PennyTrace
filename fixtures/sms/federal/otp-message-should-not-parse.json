@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0126",
+    "address": "AD-FEDBNK",
+    "body": "Dear Customer, your FedMobile registration has been initiated. If not initiated by you, please call 18004201199. Please do not share your card details/OTP/CVV to anyone -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP Message Should Not Parse [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

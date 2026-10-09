@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bob-0077",
+    "address": "VM-BOBSMS",
+    "body": "Rs.1000.00 Cr. to merchant@okaxis A/c XX345678 on 16-11-2024. AvlBal:Rs10000.00. Ref:1234567890 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "credit",
+    "counterparty": "merchant",
+    "refs": {
+      "other": "1234567890"
+    },
+    "balance": 1000000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Credit with Real VPA [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

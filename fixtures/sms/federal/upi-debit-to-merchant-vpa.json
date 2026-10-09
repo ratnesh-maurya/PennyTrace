@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0108",
+    "address": "AD-FEDBNK",
+    "body": "Rs 450.75 debited via UPI on 16-08-2024 14:22:10 to VPA swiggy.food@paytm.Ref No 876543210987.Small txns?Use UPI Lite!-Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 45075,
+    "direction": "debit",
+    "counterparty": "Swiggy",
+    "refs": {
+      "upi": "876543210987"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit to Merchant VPA [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

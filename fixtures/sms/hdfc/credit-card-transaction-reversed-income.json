@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "hdfc-0141",
+    "address": "VM-HDFCBK-S",
+    "body": "Transaction Reversed!On HDFC Bank CREDIT Card xx5555 Amt: Rs.862.16 By AMAZON                000 On 2026-08-21:05:20:26",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 86216,
+    "direction": "credit",
+    "counterparty": "AMAZON",
+    "accountLast4": "5555"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Transaction Reversed - Income [upstream TestHDFCBankParser.kt]",
+  "source": "upstream-test"
+}

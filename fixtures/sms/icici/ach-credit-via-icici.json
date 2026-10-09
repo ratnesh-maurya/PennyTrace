@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0168",
+    "address": "AD-ICICIT-S",
+    "body": "ICICI Bank Account XX227 credited:Rs. 104.00 on 19-May-26. Info ACH*VARUNBEVERAGES LIMI*778. Available Balance is Rs 1,11,231.93",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10400,
+    "direction": "credit",
+    "counterparty": "VARUNBEVERAGES LIMI Dividend",
+    "balance": 11123193,
+    "accountLast4": "227"
+  },
+  "expectedStatus": "parsed",
+  "note": "ACH credit via ICICI [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

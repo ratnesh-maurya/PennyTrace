@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0120",
+    "address": "VM-FEDSCP-S",
+    "body": "Hi! Your txn of ₹882.00 at Carnatic Cafe Gurgaon In on your Scapia Federal Visa credit card was successful. And you've earned 10% rewards on this spend! Not you? Go to Scapia support on the app or call 18002961199. -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 88200,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Carnatic Cafe Gurgaon In"
+  },
+  "expectedStatus": "parsed",
+  "note": "Scapia Federal Credit Card Transaction [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

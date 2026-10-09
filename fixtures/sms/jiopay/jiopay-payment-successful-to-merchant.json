@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jiopay-0334",
+    "address": "JIOPAY",
+    "body": "Payment successful to ZOMATO. Rs. 500.00 paid. Transaction ID : BR000CAUBYON",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "ZOMATO",
+    "refs": {
+      "other": "BR000CAUBYON"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "JioPay payment successful to merchant [upstream JioPayParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0358",
+    "address": "AD-SLCEIT-S",
+    "body": "Your OTP for slice transaction is 123456. Do not share.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Non-transaction message (OTP) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

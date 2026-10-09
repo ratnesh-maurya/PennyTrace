@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0233",
+    "address": "JD-KOTAKB-S",
+    "body": "Sent Rs.15.00 from Kotak Bank AC X1234 to paytmqr288005050101t74afkchmxjd@paytm on 14-10-25.UPI Ref 1234567890. Not you, https://kotak.com/KBANKT/Fraud",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500,
+    "direction": "debit",
+    "counterparty": "Paytm",
+    "refs": {
+      "other": "1234567890"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Paytm QR code transaction [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

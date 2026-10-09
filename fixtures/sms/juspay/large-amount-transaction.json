@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0223",
+    "address": "AMAZON PAY",
+    "body": "Payment of Rs 15,000.00 using Apay Balance successful at Amazon. Updated Balance is Rs 25,000.00 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "debit",
+    "counterparty": "Amazon"
+  },
+  "expectedStatus": "parsed",
+  "note": "Large amount transaction [upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

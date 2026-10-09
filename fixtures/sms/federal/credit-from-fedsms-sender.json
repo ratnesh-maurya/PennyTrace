@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0134",
+    "address": "AX-FEDSMS-S",
+    "body": "Dear Customer, Rs.123 credited to your A/c XX1234 on 01JAN2026 12:00:00. BAL-Rs.1234.56-Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12300,
+    "direction": "credit",
+    "balance": 123456,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit from FEDSMS sender [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

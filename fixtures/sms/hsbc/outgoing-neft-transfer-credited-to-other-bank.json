@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "hsbc-0326",
+    "address": "VM-HSBCIN-S",
+    "body": "HSBC: Dear HSBC Customer, your NEFT transaction with reference number HSBCN00106726185 for INR 150,000.00 has been credited to the HDFC A/c XXXXXXXXXX6956 of AKASH KEDIA on 01-01-2026 at 15:36:47 .",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 15000000,
+    "counterparty": "AKASH KEDIA"
+  },
+  "expectedStatus": "parsed",
+  "note": "Outgoing NEFT Transfer - credited to other bank [upstream HSBCBankParserTest.kt]",
+  "source": "upstream-test"
+}

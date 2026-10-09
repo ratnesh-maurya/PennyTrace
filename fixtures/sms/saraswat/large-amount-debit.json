@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0259",
+    "address": "AD-SARBNK-S",
+    "body": "Dear Customer, Your account no. ending with 3456 is debited with INR 25,000.00 on 15-10-2025 for NEFT. Current Bal is INR 50,000.00CR. - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2500000,
+    "direction": "debit",
+    "counterparty": "NEFT Transfer",
+    "balance": 5000000,
+    "accountLast4": "3456"
+  },
+  "expectedStatus": "parsed",
+  "note": "Large amount debit [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

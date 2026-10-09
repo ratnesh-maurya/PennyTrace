@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "yes-0298",
+    "address": "CP-YESBNK-S",
+    "body": "Dear Customer, your OTP for login is 123456. Do not share with anyone. -Yes Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP message [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "slice-0366",
+    "address": "slice",
+    "body": "Rs. 2,000 received in slice A/c xx2743 on 15-Jun-26 from NASIMUDDIN NAJAMUDDIN SHAIKH via UPI (Ref ID: 212756500000). Avl. Bal. Rs. 2,203.56 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "credit",
+    "counterparty": "NASIMUDDIN NAJAMUDDIN SHAIKH",
+    "refs": {
+      "upi": "212756500000"
+    },
+    "balance": 220356,
+    "accountLast4": "2743"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice SFB UPI credit (money received) is INCOME with balance [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

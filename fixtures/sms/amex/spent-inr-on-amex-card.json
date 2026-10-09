@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "amex-a01",
+    "address": "AD-AMEXIN-S",
+    "body": "Alert: You've spent INR 1,017.70 on your AMEX card ** 91234 at VOUCHER PLAT on 20 August 2025",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 101770,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "VOUCHER PLAT",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Card spend [upstream AMEXBankParser.kt KDoc format]",
+  "source": "upstream-kdoc"
+}

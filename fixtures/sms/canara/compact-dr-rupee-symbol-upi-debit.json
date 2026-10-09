@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "canara-0305",
+    "address": "VK-CANBNK-S",
+    "body": "Dear Customer, Acct XXX789 Dr. ₹41.00 on 08/07/26 to METRO TRANSIT; UPI: 456789012345; Bal INR 8,765.43.Not you? SMS BLOCKUPI to XXXXXXXXXX-CanaraBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 4100,
+    "direction": "debit",
+    "counterparty": "METRO TRANSIT",
+    "refs": {
+      "upi": "456789012345"
+    },
+    "balance": 876543,
+    "accountLast4": "789"
+  },
+  "expectedStatus": "parsed",
+  "note": "Compact Dr rupee-symbol UPI debit [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

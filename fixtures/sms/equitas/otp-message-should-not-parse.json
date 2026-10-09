@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "equitas-0102",
+    "address": "CP-EQUTAS-S",
+    "body": "Your Equitas Bank OTP for UPI transaction is 123456. Do not share with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP Message Should Not Parse [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

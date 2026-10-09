@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jupiter-a01",
+    "address": "VK-JTEDGE-S",
+    "body": "Rs.130.00 debited to your Edge CSB Bank RuPay Credit Card ending 6852 on 9/20/25, 1:15 PM - (UPI Ref no.281751568470). To dispute, call 8655055086.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 13000,
+    "direction": "debit",
+    "instrument": "card",
+    "refs": {
+      "upi": "281751568470"
+    },
+    "accountLast4": "6852"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit card debit [upstream JupiterBankParser.kt KDoc + comments: \"UPI Ref no.281751568470\", \"ending 6852\"]",
+  "source": "upstream-kdoc"
+}

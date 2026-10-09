@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0240",
+    "address": "VM-KOTAKD-S",
+    "body": "Sent Rs.51.00 from XXXXXX9722 to DINESHBHAI RAMJIBHAI on 30/04/2026. UPI ref no. 648604626824. Not you? Tap https://kotk.in/KOTAKD/Eg9Cu0 to report -Kotak",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5100,
+    "direction": "debit",
+    "counterparty": "DINESHBHAI RAMJIBHAI",
+    "refs": {
+      "upi": "648604626824"
+    },
+    "accountLast4": "9722"
+  },
+  "expectedStatus": "parsed",
+  "note": "Short-SMS UPI to person (KOTAKD sender) [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

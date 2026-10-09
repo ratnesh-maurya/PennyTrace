@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "ippb-a01",
+    "address": "AD-IPBMSG-S",
+    "body": "A/C X1234 Debit Rs.1.00 for UPI to john@superyes on 20-08-25 Ref 560002638161. Avl Bal Rs.436.91",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100,
+    "direction": "debit",
+    "counterparty": "john",
+    "refs": {
+      "upi": "560002638161"
+    },
+    "balance": 43691,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit [upstream IPPBParser.kt pattern comments: \"A/C X1234\", \"for UPI to john@superyes\", \"Ref 560002638161\", \"Avl Bal Rs.436.91\"]",
+  "source": "upstream-kdoc"
+}

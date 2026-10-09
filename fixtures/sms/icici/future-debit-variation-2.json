@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "icici-0155",
+    "address": "AX-ICICIT-S",
+    "body": "Your ICICI Bank Account will be debited with Rs 1,000.00 on 10-Oct-25",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Future debit variation 2 [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

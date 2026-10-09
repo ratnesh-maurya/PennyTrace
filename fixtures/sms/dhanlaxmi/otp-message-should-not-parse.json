@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "dhanlaxmi-0095",
+    "address": "VM-DHANBK",
+    "body": "Your Dhanlaxmi Bank OTP is 123456. Do not share this code with anyone. Valid for 5 minutes.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP Message (Should Not Parse) [upstream TestDhanlaxmiBankParser.kt]",
+  "source": "upstream-test"
+}

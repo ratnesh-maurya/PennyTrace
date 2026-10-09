@@ -1,0 +1,15 @@
+{
+  "sms": {
+    "id": "federal-0129",
+    "address": "VM-FEDBNK-S",
+    "body": "Your available balance for a/c no(s) SBA1234 is INR 15000.50,SBA5678 is INR 8500.25 .For detailed statement download FedMobile https://fedmobile.federalbank.co.in/download-fedmobile/ - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "balance",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Balance Inquiry with Clear Balance [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "sbi-0252",
+    "address": "SBI CARDS AND PAYMENT SERVICES",
+    "body": "Rs.90.00 𝗌𝗉𝖾𝗇𝗍 𝗈𝗇 𝗒𝗈𝗎𝗋 𝖲𝖡𝖨 𝖢𝗋𝖾𝖽𝗂𝗍 𝖢𝖺𝗋𝖽 𝖾𝗇𝖽𝗂𝗇𝗀 5667 at SUPREMEGOURMET on 13/02/26. 𝖳𝗋𝗑𝗇. 𝗇𝗈𝗍 𝖽𝗈𝗇𝖾 𝖻𝗒 𝗒𝗈𝗎? 𝖱𝖾𝗉𝗈𝗋𝗍 𝖺𝗍 https://sbicard.com/Dispute",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 9000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "SUPREMEGOURMET",
+    "accountLast4": "5667"
+  },
+  "expectedStatus": "parsed",
+  "note": "SBI Card Unicode Math Sans-Serif spending SMS [upstream TestSBIParser.kt]",
+  "source": "upstream-test"
+}
