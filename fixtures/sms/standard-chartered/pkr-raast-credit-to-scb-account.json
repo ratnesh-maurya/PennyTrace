@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "standard-chartered-0280",
+    "address": "9220",
+    "body": "Dear Customer, PKR 55,000.00 sent to SCB PK A/C ****9901 for FUNDSTRANSFER 001 on 06-Feb-26 14:22 via RAAST for TX ID FAYS2602061422095059608557891",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "PKR RAAST credit to SCB account [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 5500000,
+    "direction": "credit",
+    "counterparty": "RAAST Transfer",
+    "refs": {
+      "other": "FAYS2602061422095059608557891"
+    },
+    "accountLast4": "9901"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0369",
+    "address": "slice",
+    "body": "UPI AutoPay for OpenAI from slice a/c XX2743 for Rs. 1,999 is revoked. UMN - 019e5ebb3a1679b6aee8a0000ff88d19@slc - slice",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Slice SFB UPI AutoPay revoked must NOT be parsed [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

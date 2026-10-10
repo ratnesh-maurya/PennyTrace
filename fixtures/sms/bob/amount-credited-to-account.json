@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bob-0083",
+    "address": "VM-BOBTXN",
+    "body": "Rs.5000.00 Credited to A/c XX112233 on 01-12-2024. AvlBal:Rs12345.67 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "balance": 1234567,
+    "accountLast4": "2233"
+  },
+  "expectedStatus": "parsed",
+  "note": "Amount Credited to Account [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

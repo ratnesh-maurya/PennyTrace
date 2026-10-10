@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "south-indian-0273",
+    "address": "SIBSMS",
+    "body": "Dear Customer, Your A/c X7377 is credited with Rs.792.02 Info: IMPS/FDRL/528005821348/EPIFI ACCOUN. Final balance is Rs.793.02-South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 79202,
+    "direction": "credit"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "ippb-a04",
+    "address": "AD-IPBMSG-S",
+    "body": "123456 is your OTP for a transaction of Rs.100.00 on your IPPB account. Do not share it with anyone.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP must not parse [base BankParser non-transaction rule]",
+  "source": "upstream-kdoc"
+}

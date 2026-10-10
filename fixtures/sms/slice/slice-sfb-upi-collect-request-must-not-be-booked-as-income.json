@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0370",
+    "address": "slice",
+    "body": "You have received a collect request of Rs. 500 from someone@slc on slice. Approve or decline in the app. - slice",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Slice SFB UPI collect request must NOT be booked as income [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

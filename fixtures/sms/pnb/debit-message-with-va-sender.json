@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0003",
+    "address": "VA-PNBSMS-S",
+    "body": "Ac XX1234 Debited with Rs.5000.00, 16-02-2026 10:04:09. Aval Bal Rs.27000.00 CR. Helpline 18001800/18002021-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "debit",
+    "balance": 2700000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit message with VA sender [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

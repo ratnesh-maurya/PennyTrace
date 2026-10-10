@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "navi-mf-a01",
+    "address": "AD-NAVAMC-S",
+    "body": "Unit Allotment Update:\nYour SIP purchase of Rs.1,000.00 in Navi ELSS Tax Saver Fund DG has been processed at applicable NAV. The units will be alloted in 1-2 working days.\nTeam Navi Mutual Fund",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "Navi ELSS Tax Saver Fund DG"
+  },
+  "expectedStatus": "parsed",
+  "note": "SIP unit allotment — ELSS fund name flows through [upstream NaviMutualFundParser.kt KDoc]",
+  "source": "upstream-kdoc"
+}

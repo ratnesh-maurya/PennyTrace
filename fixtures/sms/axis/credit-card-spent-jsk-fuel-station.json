@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0059",
+    "address": "JX-AXISBK-S",
+    "body": "Spent INR 500\nAxis Bank Card no. XX6018\n13-09-25 13:08:07 IST\nJSK FUEL ST\nAvl Limit: INR 6826.78\nNot you? SMS BLOCK 6018 to 919951860002",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "JSK FUEL ST",
+    "availableLimit": 682678,
+    "accountLast4": "6018"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - JSK Fuel Station [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

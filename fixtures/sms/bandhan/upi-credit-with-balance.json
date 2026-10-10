@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bandhan-0068",
+    "address": "XY-BDNSMS-S",
+    "body": "INR 25,000.00 deposited to A/c XXXXXXXXXX1234 towards UPI/CR/C224513287910/JOHN DOE/u on 03-OCT-2025 . Clear Bal is INR 30,123.00 . Bandhan Bank.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2500000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "refs": {
+      "other": "C224513287910"
+    },
+    "balance": 3012300,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit with balance [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

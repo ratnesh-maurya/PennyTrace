@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0123",
+    "address": "AD-FEDBNK",
+    "body": "Hi, txn of Rs. 1500.00 using card XX**3456 failed due to insufficient funds. Current Bal: Rs.250.75. Call 18004251199 if txn not initiated by you -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Failed Transaction Should Not Parse [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

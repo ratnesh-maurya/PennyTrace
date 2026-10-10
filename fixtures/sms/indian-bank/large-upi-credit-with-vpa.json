@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "indian-bank-0188",
+    "address": "BV-INDBNK-S",
+    "body": "Rs.15000.00 credited to a/c *1234 on 11/10/2025 by a/c linked to VPA customer@paytm (UPI Ref no 555444333222).Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "credit",
+    "counterparty": "customer",
+    "refs": {
+      "upi": "555444333222"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Large UPI credit with VPA [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

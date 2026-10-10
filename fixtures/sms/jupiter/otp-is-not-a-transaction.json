@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "jupiter-a03",
+    "address": "VK-JTEDGE-S",
+    "body": "123456 is your OTP for a transaction of Rs.100.00 on your Edge CSB Bank RuPay Credit Card ending 6852. Do not share it.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP must not parse [base BankParser non-transaction rule]",
+  "source": "upstream-kdoc"
+}

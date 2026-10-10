@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "hdfc-mf-0143",
+    "address": "AD-HDFCMF-AC",
+    "body": "Your SIP Purchase in Folio 38822412/82 under HDFC Mid Cap Fund-DG for Rs. 7,000.65 has been processed at the NAV of 224.603 for 31.169 units and 24-Feb-2026. Your smart statement https://shrtsms.in/HDFCMF/xYSrbW. Enter your PAN as the password. Sincerely, HDFCMF",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 700065,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "HDFC Mid Cap Fund-DG"
+  },
+  "expectedStatus": "parsed",
+  "note": "SIP Purchase message [upstream TestHDFCMutualFundParser.kt]",
+  "source": "upstream-test"
+}

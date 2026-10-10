@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "axis-0061",
+    "address": "JD-AXISBK-S",
+    "body": "INR 209.00 debited from A/c no. XXxxxxy on BURGRILL 04-12-2025 13:13:27 IST. Avl bal: INR xxxxxxx. Not you? SMS BLOCKCARD XX0023 to +919951860002 - Axis Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 20900,
+    "direction": "debit",
+    "counterparty": "BURGRILL"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit Card - BURGRILL [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

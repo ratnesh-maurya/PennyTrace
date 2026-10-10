@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "cred-0316",
+    "address": "AD-CRED-S",
+    "body": "Payment of Rs.10000 has been successfully credited towards your SBI Credit Card.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000000,
+    "counterparty": "SBI Credit Card"
+  },
+  "expectedStatus": "parsed",
+  "note": "CRED sender CRED-S pattern [upstream CredParserTest.kt]",
+  "source": "upstream-test"
+}

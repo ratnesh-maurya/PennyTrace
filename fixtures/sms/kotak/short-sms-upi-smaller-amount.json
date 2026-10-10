@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0241",
+    "address": "VM-KOTAKD-S",
+    "body": "Sent Rs.10.00 from XXXXXX9722 to Makavana Mahipatbhai on 01/05/2026. UPI ref no. 648724676562. Not you? Tap https://kotk.in/KOTAKD/EhkUKk to report -Kotak",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "debit",
+    "counterparty": "Makavana Mahipatbhai",
+    "refs": {
+      "upi": "648724676562"
+    },
+    "accountLast4": "9722"
+  },
+  "expectedStatus": "parsed",
+  "note": "Short-SMS UPI smaller amount [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

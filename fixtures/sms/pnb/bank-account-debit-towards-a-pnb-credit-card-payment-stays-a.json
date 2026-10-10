@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "pnb-0014",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX1111 debited with Rs.270.00 on 05-10-2026 towards PNB credit card payment. Avl Bal Rs.5000.00 -PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 27000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "Bank-account debit towards a PNB credit card payment stays an expense [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

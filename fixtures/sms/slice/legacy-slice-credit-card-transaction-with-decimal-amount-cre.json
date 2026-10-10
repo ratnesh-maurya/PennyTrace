@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "slice-0354",
+    "address": "AX-SLICEIT-S",
+    "body": "Your slice credit card transaction of RS. 1234.56 on flipkart.com is successful.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123456,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "flipkart.com"
+  },
+  "expectedStatus": "parsed",
+  "note": "Legacy slice credit card transaction with decimal amount (CREDIT) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

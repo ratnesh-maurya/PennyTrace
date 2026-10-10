@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "slice-0357",
+    "address": "AD-SLCEIT-S",
+    "body": "Rs.1000 credited to your slice account as cashback.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "credit",
+    "counterparty": "Slice Credit"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cashback credited to slice account (INCOME) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

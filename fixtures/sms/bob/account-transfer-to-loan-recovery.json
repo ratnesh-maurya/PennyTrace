@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "bob-0073",
+    "address": "VM-BOBTXN-S",
+    "body": "Rs.29 transferred from A/c ...5494 to:Loan Recovery Fo. Total Bal:Rs.24898.57CR. Avlbl Amt:Rs.24898.57(04-11-2025 04:03:09) - Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2900,
+    "direction": "debit",
+    "counterparty": "Loan Recovery Fo",
+    "balance": 2489857,
+    "accountLast4": "5494"
+  },
+  "expectedStatus": "parsed",
+  "note": "Account Transfer to Loan Recovery [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

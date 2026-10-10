@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kerala-gramin-0231",
+    "address": "AD-KGBANK-S",
+    "body": "Dear Customer, Account XXXX5678 is credited with INR 500 on 15-10-2025 10:30:00 from merchant@paytm. UPI Ref. no. 123456789012-Kerala Gramin Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "merchant",
+    "refs": {
+      "upi": "123456789012"
+    },
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Credit from UPI ID [upstream TestKeralaGraminBankParser.kt]",
+  "source": "upstream-test"
+}

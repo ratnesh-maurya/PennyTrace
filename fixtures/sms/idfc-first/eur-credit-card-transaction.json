@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "idfc-first-0176",
+    "address": "BM-IDFCBK-S",
+    "body": "Transaction Successful! EUR 500.00 spent on your IDFC FIRST Bank Credit Card ending XX1234 at AMAZON EU on 08-FEB-2025 at 01:28 PM Avbl Limit: INR 4074.10 If not done by you, call 180010888",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "EUR Credit Card Transaction [upstream TestIDFCFirstBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "AMAZON EU",
+    "accountLast4": "1234"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "nsdl-payments-bank-0343",
+    "address": "AD-NSDLPB-S",
+    "body": "A/c no XX1234 is credited for Rs.100.00 on 20-Jun-26 (UPI Ref No 617109835321) - NSDLPB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "credit",
+    "refs": {
+      "upi": "617109835321"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit [upstream NSDLPaymentsBankParserTest.kt]",
+  "source": "upstream-test"
+}

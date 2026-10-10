@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "dbs-a01",
+    "address": "VM-DBSBNK-S",
+    "body": "Your account no ********1234 is debited with INR 11.00 on 12-06-26. Current Balance is INR37888.45. - DBS Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1100,
+    "direction": "debit",
+    "balance": 3788845,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit with masked account and INR balance [upstream DBSBankParser.kt comment formats]",
+  "source": "upstream-kdoc"
+}

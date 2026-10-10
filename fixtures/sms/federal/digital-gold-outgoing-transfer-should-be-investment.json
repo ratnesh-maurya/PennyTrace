@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0104",
+    "address": "AD-FEDBNK-S",
+    "body": "Digital Gold India Private Limited has received Rs 21.00 from your A/c 7990 via NEFT on 10-Jan-2026 12:06:17. Ref no. FBBT260103879100 - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2100,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "Digital Gold India"
+  },
+  "expectedStatus": "parsed",
+  "note": "Digital Gold outgoing transfer - should be INVESTMENT [upstream TestFederalBankOutgoingParser.kt]",
+  "source": "upstream-test"
+}

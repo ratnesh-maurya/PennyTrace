@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "hsbc-0145",
+    "address": "HSBC",
+    "body": "HSBC: A/c 123-456***-789 is credited with INR 2500.75 on 15DEC at 10.15.30 with UTR NEFT12345678901 as NEFT from AXIS A/c ***1234 of Jane Smith . Your Avl Bal is INR 50000.00.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 250075,
+    "direction": "credit",
+    "counterparty": "AXIS A/c ***1234 of Jane Smith",
+    "refs": {
+      "utr": "NEFT12345678901"
+    },
+    "balance": 5000000,
+    "accountLast4": "6789"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT Credit with UTR - Different account format [upstream TestHSBCBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "yes-0297",
+    "address": "CP-YESBNK-S",
+    "body": "INR 250.00 spent on YES BANK Card X3349 @UPI_SURAKSHAA HEALTHCA 23-08-2025 10:02:59 am. Avl Lmt INR 212,036.60. SMS BLKCC 3349 to 9840909000 if not you",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "SURAKSHAA HEALTHCA",
+    "availableLimit": 21203660,
+    "accountLast4": "3349"
+  },
+  "expectedStatus": "parsed",
+  "note": "Surakshaa Healthcare [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

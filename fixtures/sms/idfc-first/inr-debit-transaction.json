@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "idfc-first-0179",
+    "address": "BM-IDFCBK-S",
+    "body": "Your A/C XXXXXXX1234 is debited by INR 68.00 on 06/08/25 17:36. New Bal :INR 5000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 6800,
+    "direction": "debit",
+    "balance": 500000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "INR Debit Transaction [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

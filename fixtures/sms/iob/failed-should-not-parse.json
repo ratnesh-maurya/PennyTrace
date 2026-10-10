@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "iob-kdoc-04",
+    "address": "VA-IOBCHN-S",
+    "body": "Your UPI transaction of Rs.100.00 to TEST MERCHANT has failed due to technical reasons -IOB",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Failed transaction (should not parse; isTransactionMessage skips failed) [upstream IndianOverseasBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

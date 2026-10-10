@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "federal-0107",
+    "address": "AD-FEDBNK",
+    "body": "Rs 150.00 debited via UPI on 15-08-2024 10:30:25 to VPA john.doe123@okbank.Ref No 987654321098.Small txns?Use UPI Lite!-Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 15000,
+    "direction": "debit",
+    "counterparty": "john.doe123@okbank",
+    "refs": {
+      "upi": "987654321098"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit to Individual VPA [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

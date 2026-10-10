@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "boi-0088",
+    "address": "JX-BOIIND-S",
+    "body": "BOI - Rs 15,000.00 Credited in your Ac XX5468 on 04-02-2026 By NEFTINWARD HDFCH00778553836/HDFC MUTUAL F .Avl Bal 18679.91",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "credit",
+    "counterparty": "HDFC MUTUAL F",
+    "balance": 1867991,
+    "accountLast4": "5468"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT inward credit extracts merchant after slash [upstream TestBankOfIndiaParser.kt]",
+  "source": "upstream-test"
+}

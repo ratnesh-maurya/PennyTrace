@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0361",
+    "address": "AD-SLCEIT-S",
+    "body": "Your slice credit card transaction of RS. 50000 on amazon.in was unsuccessful.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Unsuccessful transaction should NOT be parsed [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,26 @@
+PennyTrace builds your expense ledger automatically from the bank and UPI SMS already on your phone. There is nothing to type in, and nothing leaves the device.
+
+<b>Private by design</b>
+• The app has no internet permission at all. It cannot send anything anywhere: no sync, no analytics, no crash reports, no ads.
+• Everything is stored in an encrypted database on your phone. The key lives in the Android Keystore.
+• You can discard the raw message text after it is read and keep only the numbers.
+• Free software under AGPL-3.0. Read the code, or check the permissions yourself.
+
+<b>What it does</b>
+• Reads bank, card and UPI alerts from Indian banks and turns them into transactions.
+• Daily close for every day: opening balance, money in, money spent, money moved, closing balance.
+• Combines several accounts and cards. Credit cards are shown as what you owe, not as money you have.
+• Own-account transfers, card bill payments and ATM withdrawals are not counted as spending. Transfers still in transit are shown as such.
+• The same transaction reported by two SMS is counted once.
+• Reconciles with the balance your bank reports and shows the difference. It never invents a transaction to hide a gap.
+• Categories with your own additions, merchant names you can correct once and have remembered, and per-account "don't count this" switches.
+• Spam that looks like a credit alert (loan offers, "Rs 65,000 credited, join now") is ignored.
+
+<b>Permissions</b>
+• Read SMS and Receive SMS: to find bank alerts and notice new ones. Messages are processed on the device.
+• Receive boot completed: to resume watching for new alerts after a restart.
+That is the whole list. There is no internet, contacts, location, storage or notification permission.
+
+<b>Good to know</b>
+• Android only. Built for Indian bank SMS formats; you can add parsers for other banks, see CONTRIBUTING.
+• Android 13 and newer may ask you to allow "restricted settings" for the app before it can be given SMS access: open App info, tap the menu, and choose "Allow restricted settings".

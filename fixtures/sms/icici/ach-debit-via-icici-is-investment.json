@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "icici-0169",
+    "address": "AX-ICICIT",
+    "body": "ICICI Bank Account XX123 debited Rs. 5,000.00 on 19-May-26 InfoACH*BD-ACHKFL.Avl Bal Rs. 3,25,000.04.To dispute call 1800 blah blah",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "balance": 32500004,
+    "accountLast4": "123"
+  },
+  "expectedStatus": "parsed",
+  "note": "ACH debit via ICICI is INVESTMENT [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

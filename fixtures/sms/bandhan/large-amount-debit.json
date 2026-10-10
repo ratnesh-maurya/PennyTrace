@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bandhan-0069",
+    "address": "AD-BDNSMS-S",
+    "body": "INR 50,000.00 debited from A/c XXXXXXXXXX5678 towards UPI/DR/D999888777666/Big Purchase Value 18-NOV-2025 . Clear Bal is INR 100,000.50. Bandhan Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "direction": "debit",
+    "counterparty": "Big Purchase",
+    "refs": {
+      "other": "D999888777666"
+    },
+    "balance": 10000050,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Large Amount Debit [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

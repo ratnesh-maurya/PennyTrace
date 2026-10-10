@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0054",
+    "address": "AX-AXISBK-S",
+    "body": "Spent INR 1299.00\nAxis Bank Card no. XX5678\n12-10-25 14:30:15 IST\nAmazon Pay\nAvl Limit: INR 50000.00\nNot you? SMS BLOCK 5678 to 919951860002",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 129900,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Amazon",
+    "availableLimit": 5000000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - Amazon [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

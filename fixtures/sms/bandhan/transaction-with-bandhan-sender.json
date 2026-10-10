@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bandhan-0070",
+    "address": "BANDHAN",
+    "body": "INR 1000.00 debited from A/c XXXXXXXXXX9876 towards UPI/DR/D111222333444/Store XYZ Value 20-NOV-2025 . Clear Bal is INR 15000.00. Bandhan Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "debit",
+    "counterparty": "Store XYZ",
+    "refs": {
+      "other": "D111222333444"
+    },
+    "balance": 1500000,
+    "accountLast4": "9876"
+  },
+  "expectedStatus": "parsed",
+  "note": "Transaction with BANDHAN sender [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "au-0050",
+    "address": "VM-AUBANK-S",
+    "body": "Dr INR 29,000.00 from A/c X7661 on 05-MAY-2026\nUPI/DR/012345678901/Bank Account XXXXX\nBal INR 10,952.10\nNot you? Call 180012001200 & dial 0\n-AU Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2900000,
+    "direction": "debit",
+    "balance": 1095210,
+    "accountLast4": "7661"
+  },
+  "expectedStatus": "parsed",
+  "note": "Short Dr form with placeholder merchant [upstream TestAUBankParser.kt]",
+  "source": "upstream-test"
+}

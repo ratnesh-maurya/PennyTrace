@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "icici-0166",
+    "address": "JD-ICICIT-S",
+    "body": "ICICI Bank Acct XX111 debited with Rs 5000 on 15-Jan-26 & Acct XX222 credited. NEFT RRN ZX9876543210. -ICICI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "counterparty": "NEFT Transfer",
+    "refs": {
+      "utr": "ZX9876543210"
+    },
+    "accountLast4": "111"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT dual-account debit gets NEFT Transfer label [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

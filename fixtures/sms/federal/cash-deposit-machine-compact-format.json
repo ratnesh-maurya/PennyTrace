@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "federal-0128",
+    "address": "AX-FEDBNK-S",
+    "body": "Hi,Rs.1100credited in your A/c XX3223 on 15JAN2026 13:03:07 using cash deposit machine at FBL-CHANGANASSERY. Current Bal: Rs.1181.90 - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 110000,
+    "direction": "credit",
+    "counterparty": "Cash Deposit",
+    "balance": 118190,
+    "accountLast4": "3223"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cash Deposit Machine - Compact Format [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

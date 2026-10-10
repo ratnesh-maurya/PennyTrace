@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "icici-0157",
+    "address": "AD-ICICIT-S",
+    "body": "Payment of Rs 26,266.00 has been received on your ICICI Bank Credit Card XX9006 through Bharat Bill Payment System on 06-DEC-25.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Credit card bill payment [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

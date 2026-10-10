@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "equitas-0103",
+    "address": "CP-EQUTAS-S",
+    "body": "Equitas Bank: Get 5% cashback offer on all UPI transactions! T&C apply.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Promotional Message Should Not Parse [upstream TestEquitasBankParser.kt]",
+  "source": "upstream-test"
+}

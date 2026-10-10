@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "pnb-0025",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX10000 Debited by INR 125.00,01-01-2026 RRN-000000000001 thru Debitcard XXXX0000.Aval Bal INR 9000.00 CR.-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "debit",
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Long masked suffix uses final four digits [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

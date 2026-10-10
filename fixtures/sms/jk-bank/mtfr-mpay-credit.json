@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "jk-bank-0003",
+    "address": "JKBANK",
+    "body": "Your A/c XXXXXXXX1111 has been Credited by INR 1,500.00 at 09:15 by mTFR/9622111111/JOHN DOE. Available Bal is INR 26,500.00 Cr -JK Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "accountLast4": "1111",
+    "balance": 2650000
+  },
+  "expectedStatus": "parsed",
+  "note": "mPay transfer \"by mTFR/<mobile>/NAME\" [JKBankParser.kt comments]",
+  "source": "synthetic"
+}

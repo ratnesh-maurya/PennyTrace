@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "navi-mf-0247",
+    "address": "AD-NAVAMC-S",
+    "body": "Unit Allotment Update:\nYour SIP purchase of Rs.499.98 in Navi Nifty Next 50 Index Fund DG has been processed at applicable NAV. The units will be alloted in 1-2 working days. For further queries, please visit the Navi app.\nTeam Navi Mutual Fund",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 49998,
+    "direction": "debit",
+    "hints": {
+      "isInvestment": true
+    },
+    "counterparty": "Navi Nifty Next 50 Index Fund DG"
+  },
+  "expectedStatus": "parsed",
+  "note": "SIP unit allotment — Nifty Next 50 Index Fund DG [upstream TestNaviMutualFundParser.kt]",
+  "source": "upstream-test"
+}

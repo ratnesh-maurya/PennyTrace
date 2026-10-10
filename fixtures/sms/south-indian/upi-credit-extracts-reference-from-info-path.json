@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "south-indian-0270",
+    "address": "SIBSMS",
+    "body": "UPI Credit:INR Rs.15000.00 in A/c X2468. Info: UPI/TGRB/111222333444/ Sample Payer on 26-12-25 19:02:01.Final balance is Rs.34567.67 -South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1500000,
+    "direction": "credit",
+    "counterparty": "Sample Payer",
+    "refs": {
+      "upi": "111222333444"
+    },
+    "balance": 3456767,
+    "accountLast4": "2468"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit extracts reference from info path [upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

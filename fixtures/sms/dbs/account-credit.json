@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "dbs-a02",
+    "address": "VM-DBSBNK-S",
+    "body": "Your a/c ****1234 is credited with INR 1,500.00 on 12-06-26. Avl Bal: INR 39388.45 - DBS Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "credit",
+    "balance": 3938845,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit with a/c mask and Avl Bal [upstream DBSBankParser.kt comment formats]",
+  "source": "upstream-kdoc"
+}

@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "slice-0356",
+    "address": "AD-SLCEIT-S",
+    "body": "Rs.350 spent on your slice credit card at MERCHANT. Available limit: Rs.10000.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 35000,
+    "direction": "debit",
+    "instrument": "card"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice card 'spent' wording with card context stays CREDIT [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

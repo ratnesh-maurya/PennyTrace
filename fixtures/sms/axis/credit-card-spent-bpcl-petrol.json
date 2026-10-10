@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0058",
+    "address": "CP-AXISBK-S",
+    "body": "Spent INR 500\nAxis Bank Card no. XX6018\n22-09-25 09:03:41 IST\nBPCL ARUNAA\nAvl Limit: INR 17131.47\nNot you? SMS BLOCK 6018 to 919951860002",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "BPCL ARUNAA",
+    "availableLimit": 1713147,
+    "accountLast4": "6018"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - BPCL Petrol [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

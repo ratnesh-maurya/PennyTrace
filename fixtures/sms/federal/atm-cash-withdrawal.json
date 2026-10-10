@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0133",
+    "address": "AD-FEDBNK-S",
+    "body": "Rs 1500 withdrawn@ YBL CHAN on 21JAN26 17:59 Bal Rs 7517.94 Ref 602117126490. Not you? Call 18004251199/ SMS NO 3683 to 9895088888 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "debit",
+    "counterparty": "Cash Withdrawal",
+    "balance": 751794
+  },
+  "expectedStatus": "parsed",
+  "note": "ATM Cash Withdrawal [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

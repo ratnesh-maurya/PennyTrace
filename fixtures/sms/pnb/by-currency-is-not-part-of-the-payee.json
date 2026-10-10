@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "pnb-0021",
+    "address": "VM-PNBSMS-S",
+    "body": "A/c X0000 credited by ₹125.00 on 01-01-2026 by Example Shop thru UPI.Avl INR 9000.00-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "credit",
+    "counterparty": "Example Shop"
+  },
+  "expectedStatus": "parsed",
+  "note": "By currency is not part of the payee [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

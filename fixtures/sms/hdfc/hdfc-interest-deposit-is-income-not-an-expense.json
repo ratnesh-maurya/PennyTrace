@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "hdfc-0040",
+    "address": "JM-HDFCBK-S",
+    "body": "Update! INR 6,657.00 deposited in HDFC Bank A/c XX1111 on 30-SEP-26 for Interest paid till 30-SEP-2026.Avl bal INR 12,28,554.72. Cheque deposits in A/C are subject to clearing",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 665700,
+    "direction": "credit",
+    "balance": 122855472,
+    "accountLast4": "1111"
+  },
+  "expectedStatus": "parsed",
+  "note": "HDFC interest deposit is income, not an expense [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "cashfree-0311",
+    "address": "JX-CSHfre-S",
+    "body": "Payment options are available on our portal. Powered by Cashfree",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Cashfree sender without confirmation phrasing returns null [upstream CashfreeParserTest.kt]",
+  "source": "upstream-test"
+}

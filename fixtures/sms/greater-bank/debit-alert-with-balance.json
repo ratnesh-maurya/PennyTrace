@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "greater-bank-0324",
+    "address": "GREATERBNK",
+    "body": "Your Account XXXX5207 had a DEBIT transaction of RS. 100.00 on 19/04/2026 at 23:21:35.Available balance is Rs. 1127.55: GREATER BANK",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "debit",
+    "counterparty": "Debit Transaction",
+    "balance": 112755,
+    "accountLast4": "5207"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit alert with balance [upstream GreaterBankParserTest.kt]",
+  "source": "upstream-test"
+}

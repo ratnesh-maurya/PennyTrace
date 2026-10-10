@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0360",
+    "address": "AX-SLICEIT-S",
+    "body": "Your slice credit card transaction of RS. 1234.56 on flipkart.com failed.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Failed transaction should NOT be parsed [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

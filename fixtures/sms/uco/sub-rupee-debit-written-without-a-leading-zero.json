@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "uco-0373",
+    "address": "VM-UCOBNK-S",
+    "body": "Your UCO Bank A/c XX1234 has been Debited with Rs..50 by Transfer.Avl Bal in your A/c is Rs.2,992.54.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50,
+    "direction": "debit",
+    "balance": 299254,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Sub-rupee debit written without a leading zero [upstream UCOBankParserTest.kt]",
+  "source": "upstream-test"
+}

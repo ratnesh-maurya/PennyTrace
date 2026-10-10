@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "kerala-bank-a02",
+    "address": "VM-KELBNK-S",
+    "body": "Dear Customer Your A/c no XXXX0024 is credited with 1,200.00 on 08-06-2026 by JOHN DOE From : 123456789. Balance is 45,000.00 - Kerala Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 120000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "balance": 4500000,
+    "accountLast4": "0024"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit with comma-grouped amount and positive balance [upstream KeralaBankParser.kt KDoc format]",
+  "source": "upstream-kdoc"
+}

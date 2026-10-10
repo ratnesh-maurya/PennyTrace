@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bandhan-0066",
+    "address": "XY-BDNSMS-S",
+    "body": "INR 92.00 debited from A/c XXXXXXXXXX1234 towards UPI/DR/D512361791780/Amazon In Value 10-OCT-2025 . Clear Bal is INR 9999.70. Bandhan Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 9200,
+    "direction": "debit",
+    "counterparty": "Amazon In",
+    "refs": {
+      "other": "D512361791780"
+    },
+    "balance": 999970,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit to Amazon In (User Issue) [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

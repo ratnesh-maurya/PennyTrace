@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "indusind-0215",
+    "address": "AD-INDUSB-S",
+    "body": "Rs. 250.00 debited from A/c XX9876 at SWIGGY Ref TXN123",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

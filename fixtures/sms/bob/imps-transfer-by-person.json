@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bob-0078",
+    "address": "VM-BOBTXN-S",
+    "body": "Rs.2500.00 credited to A/c XX456789 via IMPS/518233445566 by JOHN DOE. AvlBal:Rs25000.00 -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 250000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "refs": {
+      "utr": "518233445566"
+    },
+    "balance": 2500000,
+    "accountLast4": "6789"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS Transfer by Person [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hsbc-0147",
+    "address": "HSBC",
+    "body": "Your HSBC creditcard xxxxx1234 used at AMAZON for INR 305.00 on 15-04-25.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 30500,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "AMAZON",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Purchase [upstream TestHSBCBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "india-post-0323",
+    "address": "VM-DOPBNK-G",
+    "body": "Account No. XXXXXXXX5678 DEBIT with amount Rs. 2000.00 on 15-03-2026. Balance: Rs.18000.00. [D12345678]",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "refs": {
+      "other": "D12345678"
+    },
+    "balance": 1800000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit transaction [upstream DOPBankParserTest.kt]",
+  "source": "upstream-test"
+}

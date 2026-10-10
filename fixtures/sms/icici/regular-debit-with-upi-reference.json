@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "icici-0158",
+    "address": "AX-ICICIT-S",
+    "body": "ICICI Bank Acct XX123 debited for Rs 500.00 on 01-Oct-25; merchant credited. UPI: 543210987654. Call 18002662 for dispute. Updated Bal: Rs 5,000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "refs": {
+      "upi": "543210987654"
+    },
+    "balance": 500000,
+    "accountLast4": "123"
+  },
+  "expectedStatus": "parsed",
+  "note": "Regular debit with UPI reference [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

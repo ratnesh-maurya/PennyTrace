@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "hdfc-pt-card-online-pa",
+    "address": "AD-HDFCBK-S",
+    "body": "HDFC Bank Cardmember, Online Payment of Rs.7316 vide Ref# 277WR7OHT3FKOF5 was credited to your card ending 2312 On 04/OCT/2026_value Date 04/OCT/2026",
+    "date": 1791561120000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 731600,
+    "direction": "credit",
+    "instrument": "card",
+    "accountLast4": "2312",
+    "hints": {
+      "isCardBillPayment": true
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: card side of a bill payment; prints the available limit when present",
+  "source": "pennytrace"
+}

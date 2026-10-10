@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0201",
+    "address": "AX-FEDBNK-S",
+    "body": "Dear Customer, You have successfully created a mandate on Netflix India for a MONTHLY frequency starting from 05-09-2024 for a maximum amount of Rs 199.00 Mandate Ref No- abc123def456@fifederal - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Mandate creation should not parse as a transaction [upstream TestFederalBankParser.kt mandate test; added manually]",
+  "source": "upstream-test"
+}

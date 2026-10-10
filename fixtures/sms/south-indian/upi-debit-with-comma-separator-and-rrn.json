@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "south-indian-0269",
+    "address": "SIBSMS",
+    "body": "UPI debit:Rs.42225.06, A/c X7477, 03-11-25 00:12:50 RRN:567304295699. Bal:Rs.35037.21 Block A/c? Cal118004251809/SMS BLK<A/c>to 9840777222-South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 4222506,
+    "direction": "debit",
+    "counterparty": "UPI Transaction",
+    "refs": {
+      "upi": "567304295699"
+    },
+    "balance": 3503721,
+    "accountLast4": "7477"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit with comma separator and RRN [upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

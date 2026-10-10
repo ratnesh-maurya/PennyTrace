@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "axis-0042",
+    "address": "AX-AXISBK-S",
+    "body": "INR 5,000.00 debited from A/c XX1111 for EMI due on 05-10-26. Avl Bal INR 10,000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "A debit that mentions a due date is still a debit [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

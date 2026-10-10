@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "kotak-0237",
+    "address": "JD-KOTAKB-S",
+    "body": "Rs.1000.00 debited from your Kotak Bank AC X4444 on 15-10-25. Avl Bal Rs.10000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "debit",
+    "balance": 1000000,
+    "accountLast4": "4444"
+  },
+  "expectedStatus": "parsed",
+  "note": "Standard debit message [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

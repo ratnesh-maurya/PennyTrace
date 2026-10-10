@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "indusind-0198",
+    "address": "VM-INDUSB-S",
+    "body": "Rs. 1,234.00 debited from A/c XX1234 at ZOMATO Ref 998877. Avl Bal: Rs 10,000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123400,
+    "direction": "debit",
+    "counterparty": "ZOMATO",
+    "refs": {
+      "other": "998877"
+    },
+    "balance": 1000000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit with merchant and balance [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

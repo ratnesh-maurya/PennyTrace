@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "hsbc-0327",
+    "address": "VM-HSBCIN",
+    "body": "HSBC: Thank you for using HSBC Debit Card XXXXX71xx for INR 305.00 on 15-Dec-25 at IKEA INDIA .",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 30500,
+    "direction": "debit",
+    "counterparty": "IKEA INDIA"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit Card Purchase [upstream HSBCBankParserTest.kt] — accountLast4 \"71xx\" dropped: upstream extractLast4Digits(\"XXXXX71xx\") yields null (only 2 digits); the upstream assertion is stale (TestHSBCBankParser.kt expects null for the same format) and violates the /^\\d{3,4}$/ invariant.",
+  "source": "upstream-test"
+}

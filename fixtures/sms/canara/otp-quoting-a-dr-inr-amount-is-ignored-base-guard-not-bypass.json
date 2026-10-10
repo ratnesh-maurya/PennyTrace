@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "canara-0307",
+    "address": "VK-CANBNK-S",
+    "body": "123456 is your OTP for a Dr. INR 500.00 transaction on your Canara Bank card. Do not share it with anyone.-Canara Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP quoting a Dr. INR amount is ignored (base guard not bypassed) [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

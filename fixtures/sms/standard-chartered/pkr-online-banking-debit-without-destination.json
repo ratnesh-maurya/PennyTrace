@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "standard-chartered-0291",
+    "address": "9220",
+    "body": "Dear Client, a transaction of PKR 252,195.77 has been completed on Account No. 0101xxx9901 on 17/12/25 using Online Banking.",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "PKR Online banking debit without destination [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 25219577,
+    "direction": "debit",
+    "accountLast4": "9901"
+  }
+}

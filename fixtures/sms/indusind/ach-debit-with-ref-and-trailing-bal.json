@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "indusind-0204",
+    "address": "AD-INDUSIND-S",
+    "body": "IndusInd A/C  Debited; INR 4,500.00 Ref-ACH DR INW PAY/0000WD2CEFDT2Z58B2202320321456/Grow.Bal INR 141,999.93.Dispute-Call 18602677777-IndusInd Bank.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 450000,
+    "direction": "debit",
+    "counterparty": "Grow",
+    "balance": 14199993
+  },
+  "expectedStatus": "parsed",
+  "note": "ACH debit with Ref and trailing Bal [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

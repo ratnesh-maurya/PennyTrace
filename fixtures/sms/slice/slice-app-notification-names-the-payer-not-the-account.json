@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "slice-0046",
+    "address": "slice",
+    "body": "UPI payment received! — You’ve got ₹1,565 from Person Name in your slice bank a/c xx1234. Avl. Bal. ₹3,502.05.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 156500,
+    "direction": "credit",
+    "counterparty": "Person Name",
+    "balance": 350205,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "slice app notification names the payer, not the account [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

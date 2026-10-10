@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "uco-0371",
+    "address": "VM-UCOBNK-S",
+    "body": "A/c XX1234 Debited with Rs.2000.00 on 21-09-2025 by UCO-UPI.Avl Bal Rs.11111.11. Report Dispute https://spgrs.ucoonline.in/Home_Page.jsp",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "balance": 1111111,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit [upstream UCOBankParserTest.kt]",
+  "source": "upstream-test"
+}

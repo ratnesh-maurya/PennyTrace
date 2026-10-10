@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "standard-chartered-0289",
+    "address": "9220",
+    "body": "Dear Client, an ATM cash withdrawal transaction of PKR 30,000.00 has been made on 01-12-25 using credit card no 0141. Avail Limit PKR18062.81. SCBPL",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "PKR Credit card ATM cash withdrawal [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 3000000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "ATM Cash Withdrawal",
+    "balance": 1806281,
+    "accountLast4": "0141"
+  }
+}

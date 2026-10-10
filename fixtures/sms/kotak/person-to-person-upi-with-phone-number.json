@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0235",
+    "address": "JD-KOTAKB-S",
+    "body": "Sent Rs.500.00 from Kotak Bank AC X9999 to 9876543210@paytm on 15-10-25.UPI Ref 1111111111. Not you, https://kotak.com/KBANKT/Fraud",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "9876543210",
+    "refs": {
+      "other": "1111111111"
+    },
+    "accountLast4": "9999"
+  },
+  "expectedStatus": "parsed",
+  "note": "Person-to-person UPI with phone number [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

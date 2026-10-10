@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "idfc-first-0184",
+    "address": "BM-IDFCBK-S",
+    "body": "IDFC First Bank: Get 10% cashback offer on all online purchases!",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Promotional Message (Should Not Parse) [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}

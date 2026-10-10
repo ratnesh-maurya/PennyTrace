@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "federal-0117",
+    "address": "AD-FEDBNK",
+    "body": "Hi, payment of INR 119.00 for Spotify via e-mandate ID: SP456DEF123 on Federal Bank Debit Card 7890 is processed successfully. To manage, visit: https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 11900,
+    "direction": "debit",
+    "counterparty": "Spotify via e-mandate ID: SP456DEF123",
+    "accountLast4": "7890"
+  },
+  "expectedStatus": "parsed",
+  "note": "Successful E-mandate Payment - Spotify [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

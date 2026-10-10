@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bandhan-0067",
+    "address": "XY-BDNSMS-S",
+    "body": "Dear Customer, your account XXXXXXXXXX1234 is credited with INR 3.00 on 01-OCT-2025 towards interest. Bandhan Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 300,
+    "direction": "credit",
+    "counterparty": "Interest",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Interest credit [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

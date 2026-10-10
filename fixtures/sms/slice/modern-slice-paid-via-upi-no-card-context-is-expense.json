@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "slice-0352",
+    "address": "AD-SLCEIT-S",
+    "body": "Rs.100 paid to MERCHANT via slice UPI. Txn ID 9876543210.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 10000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "Modern Slice paid via UPI (no card context) is EXPENSE [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

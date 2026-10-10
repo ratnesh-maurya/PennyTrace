@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "slice-0039",
+    "address": "VM-SLICEIT-S",
+    "body": "Rs. 5000 received in a/c XX1111 from Person Name on 22-Sep-26 (NEFT Ref No. IDFB0000A0000000). - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "Person Name",
+    "refs": {
+      "utr": "IDFB0000A0000000"
+    },
+    "accountLast4": "1111"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice NEFT credit keeps the ref, not the word \"No\" [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

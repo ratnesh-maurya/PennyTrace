@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "icici-0173",
+    "address": "ICICIB",
+    "body": "ICICI Bank Acct XX051 debited for Rs 180.00 on 10-Nov-25; DINDUGAL ORIGIN credited. UPI:568069174081. Call 18002662 for dispute. SMS BLOCK 051 to 9215676766. 06:33 PM",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 18000,
+    "direction": "debit",
+    "counterparty": "DINDUGAL ORIGIN",
+    "refs": {
+      "upi": "568069174081"
+    },
+    "accountLast4": "051"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit - DINDUGAL ORIGIN (Nov 10) [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

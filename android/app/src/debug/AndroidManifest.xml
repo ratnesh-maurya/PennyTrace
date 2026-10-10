@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      DEBUG BUILDS ONLY. The Metro bundler is a web server, so a debug build needs INTERNET and
+      cleartext HTTP to localhost. The release manifest has neither (see src/main/AndroidManifest.xml).
+    -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="replace" />
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:replace="android:networkSecurityConfig" />
+</manifest>

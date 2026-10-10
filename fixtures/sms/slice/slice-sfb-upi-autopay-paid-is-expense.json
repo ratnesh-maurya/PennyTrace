@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "slice-0365",
+    "address": "slice",
+    "body": "Successfully paid Rs.1 from slice a/c XX2743 to OpenAI LLC on 25-May-26 via UPI AutoPay. UMN - 019e5exxxa1679b6aee8ae4f0ff88d19@slc - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100,
+    "direction": "debit",
+    "counterparty": "OpenAI LLC",
+    "accountLast4": "2743"
+  },
+  "expectedStatus": "parsed",
+  "note": "Slice SFB UPI AutoPay paid is EXPENSE [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

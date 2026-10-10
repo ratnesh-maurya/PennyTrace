@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "bandhan-0065",
+    "address": "XY-BDNSMS-S",
+    "body": "INR 5.00 debited from A/c XXXXXXXXXX1234 towards UPI/DR/D123290818021/Tanuska E Value 10-NOV-2025 . Clear Bal is INR 9999.76. Bandhan Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500,
+    "direction": "debit",
+    "counterparty": "Tanuska E",
+    "refs": {
+      "other": "D123290818021"
+    },
+    "balance": 999976,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Debit to Tanuska E (User Issue) [upstream TestBandhanBankParser.kt]",
+  "source": "upstream-test"
+}

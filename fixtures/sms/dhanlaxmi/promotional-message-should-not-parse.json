@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "dhanlaxmi-0096",
+    "address": "VM-DHANBK",
+    "body": "Dhanlaxmi Bank: Get 5% cashback on all UPI transactions this festive season!",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Promotional Message (Should Not Parse) [upstream TestDhanlaxmiBankParser.kt]",
+  "source": "upstream-test"
+}

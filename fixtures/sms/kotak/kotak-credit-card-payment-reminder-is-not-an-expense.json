@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "kotak-0029",
+    "address": "VM-KOTAKB-S",
+    "body": "Payment of INR 1577 on Kotak Credit Card xx2222 is due on 13-07-26. Min due: INR 100. Tap to pay: https://example.invalid/pay Ignore if paid",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Kotak credit-card payment reminder is not an expense [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

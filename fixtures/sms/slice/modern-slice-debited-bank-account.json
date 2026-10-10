@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "slice-0351",
+    "address": "AD-SLCEIT-S",
+    "body": "Rs.250 debited from your slice account via UPI. Txn ID 1234567890.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit"
+  },
+  "expectedStatus": "parsed",
+  "note": "Modern Slice debited (bank account) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

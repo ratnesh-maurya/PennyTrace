@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jana-0332",
+    "address": "JM-JANABK-S",
+    "body": "Dear Customer, Your acct XX005 is debited with INR 250.00 on 14-Jun-26 to merchant@okaxis. UPI Ref no 103475395202 . JANA SFB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "counterparty": "merchant",
+    "refs": {
+      "upi": "103475395202"
+    },
+    "accountLast4": "005"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit [upstream JanaSmallFinanceBankParserTest.kt]",
+  "source": "upstream-test"
+}

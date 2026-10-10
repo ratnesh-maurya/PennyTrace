@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "punjab-sind-0348",
+    "address": "VM-PSBANK-S",
+    "body": "PSB000000000000004\nA/c No **3333 Credited with Rs 700--Credit of 045252 (CLR BAL 11064.24CR)(13-04-2026 19:16:15)-Punjab&Sind Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 70000,
+    "direction": "credit",
+    "counterparty": "Cheque Credit",
+    "refs": {
+      "other": "045252"
+    },
+    "balance": 1106424,
+    "accountLast4": "3333"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cheque clearing credit maps to Cheque Credit merchant [upstream PunjabSindBankParserTest.kt]",
+  "source": "upstream-test"
+}

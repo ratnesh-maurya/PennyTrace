@@ -1,0 +1,6 @@
+First release.
+
+- Builds a ledger from bank and UPI SMS on the phone
+- Daily close across accounts and cards
+- Transfers, card bills and duplicate alerts are not counted as spending
+- No internet permission

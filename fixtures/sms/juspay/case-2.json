@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0228",
+    "address": "APAY",
+    "body": "Payment of Rs 350.00 using Apay Balance successful at Swiggy. Updated Balance is Rs 650.00 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 35000,
+    "direction": "debit",
+    "counterparty": "Swiggy"
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

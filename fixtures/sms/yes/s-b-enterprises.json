@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "yes-0295",
+    "address": "VM-YESBNK-S",
+    "body": "INR 56.00 spent on YES BANK Card X3349 @UPI_S B ENTERPRISES 24-08-2025 06:03:40 am. Avl Lmt INR 211,880.60. SMS BLKCC 3349 to 9840909000 if not you",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5600,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "S B ENTERPRISES",
+    "availableLimit": 21188060,
+    "accountLast4": "3349"
+  },
+  "expectedStatus": "parsed",
+  "note": "S B Enterprises [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "south-indian-0272",
+    "address": "SIBSMS",
+    "body": "Dear Customer, Your A/c X1234 is credited with Rs.1000.00 Info: IMPS/PUNB/123456789012/ METRO TRADERS. Final balance is Rs.10000.00-South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 100000,
+    "direction": "credit",
+    "counterparty": "METRO TRADERS",
+    "refs": {
+      "utr": "123456789012"
+    },
+    "balance": 1000000,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS credit with different bank code and merchant [upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

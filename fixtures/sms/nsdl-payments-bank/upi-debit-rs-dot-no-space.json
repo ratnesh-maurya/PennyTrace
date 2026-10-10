@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "nsdl-payments-bank-a01",
+    "address": "AD-NSDLPB-S",
+    "body": "A/c XX5678 debited Rs.250.00 on 21-Jun-26 for linked testshop@ybl. UPI Ref 123456789012 - NSDLPB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "counterparty": "testshop",
+    "refs": {
+      "upi": "123456789012"
+    },
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI debit with \"Rs.250.00\" (no space) [upstream NSDLPaymentsBankParser.kt extractAmount comment]",
+  "source": "upstream-kdoc"
+}

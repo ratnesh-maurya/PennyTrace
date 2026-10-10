@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "indian-bank-0185",
+    "address": "BV-INDBNK-S",
+    "body": "Rs.2.00 credited to a/c *8175 on 07/10/2025 by a/c linked to VPA poweraccess.paytm3@axisbank (UPI Ref no 981408452805).Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200,
+    "direction": "credit",
+    "counterparty": "poweraccess.paytm3",
+    "refs": {
+      "upi": "981408452805"
+    },
+    "accountLast4": "8175"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit transaction with VPA [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

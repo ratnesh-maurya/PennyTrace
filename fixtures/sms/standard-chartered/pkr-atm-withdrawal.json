@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "standard-chartered-0285",
+    "address": "9220",
+    "body": "Dear Client, PKR 20,000.00 were withdrawn from Account No. 0101xxx9901 on 10-12-25 using an ATM.",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "PKR ATM withdrawal [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 2000000,
+    "direction": "debit",
+    "counterparty": "ATM Cash Withdrawal",
+    "accountLast4": "9901"
+  }
+}

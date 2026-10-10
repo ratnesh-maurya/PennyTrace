@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "hdfc-pt-debit-card-e",
+    "address": "JD-HDFCBK-S",
+    "body": "HDFC Bank Customer, Payment of Rs 3035.82 was credited to your Debit Card EMI Loan 4516 on 05/APR/2026",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "PennyTrace: loan repayment confirmation; the savings debit is the transaction",
+  "source": "pennytrace"
+}

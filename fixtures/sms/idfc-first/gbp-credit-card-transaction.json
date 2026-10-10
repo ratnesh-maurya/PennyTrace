@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "idfc-first-0178",
+    "address": "AX-IDFCBK-T",
+    "body": "Transaction Successful! GBP 150.00 spent on your IDFC FIRST Bank Credit Card ending XX9999 at LONDON SHOP on 20-APR-2025 at 03:45 PM Avbl Limit: INR 10000.00",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "GBP Credit Card Transaction [upstream TestIDFCFirstBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 15000,
+    "direction": "debit",
+    "accountLast4": "9999"
+  }
+}

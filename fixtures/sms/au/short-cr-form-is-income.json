@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "au-0052",
+    "address": "VM-AUBANK-S",
+    "body": "Cr INR 5,000.00 to A/c X4541 12-MAY-2026\nUPI/CR/424941009999/JANE DOE/Y\nBal INR 23,838.10\n-AU Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "counterparty": "JANE DOE",
+    "balance": 2383810,
+    "accountLast4": "4541"
+  },
+  "expectedStatus": "parsed",
+  "note": "Short Cr form is INCOME [upstream TestAUBankParser.kt]",
+  "source": "upstream-test"
+}

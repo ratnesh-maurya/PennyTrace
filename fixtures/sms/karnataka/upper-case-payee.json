@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "karnataka-0339",
+    "address": "BG-KBLBNK-T",
+    "body": "Your a/c XX1111 debited for Rs.20.00 on 06-10-26 trf to SK FAST FOOD CORNER. UPI:6*********28.For dispute SMS BLOCK 1111 to 1800000000 -KarnatakaBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2000,
+    "direction": "debit",
+    "counterparty": "SK FAST FOOD CORNER",
+    "accountLast4": "1111"
+  },
+  "expectedStatus": "parsed",
+  "note": "Upper-case payee [upstream KarnatakaBankParserTest.kt]",
+  "source": "upstream-test"
+}

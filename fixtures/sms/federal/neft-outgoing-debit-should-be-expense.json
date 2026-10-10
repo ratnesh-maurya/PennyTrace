@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "federal-0131",
+    "address": "AD-FEDBNK-T",
+    "body": "Debited Rs 6000 from a/c XX3343 on 24JUN2026 21:35 via NEFT to Jerry.Ref FDRLM4175007432.Bal Rs 76.82.Not you?Call 18004251199 -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 600000,
+    "direction": "debit",
+    "counterparty": "Jerry",
+    "refs": {
+      "utr": "FDRLM4175007432"
+    },
+    "balance": 7682,
+    "accountLast4": "3343"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT Outgoing Debit - should be EXPENSE [upstream TestFederalBankParser.kt]",
+  "source": "upstream-test"
+}

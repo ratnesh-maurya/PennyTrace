@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "yes-0296",
+    "address": "JX-YESBNK-S",
+    "body": "INR 24.00 spent on YES BANK Card X3349 @UPI_MOHAMMED AKRAM 23-08-2025 11:51:19 am. Avl Lmt INR 212,012.60. SMS BLKCC 3349 to 9840909000 if not you",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2400,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "MOHAMMED AKRAM",
+    "availableLimit": 21201260,
+    "accountLast4": "3349"
+  },
+  "expectedStatus": "parsed",
+  "note": "Mohammed Akram [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

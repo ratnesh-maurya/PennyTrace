@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hsbc-0330",
+    "address": "HSBC",
+    "body": "Your Credit Card ending with 0006 has been used for EGP 199.99 on 23/01/2026 at SomePremium. Your available limit is EGP 5004.29",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "Egypt Credit Card Purchase (EGP) [upstream HSBCBankParserTest.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 19999,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "SomePremium",
+    "accountLast4": "0006"
+  }
+}

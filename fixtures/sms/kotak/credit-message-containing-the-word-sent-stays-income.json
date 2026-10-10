@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "kotak-0245",
+    "address": "JD-KOTAKB-S",
+    "body": "Cashback of Rs.50.00 has been sent to your Kotak Bank A/c x5555. Credited on 14-10-25. UPI Ref 9999999999",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000,
+    "direction": "credit",
+    "refs": {
+      "other": "9999999999"
+    },
+    "accountLast4": "5555"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit message containing the word 'sent' stays INCOME [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

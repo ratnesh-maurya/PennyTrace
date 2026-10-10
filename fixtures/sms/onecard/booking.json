@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "onecard-kdoc-01",
+    "address": "CP-ONECRD-S",
+    "body": "You've made a booking of Rs. 1,250.00 on TEST TRAVELS on card ending XX1234",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 125000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "TEST TRAVELS",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Spending (booking) format [upstream OneCardParser.kt KDoc]",
+  "source": "upstream-kdoc"
+}

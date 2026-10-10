@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "jana-0331",
+    "address": "JM-JANABK-S",
+    "body": "Dear Customer, Your acct XX005 is credited with INR 8.00 on 13-Jun-26 from NPCI BHIM. UPI Ref no 103475395201 . JANA SFB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 800,
+    "direction": "credit",
+    "counterparty": "NPCI BHIM",
+    "refs": {
+      "upi": "103475395201"
+    },
+    "accountLast4": "005"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit from NPCI BHIM [upstream JanaSmallFinanceBankParserTest.kt]",
+  "source": "upstream-test"
+}

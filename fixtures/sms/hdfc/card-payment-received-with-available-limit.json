@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "hdfc-pt-card-payment-r",
+    "address": "VM-HDFCBK-S",
+    "body": "DEAR HDFCBANK CARDMEMBER, PAYMENT OF Rs. 4515.00 RECEIVED TOWARDS YOUR CREDIT CARD ENDING WITH 2312 ON 9-10-2026.YOUR AVAILABLE LIMIT IS RS. 52000.00",
+    "date": 1791561120000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 451500,
+    "direction": "credit",
+    "instrument": "card",
+    "accountLast4": "2312",
+    "availableLimit": 5200000,
+    "hints": {
+      "isCardBillPayment": true
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: card side of a bill payment; prints the available limit when present",
+  "source": "pennytrace"
+}

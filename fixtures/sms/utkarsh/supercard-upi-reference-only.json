@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "utkarsh-a02",
+    "address": "VM-UTKSPR-S",
+    "body": "INR 250.00 spent on Utkarsh SuperCard xx1234 for UPI - 412345678901 on 12-06-26.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "UPI Payment",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI reference only, so merchant falls back to UPI Payment [upstream UtkarshBankParser.kt]",
+  "source": "upstream-kdoc"
+}

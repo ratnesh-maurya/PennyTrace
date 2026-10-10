@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "federal-0204",
+    "address": "AD-FEDBNK-S",
+    "body": "Hi, payment due for Streaming Service,INR 299.00 on 06/08/2024 will be processed using Federal Bank Debit Card ****. To cancel, visit https://www.sihub.in/managesi/federal T&CA -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Payment due with masked card should not parse [upstream TestFederalBankMandateParsing.kt; added manually]",
+  "source": "upstream-test"
+}

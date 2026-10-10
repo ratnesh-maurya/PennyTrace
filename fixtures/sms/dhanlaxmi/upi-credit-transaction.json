@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "dhanlaxmi-0091",
+    "address": "VM-DHANBK",
+    "body": "INR 10.00 is credited to A/c XXXX1234 on 24-APR-2025 - \"UPI TXN: /398353431145-Paytm/payment on Myntra using UPI on Mar 25 2025/one97987¡axisbank/911188478932/41721202504240001\". Aval Bal is INR 36,278.92 -DhanlaxmiBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "credit",
+    "counterparty": "Myntra",
+    "balance": 3627892,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI Credit Transaction [upstream TestDhanlaxmiBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "standard-chartered-0276",
+    "address": "JK-SCBANK-S",
+    "body": "Dear Customer, there is an NEFT credit of INR 48,796.00 in your account 123xxxx7655 on 1/11/2025.Available Balance:INR 97,885.05 -StanChart",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 4879600,
+    "direction": "credit",
+    "counterparty": "NEFT Credit",
+    "balance": 9788505,
+    "accountLast4": "7655"
+  },
+  "expectedStatus": "parsed",
+  "note": "NEFT Credit with Balance [upstream TestStandardCharteredBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "kotak-0239",
+    "address": "TX-KOTAKB-S",
+    "body": "INR 20 spent on Kotak Credit Card x5236 on 23-JAN-2026 at UPI-638903921672-CORN. Avl limit INR 73733.02 Fraud? https://www.kotak.bank.in/KBANKT/querytxn",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 2000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "CORN",
+    "availableLimit": 7373302,
+    "accountLast4": "5236"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit card spending with available limit [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

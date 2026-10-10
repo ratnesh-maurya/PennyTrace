@@ -1,0 +1,15 @@
+{
+  "sms": {
+    "id": "federal-0106",
+    "address": "CP-FEDSCP-S",
+    "body": "Yay! We've received your payment of ₹12,056.72 towards your Scapia Federal credit card. -Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1205672
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit card bill payment - should be TRANSFER [upstream TestFederalBankOutgoingParser.kt]",
+  "source": "upstream-test"
+}

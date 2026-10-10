@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "cred-0314",
+    "address": "AX-CREDIN-S",
+    "body": "Payment of Rs.1234.56 has been successfully credited towards your HDFC Credit Card. Your payment was settled in 3 seconds - CRED",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 123456,
+    "counterparty": "HDFC Credit Card"
+  },
+  "expectedStatus": "parsed",
+  "note": "CRED payment with decimal amount [upstream CredParserTest.kt]",
+  "source": "upstream-test"
+}

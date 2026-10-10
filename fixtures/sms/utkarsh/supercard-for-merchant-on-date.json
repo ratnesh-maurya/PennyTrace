@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "utkarsh-a03",
+    "address": "VM-UTKSPR-S",
+    "body": "INR 1,200.00 spent on Utkarsh SuperCard xx1234 for AMAZON on 12-06-26.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 120000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "AMAZON",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "\"for merchant on date\" pattern [upstream UtkarshBankParser.kt]",
+  "source": "upstream-kdoc"
+}

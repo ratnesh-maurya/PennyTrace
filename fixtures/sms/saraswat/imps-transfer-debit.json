@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "saraswat-0262",
+    "address": "BV-SARBNK-S",
+    "body": "Dear Customer, Your account no. ending with 1357 is debited with INR 2,500.00 on 23-10-2025 for IMPS. Current Bal is INR 12,345.67CR. - Saraswat Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 250000,
+    "direction": "debit",
+    "counterparty": "IMPS Transfer",
+    "balance": 1234567,
+    "accountLast4": "1357"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS transfer debit [upstream TestSaraswatBankParser.kt]",
+  "source": "upstream-test"
+}

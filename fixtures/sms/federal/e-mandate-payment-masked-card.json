@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "federal-0205",
+    "address": "AD-FEDBNK",
+    "body": "Hi, payment of INR 299.00 for Streaming Service via e-mandate ID: xyz789abc on Federal Bank Debit Card **** is processed successfully. To manage, visit: https://www.sihub.in/managesi/federal T&CA - Federal Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 29900,
+    "direction": "debit",
+    "counterparty": "Streaming Service via e-mandate ID: xyz789abc"
+  },
+  "expectedStatus": "parsed",
+  "note": "Successful e-mandate payment with masked card [upstream TestFederalBankMandateParsing.kt; added manually]",
+  "source": "upstream-test"
+}

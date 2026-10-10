@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "juspay-0227",
+    "address": "JUSPAY",
+    "body": "Your Apay Wallet balance is debited for INR 200.00 Transaction Reference Number is 123456789012 - Powered by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 20000,
+    "direction": "debit",
+    "counterparty": "Amazon Pay Transaction",
+    "refs": {
+      "upi": "123456789012"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "[upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

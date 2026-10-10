@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "slice-0368",
+    "address": "slice",
+    "body": "5738xx is your OTP for txn of Rs. INR 2.07 at FamApp by TriO on slice card ending with 2887. Do not share OTP for security reasons. - slice",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Slice SFB card OTP must NOT be parsed [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

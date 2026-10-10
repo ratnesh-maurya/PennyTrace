@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "icici-0165",
+    "address": "JD-ICICIT-S",
+    "body": "ICICI Bank Acct XX123 debited with Rs 10 on 20-Dec-25 & Acct XX456 credited.IMPS:ABCDEF123456. Call 18002662 for dispute or SMS BLOCK 700 to 9215676766",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "counterparty": "IMPS Transfer",
+    "refs": {
+      "utr": "ABCDEF123456"
+    },
+    "accountLast4": "123"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS dual-account debit is TRANSFER [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

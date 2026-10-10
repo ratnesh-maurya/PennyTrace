@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "slice-0353",
+    "address": "AD-SLCEIT-S",
+    "body": "Your slice credit card transaction of RS. 50000 on amazon.in is successful. If not you, call 08048329999 - slice",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "amazon.in"
+  },
+  "expectedStatus": "parsed",
+  "note": "Legacy slice credit card transaction on amazon.in (CREDIT) [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

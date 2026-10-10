@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "kotak-0246",
+    "address": "JM-Kotakb-S",
+    "body": "INR 2 from Airport Lounge refunded to your Kotak Credit Card x8848 on 17-Jul-2026. Opted for EMI? Please call 18602662666 to cancel.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200,
+    "direction": "credit",
+    "counterparty": "Airport Lounge",
+    "accountLast4": "8848"
+  },
+  "expectedStatus": "parsed",
+  "note": "Issue #616 - Credit card refund [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

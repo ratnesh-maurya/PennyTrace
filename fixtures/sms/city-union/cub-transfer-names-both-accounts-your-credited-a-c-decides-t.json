@@ -1,0 +1,16 @@
+{
+  "sms": {
+    "id": "city-union-0036",
+    "address": "JX-CUBANK-S",
+    "body": "Your a/c no. XXXXXXXX5555 is credited for Rs.5000.00 on 03-05-2026 and debited from a/c no. XXXXXXXX6666 (UPI Ref no 123456789012) -CUB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit"
+  },
+  "expectedStatus": "parsed",
+  "note": "CUB transfer names both accounts — your credited a/c decides the direction [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "boi-9001",
+    "address": "BOIIND",
+    "body": "Rs.150.00 credited A/cXX5468 and debited from JOHN DOE via UPI Ref No 315439383342 on 24Aug25. Call 18001031906, if not done by you. -BOI",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 15000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "accountLast4": "5468",
+    "refs": {
+      "upi": "315439383342"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit: \"credited A/c... and debited from\" (mirror of the KDoc debit sample) [BankOfIndiaParser.kt extractTransactionType]",
+  "source": "synthetic"
+}

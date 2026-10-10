@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "slice-0350",
+    "address": "JK-SLICEIT",
+    "body": "Sent Rs.500 to MERCHANT NAME (UPI transaction success). Sent from slice.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "counterparty": "MERCHANT NAME"
+  },
+  "expectedStatus": "parsed",
+  "note": "Modern Slice UPI transfer (sent to) should be EXPENSE, not CREDIT [upstream SliceParserTest.kt]",
+  "source": "upstream-test"
+}

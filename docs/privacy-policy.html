@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PennyTrace Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 42rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  h1 { font-size: 1.8rem; margin-bottom: .25rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { border: 1px solid #8884; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+  .meta { opacity: .7; }
+</style>
+</head>
+<body>
+
+<h1>PennyTrace Privacy Policy</h1>
+<p class="meta">Effective 10 October 2026 · App: PennyTrace (Android, package <code>com.pennytrace</code>) · Developer: Ratnesh Maurya</p>
+
+<p>PennyTrace is a personal expense tracker. It reads the bank and UPI text messages (SMS) already on your phone and turns them into a ledger of your spending, income, balances and transfers. <strong>All of this happens on your phone. PennyTrace has no server and no account, and it does not collect, transmit, sell or share your messages or your financial data.</strong></p>
+
+<h2>What the app reads</h2>
+<table>
+  <tr><th>Data</th><th>Why</th><th>What happens to it</th></tr>
+  <tr>
+    <td>The SMS in your inbox, and each new SMS as it arrives (Android permissions <code>READ_SMS</code> and <code>RECEIVE_SMS</code>)</td>
+    <td>To find bank and UPI transaction alerts and build your ledger. This is the app's core function: without SMS access it cannot work.</td>
+    <td>Read on the phone and sorted by sender and wording. Transaction alerts are turned into amounts, dates, merchants, account digits and balances. Other messages (one-time passwords, promotions, personal chats) are skipped: only the sender name is noted, never the message text.</td>
+  </tr>
+  <tr>
+    <td>Alerts that look financial but that the app cannot read yet (for example from an insurer or a wallet)</td>
+    <td>So a later app update can read them.</td>
+    <td>The text is kept in the encrypted on-device database described below. Turning on <em>Privacy → Discard raw messages</em> removes it (and the text of every other message the app has kept), as does clearing the app's storage.</td>
+  </tr>
+  <tr>
+    <td>Choices you make in the app: category corrections, categories you create, accounts you choose not to count, balances you enter</td>
+    <td>So your corrections are remembered.</td>
+    <td>Stored in the same on-device database.</td>
+  </tr>
+</table>
+<p>PennyTrace never sends, deletes or changes your messages. It does not request permission to send or write SMS.</p>
+
+<h2>Where it is stored</h2>
+<p>In a database on your phone, in the app's private storage, encrypted with SQLCipher. The encryption key is held in the Android Keystore. Android cloud backup and device-to-device transfer of the app's data are turned off. Nothing is copied to any server.</p>
+
+<h2>What leaves your phone</h2>
+<p><strong>Nothing.</strong> PennyTrace does not request the Android internet permission, so it cannot connect to any network. No messages, ledger data or personal data leave your phone, and the app has no analytics, advertising, crash-reporting or tracking software. You can confirm this in Android's app settings, or by reading the app's manifest in the source code.</p>
+
+<h2>Other permissions</h2>
+<table>
+  <tr><th>Permission</th><th>Purpose</th></tr>
+  <tr><td>Receive SMS</td><td>To notice a new bank alert as it arrives (see above).</td></tr>
+  <tr><td>Run at start-up</td><td>To check for SMS that arrived while the phone was off.</td></tr>
+  <tr><td>Wake lock</td><td>Added by Android's background-work library so a short scan of new messages can finish while the screen is off.</td></tr>
+</table>
+
+<h2>How long it is kept, and deleting it</h2>
+<p>Data stays on your phone until you remove it. Uninstalling PennyTrace, or choosing <em>Clear storage</em> in Android's app settings, deletes all of it; there is no copy anywhere else. Within the app you can turn on <em>Discard raw messages</em>, and stop counting any account. Because there is no account or server, there is nothing for the developer to delete on your behalf.</p>
+
+<h2>Children</h2>
+<p>PennyTrace is not directed at children.</p>
+
+<h2>Open source</h2>
+<p>PennyTrace is open source under the AGPL-3.0 licence, so you can read exactly what it does: <a href="https://github.com/ratnesh-maurya/PennyTrace">github.com/ratnesh-maurya/PennyTrace</a>.</p>
+
+<h2>Changes to this policy</h2>
+<p>If the app's handling of data changes, this page will be updated and the effective date above changed before the new version is released.</p>
+
+<h2>Contact</h2>
+<p>Questions or requests: <a href="mailto:hiratensh@gmail.com">hiratensh@gmail.com</a></p>
+
+</body>
+</html>

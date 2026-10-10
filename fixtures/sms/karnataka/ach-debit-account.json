@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "karnataka-kdoc-01",
+    "address": "VM-KBLBNK-S",
+    "body": "Your Account x001234x has been DEBITED for Rs.6368/- on 05-01-2025 towards ACHInwDr-LIC OF INDIA/050125. Balance is Rs.705.92 -Karnataka Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 636800,
+    "direction": "debit",
+    "counterparty": "LIC OF INDIA",
+    "accountLast4": "1234",
+    "balance": 70592
+  },
+  "expectedStatus": "parsed",
+  "note": "ACH debit (\"DEBITED for Rs.6368/-\", \"Account x001234x\", \"ACHInwDr-MERCHANT/date\", \"Balance is Rs.705.92\") [upstream KarnatakaBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

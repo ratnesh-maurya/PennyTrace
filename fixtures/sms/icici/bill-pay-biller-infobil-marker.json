@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0172",
+    "address": "JD-ICICIT-S",
+    "body": "ICICI Bank Acc XX342 debited Rs. 8,927.00 on 07-Jun-26 InfoBIL*Auto Loan.Avl Bal Rs. 1,248.78.To dispute call 18002662 or SMS BLOCK 342 to 9215676766",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 892700,
+    "direction": "debit",
+    "counterparty": "Auto Loan",
+    "balance": 124878,
+    "accountLast4": "342"
+  },
+  "expectedStatus": "parsed",
+  "note": "Bill-pay biller (InfoBIL* marker) [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "icici-0153",
+    "address": "AX-ICICIT-S",
+    "body": "Your account has been debited with Rs 649.00 towards Netflix Entertainment Ser for AutoPay MERCHANTMANDATE. RRN 421723106963. Avl Bal Rs 10,000.00-ICICI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 64900,
+    "direction": "debit",
+    "counterparty": "Netflix Entertainment Ser",
+    "refs": {
+      "upi": "421723106963"
+    },
+    "balance": 1000000
+  },
+  "expectedStatus": "parsed",
+  "note": "Actual autopay debit [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

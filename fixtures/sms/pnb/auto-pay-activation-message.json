@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "pnb-0005",
+    "address": "VM-PNBSMS-S",
+    "body": "Dear Customer, auto pay facility has been successfully activated on your Punjab National Bank Card XX4356 for Rs. 75000.00, from Google Clouds. An initial amount of Rs. 2.00 has been debited from your account. Google Clouds can initiate subsequent transactions for a max amount upto Rs. 75000.00. You will receive notification with the transaction amount prior to any subsequent debits initiated by Google Clouds. Manage / cancel your Auto-Pay facility with ID RTy243262532g via https://www.sihub.in/man",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200,
+    "direction": "debit",
+    "counterparty": "Google Clouds",
+    "accountLast4": "4356"
+  },
+  "expectedStatus": "parsed",
+  "note": "Auto-Pay activation message [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

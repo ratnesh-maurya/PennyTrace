@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bob-0081",
+    "address": "VM-BOBCRD-S",
+    "body": "ALERT: INR 250.50 spent on your BOBCARD ending 5678 at SWIGGY on 26-11-2024. -Bank of Baroda",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25050,
+    "direction": "debit",
+    "instrument": "card",
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent Pattern [upstream TestBankOfBarodaParser.kt]",
+  "source": "upstream-test"
+}

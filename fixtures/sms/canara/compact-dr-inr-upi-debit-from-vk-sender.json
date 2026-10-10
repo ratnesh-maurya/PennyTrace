@@ -1,0 +1,22 @@
+{
+  "sms": {
+    "id": "canara-0303",
+    "address": "VK-CANBNK-S",
+    "body": "Dear Customer, Acct XXX123 Dr. INR 260.00 on 06/07/26 to SAMPLE MART; UPI: 123456789012; Bal INR 12,345.67.Not you? SMS BLOCKUPI to XXXXXXXXXX-CanaraBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 26000,
+    "direction": "debit",
+    "counterparty": "SAMPLE MART",
+    "refs": {
+      "upi": "123456789012"
+    },
+    "balance": 1234567,
+    "accountLast4": "123"
+  },
+  "expectedStatus": "parsed",
+  "note": "Compact Dr INR UPI debit from VK sender [upstream CanaraBankParserTest.kt]",
+  "source": "upstream-test"
+}

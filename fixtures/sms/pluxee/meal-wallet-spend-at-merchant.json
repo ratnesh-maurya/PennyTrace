@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "pluxee-0027",
+    "address": "AD-PLUXEE",
+    "body": "Rs. 40.00 spent from Pluxee  Meal wallet, card no.xx1234 on 17-08-2026 16:03:14 at NEW SHAKTHI  . Avl bal Rs.24342.81. Not you call 18002161234",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 4000,
+    "direction": "debit",
+    "counterparty": "NEW SHAKTHI",
+    "balance": 2434281,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Meal wallet spend at merchant [upstream PluxeeBankParserTest.kt]",
+  "source": "upstream-test"
+}

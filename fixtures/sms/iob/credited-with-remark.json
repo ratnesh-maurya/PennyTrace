@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "iob-kdoc-03",
+    "address": "BP-IOB-S",
+    "body": "Your a/c no. XXXXX92 credited with Rs.1,500.00 on 2025-09-01. Payer Remark - RENT SEPT -IOB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150000,
+    "direction": "credit",
+    "counterparty": "RENT SEPT"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit (\"credited with Rs.\" amount pattern, Payer Remark merchant) [upstream IndianOverseasBankParser.kt KDoc/comments]",
+  "source": "upstream-kdoc"
+}

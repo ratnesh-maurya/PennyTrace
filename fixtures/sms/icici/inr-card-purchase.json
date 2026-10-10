@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "icici-0151",
+    "address": "JM-ICICIT-S",
+    "body": "INR 500.00 spent using ICICI Bank Card XX5678 on 06-Sep-25 on Swiggy. Avl Limit: INR 1,50,000.00.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "Swiggy",
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "INR card purchase [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

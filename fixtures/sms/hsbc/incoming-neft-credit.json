@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "hsbc-0328",
+    "address": "VM-HSBCIN-S",
+    "body": "HSBC: INR 50,000.00 is credited to your A/c 074-260***-006 as NEFT from CHAS A/c ***6983 of John Doe .",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 5000000,
+    "direction": "credit",
+    "counterparty": "CHAS A/c ***6983 of John Doe",
+    "accountLast4": "0006"
+  },
+  "expectedStatus": "parsed",
+  "note": "Incoming NEFT Credit [upstream HSBCBankParserTest.kt]",
+  "source": "upstream-test"
+}

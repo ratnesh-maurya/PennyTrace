@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "cashfree-0310",
+    "address": "JX-CSHfre-S",
+    "body": "OTP 123456 is your one time password. Do not share.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "OTP message should be rejected [upstream CashfreeParserTest.kt]",
+  "source": "upstream-test"
+}

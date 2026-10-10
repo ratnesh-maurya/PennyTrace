@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "icici-0034",
+    "address": "JM-ICICIT-S",
+    "body": "USD .28 spent using ICICI Bank Card XX3333 on 01-Jun-26 on GOOGLE*CLOUD PH. Avl Limit: INR 3,85,664.53. If not you, call 1800000000/SMS BLOCK 3333 to 1800000000.",
+    "date": 1768458600000
+  },
+  "expectedStatus": "unparsed",
+  "note": "ICICI sub-unit foreign amount: USD .28, not the INR available limit [upstream SmsReportRegressionTest.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
+    "kind": "transaction",
+    "amount": 28,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "GOOGLE*CLOUD PH"
+  }
+}

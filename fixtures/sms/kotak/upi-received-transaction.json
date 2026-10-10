@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0236",
+    "address": "JD-KOTAKB-S",
+    "body": "Received Rs.250.00 in your Kotak Bank AC X3333 from john.doe@oksbi on 14-10-25.UPI Ref 2222222222. Not you, https://kotak.com/KBANKT/Fraud",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 25000,
+    "direction": "credit",
+    "counterparty": "john.doe",
+    "refs": {
+      "other": "2222222222"
+    },
+    "accountLast4": "3333"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI received transaction [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

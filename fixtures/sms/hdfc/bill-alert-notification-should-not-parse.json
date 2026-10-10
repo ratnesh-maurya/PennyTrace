@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "hdfc-0135",
+    "address": "CP-HDFCBK-S",
+    "body": "New Bill Alert:\nYour XUBA00000TST1A Bill 1234567890 of Rs.1500.00 is due on 15-Jan-2026. To pay, login to HDFC Bank Net/Mobile Banking>BillPay\nT&C. Ignore if paid",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Bill Alert Notification - Should Not Parse [upstream TestHDFCBankParser.kt]",
+  "source": "upstream-test"
+}

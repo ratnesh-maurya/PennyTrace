@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "amex-a02",
+    "address": "TX-AMEXIN-S",
+    "body": "INR 2,500.00 spent on your AMEX card ** 91234 at TEST MERCHANT on 21 August 2025",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 250000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "TEST MERCHANT",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "\"INR x spent\" variant [upstream AMEXBankParser.kt alt amount pattern comment]",
+  "source": "upstream-kdoc"
+}

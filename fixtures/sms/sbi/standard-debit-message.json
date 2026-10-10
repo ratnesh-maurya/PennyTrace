@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "sbi-0251",
+    "address": "ATMSBI",
+    "body": "Rs.500 debited from A/c X1234 on 13Sep25. Avl Bal Rs.999999999",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "debit",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Standard debit message [upstream TestSBIParser.kt]",
+  "source": "upstream-test"
+}

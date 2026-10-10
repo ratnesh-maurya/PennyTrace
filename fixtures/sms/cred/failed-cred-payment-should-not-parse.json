@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "cred-0319",
+    "address": "JK-CREDIN-S",
+    "body": "Payment of Rs.50000 could not be processed. Please try again later.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Failed CRED payment (should not parse) [upstream CredParserTest.kt]",
+  "source": "upstream-test"
+}

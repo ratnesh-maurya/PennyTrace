@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "south-indian-0268",
+    "address": "VM-SIBSMS-S",
+    "body": "A/c X7477 DEBIT:Rs.983.75 SPICE KITCHEN MCT Bal:Rs.1234.67 Block A/c? call 18004251809/SMS BLK<full A/c>to 9840777222-South Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 98375,
+    "direction": "debit",
+    "counterparty": "SPICE KITCHEN MCT",
+    "balance": 123467,
+    "accountLast4": "7477"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debit card usage [upstream TestSouthIndianBankParser.kt]",
+  "source": "upstream-test"
+}

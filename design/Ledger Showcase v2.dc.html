@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>body{margin:0;background:#EAEEF6;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#1E5EFF}a:hover{color:#1440DB}</style>
+</helmet>
+<section data-screen-label="Light theme" style="background:#EAEEF6;padding:56px 64px 64px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:760px">
+<span style="font:500 12px 'Geist Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5E6880">Ledger · local-first expense tracker · Android</span>
+<span style="font-size:40px;font-weight:600;letter-spacing:-0.03em;color:#0B1324;line-height:1.05">A ledger that keeps itself — light</span>
+<span style="font-size:15px;line-height:1.55;color:#46526B;text-wrap:pretty">White and electric blue. Every phone is live: pick any day in the week strip, switch accounts, open Insights for per-account and joint-account analytics, and resolve the low-confidence DMart charge.</span>
+</div>
+<div style="display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start">
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="7">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:10px;align-items:baseline;padding-left:8px"><span style="font:600 11px 'Geist Mono',monospace;color:#0B1324;background:rgba(30,94,255,0.1);padding:3px 7px;border-radius:5px">{{ s.num }}</span><span style="font-size:14px;font-weight:600;color:#0B1324">{{ s.title }}</span></div>
+<dc-import name="LedgerApp2" theme="light" start-screen="{{ s.key }}" accent="{{ accent }}" hint-size="380px,820px"></dc-import>
+<span style="font-size:12.5px;line-height:1.5;color:#5E6880;max-width:360px;padding-left:8px;text-wrap:pretty">{{ s.note }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+<section data-screen-label="Dark theme" style="background:#050913;padding:56px 64px 72px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:760px">
+<span style="font:500 12px 'Geist Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#7C87A0">Same screens · dark</span>
+<span style="font-size:40px;font-weight:600;letter-spacing:-0.03em;color:#EEF2FB;line-height:1.05">A ledger that keeps itself — dark</span>
+<span style="font-size:15px;line-height:1.55;color:#A7B1C8;text-wrap:pretty">Deep navy surfaces, hairline borders instead of shadows, and a brighter electric blue so the daily close still glows at night.</span>
+</div>
+<div style="display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start">
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="7">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:10px;align-items:baseline;padding-left:8px"><span style="font:600 11px 'Geist Mono',monospace;color:#EEF2FB;background:rgba(255,255,255,0.1);padding:3px 7px;border-radius:5px">{{ s.num }}</span><span style="font-size:14px;font-weight:600;color:#EEF2FB">{{ s.title }}</span></div>
+<dc-import name="LedgerApp2" theme="dark" start-screen="{{ s.key }}" accent="{{ accent }}" hint-size="380px,820px"></dc-import>
+<span style="font-size:12.5px;line-height:1.5;color:#7C87A0;max-width:360px;padding-left:8px;text-wrap:pretty">{{ s.note }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;green&quot;,&quot;indigo&quot;,&quot;saffron&quot;],&quot;default&quot;:&quot;green&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? 'blue',
+      screens: [
+        { num:'01', key:'today', title:'Daily close', note:'Pick any day from the week strip. Opening → in → spent → moved → closing, recomputed per account.' },
+        { num:'02', key:'review', title:'Quick correction', note:'Low-confidence category asks instead of guessing. Corrections become on-device rules.' },
+        { num:'03', key:'activity', title:'Activity', note:'Source icons show how many alerts back each row. Transfers, card bills and ATM cash are flagged as not spending.' },
+        { num:'04', key:'detail', title:'Transaction evidence', note:'Three alerts, one transaction — the dedup reasoning is visible, not hidden.' },
+        { num:'05', key:'insights', title:'Insights', note:'Week or month, per account or joint account. Tap a bar to jump the daily close to that day.' },
+        { num:'06', key:'accounts', title:'Reconciliation', note:'Calculated vs. bank-reported balance per account. Variances are reported, never silently fixed.' },
+        { num:'07', key:'privacy', title:'Privacy & sources', note:'No internet permission, encrypted ledger, no cloud backup — stated plainly.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

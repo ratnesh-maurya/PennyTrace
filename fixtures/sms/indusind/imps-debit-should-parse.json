@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "indusind-0202",
+    "address": "AD-INDUSIND-S",
+    "body": "Your IndusInd Account 20XXXXX1234 has been debited for INR 6440 towards IMPS/12345678901. Call 18602677777 to report issue-IndusInd Bank.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 644000,
+    "direction": "debit",
+    "counterparty": "IMPS",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS debit - should parse [upstream TestIndusIndBankParser.kt]",
+  "source": "upstream-test"
+}

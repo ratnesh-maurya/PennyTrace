@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "pnb-0007",
+    "address": "VM-PNBSMS-S",
+    "body": "Your a/c no XX847 is debited for Rs 3200 on 11-07-25 03:14:52 and a/c XX291 credited (IMPS Ref no 712845931206) .If not done by you, pl. forward this SMS from registered mobile to 9264092640 to report unauthorized txn & block IBS/MBS. Download PNB ONE.-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 320000,
+    "direction": "debit",
+    "counterparty": "IMPS Transfer",
+    "refs": {
+      "utr": "712845931206"
+    },
+    "accountLast4": "847"
+  },
+  "expectedStatus": "parsed",
+  "note": "IMPS transfer debit to different account [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

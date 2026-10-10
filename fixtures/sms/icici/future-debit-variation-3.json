@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "icici-0156",
+    "address": "AX-ICICIT-S",
+    "body": "AutoPay: Rs 299.00 will be debited on 15-Oct-25 for Spotify subscription",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Future debit variation 3 [upstream TestICICIBankParser.kt]",
+  "source": "upstream-test"
+}

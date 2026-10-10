@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "idbi-kdoc-03",
+    "address": "VM-IDBIBK",
+    "body": "IDBI Bank Acct XX1234 credited with Rs 500.00 on 06-Feb-25. Bal Rs 4194.38 -IDBI Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "accountLast4": "1234",
+    "balance": 419438
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit built from KDoc/comment sample (\"credited with Rs XXX\") [upstream IDBIBankParser.kt]",
+  "source": "upstream-kdoc"
+}

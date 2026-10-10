@@ -1,0 +1,79 @@
+{
+  "name": "pennytrace",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "test:core": "jest src/core",
+    "db:generate": "drizzle-kit generate",
+    "release:apk": "cd android && ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a",
+    "audit:permissions": "node scripts/audit-permissions.js",
+    "install:release": "adb install -r android/app/build/outputs/apk/release/app-release.apk",
+    "bundle:release": "cd android && rm -rf app/build/generated/res/react app/build/generated/assets/createBundleReleaseJsAndAssets && PENNYTRACE_NO_LOGOS=1 ./gradlew :app:createBundleReleaseJsAndAssets --rerun :app:bundleRelease -PreactNativeArchitectures=arm64-v8a",
+    "check:play": "node scripts/check-play-ready.js"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@op-engineering/op-sqlite": "^18.2.5",
+    "@react-navigation/bottom-tabs": "^7.20.0",
+    "@react-navigation/native": "^7.5.0",
+    "@react-navigation/native-stack": "^7.20.0",
+    "drizzle-orm": "^0.45.4",
+    "react": "19.2.3",
+    "react-native": "0.87.1",
+    "react-native-keychain": "^10.0.0",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-safe-area-context": "^5.5.2",
+    "react-native-screens": "^4.29.0",
+    "react-native-svg": "^15.15.5",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/plugin-transform-export-namespace-from": "^7.29.7",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@material-symbols/svg-400": "^0.48.0",
+    "@react-native-community/cli": "20.2.0",
+    "@react-native-community/cli-platform-android": "20.2.0",
+    "@react-native/babel-preset": "0.87.1",
+    "@react-native/eslint-config": "0.87.1",
+    "@react-native/jest-preset": "0.87.1",
+    "@react-native/metro-config": "0.87.1",
+    "@react-native/typescript-config": "0.87.1",
+    "@testing-library/react-native": "^14.1.0",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.2.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "babel-plugin-inline-import": "^3.0.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^8.19.0",
+    "fast-check": "^4.10.2",
+    "jest": "^29.6.3",
+    "prettier": "2.8.8",
+    "react-native-svg-transformer": "^1.5.3",
+    "react-test-renderer": "19.2.3",
+    "test-renderer": "~1.2.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">= 22.11.0"
+  },
+  "license": "AGPL-3.0-or-later",
+  "op-sqlite": {
+    "sqlcipher": true
+  },
+  "codegenConfig": {
+    "name": "PennyTraceSpecs",
+    "type": "modules",
+    "jsSrcsDir": "src/native",
+    "android": {
+      "javaPackageName": "com.pennytrace.specs"
+    }
+  }
+}

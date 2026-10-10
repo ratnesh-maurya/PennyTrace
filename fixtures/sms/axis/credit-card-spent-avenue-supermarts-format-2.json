@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "axis-0055",
+    "address": "CP-AXISBK-S",
+    "body": "Spent\nCard no. XX7441\nINR 562\n01-09-25 12:04:18\nAVENUE SUPE\nAvl Lmt INR 5120.87\nSMS BLOCK 7441 to 919951860002, if not you - Axis Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 56200,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "AVENUE",
+    "availableLimit": 512087,
+    "accountLast4": "7441"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit Card Spent - Avenue Supermarts (format 2) [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

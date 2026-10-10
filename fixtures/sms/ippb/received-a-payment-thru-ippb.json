@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "ippb-a02",
+    "address": "AD-IPBMSG-S",
+    "body": "You have received a payment of Rs.500.00 in a/c X1234 on 20/08/2025 from JOHN DOE thru IPPB. Info: UPI/CREDIT/523498793035",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "counterparty": "JOHN DOE",
+    "refs": {
+      "upi": "523498793035"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "UPI credit [upstream IPPBParser.kt pattern comments: \"from john doe thru IPPB\", \"Info: UPI/CREDIT/523498793035\"]",
+  "source": "upstream-kdoc"
+}

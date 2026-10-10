@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "axis-0060",
+    "address": "JD-AXISBK-S",
+    "body": "INR 2000.00 debited from A/c no. XX589034 on AXIS BANK L 04-11-2025 16:06:39 IST. Avl bal: INR 98919.81. Not you? SMS BLOCKCARD XX0192 to +919951860002 - Axis Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "counterparty": "ATM",
+    "balance": 9891981,
+    "accountLast4": "9034"
+  },
+  "expectedStatus": "parsed",
+  "note": "ATM Withdrawal - Axis Bank Location [upstream TestAxisBankParser.kt]",
+  "source": "upstream-test"
+}

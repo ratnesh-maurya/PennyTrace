@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "pnb-0022",
+    "address": "VM-PNBSMS-S",
+    "body": "Ac XX0000 Debited by ₹125.00,01-01-2026 12:00:00 RRN-000000000001 thru Debitcard XXXX0000.Aval Bal INR 9000.00 CR.-PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "debit",
+    "counterparty": "Debit Card Transaction",
+    "refs": {
+      "upi": "000000000001"
+    },
+    "accountLast4": "0000"
+  },
+  "expectedStatus": "parsed",
+  "note": "Debitcard carries RRN and bank account [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

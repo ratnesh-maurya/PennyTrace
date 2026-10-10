@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "dhanlaxmi-0092",
+    "address": "VM-DHANBK",
+    "body": "Your a/c no. XXXXXXXX1234 is credited for Rs.10.00 on 24-04-25 and debited from a/c no. XXXXXXXX0987 (UPI Ref no 398353431145).-DhanlaxmiBank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1000,
+    "direction": "credit",
+    "counterparty": "Internal Transfer",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Internal Transfer Credit [upstream TestDhanlaxmiBankParser.kt]",
+  "source": "upstream-test"
+}

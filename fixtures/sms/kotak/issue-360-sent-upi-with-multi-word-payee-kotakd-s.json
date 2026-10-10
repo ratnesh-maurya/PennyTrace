@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "kotak-0242",
+    "address": "JD-KOTAKD-S",
+    "body": "Sent Rs.205.00 from XXXXXX1234 to ANNAPOORNESWARI K M on 26/05/2026. UPI ref no. 651229267141. Not you? Tap https://kotk.in/KOTAKD/E7LzzX to report -Kotak",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 20500,
+    "direction": "debit",
+    "counterparty": "ANNAPOORNESWARI K M",
+    "refs": {
+      "upi": "651229267141"
+    },
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Issue #360 - Sent UPI with multi-word payee (KOTAKD-S) [upstream TestKotakBankParser.kt]",
+  "source": "upstream-test"
+}

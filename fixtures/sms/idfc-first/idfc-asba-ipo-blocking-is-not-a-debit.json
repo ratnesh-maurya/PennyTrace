@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "idfc-first-0031",
+    "address": "AD-IDFCFB-S",
+    "body": "Your ASBA application for AUGMONT is received and Application value of Rs 14972 is blocked in your registered Bank account on 25/08/2026.",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "IDFC ASBA/IPO blocking is not a debit [upstream SmsReportRegressionTest.kt]",
+  "source": "upstream-test"
+}

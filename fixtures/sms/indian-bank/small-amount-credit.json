@@ -1,0 +1,21 @@
+{
+  "sms": {
+    "id": "indian-bank-0189",
+    "address": "BV-INDBNK-S",
+    "body": "Rs.1.50 credited to a/c *5678 on 12/10/2025 by a/c linked to VPA reward@gpay (UPI Ref no 111222333444).Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 150,
+    "direction": "credit",
+    "counterparty": "reward",
+    "refs": {
+      "upi": "111222333444"
+    },
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "Small amount credit [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

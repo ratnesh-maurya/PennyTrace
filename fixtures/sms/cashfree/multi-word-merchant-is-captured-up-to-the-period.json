@@ -1,0 +1,20 @@
+{
+  "sms": {
+    "id": "cashfree-0312",
+    "address": "VK-CSHfre-S",
+    "body": "Payment INR 299.00 (ID:9988776655) confirmed for order #order_001 on Sun Direct.\nPowered by Cashfree",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 29900,
+    "direction": "debit",
+    "counterparty": "Sun Direct",
+    "refs": {
+      "other": "9988776655"
+    }
+  },
+  "expectedStatus": "parsed",
+  "note": "Multi-word merchant is captured up to the period [upstream CashfreeParserTest.kt]",
+  "source": "upstream-test"
+}

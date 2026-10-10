@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "yes-0301",
+    "address": "CP-YESBNK-S",
+    "body": "Your Yes Bank Credit Card payment of INR 10,000 is due by 25-08-2025",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "Payment due reminder [upstream TestYesBankParser.kt]",
+  "source": "upstream-test"
+}

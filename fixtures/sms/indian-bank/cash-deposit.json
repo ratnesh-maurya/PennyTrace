@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "indian-bank-0187",
+    "address": "INDBNK",
+    "body": "Rs. 5000.00 deposited to a/c *8175 on 10/10/2025.Indian Bank",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 500000,
+    "direction": "credit",
+    "accountLast4": "8175"
+  },
+  "expectedStatus": "parsed",
+  "note": "Cash deposit [upstream TestIndianBankParser.kt]",
+  "source": "upstream-test"
+}

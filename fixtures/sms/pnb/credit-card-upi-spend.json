@@ -1,0 +1,23 @@
+{
+  "sms": {
+    "id": "pnb-0012",
+    "address": "VA-PNBCCD-S",
+    "body": "PNB Credit Card 1234 debited with Rs.270 [CODE:VG9918] at ombk.aaeh000000abcd@mbk on 04-10-2026 20:44 through UPI: 627768901810 Avl limit Rs. 48882.5. -PNB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 27000,
+    "direction": "debit",
+    "instrument": "card",
+    "counterparty": "ombk.aaeh000000abcd",
+    "refs": {
+      "upi": "627768901810"
+    },
+    "availableLimit": 4888250,
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "Credit card UPI spend [upstream PNBBankParserTest.kt]",
+  "source": "upstream-test"
+}

@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "juspay-0217",
+    "address": "APAY",
+    "body": "Payment of Rs 150.50 using Apay Balance successful at merchant. Updated Balance is Rs 850.00 - SMS by Juspay",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 15050,
+    "direction": "debit",
+    "counterparty": "merchant"
+  },
+  "expectedStatus": "parsed",
+  "note": "Payment using Apay balance [upstream TestJuspayParser.kt]",
+  "source": "upstream-test"
+}

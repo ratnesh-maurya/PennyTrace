@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "idfc-first-0181",
+    "address": "BM-IDFCBK-S",
+    "body": "Your A/C XXXXXXX5678 is credited by INR 500.00 on 06/08/25 17:36. New Bal :INR 10000.00",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 50000,
+    "direction": "credit",
+    "balance": 1000000,
+    "accountLast4": "5678"
+  },
+  "expectedStatus": "parsed",
+  "note": "INR Credit Transaction [upstream TestIDFCFirstBankParser.kt]",
+  "source": "upstream-test"
+}
