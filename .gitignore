@@ -78,3 +78,6 @@ yarn-error.log
 *.gguf
 /coverage
 fixtures/sms/_raw/
+# Bank logos are trademarks of their owners: fetched locally (scripts/fetch-bank-logos.js), never committed.
+assets/banks/
+src/ui/theme/bankLogos.generated.ts

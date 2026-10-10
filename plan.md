@@ -1,5 +1,8 @@
 # PennyTrace — Build Plan
 
+> **Update 2026-10-10: the on-device LLM and all network use were removed.** The app has no INTERNET permission, no model download, no notifications and no foreground service. Wherever this document mentions the LLM, `src/llm`, the AI model screen, chat, Hugging Face or a network exception, treat it as history. The release APK requests only READ_SMS, RECEIVE_SMS and RECEIVE_BOOT_COMPLETED (plus WorkManager's WAKE_LOCK). Distribution is via F-Droid (see `docs/FDROID.md`).
+
+
 ## Context
 
 PennyTrace is an open-source Android app. It builds a personal ledger automatically from bank and UPI SMS:
@@ -183,7 +186,7 @@ Money is stored as integer **paise**. Times are epoch ms; day buckets use the de
 
 The "All" scope sums accounts with `include_in_total`. Cards are shown separately as liabilities. Joint accounts are excluded from the total by default and analysable on their own.
 
-## 6. On-device LLM (`src/llm/`)
+## 6. On-device LLM (`src/llm/`): REMOVED, kept for history
 - **Model manager:**
   - Catalog of HF URLs pinned to a commit, with byte size, SHA-256 and licence.
   - Download is explicit, Wi-Fi only by default. It writes a `.part` file, verifies the SHA-256, then moves it to `filesDir/models/`.
@@ -249,3 +252,101 @@ The "All" scope sums accounts with `include_in_total`. Cards are shown separatel
   - Airplane mode: everything except the download still works.
   - mitmproxy over a full session: the only traffic is to HF hosts, during the download.
 - **LLM:** an eval script runs parseFallback over the fixtures with the parsers disabled and reports field accuracy and rejection rate. Also measure tokens per second on a mid-range device.
+
+## 10. Status (2026-10-10)
+
+**Done and verified**
+- **Scaffold:** RN CLI 0.87.1 (bare, New Architecture, Hermes), Android only. Debug and release APKs both build. `npm run audit:permissions` passes on the release APK.
+- **Parsers (`src/core/parsers`):**
+  - 54 parsers ported from pennywiseai-tracker (AGPL, credited in NOTICE.md).
+  - 527 golden fixtures pass.
+  - PennyTrace fixes on top of the port:
+    - The HDFC "(UPI Ref No …)" text was being read as the merchant name.
+    - A card "withdrawn" alert now counts as ATM cash.
+    - The generic fallback can no longer resurrect a message that a bank parser deliberately rejected.
+    - Banks that send from `-G` senders (India Post) are now accepted.
+- **Ledger engine (`src/core/ledger`):**
+  - Covers deduplication, transaction lifecycle, transfers (matched or in transit), card bills, ATM cash, refunds and reversals, categories with confidence, reconciliation, daily close and insights.
+  - Has scenario tests and a property test: shuffling or rescanning the input gives the same ledger.
+  - Card swipes count in Spent and are offset by `spentOnCard`.
+  - Only credit-card evidence makes an account a card. A debit-card swipe stays on the savings account.
+- **DB / native / sync:** encrypted op-sqlite database with drizzle migrations, the PennySms TurboModule and SmsReceiver, boot rescan, a headless scan task, and the sync service.
+- **UI:**
+  - All 7 Ledger design screens, plus the correction sheet, onboarding (including a demo mode), the AI model screen and chat.
+  - Screens read the real engine through `src/app/data`, backed by a `live` (DB + SMS) or `demo` backend.
+  - The demo is a week of realistic SMS run through the real pipeline. It reconciles to the paisa.
+- **LLM layer (`src/llm`):** model catalog pinned to a commit with SHA-256 checks, resumable Wi-Fi-only download, constrained-JSON tasks with validators, chat as a typed query intent, and learned templates.
+- **Checks:** 605 Jest tests, `tsc`, ESLint (which bans network code everywhere except `src/llm/download.ts`), and the Metro production bundle.
+- **On an emulator (release APK, Android 16 / API 36):**
+  - Onboarding → system SMS permission → first import read 4 inbox SMS.
+  - Today showed Spent ₹1,589, with the two Swiggy alerts counted once, and "Matches 2 bank balances" (₹1,18,460).
+  - Activity shows Swiggy's two SMS as evidence.
+  - A new SMS sent while the app was open showed up in Activity within seconds.
+
+**From the owner's real inbox (21,642 SMS, analysed locally, never committed)**
+- Accounts went from 34 to 9. Fixes:
+  - spam/bait filter;
+  - no generic fallback;
+  - cross-bank last-4 merge;
+  - debit card → savings;
+  - alerts without digits attach by account kind;
+  - SBI `A/cX1234` digits;
+  - NCMC top-ups and HDFC EMI-loan confirmations ignored.
+- "Don't count this account" (`Account.ignored`, DB migration 0001), with a "Not counted" section on Accounts.
+- Optional local bank logos (`scripts/fetch-bank-logos.js`, gitignored), cropped to the symbol inside tiles.
+- `PARSER_SCHEMA_VERSION` 2 and `LEDGER_VERSION` 2, so installed apps re-parse on the next launch.
+
+**Second pass on the real inbox (2026-10-10)**
+- **Credit-card payments** ("PAYMENT … RECEIVED TOWARDS YOUR CREDIT CARD … AVAILABLE LIMIT") are parsed. Card dues come from available-limit readings; the limit is the highest reading when there are 2 or more. HDFC card dues went from −₹2,84,113 to ₹102.
+- **Slice:** its top-up and "updated balance" alert are parsed. "Set today's balance" (`Account.balanceAnchor`) covers accounts whose SMS miss incoming money, and a negative savings balance is flagged as missing alerts.
+- **New `invest` kind:** Groww, SIPs and brokers are moved money, not spending.
+- **"Sent home" category:** a person with the user's surname but a different first name.
+- **The user's own name is learned** from reference-matched transfers between their accounts. Bank labels such as "UPI Credit" can never become a name.
+- **Bank of Baroda:** the payee is the VPA after "credited to"; it was the user's own "Your VPA". A counter-account number only means a self transfer when it matches one of the user's accounts.
+- **Merchant names:** keywords of 5+ letters match at the start of a word (ZOMATOCYBS → food), and a UPI handle shown as a name keeps only the part before the @.
+- **Review** asks only about the last 30 days of data: 4,426 items became 65.
+- **UI:**
+  - Activity loads 15 days at a time as you scroll.
+  - The Today week strip steps back through earlier weeks.
+  - Bank chips sit on one scrollable line.
+  - Account detail shows the last month first, then "Load more" (+1 month, 3 or 6 months, all).
+  - Today shows current balances and opens accounts.
+
+**Third pass (2026-10-10)**
+- **Per-day closing balances** (`Account.closingBalances`). Pick any day and enter that day's closing from the bank app; the day closes at that figure and later days roll forward from it. Entry points:
+  - "Set this day's closing balance" on Today, which warns when an account is below ₹0;
+  - "Set closing" on each day of an account's history;
+  - "Set closing balance" on Accounts.
+- **"Change category" lists every category,** grouped as Spending / Not spending (or Money in / Not income), including Sent home and Investments.
+- **"+ New category":** name, icon, colour, and whether it counts as spending.
+  - Custom categories are registered in `src/core/categories.ts` (`setCustomCategories`) and passed to `buildLedger` (`LedgerInput.customCategories`).
+  - They are stored in the encrypted settings.
+
+**Fourth pass (2026-10-10)**
+- **Installing the release APK on a phone** (no Play Store needed):
+  - The release APK is signed with `android/app/release.keystore`, the dev build with the debug key. Android refuses to update across keys, so uninstall the dev build first.
+  - Play Protect (India) blocks sideloaded apps that ask for SMS access: tap "More details → Install anyway", or install with `npm run install:release` (adb).
+  - Android 13+ marks sideloaded apps as restricted: app settings → ⋮ → Allow restricted settings, then Permissions → SMS. Onboarding now shows these steps with an "Open app settings" button.
+  - `npm run release:apk` builds arm64 only: 118 MB instead of 213 MB.
+- **Reconciliation card** shows dates: "Bank said · 16 Sep", "SMS add up to" (at that same moment), "Missing", and "Balance now". The balance now is the bank's last figure rolled forward by the alerts since, and it is not affected by the gap. The note names the two bank reports between which money went missing.
+- **Credit cards** have their own section on Today and on Accounts: used, limit, available, a utilisation bar, and what was charged on the selected day. They are kept out of the closing balance.
+
+**Play Store preparation (2026-10-10)**
+- `docs/PLAY_STORE.md`: the checklist and the copy-paste text for the declaration forms, the store listing and the reviewer instructions.
+- `docs/privacy-policy.html` (public page for GitHub Pages), an in-app link to it, and an onboarding disclosure that matches what the code does.
+- "Discard raw messages" now removes the text of every kept message, including alerts the app couldn't read.
+- `npm run bundle:release` builds the `.aab` without bank logos. `npm run check:play` is the preflight.
+- Checked: all 32 native libraries are 16 KB-aligned, SMS permissions are exactly READ_SMS and RECEIVE_SMS, and the only foreground service is the model download (`dataSync`).
+
+**Logo (2026-10-10):** a ₹ coin leaving a trail of shrinking dots, in the app's blue. Source: `scripts/make-logo.py` (geometry) and `scripts/render-logo.sh` (PNG via Chrome); output in `assets/brand/`. Installed as the launcher icon with `scripts/install-android-icons.py` (adaptive + legacy sizes), checked on an emulator.
+
+**Not done yet**
+- **Paytm QR merchants** ("Paytmqr6pwfot") and phone-number VPAs have no readable name. The on-device LLM, or a rule the user saves, should name them.
+- **HDFC ••3632 is off by ₹13,160** at the 16 Sep alert: some debits never arrived as SMS, or are unparsed. Check the unparsed HDFC messages for that window.
+- **LLM not wired into sync:** unparsed SMS are not yet sent to `llm.parseFallback`, and low-confidence categories are not sent to `llm.categorize`. The tasks themselves exist and are tested.
+- **Model never run:** no download or inference has been tried on a device yet.
+- **Daily notification** (Kotlin `PennyNotify`), **biometric lock** and **encrypted export/import** (SAF) are not built. Export and import show "coming soon".
+- **Settings are not persisted:** theme and accent reset on restart, and the "SMS enabled" toggle only lasts for the session.
+- **APK size:** the release APK is about 213 MB because it ships 4 ABIs × llama.rn. Ship arm64-v8a only (`reactNativeArchitectures`) or use ABI splits / AAB.
+- **Real SMS samples:** awaiting the owner's samples. Anonymise them with `scripts/anonymize-sms.ts` and add them as fixtures.
+- **Reload cost:** the live backend loads every source event on each reload. Lazy-load the evidence once inboxes get large.

@@ -95,9 +95,62 @@ describe('parseSms API', () => {
       reason: 'promo_sender',
     });
   });
+});
 
-  it('never returns llm', () => {
-    const out = parseSms({ id: '1', address: 'VM-UNKNWN-S', body: 'Rs 500 something happened', date: 0 });
-    expect(['parsed', 'ignored', 'unparsed']).toContain(out.status);
+describe('dispatch rules', () => {
+  const dop = (address: string) => ({
+    id: '1',
+    address,
+    body: 'Account No. XXXXXXXX1234 CREDIT with amount Rs. 5550.00 on 02-02-2026. Balance: Rs.37500.00. [S33475450]',
+    date: 1768458600000,
+  });
+
+  it('lets a -G sender through only when a bank parser claims it', () => {
+    expect(parseSms(dop('VM-DOPBNK-G')).status).toBe('parsed');
+    expect(parseSms({ ...dop('VM-RANDOM-G'), body: 'Rs. 100 debited from your account' }).status).toBe('ignored');
+  });
+
+  it('always drops promotional -P senders, even for known banks', () => {
+    expect(parseSms(dop('VM-DOPBNK-P')).status).toBe('ignored');
+  });
+
+  it('does not let the generic fallback resurrect a known bank rejection', () => {
+    // Federal printed this NEFT receipt as a duplicate of the debit: counting it would double-count.
+    const federal = {
+      id: '2',
+      address: 'CP-FEDBNK-S',
+      body: 'Jerry Joseph has received Rs 6000.000 from your A/c XX3343 via NEFT on 24-06-2026 22:04:04. Ref no. FDRLM4175007432 - Federal Bank',
+      date: 1768458600000,
+    };
+    expect(parseSms(federal).status).toBe('unparsed');
+  });
+
+  it('keeps foreign-currency card spends visible as unparsed instead of dropping them', () => {
+    const eur = {
+      id: '3',
+      address: 'JM-ICICIT-S',
+      body: 'EUR 50.00 spent using ICICI Bank Card XX1234 on 05-Sep-25 on Amazon DE. Avl Limit: INR 2,00,000.00.',
+      date: 1768458600000,
+    };
+    expect(parseSms(eur).status).toBe('unparsed');
+  });
+});
+
+describe('senders no bank parser claims', () => {
+  it('are never counted, even when they read like a debit', () => {
+    const lic = {
+      id: '9',
+      address: 'JD-LICIND',
+      body: 'Dear Customer, Survival Benefit under policy no.- 123456789 paid by LIC Rs. 19982 to Bank A/C no. XXXXXXXXXX1234.',
+      date: 1768458600000,
+    };
+    expect(parseSms(lic).status).toBe('unparsed');
+    const jio = {
+      id: '10',
+      address: 'JZ-JIOFBR',
+      body: 'Dear Customer, Payment of Rs. 2120.46 for your JioAirFiber connection through UPI Payments has been received on 07-Sep-24.',
+      date: 1768458600000,
+    };
+    expect(parseSms(jio).status).toBe('unparsed');
   });
 });

@@ -38,10 +38,7 @@ export class BandhanBankParser extends BaseIndianBankParser {
   protected extractMerchant(message: string, sender: string): string | null {
     // Pattern to extract merchant from "towards" section
     // Stops at: " Value", " on", " dt", " at", ".", or end of string
-    const m = find(
-      /towards\s+([^.\n]+?)(?:\s+Value|\s+on|\s+dt|\s+at|\.|$)/i,
-      message,
-    );
+    const m = find(/towards\s+([^.\n]+?)(?:\s+Value|\s+on|\s+dt|\s+at|\.|$)/i, message);
     if (m) {
       let merchantRaw = gv(m, 1).trim();
 
@@ -52,30 +49,19 @@ export class BandhanBankParser extends BaseIndianBankParser {
           .map(it => it.trim())
           .filter(it => it !== '');
         const meaningful = segments.filter(
-          segment =>
-            segment.length >= 2 &&
-            hasLetter(segment) &&
-            segment.toLowerCase() !== 'upi',
+          segment => segment.length >= 2 && hasLetter(segment) && segment.toLowerCase() !== 'upi',
         );
-        const candidate =
-          meaningful.length > 0
-            ? meaningful[meaningful.length - 1]
-            : segments[segments.length - 1];
+        const candidate = meaningful.length > 0 ? meaningful[meaningful.length - 1] : segments[segments.length - 1];
         if (candidate != null) {
           merchantRaw = candidate;
         }
       }
 
       // Clean up the merchant name
-      const cleanedMerchant = this.cleanMerchantName(
-        replaceAll(merchantRaw, /\bu\b/i, '').trim(),
-      );
+      const cleanedMerchant = this.cleanMerchantName(replaceAll(merchantRaw, /\bu\b/i, '').trim());
 
       // Normalize specific merchants
-      const normalizedMerchant =
-        cleanedMerchant.toLowerCase() === 'interest'
-          ? 'Interest'
-          : cleanedMerchant;
+      const normalizedMerchant = cleanedMerchant.toLowerCase() === 'interest' ? 'Interest' : cleanedMerchant;
 
       if (this.isValidMerchantName(normalizedMerchant)) {
         return normalizedMerchant;
@@ -94,10 +80,7 @@ export class BandhanBankParser extends BaseIndianBankParser {
   }
 
   protected extractBalance(message: string): Paise | null {
-    const m = find(
-      /Clear\s+Bal\s+(?:is\s+)?(?:INR\s*)?([0-9,]+(?:\.\d{2})?)/i,
-      message,
-    );
+    const m = find(/Clear\s+Bal\s+(?:is\s+)?(?:INR\s*)?([0-9,]+(?:\.\d{2})?)/i, message);
     if (m) {
       return toPaise(gv(m, 1));
     }

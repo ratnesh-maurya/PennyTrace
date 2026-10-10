@@ -9,10 +9,7 @@ import { TransactionType } from '../engine/types';
 
 /** Rupees with or without a leading zero: "2,000.00", "50.00", ".50". */
 const AMOUNT = String.raw`(\d[\d,]*(?:\.\d{1,2})?|\.\d{1,2})`;
-const DEBIT_CREDIT_AMOUNT = rx(
-  String.raw`(?:debited|credited)\s+with\s+Rs\.?\s*${AMOUNT}`,
-  'i',
-);
+const DEBIT_CREDIT_AMOUNT = rx(String.raw`(?:debited|credited)\s+with\s+Rs\.?\s*${AMOUNT}`, 'i');
 const ANY_AMOUNT = rx(String.raw`Rs\.?\s*${AMOUNT}`, 'i');
 const BALANCE_CLAUSE = /Avl\s+Bal|Available\s+Balance/i;
 
@@ -99,11 +96,7 @@ export class UcoBankParser extends BankParser {
       return base;
     }
     // UCO Bank format: "A/c XX1111"
-    const accountPatterns = [
-      /A\/c\s+([X*\d]+)/i,
-      /Account\s+([X*\d]+)/i,
-      /Acc\s+([X*\d]+)/i,
-    ];
+    const accountPatterns = [/A\/c\s+([X*\d]+)/i, /Account\s+([X*\d]+)/i, /Acc\s+([X*\d]+)/i];
     for (const pattern of accountPatterns) {
       const m = find(pattern, message);
       if (m) {
@@ -135,11 +128,7 @@ export class UcoBankParser extends BankParser {
 
   protected extractReference(message: string): string | null {
     // Look for any transaction reference patterns specific to UCO Bank
-    const refPatterns = [
-      /ref[:#]?\s*(\w+)/i,
-      /txn[:#]?\s*(\w+)/i,
-      /transaction\s+id[:#]?\s*(\w+)/i,
-    ];
+    const refPatterns = [/ref[:#]?\s*(\w+)/i, /txn[:#]?\s*(\w+)/i, /transaction\s+id[:#]?\s*(\w+)/i];
     for (const pattern of refPatterns) {
       const m = find(pattern, message);
       if (m) {

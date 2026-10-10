@@ -1,7 +1,7 @@
 /**
  * PennyTrace core contract.
  *
- * Every layer (parsers, ledger engine, DB, UI, LLM) agrees on these shapes.
+ * Every layer (parsers, ledger engine, DB, UI) agrees on these shapes.
  * Change them deliberately: bump PARSER_SCHEMA_VERSION / LEDGER_VERSION when
  * semantics change so stored data is reprocessed.
  *
@@ -10,6 +10,8 @@
  * - Time is epoch milliseconds (`EpochMs`). Day buckets are `DayKey` (YYYY-MM-DD,
  *   device-local time zone at the moment of computation).
  */
+
+import type { CategoryDef } from './categories';
 
 export type Paise = number;
 export type EpochMs = number;
@@ -39,7 +41,6 @@ export type SourceKind = 'sms'; // 'notification' | 'mail' later
 
 export type ParseStatus =
   | 'parsed' // a bank/generic parser produced a ParsedEvent
-  | 'llm' // produced by the on-device LLM fallback (lower trust)
   | 'ignored' // gated out: OTP, promo, non-financial
   | 'unparsed'; // looked financial but nothing could parse it
 
@@ -70,6 +71,11 @@ export interface ParseHints {
   isEmandate?: boolean;
   /** Bank says money went to/came from another account of the same holder. */
   counterAccountLast4?: string;
+  /**
+   * The alert is about a CREDIT card (credit-card spend type, "credit card" wording or an
+   * available limit). A plain `instrument: 'card'` may be a debit card on a savings account.
+   */
+  isCreditCard?: boolean;
 }
 
 /** What a parser extracts from a single message. */
@@ -103,7 +109,7 @@ export interface ParsedEvent {
   /** When it happened. Falls back to the SMS delivery time. */
   occurredAt: EpochMs;
   hints: ParseHints;
-  /** 0–100. Bank parsers ~90+, generic ~70, LLM ≤70. */
+  /** 0–100. Bank parsers are ~90. */
   confidence: number;
 }
 
@@ -130,6 +136,12 @@ export interface SourceEvent {
 export type AccountType = 'savings' | 'current' | 'credit_card' | 'wallet' | 'cash';
 export type Ownership = 'personal' | 'joint';
 
+/** A day's closing balance the user read in their bank app. */
+export interface ClosingBalance {
+  day: DayKey;
+  closing: Paise;
+}
+
 export interface Account {
   id: AccountId;
   bank: string;
@@ -146,6 +158,18 @@ export interface Account {
   includeInTotal: boolean;
   /** Credit cards: total limit, when known (user edit or derived from available-limit alerts). */
   creditLimit?: Paise;
+  /**
+   * The user said "don't count this account" (an old account, someone else's, a wallet they
+   * don't care about). Its transactions and balances are left out of the ledger entirely; it is
+   * kept in `accounts` so it can be restored.
+   */
+  ignored?: boolean;
+  /**
+   * Input only (an account edit, not stored on the derived account): closing balances the user
+   * entered for chosen days, for accounts whose SMS miss money (a credit that was never alerted).
+   * Each makes that day close at exactly that figure; later days roll forward from it.
+   */
+  closingBalances?: readonly ClosingBalance[];
 }
 
 /**
@@ -158,8 +182,9 @@ export interface Account {
  * - liability: credit-card bill payment (settles debt, not a second expense)
  * - cash: ATM withdrawal into cash
  * - fee: bank charge (counts in "Spent")
+ * - invest: money into investments (SIP, broker, mutual fund): an asset, not spending
  */
-export type TxnKind = 'spend' | 'in' | 'xfer' | 'pending_xfer' | 'refund' | 'liability' | 'cash' | 'fee';
+export type TxnKind = 'spend' | 'in' | 'xfer' | 'pending_xfer' | 'refund' | 'liability' | 'cash' | 'fee' | 'invest';
 
 export interface Transaction {
   id: TxnId;
@@ -216,7 +241,7 @@ export interface CategoryRule {
   field: 'counterparty' | 'vpa' | 'body';
   categoryId: CategoryId;
   priority: number;
-  source: 'seed' | 'user' | 'llm';
+  source: 'seed' | 'user';
 }
 
 /** User correction, replayed on every rebuild. */
@@ -247,6 +272,8 @@ export interface LedgerInput {
   overrides: UserOverride[];
   /** The user's own names / VPAs, for self-transfer detection. */
   selfIdentities: string[];
+  /** Categories the user created in the app. */
+  customCategories?: CategoryDef[];
 }
 
 export const REVIEW_THRESHOLD = 75;
@@ -290,9 +317,14 @@ export interface DailyClose {
 
 export interface AccountRecon {
   accountId: AccountId;
+  /** What the SMS alone predict the balance was when the bank last reported (not "now"). */
   calculated: Paise;
   reported?: Paise;
   reportedAt?: EpochMs;
+  /** The bank report before the last one: the gap arose between the two. */
+  previousReportedAt?: EpochMs;
+  /** Balance now: the bank's last figure rolled forward by the alerts since. */
+  current?: Paise;
   variance?: Paise;
   status: 'reconciled' | 'off' | 'unknown';
 }

@@ -98,6 +98,10 @@ export const accounts = sqliteTable('accounts', {
   /** JSON string[] */
   aliasesJson: text('aliases_json').notNull(),
   includeInTotal: integer('include_in_total', { mode: 'boolean' }).notNull(),
+  /** Credit cards: total limit in paise, when known. */
+  creditLimitPaise: integer('credit_limit_paise'),
+  /** The user chose "don't count this account". */
+  ignored: integer('ignored', { mode: 'boolean' }).notNull().default(false),
   /** Insertion order from buildLedger, so loadLedger returns accounts in the same order. */
   ord: integer('ord').notNull(),
 });

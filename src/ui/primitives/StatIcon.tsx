@@ -24,7 +24,8 @@ export const StatIcon = memo(function StatIcon({ icon, color, size = 28, fill }:
           backgroundColor: color,
           boxShadow: glow(color),
         },
-      ]}>
+      ]}
+    >
       <Icon name={icon} size={18} color={FIXED.white} fill={fill} />
     </View>
   );

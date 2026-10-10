@@ -24,11 +24,14 @@ export function reconcile(ledger: Ledger): AccountRecon[] {
     }
     const { balance: calculated } = balanceAt(tl, last.key);
     const variance = last.snap.reported - calculated;
+    const previous = tl.snapshots[tl.snapshots.length - 2];
     return {
       accountId: account.id,
       calculated,
       reported: last.snap.reported,
       reportedAt: last.snap.at,
+      ...(previous ? { previousReportedAt: previous.snap.at } : {}),
+      current: currentBalance(tl),
       variance,
       status: variance === 0 ? ('reconciled' as const) : ('off' as const),
     };

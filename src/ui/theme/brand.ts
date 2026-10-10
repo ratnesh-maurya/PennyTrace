@@ -40,7 +40,18 @@ const BRANDS: BrandEntry[] = [
 ];
 
 /** Fallback palette for unknown names (mid-tone, white text stays legible in both themes). */
-const HASH_COLORS = ['#3B6BFF', '#0B7A3E', '#B4380E', '#6A4FA3', '#00788A', '#A2367E', '#5C6B12', '#1F3A5F', '#8A5A00', '#C2255C'];
+const HASH_COLORS = [
+  '#3B6BFF',
+  '#0B7A3E',
+  '#B4380E',
+  '#6A4FA3',
+  '#00788A',
+  '#A2367E',
+  '#5C6B12',
+  '#1F3A5F',
+  '#8A5A00',
+  '#C2255C',
+];
 
 export function normaliseName(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -55,7 +66,11 @@ function hash(s: string): number {
 }
 
 export function initialsOf(name: string): string {
-  const words = name.replace(/[^A-Za-z0-9 ]/g, ' ').trim().split(/\s+/).filter(Boolean);
+  const words = name
+    .replace(/[^A-Za-z0-9 ]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
   if (words.length === 0) {
     return '?';
   }

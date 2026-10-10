@@ -24,7 +24,9 @@ export class JuspayParser extends BaseIndianBankParser {
 
   canHandle(sender: string): boolean {
     const normalizedSender = sender.toUpperCase();
-    return normalizedSender.includes('JUSPAY') || normalizedSender.includes('APAY') || normalizedSender === 'AMAZON PAY';
+    return (
+      normalizedSender.includes('JUSPAY') || normalizedSender.includes('APAY') || normalizedSender === 'AMAZON PAY'
+    );
   }
 
   protected extractAmount(message: string): Paise | null {

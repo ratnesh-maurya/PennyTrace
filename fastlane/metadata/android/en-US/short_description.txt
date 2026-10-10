@@ -1,0 +1,1 @@
+Expense tracker built from your bank SMS. No internet, no cloud.

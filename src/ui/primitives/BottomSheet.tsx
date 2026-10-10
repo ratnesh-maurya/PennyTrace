@@ -55,7 +55,8 @@ export function BottomSheet({ visible, onClose, children, testID }: BottomSheetP
       animationType="none"
       statusBarTranslucent
       navigationBarTranslucent
-      onRequestClose={onClose}>
+      onRequestClose={onClose}
+    >
       <View style={StyleSheet.absoluteFill} testID={testID}>
         <Animated.View style={[StyleSheet.absoluteFill, s.scrim, { opacity: progress }]}>
           <Pressable
@@ -65,8 +66,7 @@ export function BottomSheet({ visible, onClose, children, testID }: BottomSheetP
             accessibilityLabel="Close"
           />
         </Animated.View>
-        <Animated.View
-          style={[s.sheet, { paddingBottom: 30 + insets.bottom, transform: [{ translateY }] }]}>
+        <Animated.View style={[s.sheet, { paddingBottom: 30 + insets.bottom, transform: [{ translateY }] }]}>
           <View style={s.handle} />
           {children}
         </Animated.View>

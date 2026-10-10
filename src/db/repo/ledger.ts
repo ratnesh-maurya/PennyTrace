@@ -41,6 +41,8 @@ export async function replaceDerivedStatements(ledger: Ledger): Promise<SqlState
     upiIdsJson: JSON.stringify(a.upiIds),
     aliasesJson: JSON.stringify(a.aliases),
     includeInTotal: a.includeInTotal,
+    creditLimitPaise: a.creditLimit ?? null,
+    ignored: a.ignored === true,
     ord,
   }));
   for (const part of chunk(accountRows)) {
@@ -124,6 +126,8 @@ export async function loadAccounts(): Promise<Account[]> {
     upiIds: parseJson<string[]>(r.upiIdsJson, []),
     aliases: parseJson<string[]>(r.aliasesJson, []),
     includeInTotal: r.includeInTotal,
+    ...(r.creditLimitPaise != null ? { creditLimit: r.creditLimitPaise } : {}),
+    ...(r.ignored ? { ignored: true } : {}),
   }));
 }
 
@@ -228,5 +232,6 @@ export async function loadLedgerInput(): Promise<LedgerInput> {
     rules,
     overrides,
     selfIdentities: settings.selfIdentities,
+    customCategories: settings.customCategories ?? [],
   };
 }

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 // GENERATED icon registry: Material Symbols Rounded (weight 400) as static SVG components.
 // Static imports only (Metro cannot bundle dynamic requires). To add an icon, add an
 // import pair and an entry below. Aliases: insights -> show_chart, local_grocery_store -> shopping_cart, smartphone -> mobile, auto_awesome -> wand_stars
@@ -9,6 +8,8 @@ import AccountBalance from '@material-symbols/svg-400/rounded/account_balance.sv
 import AccountBalanceFill from '@material-symbols/svg-400/rounded/account_balance-fill.svg';
 import ArrowBack from '@material-symbols/svg-400/rounded/arrow_back.svg';
 import ArrowBackFill from '@material-symbols/svg-400/rounded/arrow_back-fill.svg';
+import ArrowUpward from '@material-symbols/svg-400/rounded/arrow_upward.svg';
+import ArrowUpwardFill from '@material-symbols/svg-400/rounded/arrow_upward-fill.svg';
 import ArrowForward from '@material-symbols/svg-400/rounded/arrow_forward.svg';
 import ArrowForwardFill from '@material-symbols/svg-400/rounded/arrow_forward-fill.svg';
 import AutoAwesome from '@material-symbols/svg-400/rounded/wand_stars.svg';
@@ -51,6 +52,14 @@ import EnhancedEncryption from '@material-symbols/svg-400/rounded/enhanced_encry
 import EnhancedEncryptionFill from '@material-symbols/svg-400/rounded/enhanced_encryption-fill.svg';
 import Error from '@material-symbols/svg-400/rounded/error.svg';
 import ErrorFill from '@material-symbols/svg-400/rounded/error-fill.svg';
+import ChevronLeft from '@material-symbols/svg-400/rounded/chevron_left.svg';
+import ChevronLeftFill from '@material-symbols/svg-400/rounded/chevron_left-fill.svg';
+import OpenInNew from '@material-symbols/svg-400/rounded/open_in_new.svg';
+import OpenInNewFill from '@material-symbols/svg-400/rounded/open_in_new-fill.svg';
+import Policy from '@material-symbols/svg-400/rounded/policy.svg';
+import PolicyFill from '@material-symbols/svg-400/rounded/policy-fill.svg';
+import FamilyHome from '@material-symbols/svg-400/rounded/family_home.svg';
+import FamilyHomeFill from '@material-symbols/svg-400/rounded/family_home-fill.svg';
 import Forum from '@material-symbols/svg-400/rounded/forum.svg';
 import ForumFill from '@material-symbols/svg-400/rounded/forum-fill.svg';
 import Help from '@material-symbols/svg-400/rounded/help.svg';
@@ -201,6 +210,11 @@ export const ICONS = {
   enhanced_encryption: [EnhancedEncryption, EnhancedEncryptionFill],
   error: [Error, ErrorFill],
   forum: [Forum, ForumFill],
+  family_home: [FamilyHome, FamilyHomeFill],
+  open_in_new: [OpenInNew, OpenInNewFill],
+  policy: [Policy, PolicyFill],
+  chevron_left: [ChevronLeft, ChevronLeftFill],
+  arrow_upward: [ArrowUpward, ArrowUpwardFill],
   help: [Help, HelpFill],
   history: [History, HistoryFill],
   home: [Home, HomeFill],

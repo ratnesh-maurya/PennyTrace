@@ -266,12 +266,7 @@ export class SouthIndianBankParser extends BaseIndianBankParser {
     if (fromBase != null) return fromBase;
 
     // Pattern for "A/c X1234" or "A/c XX1234" or "A/c XXX1234"
-    const patterns = [
-      /A\/c\s+[X*]*(\d{4})/i,
-      /Account\s+[X*]*(\d{4})/i,
-      /from\s+[X*]*(\d{4})/i,
-      /to\s+[X*]*(\d{4})/i,
-    ];
+    const patterns = [/A\/c\s+[X*]*(\d{4})/i, /Account\s+[X*]*(\d{4})/i, /from\s+[X*]*(\d{4})/i, /to\s+[X*]*(\d{4})/i];
 
     for (const pattern of patterns) {
       const m = find(pattern, message);

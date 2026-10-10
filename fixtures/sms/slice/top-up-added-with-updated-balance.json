@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "slice-pt-added",
+    "address": "AD-SLCEIT-S",
+    "body": "Rs. 11,000 is successfully added to your slice savings account. Your updated balance is Rs. 12,900.15 - slice(NESFB)",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 1100000,
+    "direction": "credit",
+    "balance": 1290015
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: a top-up to the slice savings account; its only balance alert",
+  "source": "pennytrace"
+}

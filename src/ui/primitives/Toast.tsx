@@ -32,7 +32,8 @@ export function Toast({ message }: ToastProps) {
     <Animated.View
       pointerEvents="none"
       accessibilityLiveRegion="polite"
-      style={[s.toast, { bottom: NAV.toastOffset + insets.bottom, opacity, transform: [{ translateY }] }]}>
+      style={[s.toast, { bottom: NAV.toastOffset + insets.bottom, opacity, transform: [{ translateY }] }]}
+    >
       <Icon name="check_circle" size={19} color={c.accent} fill />
       <Text variant="label" color="toastInk" style={s.text}>
         {message ?? last.current ?? ''}

@@ -5,15 +5,15 @@
     "body": "EUR 50.00 spent using ICICI Bank Card XX1234 on 05-Sep-25 on Amazon DE. Avl Limit: INR 2,00,000.00. SMS BLOCK 1234 to 9215676766",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "EUR card purchase [upstream TestICICIBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 5000,
     "direction": "debit",
     "instrument": "card",
     "counterparty": "Amazon DE",
     "accountLast4": "1234"
-  },
-  "expectedStatus": "parsed",
-  "note": "EUR card purchase [upstream TestICICIBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

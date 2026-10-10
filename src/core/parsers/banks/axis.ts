@@ -76,7 +76,10 @@ export class AxisBankParser extends BaseIndianBankParser {
     }
 
     // Also check for explicit ATM mentions
-    if ((lowerMessage.includes('atm') || lowerMessage.includes('cash withdrawal')) && lowerMessage.includes('debited')) {
+    if (
+      (lowerMessage.includes('atm') || lowerMessage.includes('cash withdrawal')) &&
+      lowerMessage.includes('debited')
+    ) {
       return 'ATM';
     }
 

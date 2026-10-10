@@ -1,4 +1,15 @@
-import { addDays, dayKey, dayRange, daysBetween, endOfDay, fixedOffset, monthDayLabel, setTimeZoneOffset, startOfDay, weekdayShort } from '../../time';
+import {
+  addDays,
+  dayKey,
+  dayRange,
+  daysBetween,
+  endOfDay,
+  fixedOffset,
+  monthDayLabel,
+  setTimeZoneOffset,
+  startOfDay,
+  weekdayShort,
+} from '../../time';
 
 describe('time (device-local days)', () => {
   afterEach(() => setTimeZoneOffset());

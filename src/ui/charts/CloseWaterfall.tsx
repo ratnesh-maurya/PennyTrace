@@ -117,7 +117,8 @@ export const CloseWaterfall = memo(function CloseWaterfall(props: CloseWaterfall
               tnum
               numberOfLines={1}
               adjustsFontSizeToFit
-              minimumFontScale={0.8}>
+              minimumFontScale={0.8}
+            >
               {values[b.key]}
             </Text>
           </View>

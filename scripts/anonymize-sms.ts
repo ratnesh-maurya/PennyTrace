@@ -37,9 +37,7 @@ interface ResolveResult {
 }
 type NextResolve = (specifier: string, context: unknown) => ResolveResult;
 interface NodeModule {
-  registerHooks(hooks: {
-    resolve(specifier: string, context: unknown, nextResolve: NextResolve): ResolveResult;
-  }): void;
+  registerHooks(hooks: { resolve(specifier: string, context: unknown, nextResolve: NextResolve): ResolveResult }): void;
 }
 interface NodeUrl {
   pathToFileURL(p: string): { href: string };
@@ -172,13 +170,15 @@ class Anonymizer {
     let s = body;
 
     // 1. VPAs (before digit masking so numeric VPA users are handled once).
-    s = s.replace(/([a-zA-Z0-9][a-zA-Z0-9._-]*)@([a-zA-Z][a-zA-Z0-9]*)(?![a-zA-Z0-9]*\.[a-zA-Z]{2,})/g, (_m, user, handle) =>
-      `${this.fakeVpaUser(user)}@${handle}`,
+    s = s.replace(
+      /([a-zA-Z0-9][a-zA-Z0-9._-]*)@([a-zA-Z][a-zA-Z0-9]*)(?![a-zA-Z0-9]*\.[a-zA-Z]{2,})/g,
+      (_m, user, handle) => `${this.fakeVpaUser(user)}@${handle}`,
     );
 
     // 2. Last-4 masks: XX1234, xx1234, **1234, *1234, X1234, ending 1234, ...1234.
-    s = s.replace(/((?<![A-Za-z0-9])[xX*•]{1,12}|\bending(?:\s+with)?\s+|\bends\s+with\s+)(\d{3,4})\b/g, (_m, prefix, digits) =>
-      `${prefix}${this.fakeLast4(digits)}`,
+    s = s.replace(
+      /((?<![A-Za-z0-9])[xX*•]{1,12}|\bending(?:\s+with)?\s+|\bends\s+with\s+)(\d{3,4})\b/g,
+      (_m, prefix, digits) => `${prefix}${this.fakeLast4(digits)}`,
     );
 
     // 3. Digit runs of 6+ that are not amounts.
@@ -245,7 +245,12 @@ async function main(argv: string[]): Promise<void> {
   let i = 0;
   for (const raw of input) {
     i += 1;
-    const sms = { id: `anon-${String(i).padStart(4, '0')}`, address: raw.address, body: anon.anonymize(raw.body), date: raw.date };
+    const sms = {
+      id: `anon-${String(i).padStart(4, '0')}`,
+      address: raw.address,
+      body: anon.anonymize(raw.body),
+      date: raw.date,
+    };
     const outcome = parseSms(sms);
     const bank = outcome.parsed?.bank ?? 'unknown';
     let name = slug(outcome.parsed?.parserId ?? `${outcome.status}-${sms.address}`);

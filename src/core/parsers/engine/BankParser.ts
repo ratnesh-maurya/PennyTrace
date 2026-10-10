@@ -184,7 +184,8 @@ export abstract class BankParser {
     }
     const availableLimit = type === TransactionType.CREDIT ? this.extractAvailableLimit(smsBody) : null;
     const rawAccountLast4 = this.extractAccountLast4(smsBody);
-    const safeAccountLast4 = rawAccountLast4 != null ? this.extractLast4Digits(rawAccountLast4) ?? rawAccountLast4 : null;
+    const safeAccountLast4 =
+      rawAccountLast4 != null ? this.extractLast4Digits(rawAccountLast4) ?? rawAccountLast4 : null;
 
     return {
       amount,
@@ -375,11 +376,29 @@ export abstract class BankParser {
   /** Card (credit/debit) vs account transaction. */
   protected detectIsCard(message: string): boolean {
     const lowerMessage = message.toLowerCase();
-    const accountPatterns = ['a/c', 'account', 'ac ', 'acc ', 'saving account', 'current account', 'savings a/c', 'current a/c'];
+    const accountPatterns = [
+      'a/c',
+      'account',
+      'ac ',
+      'acc ',
+      'saving account',
+      'current account',
+      'savings a/c',
+      'current a/c',
+    ];
     if (accountPatterns.some(p => lowerMessage.includes(p))) {
       return false;
     }
-    const cardPatterns = ['card ending', 'card xx', 'debit card', 'credit card', 'card no.', 'card number', 'card *', 'card x'];
+    const cardPatterns = [
+      'card ending',
+      'card xx',
+      'debit card',
+      'credit card',
+      'card no.',
+      'card number',
+      'card *',
+      'card x',
+    ];
     if (cardPatterns.some(p => lowerMessage.includes(p))) {
       return true;
     }

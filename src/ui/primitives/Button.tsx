@@ -55,7 +55,8 @@ export const Button = memo(function Button({
         },
         flex ? styles.flex : null,
         style,
-      ]}>
+      ]}
+    >
       <View style={styles.row}>
         {icon ? <Icon name={icon} size={18} color={ink} /> : null}
         <Text variant={variant} color={ink} numberOfLines={1}>

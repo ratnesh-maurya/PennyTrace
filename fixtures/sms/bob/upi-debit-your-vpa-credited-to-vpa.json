@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "bob-pt-vpa",
+    "address": "VD-BOBSMS-S",
+    "body": "Your VPA ratnesh2311@okhdfcbank linked to your a/c no. XXXXXX1234 is debited for Rs. 136.0 and credited to VPA kureelarun@okicici UPI Ref no. 612300000001.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 13600,
+    "direction": "debit",
+    "accountLast4": "1234",
+    "counterparty": "kureelarun",
+    "vpa": "kureelarun@okicici"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: the payee is the VPA after 'credited to', not the user's own 'Your VPA'",
+  "source": "pennytrace"
+}

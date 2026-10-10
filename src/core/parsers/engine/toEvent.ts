@@ -120,11 +120,28 @@ export function extractRefs(body: string, upstreamRef?: string | null): TxnRefs 
 
 // ---- VPA -------------------------------------------------------------------------
 
-const VPA = /(?:^|[\s:(/,])([a-zA-Z0-9][a-zA-Z0-9._-]{0,255}@[a-zA-Z][a-zA-Z0-9]{1,63})(?![a-zA-Z0-9.@]*\.[a-zA-Z]{2,})/;
+const VPA =
+  /(?:^|[\s:(/,])([a-zA-Z0-9][a-zA-Z0-9._-]{0,255}@[a-zA-Z][a-zA-Z0-9]{1,63})(?![a-zA-Z0-9.@]*\.[a-zA-Z]{2,})/;
 
+/** "credited to VPA kureelarun@okicici", "from VPA x@ybl": the other party, named explicitly. */
+const COUNTERPARTY_VPA = /\b(?:to|from)\s+VPA\s*:?\s*([a-zA-Z0-9][a-zA-Z0-9._-]{0,255}@[a-zA-Z][a-zA-Z0-9]{1,63})/i;
+
+/**
+ * The counterparty's VPA. PennyTrace: prefer an explicit "to/from VPA …", and never return the
+ * user's own handle ("Your VPA ratnesh@okhdfcbank linked to your a/c … credited to VPA x@okicici"),
+ * which made every such payment look like a transfer to self.
+ */
 export function extractVpa(body: string): string | undefined {
+  const named = find(COUNTERPARTY_VPA, body);
+  if (named) {
+    return gv(named, 1);
+  }
   const m = find(VPA, body);
-  return m ? gv(m, 1) : undefined;
+  if (!m) {
+    return undefined;
+  }
+  const before = body.slice(Math.max(0, m.index - 12), m.index + 1);
+  return /\byour\s+vpa\b/i.test(before) ? undefined : gv(m, 1);
 }
 
 // ---- Body date/time ----------------------------------------------------------------
@@ -230,12 +247,18 @@ function buildHints(
   accountLast4: string | undefined,
 ): ParseHints {
   const hints: ParseHints = {};
-  if (direction === 'debit' && ATM.test(body)) {
+  // Card + "withdrawn" is an ATM cash withdrawal even when "ATM" is not printed
+  // (HDFC: "Rs.2000 withdrawn from HDFC Bank Card x1234 At +18 <location> On ...").
+  if (direction === 'debit' && (ATM.test(body) || (instrument === 'card' && /\bwithdrawn\b/i.test(body)))) {
     hints.isAtmWithdrawal = true;
   }
   const refund = REFUND.test(body);
   if (
-    (direction === 'credit' && instrument === 'card' && CARD_PAYMENT_CREDIT.test(body) && !refund && status !== 'reversed') ||
+    (direction === 'credit' &&
+      instrument === 'card' &&
+      CARD_PAYMENT_CREDIT.test(body) &&
+      !refund &&
+      status !== 'reversed') ||
     (direction === 'debit' && CARD_BILL_DEBIT.test(body))
   ) {
     hints.isCardBillPayment = true;
@@ -251,6 +274,13 @@ function buildHints(
   }
   if (t.type === TransactionType.INVESTMENT) {
     hints.isInvestment = true;
+  }
+  if (
+    instrument === 'card' &&
+    !hints.isCardBillPayment &&
+    (t.type === TransactionType.CREDIT || t.creditLimit != null || /\bcredit\s*card\b/i.test(body))
+  ) {
+    hints.isCreditCard = true;
   }
   if (direction === 'debit' && EMANDATE.test(body)) {
     hints.isEmandate = true;
@@ -269,7 +299,12 @@ function buildHints(
 
 // ---- Instrument / parserId ---------------------------------------------------------
 
-function detectInstrument(t: BankTxn, body: string, accountLast4: string | undefined, fallback?: Instrument): Instrument {
+function detectInstrument(
+  t: BankTxn,
+  body: string,
+  accountLast4: string | undefined,
+  fallback?: Instrument,
+): Instrument {
   if (t.type === TransactionType.CREDIT || t.isFromCard) {
     return 'card';
   }
@@ -285,12 +320,7 @@ function detectInstrument(t: BankTxn, body: string, accountLast4: string | undef
   return 'unknown';
 }
 
-export function variantFor(
-  direction: Direction,
-  instrument: Instrument,
-  hints: ParseHints,
-  body: string,
-): string {
+export function variantFor(direction: Direction, instrument: Instrument, hints: ParseHints, body: string): string {
   let channel: string;
   if (hints.isAtmWithdrawal) {
     channel = 'atm';

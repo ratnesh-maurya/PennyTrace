@@ -106,13 +106,8 @@ export class IppbParser extends BankParser {
   protected extractTransactionType(message: string): TransactionType | null {
     const lowerMessage = message.toLowerCase();
     if (lowerMessage.includes('debit')) return TransactionType.EXPENSE;
-    if (lowerMessage.includes('received a payment'))
-      return TransactionType.INCOME;
-    if (
-      lowerMessage.includes('credit') &&
-      lowerMessage.includes('info: upi/credit')
-    )
-      return TransactionType.INCOME;
+    if (lowerMessage.includes('received a payment')) return TransactionType.INCOME;
+    if (lowerMessage.includes('credit') && lowerMessage.includes('info: upi/credit')) return TransactionType.INCOME;
     return super.extractTransactionType(message);
   }
 

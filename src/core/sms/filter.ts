@@ -46,17 +46,60 @@ const IGNORE_IF_PAID = /\bignore\s+if\s+(?:already\s+)?paid\b/i;
 const PROMO =
   /\boffers?\b|\bdiscount|\bwin\s|\bcongratulations\b|\bpre-?approved\b|\bapply\s+now\b|\beligible\s+for\b|\blimited\s+period\b|\bexclusive\b|\bhurry\b|\bget\s+up\s*to\b|\bupgrade\s+(?:now|your)\b|\bcashback\s+offer\b|\bvoucher\s+worth\b|\binstant\s+loan\b|\bloan\s+(?:of|upto|up\s+to)\b/i;
 
+/**
+ * Spam that imitates a credit alert to get a tap: instant-loan and card-limit offers, gaming /
+ * rummy "winnings", "can be credited" teasers. Dropped even though they say "credited", because
+ * real bank alerts never use these phrasings.
+ */
+const BAIT = new RegExp(
+  [
+    String.raw`\b(?:get|avail|claim|apply\s+for)\s+(?:an?\s+)?(?:instant\s+|personal\s+)?loan\b`,
+    String.raw`\bloan\s+(?:of|upto|up\s+to)\s+(?:rs\.?|inr|₹)`,
+    String.raw`\binstant(?:ly)?\s+(?:loan|credited|approved|disbursed)\b`,
+    String.raw`\b(?:can|could|will)\s+be\s+(?:successfully\s+)?(?:credited|transferred|disbursed)\b`,
+    String.raw`\blimit\s+(?:is|has\s+been)\s+(?:upgraded|increased|enhanced)\b`,
+    String.raw`\b(?:install|download|register|join)\s+(?:now|today|the\s+app)\b`,
+    String.raw`\bto\s+withdraw\b`,
+    String.raw`\b(?:rummy|teen\s*patti|fantasy|my11circle|dream11|poker|casino)\b`,
+    String.raw`\bwelcome\s+bonus\b|\bprize\s+pool\b|\bclaim\s+now\b`,
+    String.raw`\bcredited\s+to\s+your\s+(?:wallet|game|gaming)\b`,
+  ].join('|'),
+  'i',
+);
+
 /** Not a transaction even though it carries an amount. */
-const NON_TXN_NOTICE =
-  /\basba\b|\bis\s+blocked\s+in\s+your\b|\bhave\s+received\s+payment\b|\be-?voucher\b(?![\s\S]*\b(?:spent|debited|charged)\b)/i;
+const NON_TXN_NOTICE = /\basba\b|\bis\s+blocked\s+in\s+your\b|\bhave\s+received\s+payment\b/i;
 
-/** Something that looks like money: Rs/INR/₹ amount, or a balance phrase. */
+/** Reward / gift voucher delivery notice. Buying a voucher (any debit wording) is a real spend. */
+function isVoucherDeliveryNotice(body: string): boolean {
+  const lower = body.toLowerCase();
+  return (
+    /\be-?voucher\b/.test(lower) &&
+    /\b(?:received|reward|redemption)\b/.test(lower) &&
+    !/\b(?:spent|debited|charged)\b/.test(lower)
+  );
+}
+
+/**
+ * Something that looks like money: Rs/INR/₹ amount, a balance phrase, or a foreign amount
+ * ("EUR 50.00"). Foreign amounts pass the gate so the parsers can see them; the ledger is
+ * INR-only, so they end up `unparsed` and surface in Needs review instead of vanishing.
+ */
 const MONEY =
-  /(?:\brs\.?|\binr\b|₹|\bamt\b|\bamount\b)\s*:?\s*\.?\d|\d[\d,]*(?:\.\d{1,2})?\s*(?:rs|inr)\b|\b(?:avl|available|a\/c|account)\s*bal|\b(?:debited|credited|dr|cr)\.?\s+(?:by|with|for)?\s*\d/i;
+  /(?:\brs\.?|\binr\b|₹|\bamt\b|\bamount\b|\b(?:usd|eur|gbp|aed|sar|pkr|egp|chf|sgd|aud|cad|jpy|thb|myr|qar|kwd|omr|bdt|lkr|npr)\b)\s*:?\s*\.?\d|\d[\d,]*(?:\.\d{1,2})?\s*(?:rs|inr)\b|\b(?:avl|available|a\/c|account)\s*bal|\b(?:debited|credited|dr|cr)\.?\s+(?:by|with|for)?\s*\d/i;
 
-export function gateSms(sms: RawSms): GateResult {
+export interface GateOptions {
+  /**
+   * A bank parser claims this sender. DLT category `-G` (government / service-explicit) is then
+   * let through, since some banks (e.g. India Post, `-DOPBNK-G`) send real alerts under it.
+   * Promotional `-P` is always dropped.
+   */
+  senderClaimed?: boolean;
+}
+
+export function gateSms(sms: RawSms, opts: GateOptions = {}): GateResult {
   const cat = dltCategory(sms.address);
-  if (cat === 'P' || cat === 'G') {
+  if (cat === 'P' || (cat === 'G' && !opts.senderClaimed)) {
     return drop('promo_sender');
   }
 
@@ -73,10 +116,10 @@ export function gateSms(sms: RawSms): GateResult {
   if (FUTURE_DEBIT.test(body) || IGNORE_IF_PAID.test(body) || (DUE_REMINDER.test(body) && !completed)) {
     return drop('reminder');
   }
-  if (PROMO.test(body) && !completed) {
+  if (BAIT.test(body) || (PROMO.test(body) && !completed)) {
     return drop('promotional');
   }
-  if (!MONEY.test(body) || NON_TXN_NOTICE.test(body)) {
+  if (!MONEY.test(body) || NON_TXN_NOTICE.test(body) || isVoucherDeliveryNotice(body)) {
     return drop('non_financial');
   }
   return KEEP;

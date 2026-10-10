@@ -1,17 +1,13 @@
 const NETWORK_GLOBALS = ['fetch', 'XMLHttpRequest', 'WebSocket', 'EventSource'].map(name => ({
   name,
-  message: 'PennyTrace makes no network calls. Only src/llm/download.ts may touch the network.',
+  message: 'PennyTrace makes no network calls and the app has no INTERNET permission.',
 }));
-
-// Modules that can open network connections. Only src/llm/download.ts may import them.
-const NETWORK_CAPABLE_MODULES = [
-  { name: '@kesha-antonov/react-native-background-downloader', message: 'Downloads live only in src/llm/download.ts.' },
-  { name: '@dr.pogodin/react-native-fs', importNames: ['downloadFile', 'uploadFile'], message: 'Network transfer lives only in src/llm/download.ts.' },
-];
 
 module.exports = {
   root: true,
   extends: '@react-native',
+  // design/ holds imported browser-side reference files, not app code.
+  ignorePatterns: ['design/', 'android/', 'coverage/'],
   rules: {
     'no-restricted-globals': ['error', ...NETWORK_GLOBALS],
     'no-restricted-imports': [
@@ -22,12 +18,12 @@ module.exports = {
             name,
             message: 'No network / telemetry SDKs in PennyTrace.',
           })),
-          ...NETWORK_CAPABLE_MODULES,
         ],
       },
     ],
   },
   overrides: [
+    { files: ['jest.setup.js', '__mocks__/**', '**/*.test.ts', '**/*.test.tsx'], env: { jest: true } },
     {
       // The ledger engine must stay pure TypeScript so it runs in Node/Jest.
       files: ['src/core/**/*.ts'],
@@ -36,16 +32,24 @@ module.exports = {
           'error',
           {
             patterns: [
-              { group: ['react', 'react-native', 'react-native-*', '@react-native/*', '@op-engineering/*'], message: 'src/core must not depend on React Native.' },
-              { group: ['../db/*', '../ui/*', '../features/*', '../llm/*', '../native/*'], message: 'src/core must not depend on app layers.' },
+              {
+                group: ['react', 'react-native', 'react-native-*', '@react-native/*', '@op-engineering/*'],
+                message: 'src/core must not depend on React Native.',
+              },
+              {
+                group: ['../db/*', '../ui/*', '../features/*', '../native/*'],
+                message: 'src/core must not depend on app layers.',
+              },
             ],
           },
         ],
       },
     },
     {
-      files: ['src/llm/download.ts'],
-      rules: { 'no-restricted-globals': 'off', 'no-restricted-imports': 'off' },
+      // Node dev tools that run on the developer's machine, never in the app.
+      files: ['scripts/**/*.js'],
+      env: { node: true },
+      rules: { 'no-restricted-globals': 'off' },
     },
   ],
 };

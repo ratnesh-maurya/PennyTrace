@@ -8,7 +8,18 @@
  * and their bill payments are `liability`, so nothing is counted twice.
  * Money in = kind `in` only (refunds and own transfers are not income).
  */
-import type { Account, AccountId, CategoryId, DayKey, InsightRange, Insights, Ledger, Paise, Scope, Transaction } from '../types';
+import type {
+  Account,
+  AccountId,
+  CategoryId,
+  DayKey,
+  InsightRange,
+  Insights,
+  Ledger,
+  Paise,
+  Scope,
+  Transaction,
+} from '../types';
 import { addDays, dayKey, monthDayLabel, weekdayShort } from '../time';
 import { bucketOf } from './dailyClose';
 import { cmpStr, signed } from './util';
@@ -86,11 +97,15 @@ export function insights(ledger: Ledger, range: InsightRange, scope: Scope, anch
     avgPerUnit: Math.round(total / units),
     prevTotal,
     moneyIn,
-    byAccount: [...byAccountMap.entries()].map(([accountId, spent]) => ({ accountId, spent })).sort((a, b) => b.spent - a.spent || cmpStr(a.accountId, b.accountId)),
+    byAccount: [...byAccountMap.entries()]
+      .map(([accountId, spent]) => ({ accountId, spent }))
+      .sort((a, b) => b.spent - a.spent || cmpStr(a.accountId, b.accountId)),
     categories: [...catMap.entries()]
       .map(([categoryId, amount]) => ({ categoryId, amount, pct: total > 0 ? Math.round((amount / total) * 100) : 0 }))
       .sort((a, b) => b.amount - a.amount || cmpStr(a.categoryId, b.categoryId)),
-    topMerchants: [...merchants.values()].sort((a, b) => b.amount - a.amount || b.count - a.count || cmpStr(a.name, b.name)).slice(0, 5),
+    topMerchants: [...merchants.values()]
+      .sort((a, b) => b.amount - a.amount || b.count - a.count || cmpStr(a.name, b.name))
+      .slice(0, 5),
   };
   if (moneyIn > 0) {
     result.keptPct = Math.max(0, Math.min(100, Math.round(((moneyIn - total) / moneyIn) * 100)));

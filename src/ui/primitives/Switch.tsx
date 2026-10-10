@@ -37,7 +37,8 @@ export function Switch({ value, onValueChange, disabled, decorative, accessibili
           borderColor: value ? c.accent : c.ink3,
           opacity: disabled ? 0.45 : 1,
         },
-      ]}>
+      ]}
+    >
       <Animated.View
         style={[
           styles.thumb,
@@ -63,7 +64,8 @@ export function Switch({ value, onValueChange, disabled, decorative, accessibili
       accessibilityState={{ checked: value, disabled: !!disabled }}
       disabled={disabled}
       onPress={() => onValueChange?.(!value)}
-      hitSlop={8}>
+      hitSlop={8}
+    >
       {track}
     </Pressable>
   );

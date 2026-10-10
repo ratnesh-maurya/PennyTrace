@@ -5,13 +5,13 @@
     "body": "Dear Client, a transaction of PKR 300,000.00 has been completed on Acc. Number 0101xxx9901 to TANBITS on 09/12/25 through Online Banking.",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "PKR Online banking transfer with merchant name [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 30000000,
     "counterparty": "TANBITS",
     "accountLast4": "9901"
-  },
-  "expectedStatus": "parsed",
-  "note": "PKR Online banking transfer with merchant name [upstream TestStandardCharteredBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

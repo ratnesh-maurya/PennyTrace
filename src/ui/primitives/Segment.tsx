@@ -24,10 +24,8 @@ export function Segment<K extends string>({ options, value, onChange, testID }: 
             accessibilityRole="button"
             accessibilityState={{ selected: active }}
             onPress={() => onChange(o.key)}
-            style={[
-              styles.seg,
-              active ? { backgroundColor: c.surface, boxShadow: FIXED.segmentShadow } : null,
-            ]}>
+            style={[styles.seg, active ? { backgroundColor: c.surface, boxShadow: FIXED.segmentShadow } : null]}
+          >
             <Text variant="chip" color={active ? 'ink' : 'ink3'}>
               {o.label}
             </Text>

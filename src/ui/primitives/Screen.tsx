@@ -31,7 +31,8 @@ export function ScreenScroll({ children, padded = true, topInset = true, content
         },
         contentStyle,
       ]}
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+    >
       {children}
     </ScrollView>
   );

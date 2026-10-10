@@ -1,13 +1,4 @@
-import {
-  compareSmsIds,
-  importSinceMs,
-  maxSmsId,
-  mergeReparse,
-  needsRebuild,
-  planScan,
-  scanProgress,
-  toRawSms,
-} from '../syncLogic';
+import { compareSmsIds, importSinceMs, maxSmsId, needsRebuild, planScan, scanProgress, toRawSms } from '../syncLogic';
 import { pendingMigrations } from '../../db/migrate';
 import bundle from '../../db/migrations/migrations';
 
@@ -53,16 +44,6 @@ describe('needsRebuild', () => {
     ['first build', { stored: {} }],
   ])('rebuilds on %s', (_label, patch) => {
     expect(needsRebuild({ ...base, ...patch })).toBe(true);
-  });
-});
-
-describe('mergeReparse', () => {
-  it('keeps an LLM parse when rule parsers still fail', () => {
-    expect(mergeReparse({ parseStatus: 'llm' }, { fingerprint: 'f', parseStatus: 'unparsed' })).toBeUndefined();
-  });
-  it('lets a rule parser supersede an LLM parse', () => {
-    const next = { fingerprint: 'f', parseStatus: 'parsed' as const };
-    expect(mergeReparse({ parseStatus: 'llm' }, next)).toBe(next);
   });
 });
 

@@ -41,7 +41,13 @@ export class JkBankParser extends BaseIndianBankParser {
     }
 
     // DLT patterns (AD-JKBANK-S, etc.)
-    const dltPatterns = [/^[A-Z]{2}-JKBANK.*$/, /^[A-Z]{2}-JKB.*$/, /^[A-Z]{2}-JKBNK.*$/, /^JKBANK-[A-Z]+$/, /^JKB-[A-Z]+$/];
+    const dltPatterns = [
+      /^[A-Z]{2}-JKBANK.*$/,
+      /^[A-Z]{2}-JKB.*$/,
+      /^[A-Z]{2}-JKBNK.*$/,
+      /^JKBANK-[A-Z]+$/,
+      /^JKB-[A-Z]+$/,
+    ];
 
     return dltPatterns.some(p => matches(p, upperSender));
   }
@@ -391,7 +397,16 @@ export class JkBankParser extends BaseIndianBankParser {
     // But make sure the transaction keywords are present
     if (lowerMessage.includes('if not done by you') || lowerMessage.includes('report immediately')) {
       // These are usually part of transaction messages, so check for transaction keywords
-      const transactionKeywords = ['debited', 'credited', 'withdrawn', 'deposited', 'spent', 'received', 'transferred', 'paid'];
+      const transactionKeywords = [
+        'debited',
+        'credited',
+        'withdrawn',
+        'deposited',
+        'spent',
+        'received',
+        'transferred',
+        'paid',
+      ];
       return transactionKeywords.some(k => lowerMessage.includes(k));
     }
 

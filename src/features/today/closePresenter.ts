@@ -44,7 +44,8 @@ export function describeMoves(close: DailyClose, accounts: readonly Account[], t
     return 'No transfers or card payments on this day.';
   }
   const byId = new Map<AccountId, Account>(accounts.map(a => [a.id, a]));
-  const inScope = (id?: AccountId) => !!id && (close.scope === 'all' ? !!byId.get(id)?.includeInTotal : id === close.scope);
+  const inScope = (id?: AccountId) =>
+    !!id && (close.scope === 'all' ? !!byId.get(id)?.includeInTotal : id === close.scope);
   const name = (id?: AccountId) => {
     const a = id ? byId.get(id) : undefined;
     return a ? (a.ownership === 'joint' ? a.displayName : bankShort(a.bank)) : 'another account';

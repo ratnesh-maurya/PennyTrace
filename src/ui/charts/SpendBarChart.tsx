@@ -59,7 +59,8 @@ export const SpendBarChart = memo(function SpendBarChart({
               accessibilityLabel={`${b.label} ${formatBarValue(b.value)}`}
               accessibilityState={{ selected }}
               onPress={onSelect ? () => onSelect(i) : undefined}
-              style={styles.slot}>
+              style={styles.slot}
+            >
               {selected ? (
                 <HeroSurface radius={BAR_RADIUS} style={{ height: heights[i] }} />
               ) : (

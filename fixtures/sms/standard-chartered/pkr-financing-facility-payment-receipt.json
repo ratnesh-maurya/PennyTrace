@@ -5,13 +5,13 @@
     "body": "Dear Client , Thank you. Your payment of PKR 54,923.13 against availed financing facility has been received. For assistance , please call 111 002 002.",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "PKR Financing facility payment receipt [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 5492313,
     "direction": "debit",
     "counterparty": "Financing Payment"
-  },
-  "expectedStatus": "parsed",
-  "note": "PKR Financing facility payment receipt [upstream TestStandardCharteredBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

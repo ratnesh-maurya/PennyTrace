@@ -2,14 +2,21 @@
  * Daily close: opening, received, spent, moved, closing — per account and per scope.
  *
  * Buckets (each balance-moving transaction lands in exactly one, so
- * `closing = opening + received − spent + movedNet` always holds):
+ * `closing = opening + received − (spent − spentOnCard) + movedNet` always holds):
  * - received: kind `in` (real income).
  * - spent:    kinds `spend` + `fee` (real consumption).
- * - movedNet: kinds `xfer`, `pending_xfer`, `liability`, `cash`, `refund`, plus
+ * - movedNet: kinds `xfer`, `pending_xfer`, `liability`, `cash`, `invest`, `refund`, plus
  *   a spend that a reversal credit undid. DECISION: a refund is money back, not
  *   income, and we keep "Spent" as what was actually bought, so the refund is a
  *   signed movement (+) instead of reducing Spent or inflating Received.
  * Failed and self-reversed alerts move nothing.
+ *
+ * Credit cards: in scope `all` (cash accounts only) a card purchase is still real
+ * spending, so it counts in `spent` and `byCategory`, and in `spentOnCard`, which
+ * offsets it because it did not reduce cash. Card-side bill credits and refunds are
+ * ignored there (the bank-side debit already moved the cash). In a single card
+ * account's own scope `spentOnCard` is 0: the card's balance (negative = dues) is
+ * the closing figure, so its spends move it directly.
  *
  * Opening = previous day's closing as the bank reported it when the bank printed
  * a balance that day, else as calculated. See balances.ts for anchoring.
@@ -20,7 +27,18 @@
  * Scope `all` = accounts with includeInTotal that are not credit cards; matched
  * transfers between two of them net to 0 in movedNet but still show in movedGross.
  */
-import type { Account, CategoryId, DailyClose, DayKey, Ledger, Paise, Provenance, Scope, Transaction, TxnId } from '../types';
+import type {
+  Account,
+  CategoryId,
+  DailyClose,
+  DayKey,
+  Ledger,
+  Paise,
+  Provenance,
+  Scope,
+  Transaction,
+  TxnId,
+} from '../types';
 import { addDays, dayKey, startOfDay } from '../time';
 import type { Timeline } from './balances';
 import { balanceAt, cmpKey, keyBefore, movesMoney, relBefore, timelines } from './balances';
@@ -66,14 +84,20 @@ function accountDay(tl: Timeline, day: DayKey): AccountDay {
 
   const inDay = tl.snapshots.filter(s => cmpKey(s.key, start) >= 0 && cmpKey(s.key, end) < 0);
   const last = inDay[inDay.length - 1];
-  const reported = last ? { closing: last.snap.reported + relBefore(tl, end) - relBefore(tl, last.key), at: last.snap.at } : undefined;
+  const reported = last
+    ? { closing: last.snap.reported + relBefore(tl, end) - relBefore(tl, last.key), at: last.snap.at }
+    : undefined;
 
   const openingProvenance: Provenance = none
     ? 'estimated'
     : anchor.kind === 'forward' && cmpKey(anchor.snapshot.key, prevStart) >= 0
-      ? 'reported'
-      : 'calculated';
-  const closingProvenance: Provenance = none ? 'estimated' : reported && reported.closing === closing ? 'reported' : 'calculated';
+    ? 'reported'
+    : 'calculated';
+  const closingProvenance: Provenance = none
+    ? 'estimated'
+    : reported && reported.closing === closing
+    ? 'reported'
+    : 'calculated';
   return { opening, closing, openingProvenance, closingProvenance, reported };
 }
 
@@ -108,16 +132,30 @@ export function dailyClose(ledger: Ledger, day: DayKey, scope: Scope): DailyClos
     }
   }
 
-  const dayTxns = ledger.transactions.filter(t => inScope.has(t.accountId) && dayKey(t.occurredAt) === day);
+  // Scope `all` also reads card accounts' purchases (not their balances).
+  const cardIds = new Set(
+    scope === 'all' ? ledger.accounts.filter(a => a.includeInTotal && a.type === 'credit_card').map(a => a.id) : [],
+  );
+  const dayTxns = ledger.transactions.filter(
+    t => (inScope.has(t.accountId) || cardIds.has(t.accountId)) && dayKey(t.occurredAt) === day,
+  );
   const byId = new Map(ledger.transactions.map(t => [t.id, t]));
   let received = 0;
   let spent = 0;
+  let spentOnCard = 0;
   let movedNet = 0;
   let movedGross = 0;
   const cats = new Map<CategoryId, { amount: Paise; count: number }>();
   for (const t of dayTxns) {
     const b = bucketOf(t);
     const delta = signed(t.amount, t.direction);
+    const onCard = cardIds.has(t.accountId);
+    if (onCard && b !== 'spent') {
+      continue;
+    }
+    if (onCard) {
+      spentOnCard -= delta;
+    }
     if (b === 'received') {
       received += delta;
     } else if (b === 'spent') {
@@ -164,6 +202,7 @@ export function dailyClose(ledger: Ledger, day: DayKey, scope: Scope): DailyClos
     opening,
     received,
     spent,
+    spentOnCard,
     movedNet,
     movedGross,
     closing,
@@ -179,7 +218,12 @@ export function dailyClose(ledger: Ledger, day: DayKey, scope: Scope): DailyClos
       .map((t): TxnId => t.id),
   };
   if (accounts.length > 0 && reportedCount === accounts.length) {
-    result.reported = { closing: reportedSum, at: reportedAt, accountsMatched: reportedCount, variance: reportedSum - closing };
+    result.reported = {
+      closing: reportedSum,
+      at: reportedAt,
+      accountsMatched: reportedCount,
+      variance: reportedSum - closing,
+    };
   }
   return result;
 }

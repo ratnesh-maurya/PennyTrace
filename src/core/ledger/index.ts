@@ -7,3 +7,5 @@ export { reviewQueue, searchTransactions } from './queries';
 export { ingestWith } from './ingest';
 export type { ParseResult } from './ingest';
 export { SEED_RULES, matchSeed } from './seedRules';
+export { withClosing } from './closings';
+export { cardSpendOn, cardStatuses, type CardSpend, type CardStatus } from './cards';

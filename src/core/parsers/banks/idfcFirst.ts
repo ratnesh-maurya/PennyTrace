@@ -29,7 +29,9 @@ export class IdfcFirstBankParser extends BaseIndianBankParser {
 
   canHandle(sender: string): boolean {
     const normalizedSender = sender.toUpperCase();
-    return normalizedSender.includes('IDFCBK') || normalizedSender.includes('IDFCFB') || normalizedSender.includes('IDFC');
+    return (
+      normalizedSender.includes('IDFCBK') || normalizedSender.includes('IDFCFB') || normalizedSender.includes('IDFC')
+    );
   }
 
   parse(smsBody: string, sender: string, timestamp: number): BankTxn | null {

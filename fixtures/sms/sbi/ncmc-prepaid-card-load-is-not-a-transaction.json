@@ -1,0 +1,12 @@
+{
+  "sms": {
+    "id": "sbi-pt-ncmc-prepaid",
+    "address": "AD-SBIBNK",
+    "body": "Your NCMC Prepaid Card 123456XXXXXX5440 is loaded with Rs. 200.00 successfully on 05/01/2025 17:23:27. Available balance is Rs. 228.00. -SBI",
+    "date": 1768458600000
+  },
+  "expected": null,
+  "expectedStatus": "not_parsed",
+  "note": "PennyTrace: a transit-card top-up; the paying bank debit is the spend",
+  "source": "pennytrace"
+}

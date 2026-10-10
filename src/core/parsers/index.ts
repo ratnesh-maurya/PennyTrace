@@ -2,45 +2,34 @@
 //
 // Parse step of the pipeline (plan.md §5):
 //   gate → bank parser(s) by sender (content-aware, upstream order)
-//        → balance-only / mandate-notice checks → generic fallback → unparsed.
-// LLM fallback is NOT done here; callers queue 'unparsed' messages for it.
+//        → balance-only / mandate-notice checks → unparsed.
 
 import { gateSms, type GateReason } from '../sms/filter';
 import type { ParsedEvent, ParseStatus, RawSms } from '../types';
 import { BaseIndianBankParser } from './engine/BaseIndianBankParser';
 import { normalizeNfkc } from './engine/regex';
 import { balanceEvent, bankTxnToEvent, BANK_PARSER_CONFIDENCE } from './engine/toEvent';
-import { parseGeneric } from './generic';
 import { BANK_PARSERS, parsersForSender } from './registry';
 
 /** Bump when output semantics change so stored events are reprocessed. */
-export const PARSER_SCHEMA_VERSION = 1;
+export const PARSER_SCHEMA_VERSION = 3;
 
 export type IgnoreReason = GateReason | 'mandate_notice';
 
 export interface ParseOutcome {
-  /** 'parsed' | 'ignored' | 'unparsed' (never 'llm'). */
+  /** 'parsed' | 'ignored' | 'unparsed'. */
   status: ParseStatus;
   parsed?: ParsedEvent;
   /** Why the message was ignored (diagnostics only). */
   reason?: IgnoreReason;
 }
 
-/** Sender id used as `bank` when no bank parser recognised the sender. */
-function senderBankId(address: string): string {
-  const upper = address.trim().toUpperCase();
-  const parts = upper.split('-');
-  const core = parts.length >= 2 && /^[A-Z0-9]{2}$/.test(parts[0]) ? parts[1] : upper;
-  return core.toLowerCase().replace(/[^a-z0-9]+/g, '') || 'unknown';
-}
-
 export function parseSms(sms: RawSms): ParseOutcome {
-  const gate = gateSms(sms);
+  const candidates = parsersForSender(sms.address);
+  const gate = gateSms(sms, { senderClaimed: candidates.length > 0 });
   if (!gate.keep) {
     return { status: 'ignored', reason: gate.reason };
   }
-
-  const candidates = parsersForSender(sms.address);
   // Some banks (SBI Card) print Unicode "math" letters; parsers expect ASCII.
   const body = normalizeNfkc(sms.body);
   const input: RawSms = body === sms.body ? sms : { ...sms, body };
@@ -63,7 +52,12 @@ export function parseSms(sms: RawSms): ParseOutcome {
     }
     const bal = parser.parseBalanceUpdate(input.body);
     if (bal) {
-      const parsed = balanceEvent(input, { bank: parser.id, confidence: BANK_PARSER_CONFIDENCE }, bal.accountLast4, bal.balance);
+      const parsed = balanceEvent(
+        input,
+        { bank: parser.id, confidence: BANK_PARSER_CONFIDENCE },
+        bal.accountLast4,
+        bal.balance,
+      );
       if (parsed) {
         return { status: 'parsed', parsed };
       }
@@ -73,10 +67,10 @@ export function parseSms(sms: RawSms): ParseOutcome {
     }
   }
 
-  const generic = parseGeneric(input, candidates[0]?.id ?? senderBankId(sms.address));
-  if (generic) {
-    return { status: 'parsed', parsed: generic };
-  }
+  // Only bank parsers count. A sender no parser claims (insurers, billers, wallets, spam) and a
+  // message a bank parser rejected both stay `unparsed` and show under Needs review: they are
+  // never guessed into the ledger. (A generic fallback made phantom "accounts" out of LIC, EPFO,
+  // NPS, Jio and loan-app SMS on a real inbox.)
   return { status: 'unparsed' };
 }
 

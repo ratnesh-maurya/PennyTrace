@@ -27,7 +27,9 @@ export class CityUnionBankParser extends BaseIndianBankParser {
 
   canHandle(sender: string): boolean {
     const normalizedSender = sender.toUpperCase();
-    return normalizedSender.includes('CUBANK') || normalizedSender.includes('CUBLTD') || normalizedSender.includes('CUB');
+    return (
+      normalizedSender.includes('CUBANK') || normalizedSender.includes('CUBLTD') || normalizedSender.includes('CUB')
+    );
   }
 
   protected extractAmount(message: string): Paise | null {

@@ -46,3 +46,16 @@ export const useCorrectionStore = create<CorrectionState>()(set => ({
   open: txnId => set({ txnId }),
   close: () => set({ txnId: undefined }),
 }));
+
+/** Global "set closing balance" sheet: a day, and the account if already chosen. */
+interface ClosingSheetState {
+  target?: { day: DayKey; accountId?: string };
+  open: (day: DayKey, accountId?: string) => void;
+  close: () => void;
+}
+
+export const useClosingSheetStore = create<ClosingSheetState>()(set => ({
+  target: undefined,
+  open: (day, accountId) => set({ target: { day, accountId } }),
+  close: () => set({ target: undefined }),
+}));

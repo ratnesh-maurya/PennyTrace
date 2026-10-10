@@ -31,7 +31,9 @@ const OPERATIONAL_PHRASES = [
 export const FinancialMessageSafety = {
   hasExplicitFailure(message: string, additionalPhrases: readonly string[] = []): boolean {
     const lower = message.toLowerCase();
-    return GENERIC_FAILURES.some(p => lower.includes(p)) || additionalPhrases.some(p => lower.includes(p.toLowerCase()));
+    return (
+      GENERIC_FAILURES.some(p => lower.includes(p)) || additionalPhrases.some(p => lower.includes(p.toLowerCase()))
+    );
   },
   isSecurityCode(message: string): boolean {
     const lower = message.toLowerCase();

@@ -2,21 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--
-      Permission allowlist (enforced on the release APK by scripts/audit-permissions.js):
-      INTERNET (model download only), READ_SMS, RECEIVE_SMS, POST_NOTIFICATIONS,
-      RECEIVE_BOOT_COMPLETED, WAKE_LOCK, FOREGROUND_SERVICE, FOREGROUND_SERVICE_DATA_SYNC,
-      and androidx.core's DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION.
-      Also kept for the model downloader (@kesha-antonov/react-native-background-downloader):
-      ACCESS_NETWORK_STATE (Wi-Fi-only check / job network constraint; grants no network access)
-      and RUN_USER_INITIATED_JOBS (Android 14+ user-initiated data-transfer job).
+      PennyTrace requests NO network permission: no INTERNET, no ACCESS_NETWORK_STATE. It cannot open a
+      connection. (Debug builds add INTERNET in src/debug/AndroidManifest.xml, only so Metro can reach
+      the dev server.) Only SMS access and start-up are requested here; scripts/audit-permissions.js
+      checks the release APK against an allowlist and fails on any network permission.
     -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- Merged in by libraries; not allowed. -->
+    <!-- Never wanted, even if a library asks: network state, and anything unrelated to SMS. -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" tools:node="remove" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
@@ -24,7 +22,6 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" tools:node="remove" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" tools:node="remove" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove" />
     <uses-permission android:name="android.permission.VIBRATE" tools:node="remove" />
 
@@ -39,7 +36,6 @@
       android:allowBackup="false"
       android:fullBackupContent="false"
       android:dataExtractionRules="@xml/data_extraction_rules"
-      android:networkSecurityConfig="@xml/network_security_config"
       android:theme="@style/AppTheme"
       android:supportsRtl="true"
       tools:replace="android:allowBackup"

@@ -1,7 +1,7 @@
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { TxnId } from '../../core/types';
+import type { AccountId, TxnId } from '../../core/types';
 
 export type TabParamList = {
   Today: undefined;
@@ -14,9 +14,8 @@ export type TabParamList = {
 export type RootStackParamList = {
   Tabs: NavigatorScreenParams<TabParamList> | undefined;
   TransactionDetail: { txnId: TxnId };
+  AccountDetail: { accountId: AccountId };
   Onboarding: undefined;
-  AIModel: undefined;
-  Chat: undefined;
 };
 
 export type RootScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;

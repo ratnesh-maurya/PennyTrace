@@ -18,7 +18,10 @@ export type AmountTone = 'pos' | 'xfer' | 'ink';
  * in/refund `+₹4,000` (pos) · xfer `₹5,000` (xfer, unsigned) · pending_xfer `−₹2,000` (xfer)
  * · everything else `−₹400` (ink). Paise shown only when non-zero.
  */
-export function formatTxnAmount(t: Pick<Transaction, 'kind' | 'amount' | 'direction'>): { text: string; tone: AmountTone } {
+export function formatTxnAmount(t: Pick<Transaction, 'kind' | 'amount' | 'direction'>): {
+  text: string;
+  tone: AmountTone;
+} {
   const abs = formatINR(t.amount, { paise: true });
   switch (t.kind) {
     case 'in':
@@ -49,6 +52,8 @@ export function txnStatusBadge(t: Transaction): { label: string; tone: BadgeTone
       return { label: 'Not spending', tone: 'neutral' };
     case 'cash':
       return { label: 'To cash', tone: 'neutral' };
+    case 'invest':
+      return { label: 'Invested', tone: 'neutral' };
     case 'refund':
       return { label: 'Refund', tone: 'pos' };
     default:
@@ -61,6 +66,7 @@ const KIND_ICON: Partial<Record<Transaction['kind'], IconName>> = {
   pending_xfer: 'schedule_send',
   liability: 'credit_card',
   cash: 'local_atm',
+  invest: 'trending_up',
 };
 
 export type TxnTileSpec =

@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hdfc-pt-0002",
+    "address": "VM-HDFCBK-S",
+    "body": "Rs.2000 withdrawn from HDFC Bank Card x1234 At +18 KORAMANGALA 5TH BLOCK On 2026-10-08:17:30:00 Avl bal INR 1,03,231.00",
+    "date": 1791462000000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "accountLast4": "1234",
+    "hints": { "isAtmWithdrawal": true },
+    "balance": 10323100
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: a card 'withdrawn' alert is ATM cash even without the word ATM, and is not credit-card evidence",
+  "source": "pennytrace"
+}

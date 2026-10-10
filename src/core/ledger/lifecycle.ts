@@ -19,7 +19,7 @@ import { cmpStr, sameCounterparty, sharesStrongRef } from './util';
 export const REVERSAL_WINDOW_MS = 30 * MS_DAY;
 export const REFUND_WINDOW_MS = 60 * MS_DAY;
 
-const REVERSIBLE = new Set(['spend', 'fee', 'pending_xfer', 'cash', 'liability']);
+const REVERSIBLE = new Set(['spend', 'fee', 'pending_xfer', 'cash', 'liability', 'invest']);
 
 export function linkReversalsAndRefunds(drafts: Draft[], links: TransferLink[]): TransferLink[] {
   // Reversals: one-to-one.
@@ -43,7 +43,9 @@ export function linkReversalsAndRefunds(drafts: Draft[], links: TransferLink[]):
       cands.push({ r, d, score: [sharesStrongRef(r.refs, d.refs) ? 0 : 1, dt] });
     }
   }
-  cands.sort((a, b) => a.score[0] - b.score[0] || a.score[1] - b.score[1] || cmpStr(a.r.id, b.r.id) || cmpStr(a.d.id, b.d.id));
+  cands.sort(
+    (a, b) => a.score[0] - b.score[0] || a.score[1] - b.score[1] || cmpStr(a.r.id, b.r.id) || cmpStr(a.d.id, b.d.id),
+  );
   const used = new Set<string>();
   let out = links;
   for (const { r, d } of cands) {
@@ -70,7 +72,14 @@ export function linkReversalsAndRefunds(drafts: Draft[], links: TransferLink[]):
     let bestScore: number[] | undefined;
     for (const d of drafts) {
       const dt = r.occurredAt - d.occurredAt;
-      if (d.direction !== 'debit' || d.kind !== 'spend' || d.status === 'failed' || d.amount < r.amount || dt < 0 || dt > REFUND_WINDOW_MS) {
+      if (
+        d.direction !== 'debit' ||
+        d.kind !== 'spend' ||
+        d.status === 'failed' ||
+        d.amount < r.amount ||
+        dt < 0 ||
+        dt > REFUND_WINDOW_MS
+      ) {
         continue;
       }
       const byName = sameCounterparty(r.counterparty, d.counterparty) || (!!r.vpa && r.vpa === d.vpa);
@@ -79,7 +88,12 @@ export function linkReversalsAndRefunds(drafts: Draft[], links: TransferLink[]):
         continue;
       }
       const score = [d.accountId === r.accountId ? 0 : 1, dt];
-      if (!bestScore || score[0] - bestScore[0] < 0 || (score[0] === bestScore[0] && (score[1] < bestScore[1] || (score[1] === bestScore[1] && cmpStr(d.id, best!.id) < 0)))) {
+      if (
+        !bestScore ||
+        score[0] - bestScore[0] < 0 ||
+        (score[0] === bestScore[0] &&
+          (score[1] < bestScore[1] || (score[1] === bestScore[1] && cmpStr(d.id, best!.id) < 0)))
+      ) {
         best = d;
         bestScore = score;
       }

@@ -76,9 +76,31 @@ export const GPAY = 'AD-GPAYBK-S';
 
 export const hdfc = (at: string, p: P, o?: SrcOpts) => src(HDFC, at, { bank: 'hdfc', accountLast4: '1234', ...p }, o);
 export const sbi = (at: string, p: P, o?: SrcOpts) =>
-  src(SBI, at, { bank: 'sbi', parserId: p.direction === 'credit' ? 'sbi-upi-credit' : 'sbi-upi-debit', accountLast4: '8821', ...p }, o);
+  src(
+    SBI,
+    at,
+    {
+      bank: 'sbi',
+      parserId: p.direction === 'credit' ? 'sbi-upi-credit' : 'sbi-upi-debit',
+      accountLast4: '8821',
+      ...p,
+    },
+    o,
+  );
 export const icici = (at: string, p: P, o?: SrcOpts) =>
-  src(ICICI, at, { bank: 'icici', parserId: 'icici-card-spend', instrument: 'card', accountLast4: '4471', ...p }, o);
+  src(
+    ICICI,
+    at,
+    {
+      bank: 'icici',
+      parserId: 'icici-card-spend',
+      instrument: 'card',
+      accountLast4: '4471',
+      ...p,
+      hints: { isCreditCard: true, ...p.hints },
+    },
+    o,
+  );
 
 export function input(sources: SourceEvent[], extra: Partial<LedgerInput> = {}): LedgerInput {
   return { sources, accountEdits: [], rules: [], overrides: [], selfIdentities: ['Ratnesh Maurya'], ...extra };
@@ -90,7 +112,14 @@ export function txnsOf(ledger: Ledger, accountId?: string) {
 
 /** The numbers a scenario asserts. */
 export function nums(c: DailyClose) {
-  return { opening: c.opening, received: c.received, spent: c.spent, movedNet: c.movedNet, movedGross: c.movedGross, closing: c.closing };
+  return {
+    opening: c.opening,
+    received: c.received,
+    spent: c.spent,
+    movedNet: c.movedNet,
+    movedGross: c.movedGross,
+    closing: c.closing,
+  };
 }
 
 /** Invariants every daily close must satisfy, checked over a span of days. */
@@ -100,7 +129,7 @@ export function expectCloseInvariants(ledger: Ledger, from: string, days: number
     for (let i = 0; i < days; i++) {
       const day = addDays(from, i);
       const c = dailyClose(ledger, day, scope);
-      expect(c.closing).toBe(c.opening + c.received - c.spent + c.movedNet);
+      expect(c.closing).toBe(c.opening + c.received - (c.spent - c.spentOnCard) + c.movedNet);
       expect(c.byCategory.reduce((s, x) => s + x.amount, 0)).toBe(c.spent);
       if (scope !== 'all') {
         const next = dailyClose(ledger, addDays(day, 1), scope);

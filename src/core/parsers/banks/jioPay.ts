@@ -53,15 +53,10 @@ export class JioPayParser extends BankParser {
     const lowerMessage = message.toLowerCase();
 
     // Jio Recharge
-    if (
-      lowerMessage.includes('recharge successful') &&
-      lowerMessage.includes('jio number')
-    ) {
+    if (lowerMessage.includes('recharge successful') && lowerMessage.includes('jio number')) {
       // Extract the phone number for reference
       const number = gv(find(/Jio\s+Number\s*:\s*(\d{10})/i, message), 1);
-      return number !== ''
-        ? `Jio Recharge - ${number.slice(0, 4)}****`
-        : 'Jio Recharge';
+      return number !== '' ? `Jio Recharge - ${number.slice(0, 4)}****` : 'Jio Recharge';
     }
 
     // Bill payment patterns
@@ -106,10 +101,7 @@ export class JioPayParser extends BankParser {
   protected extractTransactionType(message: string): TransactionType {
     const lowerMessage = message.toLowerCase();
     // Bill payment confirmations ("Payment of Rs... has been received") are expenses
-    if (
-      lowerMessage.includes('payment of') &&
-      lowerMessage.includes('has been received')
-    ) {
+    if (lowerMessage.includes('payment of') && lowerMessage.includes('has been received')) {
       return TransactionType.EXPENSE;
     }
     // All JioPay wallet transactions are marked as CREDIT
@@ -133,9 +125,6 @@ export class JioPayParser extends BankParser {
 
     // JioPay messages don't use standard transaction keywords
     // but "recharge successful" indicates a transaction
-    return (
-      lowerMessage.includes('recharge successful') ||
-      super.isTransactionMessage(message)
-    );
+    return lowerMessage.includes('recharge successful') || super.isTransactionMessage(message);
   }
 }

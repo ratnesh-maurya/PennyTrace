@@ -5,7 +5,10 @@
     "body": "Dear Client, PKR 1,958.98 have been paid at FOOD PANDA KARACHI PAK on 23-03-26 using Credit Card no 0141. Avail Limit PKR5174.79. SCBPL",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "PKR Credit card purchase [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 195898,
     "direction": "debit",
@@ -13,8 +16,5 @@
     "counterparty": "FOOD PANDA KARACHI PAK",
     "balance": 517479,
     "accountLast4": "0141"
-  },
-  "expectedStatus": "parsed",
-  "note": "PKR Credit card purchase [upstream TestStandardCharteredBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

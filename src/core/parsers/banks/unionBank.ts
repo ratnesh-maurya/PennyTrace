@@ -46,7 +46,16 @@ export class UnionBankParser extends BaseIndianBankParser {
 
     // Union Bank includes "Never Share OTP/PIN/CVV" warning in transaction messages
     // Check if it's actually a transaction first before rejecting due to OTP keyword
-    const transactionKeywords = ['debited', 'credited', 'withdrawn', 'deposited', 'spent', 'received', 'transferred', 'paid'];
+    const transactionKeywords = [
+      'debited',
+      'credited',
+      'withdrawn',
+      'deposited',
+      'spent',
+      'received',
+      'transferred',
+      'paid',
+    ];
 
     if (transactionKeywords.some(it => lowerMessage.includes(it))) {
       // It's a transaction message, even if it contains OTP in warning text
@@ -131,7 +140,12 @@ export class UnionBankParser extends BaseIndianBankParser {
 
   protected extractReference(message: string): string | null {
     // Union Bank format: "ref no 123456789000"
-    const refPatterns = [/ref\s+no\s+([\w]+)/i, /ref[:#]?\s*([\w]+)/i, /reference[:#]?\s*([\w]+)/i, /txn[:#]?\s*([\w]+)/i];
+    const refPatterns = [
+      /ref\s+no\s+([\w]+)/i,
+      /ref[:#]?\s*([\w]+)/i,
+      /reference[:#]?\s*([\w]+)/i,
+      /txn[:#]?\s*([\w]+)/i,
+    ];
 
     for (const pattern of refPatterns) {
       const m = find(pattern, message);
@@ -150,7 +164,12 @@ export class UnionBankParser extends BaseIndianBankParser {
     }
 
     // Union Bank format: "A/c *1234" or "A/C X1234"
-    const accountPatterns = [/A\/[Cc]\s*[*X](\d{4})/i, /Account\s*[*X](\d{4})/i, /Acc\s*[*X](\d{4})/i, /A\/[Cc]\s+(\d{4})/i];
+    const accountPatterns = [
+      /A\/[Cc]\s*[*X](\d{4})/i,
+      /Account\s*[*X](\d{4})/i,
+      /Acc\s*[*X](\d{4})/i,
+      /A\/[Cc]\s+(\d{4})/i,
+    ];
 
     for (const pattern of accountPatterns) {
       const m = find(pattern, message);

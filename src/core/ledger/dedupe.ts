@@ -33,20 +33,22 @@ export interface SourceGroup {
 }
 
 /**
- * Usable sources in canonical order: parsed (or LLM-parsed) only, identical
+ * Usable sources in canonical order: parsed only, identical
  * fingerprints collapsed to the earliest-received copy.
  */
 export function canonicalSources(sources: readonly SourceEvent[]): ParsedSource[] {
   const byFp = new Map<string, SourceEvent>();
   for (const s of sources) {
     const prev = byFp.get(s.fingerprint);
-    if (!prev || cmpNum(s.receivedAt, prev.receivedAt) < 0 || (s.receivedAt === prev.receivedAt && cmpStr(s.id, prev.id) < 0)) {
+    if (
+      !prev ||
+      cmpNum(s.receivedAt, prev.receivedAt) < 0 ||
+      (s.receivedAt === prev.receivedAt && cmpStr(s.id, prev.id) < 0)
+    ) {
       byFp.set(s.fingerprint, s);
     }
   }
-  return [...byFp.values()]
-    .filter((s): s is ParsedSource => !!s.parsed && (s.parseStatus === 'parsed' || s.parseStatus === 'llm'))
-    .sort(cmpSource);
+  return [...byFp.values()].filter((s): s is ParsedSource => !!s.parsed && s.parseStatus === 'parsed').sort(cmpSource);
 }
 
 function accountsCompatible(a: ParsedEvent, b: ParsedEvent): boolean {
@@ -71,7 +73,6 @@ function primaryRank(s: ParsedSource): number[] {
     p.balance !== undefined ? 0 : 1,
     isRelay(s) ? 1 : 0,
     p.accountLast4 ? 0 : 1,
-    s.parseStatus === 'llm' ? 1 : 0,
     p.status === 'success' ? 0 : 1,
     -p.confidence,
   ];
@@ -233,7 +234,10 @@ export function groupSources(sources: readonly ParsedSource[]): SourceGroup[] {
   }
 
   return result.map(({ idx, reason }) => {
-    const group = idx.slice().sort(cmpNum).map(i => sources[i]);
+    const group = idx
+      .slice()
+      .sort(cmpNum)
+      .map(i => sources[i]);
     const primary = pickPrimary(group);
     let mergeReason: string | undefined;
     if (group.length > 1) {
@@ -245,7 +249,9 @@ export function groupSources(sources: readonly ParsedSource[]): SourceGroup[] {
         const senders = [...new Set(group.map(g => normalizeSender(g.sender)))];
         const span = Math.round((group[group.length - 1].parsed.occurredAt - group[0].parsed.occurredAt) / 60_000);
         const from = senders.length > 1 ? `from ${senders.join(' and ')}` : 'from different templates';
-        mergeReason = `Same ${formatINR(primary.parsed.amount, { paise: true })} ${primary.parsed.direction} ${from}, ${span} min apart`;
+        mergeReason = `Same ${formatINR(primary.parsed.amount, { paise: true })} ${
+          primary.parsed.direction
+        } ${from}, ${span} min apart`;
       }
       mergeReason += lifecycleSuffix(group);
     }

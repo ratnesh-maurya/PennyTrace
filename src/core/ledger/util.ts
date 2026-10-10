@@ -60,19 +60,49 @@ export function cmpSource(a: SourceEvent, b: SourceEvent): number {
 
 const SMALL_WORDS = new Set(['of', 'and', 'the', 'for', 'to', 'by', 'at', 'on', 'in']);
 /** Short words that are not acronyms, so they get Title Case. */
-const SHORT_WORDS = new Set(['pvt', 'ltd', 'llp', 'inc', 'co', 'pay', 'net', 'mr', 'mrs', 'ms', 'dr', 'new', 'one', 'big', 'tea', 'bar', 'car', 'gym', 'spa']);
+const SHORT_WORDS = new Set([
+  'pvt',
+  'ltd',
+  'llp',
+  'inc',
+  'co',
+  'pay',
+  'net',
+  'mr',
+  'mrs',
+  'ms',
+  'dr',
+  'new',
+  'one',
+  'big',
+  'tea',
+  'bar',
+  'car',
+  'gym',
+  'spa',
+  'sri',
+  'shri',
+  'smt',
+]);
 
 /**
  * Display name for a counterparty: whitespace collapsed, trailing punctuation
- * removed, SHOUTING turned into Title Case (short acronyms such as `SBI`, `ATM` kept).
+ * removed, SHOUTING and all-lowercase turned into Title Case (short acronyms such as
+ * `SBI`, `ATM` kept).
  */
 export function cleanCounterparty(raw: string | undefined): string | undefined {
   if (!raw) {
     return undefined;
   }
-  const s = raw.replace(/\s+/g, ' ').replace(/^[\s.,:;\-/]+|[\s.,:;\-/]+$/g, '');
+  // A UPI handle printed as the name ("MANMATTERS@YESPAY"): the part before "@" names the payee.
+  const handle = /^([A-Za-z0-9._-]+)@[A-Za-z0-9.]+$/.exec(raw.trim());
+  const s = (handle ? handle[1] : raw).replace(/\s+/g, ' ').replace(/^[\s.,:;\-/]+|[\s.,:;\-/]+$/g, '');
   if (!s) {
     return undefined;
+  }
+  // All-lowercase names come from UPI handles ("swiggy", "uber"): capitalise each word.
+  if (s === s.toLowerCase() && /[a-z]/.test(s)) {
+    return s.replace(/\b[a-z]/g, ch => ch.toUpperCase());
   }
   if (s !== s.toUpperCase() || !/[A-Z]/.test(s)) {
     return s;
@@ -80,7 +110,12 @@ export function cleanCounterparty(raw: string | undefined): string | undefined {
   return s
     .split(' ')
     .map((w, i) => {
-      if (w.length <= 3 && /^[A-Z]+$/.test(w) && !SHORT_WORDS.has(w.toLowerCase()) && !(i > 0 && SMALL_WORDS.has(w.toLowerCase()))) {
+      if (
+        w.length <= 3 &&
+        /^[A-Z]+$/.test(w) &&
+        !SHORT_WORDS.has(w.toLowerCase()) &&
+        !(i > 0 && SMALL_WORDS.has(w.toLowerCase()))
+      ) {
         return w;
       }
       const lower = w.toLowerCase();

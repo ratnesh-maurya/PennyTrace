@@ -30,6 +30,13 @@ export const TxnTile = memo(function TxnTile({ txn, size, radius, initialsSize, 
     return <Tile size={size} radius={radius} bg={bg} ink={ink} icon={spec.icon} iconSize={iconSize} shadow={shadow} />;
   }
   return (
-    <Tile size={size} radius={radius} bg={spec.color} initials={spec.initials} fontSize={initialsSize} shadow={shadow} />
+    <Tile
+      size={size}
+      radius={radius}
+      bg={spec.color}
+      initials={spec.initials}
+      fontSize={initialsSize}
+      shadow={shadow}
+    />
   );
 });

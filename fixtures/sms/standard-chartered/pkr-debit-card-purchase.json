@@ -5,14 +5,14 @@
     "body": "Dear Client, PKR 4,829.00 have been paid at ELITE CLUB on 10-12-25 using Debit Card no. 53119xxxxxxxx1640.",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "PKR Debit card purchase [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 482900,
     "direction": "debit",
     "counterparty": "ELITE CLUB",
     "accountLast4": "1640"
-  },
-  "expectedStatus": "parsed",
-  "note": "PKR Debit card purchase [upstream TestStandardCharteredBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

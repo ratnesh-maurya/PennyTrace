@@ -18,7 +18,8 @@ const parsed = (sms: RawSms, occurredAt = sms.date): ParsedEvent => ({
   confidence: 92,
 });
 
-const fakeParse = (sms: RawSms) => (/debited/.test(sms.body) ? { status: 'parsed' as const, parsed: parsed(sms) } : { status: 'ignored' as const });
+const fakeParse = (sms: RawSms) =>
+  /debited/.test(sms.body) ? { status: 'parsed' as const, parsed: parsed(sms) } : { status: 'ignored' as const };
 
 const raw: RawSms[] = [
   { id: '12', address: 'AX-HDFCBK-S', body: 'Rs.349.00 debited from a/c **1234 to SWIGGY', date: 1_780_000_000_000 },
@@ -30,7 +31,13 @@ describe('ingest', () => {
   it('fingerprints, parses, and drops in-batch duplicates (earliest copy wins)', () => {
     const out = ingestWith(fakeParse, [...raw].reverse(), new Set(), 1_780_000_100_000);
     expect(out.map(e => e.id)).toEqual(['sms:12', 'sms:14']);
-    expect(out[0]).toMatchObject({ sourceKind: 'sms', externalId: '12', sender: 'AX-HDFCBK-S', parseStatus: 'parsed', receivedAt: raw[0].date });
+    expect(out[0]).toMatchObject({
+      sourceKind: 'sms',
+      externalId: '12',
+      sender: 'AX-HDFCBK-S',
+      parseStatus: 'parsed',
+      receivedAt: raw[0].date,
+    });
     expect(out[0].fingerprint).toBe(fingerprint('AX-HDFCBK-S', raw[0].body));
     expect(out[1]).toMatchObject({ parseStatus: 'ignored' });
     expect(out[1].parsed).toBeUndefined();

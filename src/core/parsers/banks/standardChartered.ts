@@ -153,7 +153,8 @@ export class StandardCharteredBankParser extends BankParser {
       const dest = gv(transferTo, 1);
       if (dest.trim() !== '') {
         const normalized = dest.toLowerCase();
-        const skip = normalized === 'your' || normalized === 'account' || normalized === 'iban' || normalized === 'acct';
+        const skip =
+          normalized === 'your' || normalized === 'account' || normalized === 'iban' || normalized === 'acct';
         if (!skip) {
           if (/^\*+$/.test(dest)) return 'Transfer';
           if (dest.startsWith('****')) return `Transfer to ${takeLast(dest, 4)}`;

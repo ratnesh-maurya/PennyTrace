@@ -85,10 +85,7 @@ export class NsdlPaymentsBankParser extends BaseIndianBankParser {
 
   protected isTransactionMessage(message: string): boolean {
     const lowerMessage = message.toLowerCase();
-    if (
-      lowerMessage.includes('upi ref') &&
-      (lowerMessage.includes('debited') || lowerMessage.includes('credited'))
-    ) {
+    if (lowerMessage.includes('upi ref') && (lowerMessage.includes('debited') || lowerMessage.includes('credited'))) {
       return true;
     }
     return super.isTransactionMessage(message);

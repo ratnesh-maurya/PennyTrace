@@ -7,14 +7,24 @@ pinIST();
 // Week of Mon 5 Oct – Sun 11 Oct 2026, plus the previous week.
 const sources = [
   hdfc('2026-09-30 13:00', { amount: rs(1000), counterparty: 'AMAZON' }), // previous week
-  hdfc('2026-10-01 09:00', { direction: 'credit', amount: rs(50000), counterparty: 'ACME TECH', hints: { isSalary: true } }),
+  hdfc('2026-10-01 09:00', {
+    direction: 'credit',
+    amount: rs(50000),
+    counterparty: 'ACME TECH',
+    hints: { isSalary: true },
+  }),
   hdfc('2026-10-05 13:00', { amount: rs(450), counterparty: 'SWIGGY' }),
   hdfc('2026-10-06 20:00', { amount: rs(350), counterparty: 'Swiggy' }),
   hdfc('2026-10-07 18:00', { amount: rs(1200), counterparty: 'DMART AVENUE' }),
   icici('2026-10-08 21:00', { amount: rs(2000), counterparty: 'DECATHLON' }),
   hdfc('2026-10-09 09:00', { amount: rs(2000), hints: { isAtmWithdrawal: true } }), // not spending
   sbi('2026-10-10 10:00', { direction: 'credit', amount: rs(10000), counterparty: 'AMIT VERMA' }),
-  hdfc('2026-10-11 10:00', { amount: rs(5000), status: 'failed', parserId: 'hdfc-upi-failed', counterparty: 'FLIPKART' }), // failed
+  hdfc('2026-10-11 10:00', {
+    amount: rs(5000),
+    status: 'failed',
+    parserId: 'hdfc-upi-failed',
+    counterparty: 'FLIPKART',
+  }), // failed
 ];
 const ledger = buildLedger(input(sources));
 
@@ -22,7 +32,15 @@ describe('insights', () => {
   it('week: 7 day bars Mon..Sun, totals, previous period, kept %', () => {
     const w = insights(ledger, 'week', 'all', '2026-10-11');
     expect(w.bars.map(b => b.label)).toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
-    expect(w.bars.map(b => b.key)).toEqual(['2026-10-05', '2026-10-06', '2026-10-07', '2026-10-08', '2026-10-09', '2026-10-10', '2026-10-11']);
+    expect(w.bars.map(b => b.key)).toEqual([
+      '2026-10-05',
+      '2026-10-06',
+      '2026-10-07',
+      '2026-10-08',
+      '2026-10-09',
+      '2026-10-10',
+      '2026-10-11',
+    ]);
     expect(w.bars.map(b => b.spent)).toEqual([rs(450), rs(350), rs(1200), rs(2000), 0, 0, 0]);
     expect(w.total).toBe(rs(4000));
     expect(w.avgPerUnit).toBe(Math.round(rs(4000) / 7));

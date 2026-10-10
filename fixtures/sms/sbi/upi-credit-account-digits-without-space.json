@@ -1,0 +1,17 @@
+{
+  "sms": {
+    "id": "sbi-pt-upi-credit-a",
+    "address": "JD-SBIUPI",
+    "body": "Dear SBI UPI User, ur A/cX1234 credited by Rs230 on 06Jun23 by (Ref no 315700000001)",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 23000,
+    "direction": "credit",
+    "accountLast4": "1234"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: SBI UPI prints A/cX1234 without a space",
+  "source": "pennytrace"
+}

@@ -54,7 +54,8 @@ export const Chip = memo(function Chip({
           borderColor: active ? c.ink : c.line2,
           backgroundColor: active ? c.ink : idleBg === 'surface' ? c.surface : 'transparent',
         },
-      ]}>
+      ]}
+    >
       {leading}
       <Text variant="chip" color={ink} numberOfLines={1}>
         {label}

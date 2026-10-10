@@ -3,7 +3,7 @@
 Thanks for helping. Two rules come before everything else:
 
 1. **Never commit real SMS.** Banks put names, account digits, UPI IDs and references in their messages. Run every sample through the anonymiser first and check its output by hand.
-2. **No network code.** The only file allowed to touch the network is `src/llm/download.ts`, and ESLint enforces this.
+2. **No network code.** The app has no INTERNET permission. ESLint bans `fetch` and friends, and `npm run audit:permissions` fails if the release APK asks for network access.
 
 ## Add or fix a bank parser
 

@@ -25,7 +25,8 @@ export function IconButton({ icon, onPress, accessibilityLabel, kind = 'ghost', 
         raised ? styles.raised : styles.ghost,
         raised ? { backgroundColor: t.c.surface, boxShadow: t.shadow } : null,
         pressed ? { backgroundColor: t.c.surface2 } : null,
-      ]}>
+      ]}
+    >
       <Icon name={icon} size={raised ? 21 : 24} color={raised ? t.c.ink2 : t.c.ink} />
     </Pressable>
   );

@@ -300,8 +300,9 @@ export class SbiBankParser extends BaseIndianBankParser {
       return this.extractLast4Digits(gv(debitCard, 1));
     }
 
-    // Pattern 1: A/c XNNNN or A/c XXNNNN
-    const p1 = find(/A\/c\s+([X*\d]+)/i, message);
+    // Pattern 1: A/c XNNNN or A/c XXNNNN. PennyTrace: the space is optional; SBI UPI alerts
+    // print "ur A/cX1234 credited".
+    const p1 = find(/A\/c\s*([X*\d]+)/i, message);
     if (p1) {
       return this.extractLast4Digits(gv(p1, 1));
     }
@@ -373,6 +374,12 @@ export class SbiBankParser extends BaseIndianBankParser {
 
     // Skip e-statement notifications
     if (lowerMessage.includes('e-statement of sbi credit card')) {
+      return false;
+    }
+
+    // PennyTrace: "Your NCMC Prepaid Card …5440 is loaded with Rs. 200" is a transit-card top-up.
+    // The bank debit that paid for it is the spend; counting the load too would double it.
+    if (/\bprepaid\s+card\b[\s\S]*\bis\s+loaded\s+with\b/.test(lowerMessage)) {
       return false;
     }
 

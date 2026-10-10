@@ -62,9 +62,7 @@ export class JupiterBankParser extends BankParser {
 
     if (
       lowerMessage.includes('credit card') &&
-      (lowerMessage.includes('debited') ||
-        lowerMessage.includes('spent') ||
-        lowerMessage.includes('charged'))
+      (lowerMessage.includes('debited') || lowerMessage.includes('spent') || lowerMessage.includes('charged'))
     ) {
       return TransactionType.CREDIT;
     }

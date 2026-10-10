@@ -1,5 +1,15 @@
 /** Mutable working shape of a transaction while the ledger is being built. */
-import type { AccountId, Direction, Paise, ParseHints, TransferLink, TxnId, TxnKind, TxnRefs, TxnStatus } from '../types';
+import type {
+  AccountId,
+  Direction,
+  Paise,
+  ParseHints,
+  TransferLink,
+  TxnId,
+  TxnKind,
+  TxnRefs,
+  TxnStatus,
+} from '../types';
 import type { ParsedSource, SourceGroup } from './dedupe';
 import { lifecycleStatus } from './dedupe';
 import { normRef } from './util';
@@ -33,13 +43,23 @@ export interface Draft {
 
 function mergeHints(sources: ParsedSource[], primary: ParsedSource): ParseHints {
   const h: ParseHints = {};
-  const keys = ['isAtmWithdrawal', 'isCardBillPayment', 'isRefund', 'isReversal', 'isSalary', 'isInvestment', 'isEmandate'] as const;
+  const keys = [
+    'isAtmWithdrawal',
+    'isCardBillPayment',
+    'isRefund',
+    'isReversal',
+    'isSalary',
+    'isInvestment',
+    'isEmandate',
+  ] as const;
   for (const k of keys) {
     if (sources.some(s => s.parsed.hints[k])) {
       h[k] = true;
     }
   }
-  const last4 = primary.parsed.hints.counterAccountLast4 ?? sources.find(s => s.parsed.hints.counterAccountLast4)?.parsed.hints.counterAccountLast4;
+  const last4 =
+    primary.parsed.hints.counterAccountLast4 ??
+    sources.find(s => s.parsed.hints.counterAccountLast4)?.parsed.hints.counterAccountLast4;
   if (last4) {
     h.counterAccountLast4 = last4;
   }
@@ -65,7 +85,11 @@ function mergeRefs(sources: ParsedSource[], primary: ParsedSource): TxnRefs {
 export function draftFromGroup(group: SourceGroup): Omit<Draft, 'accountId' | 'stableKey' | 'id'> {
   const { sources, primary } = group;
   const p = primary.parsed;
-  const accountSource = p.accountLast4 ? primary : sources.find(s => s.parsed.accountLast4 && s.parsed.bank === p.bank) ?? sources.find(s => s.parsed.accountLast4) ?? primary;
+  const accountSource = p.accountLast4
+    ? primary
+    : sources.find(s => s.parsed.accountLast4 && s.parsed.bank === p.bank) ??
+      sources.find(s => s.parsed.accountLast4) ??
+      primary;
   const others = [primary, ...sources.filter(s => s !== primary)];
   return {
     sources,
@@ -77,7 +101,10 @@ export function draftFromGroup(group: SourceGroup): Omit<Draft, 'accountId' | 's
     status: lifecycleStatus(sources),
     refs: mergeRefs(sources, primary),
     counterparty: others.find(s => s.parsed.counterparty?.trim())?.parsed.counterparty?.trim(),
-    vpa: others.find(s => s.parsed.vpa?.trim())?.parsed.vpa?.trim().toLowerCase(),
+    vpa: others
+      .find(s => s.parsed.vpa?.trim())
+      ?.parsed.vpa?.trim()
+      .toLowerCase(),
     hints: mergeHints(sources, primary),
     parserId: p.parserId,
     mergeReason: group.mergeReason,

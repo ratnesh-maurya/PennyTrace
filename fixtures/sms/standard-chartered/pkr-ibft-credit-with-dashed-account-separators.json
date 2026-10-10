@@ -5,14 +5,14 @@
     "body": "Dear Client, your account 01-01***99-01 has been credited with amount PKR 1,083,503.58 from account 18-87xxxxx-9039959 PAYONEER from IBFT 04/12/202 on 04/12/25.",
     "date": 1768458600000
   },
-  "expected": {
+  "expectedStatus": "unparsed",
+  "note": "PKR IBFT credit with dashed account separators [upstream TestStandardCharteredBankParser.kt] | PennyTrace: non-INR amount, ledger is INR-only, so this stays unparsed and surfaces in Needs review.",
+  "source": "upstream-test",
+  "upstreamExpected": {
     "kind": "transaction",
     "amount": 108350358,
     "direction": "credit",
     "counterparty": "PAYONEER",
     "accountLast4": "9901"
-  },
-  "expectedStatus": "parsed",
-  "note": "PKR IBFT credit with dashed account separators [upstream TestStandardCharteredBankParser.kt]",
-  "source": "upstream-test"
+  }
 }

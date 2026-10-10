@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "hdfc-pt-0001",
+    "address": "VM-HDFCBK-S",
+    "body": "Rs.349.00 debited from A/c XX1234 on 09-Oct-26 to VPA swiggy@icici (UPI Ref No 428100000110)",
+    "date": 1791561120000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 34900,
+    "direction": "debit",
+    "counterparty": "swiggy",
+    "accountLast4": "1234",
+    "refs": { "upi": "428100000110" }
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace regression: the parenthesised UPI reference must not become the merchant name",
+  "source": "pennytrace"
+}

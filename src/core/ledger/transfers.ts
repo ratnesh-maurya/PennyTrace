@@ -22,7 +22,7 @@ import type { AccountResolver } from './accounts';
 import type { Draft } from './draft';
 import { isVoid } from './draft';
 import { BANK_CHARGE, matchesAny, matchSeed } from './seedRules';
-import { cmpNum, cmpStr, nameTokens, sharesStrongRef } from './util';
+import { cmpNum, cmpStr, nameTokens, sharesStrongRef, vpaHandleWords } from './util';
 
 export const TRANSFER_WINDOW_MS = 72 * 3_600_000;
 const SKEW_MS = 10 * 60_000;
@@ -92,8 +92,14 @@ export class SelfMatcher {
 
   /** Bank says "to/from your a/c XX8821", or the payee is one of the user's own ids/names. */
   looksSelf(d: Draft): boolean {
-    const own = this.accounts.find(a => a.id === d.accountId)?.mask;
-    if (d.hints.counterAccountLast4 && d.hints.counterAccountLast4 !== own) {
+    // The other account must be one of the user's: "credited to a/c no. XXXXXX7881" is very often
+    // someone else's account.
+    const other = d.hints.counterAccountLast4;
+    if (other && this.accounts.some(a => a.mask === other && a.id !== d.accountId)) {
+      return true;
+    }
+    // "transferred to your account XXXXX05754": the bank itself says it is the user's account.
+    if (/\byour\s+(?:a\/c|account)\b/i.test(d.counterparty ?? '')) {
       return true;
     }
     return this.isSelfVpa(d.vpa) || this.isSelfName(d.counterparty);
@@ -101,7 +107,8 @@ export class SelfMatcher {
 
   /** The own account a debit names as its destination, if any. */
   target(d: Draft): AccountId | undefined {
-    const last4 = d.hints.counterAccountLast4;
+    const last4 =
+      d.hints.counterAccountLast4 ?? /\byour\s+(?:a\/c|account)\s+[X*]*\d*?(\d{4})\b/i.exec(d.counterparty ?? '')?.[1];
     if (last4) {
       const hits = this.accounts.filter(a => a.mask === last4 && a.id !== d.accountId);
       if (hits.length === 1) {
@@ -111,7 +118,9 @@ export class SelfMatcher {
     if (d.vpa && this.vpaToAccount.has(d.vpa)) {
       return this.vpaToAccount.get(d.vpa);
     }
-    const alias = this.aliasToAccount.find(x => x.accountId !== d.accountId && this.nameMatches(d.counterparty, x.tokens));
+    const alias = this.aliasToAccount.find(
+      x => x.accountId !== d.accountId && this.nameMatches(d.counterparty, x.tokens),
+    );
     return alias?.accountId;
   }
 }
@@ -163,7 +172,22 @@ function link(c: Candidate, kind: 'xfer' | 'liability'): TransferLink {
   c.credit.linkedTxnId = c.debit.id;
   c.debit.transferMethod = c.method;
   c.credit.transferMethod = c.method;
-  return { debitTxnId: c.debit.id, creditTxnId: c.credit.id, method: c.method, state: 'matched', confidence: c.confidence };
+  return {
+    debitTxnId: c.debit.id,
+    creditTxnId: c.credit.id,
+    method: c.method,
+    state: 'matched',
+    confidence: c.confidence,
+  };
+}
+
+/** A debit into investments: the bank says so (NACH/SIP/broker words), or the payee is a known platform. */
+function isInvestment(d: Draft): boolean {
+  if (d.hints.isInvestment) {
+    return true;
+  }
+  const seed = matchSeed(d.counterparty) ?? matchSeed(vpaHandleWords(d.vpa));
+  return seed?.rule.categoryId === 'investments';
 }
 
 export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[] {
@@ -192,7 +216,10 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
     }
     if (d.direction === 'debit' && d.hints.isAtmWithdrawal) {
       d.kind = 'cash';
-    } else if (d.direction === 'credit' && (d.hints.isReversal || d.sources.some(s => s.parsed.status === 'reversed'))) {
+    } else if (
+      d.direction === 'credit' &&
+      (d.hints.isReversal || d.sources.some(s => s.parsed.status === 'reversed'))
+    ) {
       d.kind = 'refund';
       d.reversal = true;
       // The credit itself landed; "reversed" describes the original debit.
@@ -223,8 +250,17 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
     }
   }
   {
-    const cardCredits = drafts.filter(d => d.kind === 'liability' && !d.kindFixed && d.direction === 'credit' && isCard(d) && live(d));
-    const bankDebits = drafts.filter(d => !isCard(d) && d.direction === 'debit' && live(d) && !d.kindFixed && (d.kind === 'liability' || d.kind === undefined));
+    const cardCredits = drafts.filter(
+      d => d.kind === 'liability' && !d.kindFixed && d.direction === 'credit' && isCard(d) && live(d),
+    );
+    const bankDebits = drafts.filter(
+      d =>
+        !isCard(d) &&
+        d.direction === 'debit' &&
+        live(d) &&
+        !d.kindFixed &&
+        (d.kind === 'liability' || d.kind === undefined),
+    );
     const cands: Candidate[] = [];
     for (const c of cardCredits) {
       const cardMask = accountOf(c)!.mask;
@@ -238,7 +274,13 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
           continue;
         }
         const named = d.hints.counterAccountLast4 === cardMask;
-        cands.push({ debit: d, credit: c, score: [ref ? 0 : 1, named ? 0 : 1, dt], method: ref ? 'ref' : named ? 'alias' : 'amount_time', confidence: ref ? 99 : named ? 90 : 75 });
+        cands.push({
+          debit: d,
+          credit: c,
+          score: [ref ? 0 : 1, named ? 0 : 1, dt],
+          method: ref ? 'ref' : named ? 'alias' : 'amount_time',
+          confidence: ref ? 99 : named ? 90 : 75,
+        });
       }
     }
     for (const c of pairGreedy(cands)) {
@@ -248,14 +290,21 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
 
   // 4. Own-account transfers.
   const debits = () => drafts.filter(d => open(d) && live(d) && d.direction === 'debit' && !isCard(d));
-  const credits = () => drafts.filter(d => open(d) && live(d) && d.direction === 'credit' && !isCard(d) && !d.hints.isSalary);
+  const credits = () =>
+    drafts.filter(d => open(d) && live(d) && d.direction === 'credit' && !isCard(d) && !d.hints.isSalary);
   {
     const cands: Candidate[] = [];
     const cs = credits();
     for (const d of debits()) {
       for (const c of cs) {
         if (c.accountId !== d.accountId && c.amount === d.amount && sharesStrongRef(d.refs, c.refs)) {
-          cands.push({ debit: d, credit: c, score: [Math.abs(c.occurredAt - d.occurredAt)], method: 'ref', confidence: 99 });
+          cands.push({
+            debit: d,
+            credit: c,
+            score: [Math.abs(c.occurredAt - d.occurredAt)],
+            method: 'ref',
+            confidence: 99,
+          });
         }
       }
     }
@@ -281,7 +330,8 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
         if (target && target !== c.accountId) {
           continue;
         }
-        const creditSelf = self.isSelfName(c.counterparty) || self.isSelfVpa(c.vpa) || c.hints.counterAccountLast4 !== undefined;
+        const creditSelf =
+          self.isSelfName(c.counterparty) || self.isSelfVpa(c.vpa) || c.hints.counterAccountLast4 !== undefined;
         const creditAnon = !c.counterparty && !c.vpa;
         if (!(debitSelf || creditSelf || (debitAnon && creditAnon))) {
           continue;
@@ -317,6 +367,8 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
     }
     if (d.direction === 'credit') {
       d.kind = 'in';
+    } else if (isInvestment(d)) {
+      d.kind = 'invest';
     } else if (matchesAny(d.counterparty ?? '', BANK_CHARGE) !== undefined || /charge|fee/i.test(d.parserId)) {
       d.kind = 'fee';
     } else {
@@ -324,5 +376,10 @@ export function classify(drafts: Draft[], opts: ClassifyOptions): TransferLink[]
     }
   }
 
-  return links.sort((a, b) => cmpStr(a.debitTxnId, b.debitTxnId) || cmpStr(a.creditTxnId ?? '', b.creditTxnId ?? '') || cmpNum(a.confidence, b.confidence));
+  return links.sort(
+    (a, b) =>
+      cmpStr(a.debitTxnId, b.debitTxnId) ||
+      cmpStr(a.creditTxnId ?? '', b.creditTxnId ?? '') ||
+      cmpNum(a.confidence, b.confidence),
+  );
 }

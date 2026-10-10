@@ -1,92 +1,75 @@
 /**
- * DATA BOUNDARY — write actions. Mock implementations mutate the in-memory
- * store; the real engine writes `user_overrides` / `category_rules` and
- * rebuilds the ledger. All actions are async so callers already await.
+ * DATA BOUNDARY: write actions. Corrections go to the backend (user overrides / rules, then a
+ * ledger rebuild) and the screens reload.
  */
-import { CATEGORY_BY_ID } from '../../core/categories';
-import type { CategoryId, Transaction, TxnId } from '../../core/types';
-import { normaliseName } from '../../ui/theme/brand';
-import { dataStore } from './store';
-import type { ChatMessage } from './types';
+import type { CategoryDef } from '../../core/categories';
+import type { CategoryId, DayKey, TxnId } from '../../core/types';
+import { dataStore, getBackend, reloadData, startData } from './store';
+import { createDemoBackend } from './demoBackend';
 
-/**
- * Choice in the correction sheet meaning "this isn't spending" (reimbursement,
- * money held for someone…). Mock: recorded as an unlinked move ('transfer'
- * category, kind 'xfer'). The core engine still has to define how this
- * override is stored.
- */
+/** Correction-sheet choice meaning "this isn't spending" (reimbursement, money held for someone…). */
 export const NOT_AN_EXPENSE = 'transfer' as const satisfies CategoryId;
 
-function patchTxns(match: (t: Transaction) => boolean, patch: (t: Transaction) => Partial<Transaction>) {
-  dataStore.setState(s => ({
-    txns: s.txns.map(t => (match(t) ? { ...t, ...patch(t) } : t)),
-  }));
-}
-
-function kindFor(t: Transaction, categoryId: CategoryId): Transaction['kind'] {
-  const group = CATEGORY_BY_ID[categoryId]?.group;
-  if (group === 'movement' && (t.kind === 'spend' || t.kind === 'fee')) {
-    return 'xfer';
-  }
-  if (group !== 'movement' && t.kind === 'xfer' && !t.linkedTxnId) {
-    return t.direction === 'credit' ? 'in' : 'spend';
-  }
-  return t.kind;
+function findTxn(txnId: TxnId) {
+  return dataStore.getState().ledger.transactions.find(t => t.id === txnId);
 }
 
 /**
- * Set a transaction's category (confidence → 100, leaves the review queue).
- * `remember` also saves an on-device rule for the counterparty, applied to
- * every transaction with the same counterparty.
+ * Set a transaction's category (confidence → 100, leaves the review queue). `remember` also
+ * saves an on-device rule for the counterparty, so future payments to it are categorised too.
  */
 export async function resolveCategory(txnId: TxnId, categoryId: CategoryId, remember: boolean): Promise<void> {
-  const target = dataStore.getState().txns.find(t => t.id === txnId);
-  if (!target) {
+  const txn = findTxn(txnId);
+  if (!txn) {
     return;
   }
-  const catName = CATEGORY_BY_ID[categoryId]?.name ?? categoryId;
-  const who = target.counterparty ?? '';
-  const key = normaliseName(who);
-  const provenance = remember && who ? `Your rule · ${who.toUpperCase()} → ${catName}` : 'Your correction';
-  patchTxns(
-    t => t.id === txnId || (remember && !!key && normaliseName(t.counterparty ?? '') === key && t.kind !== 'in'),
-    t => ({
-      categoryId,
-      kind: kindFor(t, categoryId),
-      confidence: 100,
-      needsReview: false,
-      ruleProvenance: provenance,
-    }),
-  );
+  await getBackend().correct(txn, categoryId, remember);
+  await reloadData();
 }
 
-/** User says this debit went to one of their own accounts: not spending. */
+/** The user says this debit went to one of their own accounts: not spending. */
 export async function markAsTransfer(txnId: TxnId): Promise<void> {
-  patchTxns(
-    t => t.id === txnId,
-    () => ({
-      kind: 'xfer',
-      categoryId: 'transfer',
-      confidence: 100,
-      needsReview: false,
-      ruleProvenance: 'Marked as a transfer by you',
-    }),
-  );
+  const txn = findTxn(txnId);
+  if (!txn) {
+    return;
+  }
+  await getBackend().markTransfer(txn);
+  await reloadData();
+}
+
+/** A day's closing balance read in the bank's app, for accounts whose SMS miss money (`undefined` removes it). */
+export async function setClosingBalance(accountId: string, day: DayKey, closing: number | undefined): Promise<void> {
+  await getBackend().setClosingBalance(accountId, day, closing);
+  await reloadData();
+}
+
+/** Creates (or updates) a category of the user's own. */
+export async function addCustomCategory(def: CategoryDef): Promise<void> {
+  await getBackend().saveCustomCategory(def);
+  await reloadData();
+}
+
+/** "Don't count this account" (an old account, someone else's, a payment app), or restore it. */
+export async function setAccountIgnored(accountId: string, ignored: boolean): Promise<void> {
+  await getBackend().setAccountIgnored(accountId, ignored);
+  await reloadData();
 }
 
 // ---------------------------------------------------------------------------
 // Sources & privacy settings
 // ---------------------------------------------------------------------------
 
+/** Pauses reading new SMS for this session. (Revoking access is done in Android settings.) */
 export async function setSmsEnabled(enabled: boolean): Promise<void> {
   dataStore.setState(s => ({ sourcesStatus: { ...s.sourcesStatus, sms: { ...s.sourcesStatus.sms, enabled } } }));
 }
 
 export async function setDiscardRaw(discardRaw: boolean): Promise<void> {
-  dataStore.setState(s => ({ sourcesStatus: { ...s.sourcesStatus, discardRaw } }));
+  await getBackend().setDiscardRaw(discardRaw);
+  await reloadData();
 }
 
-/** Stubs until the SAF file picker + encrypted export land. Resolve `false` = not available. */
+/** Not built yet (SAF file picker + encrypted export). `false` = not available. */
 export async function exportLedger(): Promise<boolean> {
   return false;
 }
@@ -95,87 +78,38 @@ export async function importStatement(): Promise<boolean> {
 }
 
 // ---------------------------------------------------------------------------
-// Onboarding (PennySms TurboModule later)
+// Onboarding
 // ---------------------------------------------------------------------------
 
 export async function requestSmsPermission(): Promise<'granted' | 'denied'> {
+  const result = await getBackend().requestPermission();
   dataStore.setState(s => ({
-    sourcesStatus: { ...s.sourcesStatus, sms: { ...s.sourcesStatus.sms, permission: 'granted' } },
+    sourcesStatus: { ...s.sourcesStatus, sms: { ...s.sourcesStatus.sms, permission: result } },
   }));
-  return 'granted';
+  return result;
 }
 
-let scanTimer: ReturnType<typeof setInterval> | undefined;
+/** Opens this app's page in Android Settings (to allow SMS, or "Allow restricted settings"). */
+export function openAppSettings(): void {
+  try {
+    (require('../../native/PennySms') as typeof import('../../native/PennySms')).openAppSettings();
+  } catch {
+    // No native module (demo / tests): nothing to open.
+  }
+}
 
 export async function startInitialScan(depthMonths: number): Promise<void> {
-  clearInterval(scanTimer);
-  const total = depthMonths * 214;
-  dataStore.setState({ scan: { state: 'scanning', depthMonths, scanned: 0, total } });
-  scanTimer = setInterval(() => {
-    const { scan } = dataStore.getState();
-    const scanned = Math.min(total, scan.scanned + 120);
-    dataStore.setState({ scan: { ...scan, scanned, state: scanned >= total ? 'done' : 'scanning' } });
-    if (scanned >= total) {
-      clearInterval(scanTimer);
-    }
-  }, 120);
+  dataStore.setState({ scan: { state: 'scanning', depthMonths, scanned: 0, total: 0 } });
+  await getBackend().initialImport(depthMonths, p =>
+    dataStore.setState(s => ({
+      scan: { ...s.scan, scanned: p.scanned, total: Math.max(p.total, p.scanned), state: p.done ? 'done' : 'scanning' },
+    })),
+  );
+  dataStore.setState(s => ({ scan: { ...s.scan, state: 'done' } }));
+  await reloadData();
 }
 
-// ---------------------------------------------------------------------------
-// On-device model (src/llm later — the only network use)
-// ---------------------------------------------------------------------------
-
-let downloadTimer: ReturnType<typeof setInterval> | undefined;
-
-/** Mock: simulates download + SHA-256 verify. Real: src/llm modelManager. */
-export async function downloadModel(): Promise<void> {
-  clearInterval(downloadTimer);
-  dataStore.setState(s => ({ model: { ...s.model, state: 'downloading', progress: 0, error: undefined } }));
-  downloadTimer = setInterval(() => {
-    const { model } = dataStore.getState();
-    if (model.state === 'downloading') {
-      const progress = Math.min(1, model.progress + 0.04);
-      dataStore.setState({ model: { ...model, progress, state: progress >= 1 ? 'verifying' : 'downloading' } });
-    } else if (model.state === 'verifying') {
-      dataStore.setState({ model: { ...model, state: 'ready', progress: 1 } });
-      clearInterval(downloadTimer);
-    } else {
-      clearInterval(downloadTimer);
-    }
-  }, 150);
-}
-
-export async function cancelModelDownload(): Promise<void> {
-  clearInterval(downloadTimer);
-  dataStore.setState(s => ({ model: { ...s.model, state: 'absent', progress: 0 } }));
-}
-
-export async function deleteModel(): Promise<void> {
-  clearInterval(downloadTimer);
-  dataStore.setState(s => ({ model: { ...s.model, state: 'absent', progress: 0 } }));
-}
-
-export async function setModelWifiOnly(wifiOnly: boolean): Promise<void> {
-  dataStore.setState(s => ({ model: { ...s.model, wifiOnly } }));
-}
-
-// ---------------------------------------------------------------------------
-// Chat (src/llm/tasks/chat later)
-// ---------------------------------------------------------------------------
-
-let chatSeq = 0;
-
-export async function sendChatMessage(text: string): Promise<void> {
-  const now = Date.now();
-  const user: ChatMessage = { id: `m${++chatSeq}`, role: 'user', text, at: now };
-  const ready = dataStore.getState().model.state === 'ready';
-  const reply: ChatMessage = {
-    id: `m${++chatSeq}`,
-    role: 'assistant',
-    text: ready
-      ? 'Answers come from your ledger on this phone. Chat is not wired to the model in this build yet.'
-      : 'Download the on-device model to ask questions about your ledger. Nothing you type leaves this phone.',
-    at: now,
-  };
-  dataStore.setState(s => ({ chat: [...s.chat, user, reply] }));
+/** Look around with a built-in week of SMS, without granting SMS access. */
+export async function enterDemoMode(): Promise<void> {
+  await startData(createDemoBackend());
 }

@@ -135,7 +135,11 @@ export class EquitasBankParser extends BaseIndianBankParser {
     }
 
     // Skip promotional messages
-    if (lowerMessage.includes('offer') || lowerMessage.includes('discount') || lowerMessage.includes('cashback offer')) {
+    if (
+      lowerMessage.includes('offer') ||
+      lowerMessage.includes('discount') ||
+      lowerMessage.includes('cashback offer')
+    ) {
       return false;
     }
 

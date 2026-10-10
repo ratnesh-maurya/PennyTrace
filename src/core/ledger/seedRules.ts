@@ -20,7 +20,18 @@ export interface SeedRule {
   excludes?: readonly string[];
 }
 
-const TAX = ['tin', 'tax information', 'income tax', 'gst', 'tax payment', 'challan', 'direct tax', 'indirect tax', 'advance tax', 'self assessment'];
+const TAX = [
+  'tin',
+  'tax information',
+  'income tax',
+  'gst',
+  'tax payment',
+  'challan',
+  'direct tax',
+  'indirect tax',
+  'advance tax',
+  'self assessment',
+];
 
 export const BANK_CHARGE = [
   'recovery',
@@ -45,7 +56,20 @@ export const BANK_CHARGE = [
 const CC_PAYMENT = ['bbps', 'bill payment', 'credit card payment', 'cc payment', 'card payment'];
 
 // PennyTrace: split out of upstream TRANSPORT.
-const FUEL = ['petrol', 'fuel', 'shell', 'indian oil', 'iocl', 'bpcl', 'hpcl', 'bharat petroleum', 'hindustan petroleum', 'nayara', 'filling station', 'petroleum'];
+const FUEL = [
+  'petrol',
+  'fuel',
+  'shell',
+  'indian oil',
+  'iocl',
+  'bpcl',
+  'hpcl',
+  'bharat petroleum',
+  'hindustan petroleum',
+  'nayara',
+  'filling station',
+  'petroleum',
+];
 
 const FOOD = [
   'swiggy',
@@ -107,9 +131,55 @@ const FOOD = [
   'uber eats',
 ];
 
-const GROCERY = ['bigbasket', 'blinkit', 'zepto', 'grofers', 'jiomart', 'dmart', 'reliance fresh', 'reliance smart', 'more retail', 'more megastore', 'more supermarket', 'grocery', 'groceries', 'dunzo', 'instamart', 'spencers', 'nature basket', 'star bazaar', 'ratnadeep', 'lulu', 'spar', 'kirana', 'supermarket'];
+const GROCERY = [
+  'bigbasket',
+  'blinkit',
+  'zepto',
+  'grofers',
+  'jiomart',
+  'dmart',
+  'reliance fresh',
+  'reliance smart',
+  'more retail',
+  'more megastore',
+  'more supermarket',
+  'grocery',
+  'groceries',
+  'dunzo',
+  'instamart',
+  'spencers',
+  'nature basket',
+  'star bazaar',
+  'ratnadeep',
+  'lulu',
+  'spar',
+  'kirana',
+  'supermarket',
+];
 
-const TRANSPORT = ['uber', 'ola', 'rapido', 'metro', 'irctc', 'redbus', 'makemytrip', 'goibibo', 'parking', 'toll', 'fastag', 'indigo', 'air india', 'spicejet', 'vistara', 'akasa', 'cleartrip', 'namma yatri', 'bmtc', 'best bus', 'yulu'];
+const TRANSPORT = [
+  'uber',
+  'ola',
+  'rapido',
+  'metro',
+  'irctc',
+  'redbus',
+  'makemytrip',
+  'goibibo',
+  'parking',
+  'toll',
+  'fastag',
+  'indigo',
+  'air india',
+  'spicejet',
+  'vistara',
+  'akasa',
+  'cleartrip',
+  'namma yatri',
+  'bmtc',
+  'best bus',
+  'yulu',
+];
 
 const SHOPPING = [
   'amazon',
@@ -153,29 +223,196 @@ const SHOPPING = [
 const SHOPPING_EXCLUDE = ['dmart', 'medical', 'pharmacy', 'chemist', 'clinic', 'hospital', 'diagnostic'];
 
 // PennyTrace additions: state electricity / water boards and piped gas seen in Indian SMS.
-const UTILITIES = ['electricity', 'water', 'gas', 'broadband', 'wifi', 'internet', 'tata sky', 'tata play', 'dish', 'd2h', 'bill', 'tata power', 'adani', 'bses', 'act fibernet', 'bescom', 'msedcl', 'mahadiscom', 'tneb', 'tangedco', 'cesc', 'kseb', 'tsspdcl', 'apspdcl', 'bwssb', 'mahanagar gas', 'igl', 'hathway', 'excitel'];
+const UTILITIES = [
+  'electricity',
+  'water',
+  'gas',
+  'broadband',
+  'wifi',
+  'internet',
+  'tata sky',
+  'tata play',
+  'dish',
+  'd2h',
+  'bill',
+  'tata power',
+  'adani',
+  'bses',
+  'act fibernet',
+  'bescom',
+  'msedcl',
+  'mahadiscom',
+  'tneb',
+  'tangedco',
+  'cesc',
+  'kseb',
+  'tsspdcl',
+  'apspdcl',
+  'bwssb',
+  'mahanagar gas',
+  'igl',
+  'hathway',
+  'excitel',
+];
 
-const ENTERTAINMENT = ['netflix', 'spotify', 'prime', 'hotstar', 'sony liv', 'zee5', 'voot', 'youtube', 'cinema', 'pvr', 'inox', 'bookmyshow', 'gaana', 'jiosaavn', 'apple music', 'wynk', 'district'];
+const ENTERTAINMENT = [
+  'netflix',
+  'spotify',
+  'prime',
+  'hotstar',
+  'sony liv',
+  'zee5',
+  'voot',
+  'youtube',
+  'cinema',
+  'pvr',
+  'inox',
+  'bookmyshow',
+  'gaana',
+  'jiosaavn',
+  'apple music',
+  'wynk',
+  'district',
+];
 
-const HEALTHCARE = ['1mg', 'pharmeasy', 'netmeds', 'apollo', 'pharmacy', 'medical', 'medicals', 'hospital', 'clinic', 'doctor', 'practo', 'healthkart', 'truemeds', 'healthcare', 'chemist', 'chemists', 'diagnostic', 'diagnostics', 'medplus'];
+const HEALTHCARE = [
+  '1mg',
+  'pharmeasy',
+  'netmeds',
+  'apollo',
+  'pharmacy',
+  'medical',
+  'medicals',
+  'hospital',
+  'clinic',
+  'doctor',
+  'practo',
+  'healthkart',
+  'truemeds',
+  'healthcare',
+  'chemist',
+  'chemists',
+  'diagnostic',
+  'diagnostics',
+  'medplus',
+];
 
-const INVESTMENT = ['groww', 'zerodha', 'upstox', 'kuvera', 'paytm money', 'coin', 'smallcase', 'mutual fund', 'sip', 'angel', '5paisa', 'etmoney', 'indmoney'];
+const INVESTMENT = [
+  'groww',
+  'zerodha',
+  'upstox',
+  'kuvera',
+  'paytm money',
+  'coin',
+  'smallcase',
+  'mutual fund',
+  'sip',
+  'angel',
+  '5paisa',
+  'etmoney',
+  'indmoney',
+];
 
 // Upstream "Banking" also lists bank names and transfer phrases; PennyTrace decides
 // transfers in transfers.ts, so only the loan words remain.
 const LOANS = ['loan', 'emi', 'bajaj finance', 'bajaj finserv', 'home credit', 'navi', 'kreditbee', 'moneyview'];
 
-const PERSONAL_CARE = ['urban company', 'salon', 'spa', 'barber', 'beauty', 'grooming', 'housejoy', 'laundry', 'parlour', 'naturals', 'lakme salon'];
+const PERSONAL_CARE = [
+  'urban company',
+  'salon',
+  'spa',
+  'barber',
+  'beauty',
+  'grooming',
+  'housejoy',
+  'laundry',
+  'parlour',
+  'naturals',
+  'lakme salon',
+];
 
-const EDUCATION = ['byju', "byju's", 'unacademy', 'vedantu', 'coursera', 'udemy', 'upgrad', 'school', 'college', 'university', 'toppr', 'udacity', 'simplilearn', 'whitehat', 'great learning', 'physics wallah'];
+const EDUCATION = [
+  'byju',
+  "byju's",
+  'unacademy',
+  'vedantu',
+  'coursera',
+  'udemy',
+  'upgrad',
+  'school',
+  'college',
+  'university',
+  'toppr',
+  'udacity',
+  'simplilearn',
+  'whitehat',
+  'great learning',
+  'physics wallah',
+];
 
 const MOBILE = ['airtel', 'jio', 'vodafone', 'vi', 'idea', 'bsnl', 'recharge', 'prepaid', 'postpaid', 'mobile'];
 
-const FITNESS = ['cult', 'cult.fit', 'cultfit', 'gym', 'fitness', 'yoga', 'healthifyme', 'fitternity', "gold's gym", 'anytime fitness'];
+const FITNESS = [
+  'cult',
+  'cult.fit',
+  'cultfit',
+  'gym',
+  'fitness',
+  'yoga',
+  'healthifyme',
+  'fitternity',
+  "gold's gym",
+  'anytime fitness',
+];
 
-const INSURANCE = ['insurance', 'lic', 'policy', 'hdfc life', 'icici pru', 'sbi life', 'max life', 'bajaj allianz', 'policybazaar', 'acko', 'digit', 'star health', 'niva bupa'];
+const INSURANCE = [
+  'insurance',
+  'lic',
+  'policy',
+  'hdfc life',
+  'icici pru',
+  'sbi life',
+  'max life',
+  'bajaj allianz',
+  'policybazaar',
+  'acko',
+  'digit',
+  'star health',
+  'niva bupa',
+];
 
-const TRAVEL = ['make my trip', 'yatra', 'ixigo', 'booking.com', 'expedia', 'agoda', 'trip.com', 'airbnb', 'skyscanner', 'flight', 'airline', 'hotel', 'marriott', 'hyatt', 'hilton', 'taj', 'oberoi', 'itc hotels', 'leela', 'radisson', 'novotel', 'ibis', 'oyo', 'treebo', 'fabhotels', 'zostel', 'emirates', 'qatar airways', 'lufthansa', 'singapore airlines'];
+const TRAVEL = [
+  'make my trip',
+  'yatra',
+  'ixigo',
+  'booking.com',
+  'expedia',
+  'agoda',
+  'trip.com',
+  'airbnb',
+  'skyscanner',
+  'flight',
+  'airline',
+  'hotel',
+  'marriott',
+  'hyatt',
+  'hilton',
+  'taj',
+  'oberoi',
+  'itc hotels',
+  'leela',
+  'radisson',
+  'novotel',
+  'ibis',
+  'oyo',
+  'treebo',
+  'fabhotels',
+  'zostel',
+  'emirates',
+  'qatar airways',
+  'lufthansa',
+  'singapore airlines',
+];
 
 // PennyTrace addition: rent platforms.
 const RENT = ['nobroker', 'nestaway', 'house rent', 'rent payment', 'housing.com', 'stanza living', 'zolo'];
@@ -224,7 +461,10 @@ export function keywordMatches(textLower: string, keyword: string): boolean {
   if (!re) {
     // Upstream uses \b; keywords such as "h&m" or "domino's" start/end with
     // non-word characters, so use explicit alphanumeric boundaries instead.
-    re = new RegExp(`(?:^|[^a-z0-9])${escapeRegex(keyword)}(?:[^a-z0-9]|$)`);
+    // PennyTrace: keywords of 5+ letters also match at the start of a longer word, because card
+    // and UPI merchant names glue suffixes on ("ZOMATOCYBS", "swiggyinstamart").
+    const end = keyword.length >= 5 ? '' : '(?:[^a-z0-9]|$)';
+    re = new RegExp(`(?:^|[^a-z0-9])${escapeRegex(keyword)}${end}`);
     wordRegexCache.set(keyword, re);
   }
   return re.test(textLower);

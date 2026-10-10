@@ -84,7 +84,12 @@ async function withUniqueIds(rows: Insert[]): Promise<Insert[]> {
     const found = await db
       .select({ id: sourceEvents.id, f: sourceEvents.fingerprint })
       .from(sourceEvents)
-      .where(sql`${sourceEvents.id} IN (${sql.join(part.map(id => sql`${id}`), sql`, `)})`);
+      .where(
+        sql`${sourceEvents.id} IN (${sql.join(
+          part.map(id => sql`${id}`),
+          sql`, `,
+        )})`,
+      );
     for (const r of found) {
       taken.set(r.id, r.f);
     }
@@ -145,7 +150,12 @@ export async function byIds(ids: readonly string[]): Promise<SourceEvent[]> {
     const rows = await db
       .select()
       .from(sourceEvents)
-      .where(sql`${sourceEvents.id} IN (${sql.join(part.map(id => sql`${id}`), sql`, `)})`);
+      .where(
+        sql`${sourceEvents.id} IN (${sql.join(
+          part.map(id => sql`${id}`),
+          sql`, `,
+        )})`,
+      );
     out.push(...rows.map(fromRow));
   }
   return out;
@@ -159,7 +169,7 @@ export interface ParseUpdate {
   body?: string;
 }
 
-/** Replaces parse results by fingerprint (used after a parser upgrade, and by the LLM fallback). */
+/** Replaces parse results by fingerprint (used after a parser upgrade). */
 export async function updateParseStatements(updates: readonly ParseUpdate[]): Promise<SqlStatement[]> {
   const { db } = await getDb();
   return updates.map(u =>
@@ -184,7 +194,7 @@ export async function updateParse(updates: readonly ParseUpdate[]): Promise<void
 
 /**
  * "Discard raw messages": drops stored SMS text. Unparsed messages keep their
- * text by default so the LLM fallback / needs-parsing list can still use it.
+ * text by default so the Needs-review list can still show it.
  */
 export async function purgeBodies(opts: { includeUnparsed?: boolean } = {}): Promise<number> {
   const { db } = await getDb();
@@ -201,14 +211,14 @@ export async function countByStatus(): Promise<Record<ParseStatus, number>> {
     .select({ status: sourceEvents.parseStatus, n: count() })
     .from(sourceEvents)
     .groupBy(sourceEvents.parseStatus);
-  const out: Record<ParseStatus, number> = { parsed: 0, llm: 0, ignored: 0, unparsed: 0 };
+  const out: Record<ParseStatus, number> = { parsed: 0, ignored: 0, unparsed: 0 };
   for (const r of rows) {
     out[r.status] = r.n;
   }
   return out;
 }
 
-/** Messages that looked financial but nothing could parse (Needs-parsing list / LLM fallback queue). */
+/** Messages that looked financial but nothing could parse (Needs-parsing list). */
 export async function unparsed(): Promise<SourceEvent[]> {
   const { db } = await getDb();
   const rows = await db
@@ -222,8 +232,6 @@ export async function unparsed(): Promise<SourceEvent[]> {
 /** fingerprint → stored parse status, for every event. */
 export async function statusByFingerprint(): Promise<Map<string, ParseStatus>> {
   const { db } = await getDb();
-  const rows = await db
-    .select({ f: sourceEvents.fingerprint, s: sourceEvents.parseStatus })
-    .from(sourceEvents);
+  const rows = await db.select({ f: sourceEvents.fingerprint, s: sourceEvents.parseStatus }).from(sourceEvents);
   return new Map(rows.map(r => [r.f, r.s]));
 }

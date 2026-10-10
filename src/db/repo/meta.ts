@@ -1,4 +1,5 @@
 import { eq, sql } from 'drizzle-orm';
+import type { CategoryDef } from '../../core/categories';
 import { getDb, runAtomic, type SqlStatement } from '../client';
 import { meta } from '../schema';
 import { parseJson, stmt } from './util';
@@ -72,6 +73,8 @@ export interface AppSettings {
   discardRawBodies: boolean;
   /** The user's own names / VPAs (LedgerInput.selfIdentities). */
   selfIdentities: string[];
+  /** Categories the user created (LedgerInput.customCategories). */
+  customCategories?: CategoryDef[];
   /** Other screens may store extra keys; they are preserved on update. */
   [key: string]: unknown;
 }

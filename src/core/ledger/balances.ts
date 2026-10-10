@@ -71,7 +71,9 @@ export function timelines(ledger: Ledger): Map<AccountId, Timeline> {
     }
   }
   for (const account of ledger.accounts) {
-    const txns = ledger.transactions.filter(t => t.accountId === account.id && movesMoney(t)).sort((a, b) => cmpKey(txnKey(a), txnKey(b)));
+    const txns = ledger.transactions
+      .filter(t => t.accountId === account.id && movesMoney(t))
+      .sort((a, b) => cmpKey(txnKey(a), txnKey(b)));
     const keys = txns.map(txnKey);
     const prefix: Paise[] = [0];
     for (const t of txns) {

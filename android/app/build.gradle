@@ -6,7 +6,61 @@ apply plugin: "com.facebook.react"
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
  */
+def findNodeExecutable() {
+    if (System.getenv("NODE_BINARY")) {
+        return System.getenv("NODE_BINARY")
+    }
+    if (project.hasProperty("NODE_BINARY")) {
+        return project.getProperty("NODE_BINARY")
+    }
+
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'sh', '-c', 'command -v node || which node'
+            standardOutput = stdout
+            ignoreExitValue = true
+        }
+        def nodePath = stdout.toString().trim()
+        if (nodePath && new File(nodePath).exists()) {
+            return nodePath
+        }
+    } catch (Exception ignored) {
+    }
+
+    def home = System.getProperty("user.home")
+    def candidates = [
+        "/opt/homebrew/bin/node",
+        "/usr/local/bin/node",
+        "/usr/bin/node",
+        "${home}/.volta/bin/node",
+        "${home}/.asdf/shims/node",
+        "${home}/.fnm/current/bin/node"
+    ]
+
+    for (String path : candidates) {
+        if (new File(path).exists()) {
+            return path
+        }
+    }
+
+    def nvmDir = new File(home, ".nvm/versions/node")
+    if (nvmDir.exists() && nvmDir.isDirectory()) {
+        def versions = nvmDir.listFiles()
+        if (versions != null && versions.length > 0) {
+            Arrays.sort(versions)
+            def nvmNode = new File(versions[versions.length - 1], "bin/node")
+            if (nvmNode.exists()) {
+                return nvmNode.absolutePath
+            }
+        }
+    }
+
+    return "node"
+}
+
 react {
+    nodeExecutableAndArgs = [findNodeExecutable()]
     /* Folders */
     //   The root of your project, i.e. where "package.json" lives. Default is '../..'
     // root = file("../../")
@@ -92,15 +146,24 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            if (project.hasProperty('PENNYTRACE_RELEASE_STORE_FILE')) {
+                storeFile file(PENNYTRACE_RELEASE_STORE_FILE)
+                storePassword PENNYTRACE_RELEASE_STORE_PASSWORD
+                keyAlias PENNYTRACE_RELEASE_KEY_ALIAS
+                keyPassword PENNYTRACE_RELEASE_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            // F-Droid builds without the keystore and signs with its own key: unsigned then.
+            if (project.hasProperty('PENNYTRACE_RELEASE_STORE_FILE')) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
@@ -112,8 +175,6 @@ dependencies {
     implementation("com.facebook.react:react-android")
     // Background inbox scan when an SMS arrives and the app isn't running (sms/ScanWorker.kt).
     implementation("androidx.work:work-runtime:2.11.2")
-    // @kesha-antonov/react-native-background-downloader declares MMKV as compileOnly; the app provides it.
-    implementation("com.tencent:mmkv-shared:1.3.16")
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

@@ -192,7 +192,10 @@ export class HsbcBankParser extends BankParser {
 
   protected extractAvailableLimit(message: string): Paise | null {
     // "Your available limit is EGP 1234.29"
-    const m = find(/available\s+limit\s+is\s+(?:INR|EGP|USD|GBP|EUR|AED|SAR|OMR|BHD|KWD|QAR)\s+([\d,]+(?:\.\d+)?)/i, message);
+    const m = find(
+      /available\s+limit\s+is\s+(?:INR|EGP|USD|GBP|EUR|AED|SAR|OMR|BHD|KWD|QAR)\s+([\d,]+(?:\.\d+)?)/i,
+      message,
+    );
     if (m) {
       return toPaise(gv(m, 1));
     }

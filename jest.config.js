@@ -15,7 +15,7 @@ module.exports = {
       setupFiles: ['<rootDir>/jest.setup.js'],
       moduleNameMapper: { '\\.svg$': '<rootDir>/__mocks__/svgMock.js' },
       transformIgnorePatterns: [
-        'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-navigation|react-native-.*|@op-engineering|llama.rn|@kesha-antonov|@dr.pogodin|@noble)/)',
+        'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-navigation|react-native-.*|@op-engineering|@noble)/)',
       ],
     },
   ],

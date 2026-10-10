@@ -83,18 +83,6 @@ export interface ReparseResult {
   body?: string;
 }
 
-/**
- * Merge a fresh parse over a stored one. An LLM-produced parse is kept when the
- * rule parsers still cannot read the message (re-running them must not throw
- * away the user's / model's work).
- */
-export function mergeReparse(prev: { parseStatus: ParseStatus }, next: ReparseResult): ReparseResult | undefined {
-  if (prev.parseStatus === 'llm' && next.parseStatus === 'unparsed') {
-    return undefined;
-  }
-  return next;
-}
-
 /** Fraction 0..1 of the id range [startId, maxId] covered by `cursor`. */
 export function scanProgress(startId: string, cursor: string, maxId: string): number {
   const s = Number(startId);

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Verifies the release APK requests only allowlisted permissions (plan §7).
+ * Verifies the release APK requests only allowlisted permissions, and no network permission at all.
  *
  *   npm run release:apk && npm run audit:permissions
  *   node scripts/audit-permissions.js [path/to/app.apk]
@@ -15,20 +15,25 @@ const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
+// PennyTrace has no network permission. Anything not listed here fails the audit.
 const ALLOWLIST = new Set([
-  'android.permission.INTERNET', // model download only
   'android.permission.READ_SMS',
   'android.permission.RECEIVE_SMS',
-  'android.permission.POST_NOTIFICATIONS',
-  'android.permission.RECEIVE_BOOT_COMPLETED',
-  'android.permission.WAKE_LOCK', // WorkManager scan + downloader
-  'android.permission.FOREGROUND_SERVICE', // downloader (dataSync)
-  'android.permission.FOREGROUND_SERVICE_DATA_SYNC',
-  // Model downloader: Wi-Fi-only check / job network constraint (no network access by itself)
-  'android.permission.ACCESS_NETWORK_STATE',
-  // Model downloader: Android 14+ user-initiated data-transfer job
-  'android.permission.RUN_USER_INITIATED_JOBS',
+  'android.permission.RECEIVE_BOOT_COMPLETED', // catch up on SMS after a reboot
+  'android.permission.WAKE_LOCK', // androidx.work: keeps the CPU awake while a scan runs
   'com.pennytrace.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION', // androidx.core, signature-level, app-private
+]);
+
+// Called out by name so the failure says exactly what went wrong.
+const NETWORK_PERMISSIONS = new Set([
+  'android.permission.INTERNET',
+  'android.permission.ACCESS_NETWORK_STATE',
+  'android.permission.ACCESS_WIFI_STATE',
+  'android.permission.CHANGE_NETWORK_STATE',
+  'android.permission.CHANGE_WIFI_STATE',
+  'android.permission.ACCESS_LOCAL_NETWORK',
+  'android.permission.NEARBY_WIFI_DEVICES',
+  'android.permission.CHANGE_WIFI_MULTICAST_STATE',
 ]);
 
 const ROOT = path.resolve(__dirname, '..');
@@ -101,6 +106,13 @@ function main() {
   console.log(`aapt: ${aapt}`);
   for (const p of perms) {
     console.log(`  ${ALLOWLIST.has(p) ? 'ok   ' : 'EXTRA'} ${p}`);
+  }
+  const network = perms.filter(p => NETWORK_PERMISSIONS.has(p));
+  if (network.length > 0) {
+    console.error(
+      `\nNETWORK PERMISSION FOUND: ${network.join(', ')}. PennyTrace must not request any network permission.`,
+    );
+    process.exit(1);
   }
   if (extras.length > 0) {
     console.error(

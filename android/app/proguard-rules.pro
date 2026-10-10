@@ -9,9 +9,6 @@
 
 # Add any project specific keep options here:
 
-# llama.rn: JNI entry points are looked up by name from native code.
--keep class com.rnllama.** { *; }
-
 # PennyTrace TurboModules / codegen specs and WorkManager worker (instantiated reflectively).
 -keep class com.pennytrace.specs.** { *; }
 -keep class com.pennytrace.sms.** { *; }

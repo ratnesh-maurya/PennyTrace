@@ -164,10 +164,7 @@
       "indexes": {
         "balance_snapshots_account_at_idx": {
           "name": "balance_snapshots_account_at_idx",
-          "columns": [
-            "account_id",
-            "at"
-          ],
+          "columns": ["account_id", "at"],
           "isUnique": false
         }
       },
@@ -225,9 +222,7 @@
       "indexes": {
         "category_rules_priority_idx": {
           "name": "category_rules_priority_idx",
-          "columns": [
-            "priority"
-          ],
+          "columns": ["priority"],
           "isUnique": false
         }
       },
@@ -344,23 +339,17 @@
       "indexes": {
         "source_events_fingerprint_uq": {
           "name": "source_events_fingerprint_uq",
-          "columns": [
-            "fingerprint"
-          ],
+          "columns": ["fingerprint"],
           "isUnique": true
         },
         "source_events_received_at_idx": {
           "name": "source_events_received_at_idx",
-          "columns": [
-            "received_at"
-          ],
+          "columns": ["received_at"],
           "isUnique": false
         },
         "source_events_status_idx": {
           "name": "source_events_status_idx",
-          "columns": [
-            "parse_status"
-          ],
+          "columns": ["parse_status"],
           "isUnique": false
         }
       },
@@ -397,19 +386,14 @@
       "indexes": {
         "transaction_sources_source_idx": {
           "name": "transaction_sources_source_idx",
-          "columns": [
-            "source_id"
-          ],
+          "columns": ["source_id"],
           "isUnique": false
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {
         "transaction_sources_txn_id_source_id_pk": {
-          "columns": [
-            "txn_id",
-            "source_id"
-          ],
+          "columns": ["txn_id", "source_id"],
           "name": "transaction_sources_txn_id_source_id_pk"
         }
       },
@@ -570,45 +554,32 @@
       "indexes": {
         "transactions_stable_key_idx": {
           "name": "transactions_stable_key_idx",
-          "columns": [
-            "stable_key"
-          ],
+          "columns": ["stable_key"],
           "isUnique": false
         },
         "transactions_account_time_idx": {
           "name": "transactions_account_time_idx",
-          "columns": [
-            "account_id",
-            "occurred_at"
-          ],
+          "columns": ["account_id", "occurred_at"],
           "isUnique": false
         },
         "transactions_occurred_at_idx": {
           "name": "transactions_occurred_at_idx",
-          "columns": [
-            "occurred_at"
-          ],
+          "columns": ["occurred_at"],
           "isUnique": false
         },
         "transactions_review_idx": {
           "name": "transactions_review_idx",
-          "columns": [
-            "needs_review"
-          ],
+          "columns": ["needs_review"],
           "isUnique": false
         },
         "transactions_ref_upi_idx": {
           "name": "transactions_ref_upi_idx",
-          "columns": [
-            "ref_upi"
-          ],
+          "columns": ["ref_upi"],
           "isUnique": false
         },
         "transactions_ref_utr_idx": {
           "name": "transactions_ref_utr_idx",
-          "columns": [
-            "ref_utr"
-          ],
+          "columns": ["ref_utr"],
           "isUnique": false
         }
       },
@@ -666,16 +637,12 @@
       "indexes": {
         "transfer_links_debit_idx": {
           "name": "transfer_links_debit_idx",
-          "columns": [
-            "debit_txn_id"
-          ],
+          "columns": ["debit_txn_id"],
           "isUnique": false
         },
         "transfer_links_credit_idx": {
           "name": "transfer_links_credit_idx",
-          "columns": [
-            "credit_txn_id"
-          ],
+          "columns": ["credit_txn_id"],
           "isUnique": false
         }
       },

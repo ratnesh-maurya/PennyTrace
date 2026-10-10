@@ -35,10 +35,7 @@ export class PunjabSindBankParser extends BaseIndianBankParser {
   }
 
   protected extractAmount(message: string): Paise | null {
-    const m = find(
-      /(?:Credited|Debited)\s+with\s+Rs\.?\s*([0-9,]+(?:\.\d{2})?)/i,
-      message,
-    );
+    const m = find(/(?:Credited|Debited)\s+with\s+Rs\.?\s*([0-9,]+(?:\.\d{2})?)/i, message);
     if (m) {
       return toPaise(gv(m, 1));
     }
@@ -84,10 +81,7 @@ export class PunjabSindBankParser extends BaseIndianBankParser {
       if (this.isValidMerchantName(merchant)) return merchant;
     }
 
-    const neftMerchant = find(
-      /NEFT\/[A-Z0-9]+\/([^(\r\n]+?)(?=\s*\(|\s*$)/i,
-      message,
-    );
+    const neftMerchant = find(/NEFT\/[A-Z0-9]+\/([^(\r\n]+?)(?=\s*\(|\s*$)/i, message);
     if (neftMerchant) {
       const merchant = this.cleanMerchantName(gv(neftMerchant, 1).trim());
       if (this.isValidMerchantName(merchant)) return merchant;
@@ -95,13 +89,10 @@ export class PunjabSindBankParser extends BaseIndianBankParser {
 
     const cheque = find(/(Credit|Debit)\s+of\s+\d+/i, message);
     if (cheque) {
-      return gv(cheque, 1).toLowerCase() === 'credit'
-        ? 'Cheque Credit'
-        : 'Cheque Debit';
+      return gv(cheque, 1).toLowerCase() === 'credit' ? 'Cheque Credit' : 'Cheque Debit';
     }
 
-    const descPattern =
-      /(?:Credited|Debited)\s+with\s+Rs\.?\s*[0-9,]+(?:\.\d{2})?\s*--\s*([^(\r\n]+?)\s*\(CLR\s+BAL/i;
+    const descPattern = /(?:Credited|Debited)\s+with\s+Rs\.?\s*[0-9,]+(?:\.\d{2})?\s*--\s*([^(\r\n]+?)\s*\(CLR\s+BAL/i;
     const desc = find(descPattern, message);
     if (desc) {
       const text = gv(desc, 1).trim().replace(/-+$/, '').trim();

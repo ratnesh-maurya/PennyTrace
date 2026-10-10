@@ -38,7 +38,8 @@ export function HeroSurface({ radius, shadow = true, glows = false, style, child
           r,
           styles.clip,
           { backgroundColor: t.hero.colors[1], backgroundImage: cssLinearGradient(t.hero) },
-        ]}>
+        ]}
+      >
         {glows ? (
           <>
             <View style={[styles.glowA, { backgroundImage: cssRadialGlow(ON_HERO.glowA, ON_HERO.glowAClear) }]} />

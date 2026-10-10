@@ -44,7 +44,8 @@ export const WeekStrip = memo(function WeekStrip({ days, selected, onSelect }: W
             onPress={() => onSelect(d.day)}
             accessibilityRole="button"
             accessibilityLabel={formatDayLong(d.day)}
-            accessibilityState={{ selected: active }}>
+            accessibilityState={{ selected: active }}
+          >
             {active ? (
               <HeroSurface radius={15} style={s.day}>
                 {body}

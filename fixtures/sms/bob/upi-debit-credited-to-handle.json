@@ -1,0 +1,19 @@
+{
+  "sms": {
+    "id": "bob-pt-credited-to-handle",
+    "address": "JK-BOBSMS",
+    "body": "Rs 99.00 debited from A/C XXXXXX1234 and credited to shopkeeper281@okhdfcbank (UPI Ref No 612300000004). Not you? Call 18005700/18005000 - BOB",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 9900,
+    "direction": "debit",
+    "accountLast4": "1234",
+    "counterparty": "shopkeeper281",
+    "vpa": "shopkeeper281@okhdfcbank"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: payee from 'credited to <vpa>' (was the label 'UPI Credit')",
+  "source": "pennytrace"
+}

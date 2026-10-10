@@ -39,10 +39,7 @@ export class KeralaGraminBankParser extends BaseIndianBankParser {
 
   protected extractAmount(message: string): Paise | null {
     // Pattern 1: "debited for Rs.160.00" or "credited with INR 3000"
-    const m = find(
-      /(?:debited for|credited with)\s+(?:Rs\.?|INR)\s*([0-9,]+(?:\.[0-9]{2})?)/i,
-      message,
-    );
+    const m = find(/(?:debited for|credited with)\s+(?:Rs\.?|INR)\s*([0-9,]+(?:\.[0-9]{2})?)/i, message);
     if (m) {
       return toPaise(gv(m, 1));
     }
@@ -53,18 +50,12 @@ export class KeralaGraminBankParser extends BaseIndianBankParser {
     const lowerMessage = message.toLowerCase();
 
     // Debited = expense
-    if (
-      lowerMessage.includes('debited for') ||
-      lowerMessage.includes('is debited')
-    ) {
+    if (lowerMessage.includes('debited for') || lowerMessage.includes('is debited')) {
       return TransactionType.EXPENSE;
     }
 
     // Credited = income
-    if (
-      lowerMessage.includes('credited with') ||
-      lowerMessage.includes('is credited')
-    ) {
+    if (lowerMessage.includes('credited with') || lowerMessage.includes('is credited')) {
       return TransactionType.INCOME;
     }
 
@@ -129,12 +120,7 @@ export class KeralaGraminBankParser extends BaseIndianBankParser {
     }
 
     // Must contain transaction keywords
-    const transactionKeywords = [
-      'debited for',
-      'is debited',
-      'credited with',
-      'is credited',
-    ];
+    const transactionKeywords = ['debited for', 'is debited', 'credited with', 'is credited'];
     return transactionKeywords.some(k => lowerMessage.includes(k));
   }
 }

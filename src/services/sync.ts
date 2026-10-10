@@ -24,7 +24,6 @@ import { checkSmsPermission, getMaxSmsId, INBOX_PAGE_SIZE, inboxPages } from '..
 import {
   importSinceMs,
   maxSmsId,
-  mergeReparse,
   needsRebuild,
   planScan,
   scanProgress,
@@ -217,7 +216,8 @@ async function scanOnce(_opts: ScanOptions): Promise<SyncResult> {
     }
 
     if ((await metaRepo.getSettings()).discardRawBodies) {
-      await sourceEventsRepo.purgeBodies();
+      // Everything, including alerts nothing could read: "discard" means no message text kept.
+      await sourceEventsRepo.purgeBodies({ includeUnparsed: true });
     }
 
     emit({ ...progress, phase: 'done', fraction: 1, ledgerChanged: rebuild });
@@ -292,7 +292,7 @@ async function persistPage(events: SourceEvent[], cursor: string): Promise<void>
 /**
  * Parser schema changed: re-run the parsers over the whole import window of the
  * inbox, then over stored bodies of messages no longer in the inbox. Existing
- * rows are updated by fingerprint; LLM parses survive if rules still fail.
+ * rows are updated by fingerprint.
  */
 async function reparseAll(since: number, progress: SyncProgress): Promise<void> {
   const statuses = await sourceEventsRepo.statusByFingerprint();
@@ -315,13 +315,7 @@ async function reparseAll(since: number, progress: SyncProgress): Promise<void> 
         statuses.set(e.fingerprint, e.parseStatus);
         continue;
       }
-      const merged = mergeReparse(
-        { parseStatus: prev },
-        { fingerprint: e.fingerprint, parseStatus: e.parseStatus, parsed: e.parsed, body: e.body },
-      );
-      if (merged) {
-        updates.push(merged);
-      }
+      updates.push({ fingerprint: e.fingerprint, parseStatus: e.parseStatus, parsed: e.parsed, body: e.body });
     }
     return { inserts, updates };
   };

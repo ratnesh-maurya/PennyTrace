@@ -1,62 +1,104 @@
 /**
- * Mutable in-memory store backing the mock data layer. Corrections and
- * transfer marks mutate it so every screen updates. Replaced by reactive
- * repository queries when src/db lands.
+ * App data state: the derived ledger (+ evidence) loaded from the active backend, plus
+ * UI-side status (scan). Screens read it through `./hooks`, write through `./actions`.
  */
+import { TurboModuleRegistry } from 'react-native';
 import { createStore } from 'zustand/vanilla';
-import type { LedgerSnapshot } from './mockEngine';
-import {
-  MOCK_ACCOUNTS,
-  MOCK_ARCHIVE,
-  MOCK_SNAPSHOTS,
-  MOCK_SOURCES,
-  MOCK_SOURCES_STATUS,
-  MOCK_TXNS,
-  at,
-  MOCK_TODAY,
-} from './mock';
-import type { ChatMessage, ModelStatus, ScanStatus, SourcesStatus } from './types';
+import { setCustomCategories } from '../../core/categories';
+import { today as todayKey } from '../../core/time';
+import type { DayKey, Ledger, SourceEvent } from '../../core/types';
+import type { DataBackend } from './backend';
+import { createDemoBackend } from './demoBackend';
+import type { ScanStatus, SourcesStatus } from './types';
 
-export interface DataState extends LedgerSnapshot {
+export interface DataState {
+  backendKind: DataBackend['kind'] | null;
+  status: 'idle' | 'loading' | 'ready' | 'error';
+  error?: string;
+  ledger: Ledger;
+  sources: ReadonlyMap<string, SourceEvent>;
+  today: DayKey;
   sourcesStatus: SourcesStatus;
-  model: ModelStatus;
   scan: ScanStatus;
-  chat: ChatMessage[];
 }
+
+const EMPTY_LEDGER: Ledger = { accounts: [], transactions: [], transferLinks: [], snapshots: [] };
 
 export function initialDataState(): DataState {
   return {
-    accounts: MOCK_ACCOUNTS,
-    txns: MOCK_TXNS,
-    archive: MOCK_ARCHIVE,
-    sources: Object.fromEntries(MOCK_SOURCES.map(s => [s.id, s])),
-    snapshots: MOCK_SNAPSHOTS,
+    backendKind: null,
+    status: 'idle',
+    ledger: EMPTY_LEDGER,
+    sources: new Map(),
+    today: todayKey(Date.now()),
     sourcesStatus: {
-      sms: {
-        enabled: true,
-        permission: 'granted',
-        messagesRead: MOCK_SOURCES_STATUS.messagesRead,
-        banksRecognised: MOCK_SOURCES_STATUS.banksRecognised,
-        lastScanAt: at(MOCK_TODAY, '19:41'),
-      },
+      sms: { enabled: true, permission: 'unknown', messagesRead: 0, banksRecognised: 0 },
       discardRaw: false,
     },
-    model: {
-      state: 'absent',
-      name: 'Qwen3-0.6B · Q4_K_M',
-      sizeBytes: 462_000_000,
-      license: 'Apache-2.0',
-      progress: 0,
-      wifiOnly: true,
-    },
-    scan: { state: 'done', depthMonths: 6, scanned: 1284, total: 1284 },
-    chat: [],
+    scan: { state: 'idle', depthMonths: 6, scanned: 0, total: 0 },
   };
 }
 
 export const dataStore = createStore<DataState>()(() => initialDataState());
 
-/** Test helper: restore the pristine mock. */
+let backend: DataBackend | null = null;
+let unsubscribe: (() => void) | null = null;
+
+export function getBackend(): DataBackend {
+  if (!backend) {
+    throw new Error('Data backend not started: call startData() first');
+  }
+  return backend;
+}
+
+/** Live when the PennySms native module exists (a device build); demo otherwise. */
+function defaultBackend(): DataBackend {
+  if (TurboModuleRegistry.get('PennySms')) {
+    // Required lazily: it pulls in op-sqlite and the SMS TurboModule.
+    const { createLiveBackend } = require('./liveBackend') as typeof import('./liveBackend');
+    return createLiveBackend();
+  }
+  return createDemoBackend();
+}
+
+/** Re-read the ledger from the backend. */
+export async function reloadData(): Promise<void> {
+  const b = getBackend();
+  try {
+    const data = await b.load();
+    // Before the screens re-render, so every category id resolves.
+    setCustomCategories(data.customCategories);
+    dataStore.setState(s => ({
+      status: 'ready',
+      error: undefined,
+      ledger: data.ledger,
+      sources: data.sources,
+      today: todayKey(Date.now()),
+      sourcesStatus: {
+        sms: { ...s.sourcesStatus.sms, ...data.sms },
+        discardRaw: data.discardRaw,
+      },
+    }));
+  } catch (e) {
+    dataStore.setState({ status: 'error', error: e instanceof Error ? e.message : String(e) });
+  }
+}
+
+/** Start (or switch) the data source. Safe to call again, e.g. to enter demo mode. */
+export async function startData(next: DataBackend = defaultBackend()): Promise<void> {
+  unsubscribe?.();
+  backend = next;
+  dataStore.setState({ ...initialDataState(), backendKind: next.kind, status: 'loading' });
+  unsubscribe = next.subscribe(() => {
+    reloadData();
+  });
+  await reloadData();
+}
+
+/** Test helper. */
 export function resetDataStore(): void {
+  unsubscribe?.();
+  unsubscribe = null;
+  backend = null;
   dataStore.setState(initialDataState(), true);
 }

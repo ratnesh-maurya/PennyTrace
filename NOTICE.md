@@ -36,10 +36,3 @@ separate project and does not use them.
 |---|---|
 | Geist and Geist Mono fonts (Vercel) | SIL Open Font License 1.1 (`assets/fonts/OFL-Geist.txt`) |
 | Material Symbols (Google), via `@material-symbols/svg-400` | Apache-2.0 |
-
-## On-device models (downloaded only when the user asks)
-
-| Model | License |
-|---|---|
-| Qwen3-0.6B, Q4_K_M GGUF quantised by unsloth (default) | Apache-2.0 |
-| Qwen3.5-0.8B, Q4_K_M GGUF quantised by unsloth (optional) | Apache-2.0 |

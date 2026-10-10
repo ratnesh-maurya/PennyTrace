@@ -17,7 +17,12 @@ function one(counterparty: string | undefined, extra: Partial<P> = {}, rules: Ca
 
 describe('categorize', () => {
   it('seed merchant list (ported keyword map)', () => {
-    expect(one('SWIGGY')).toMatchObject({ categoryId: 'food', confidence: 85, ruleProvenance: 'Merchant list · Swiggy → Food & dining', needsReview: false });
+    expect(one('SWIGGY')).toMatchObject({
+      categoryId: 'food',
+      confidence: 85,
+      ruleProvenance: 'Merchant list · Swiggy → Food & dining',
+      needsReview: false,
+    });
     expect(one('UBER INDIA SYSTEMS PVT LTD').categoryId).toBe('travel');
     expect(one('DMART AVENUE').categoryId).toBe('groceries');
     expect(one('BESCOM BANGALORE').categoryId).toBe('bills');
@@ -32,20 +37,47 @@ describe('categorize', () => {
   });
 
   it('user rule beats the seed list', () => {
-    const t = one('DMART AVENUE', {}, [{ id: 'r1', pattern: 'DMART AVENUE', field: 'counterparty', categoryId: 'shopping', priority: 10, source: 'user' }]);
-    expect(t).toMatchObject({ categoryId: 'shopping', confidence: 95, ruleProvenance: 'Your rule · DMART AVENUE → Shopping' });
+    const t = one('DMART AVENUE', {}, [
+      {
+        id: 'r1',
+        pattern: 'DMART AVENUE',
+        field: 'counterparty',
+        categoryId: 'shopping',
+        priority: 10,
+        source: 'user',
+      },
+    ]);
+    expect(t).toMatchObject({
+      categoryId: 'shopping',
+      confidence: 95,
+      ruleProvenance: 'Your rule · DMART AVENUE → Shopping',
+    });
   });
 
   it('regex user rule on the SMS body', () => {
-    const rules: CategoryRule[] = [{ id: 'r2', pattern: '/act\\s*fibernet/', field: 'body', categoryId: 'bills', priority: 1, source: 'user' }];
-    const sms = hdfc('2026-10-05 12:00', { amount: rs(1179), counterparty: 'PAYU' }, { body: 'Rs 1179 debited from a/c **1234 to PAYU for ACT Fibernet bill. -HDFC' });
+    const rules: CategoryRule[] = [
+      { id: 'r2', pattern: '/act\\s*fibernet/', field: 'body', categoryId: 'bills', priority: 1, source: 'user' },
+    ];
+    const sms = hdfc(
+      '2026-10-05 12:00',
+      { amount: rs(1179), counterparty: 'PAYU' },
+      { body: 'Rs 1179 debited from a/c **1234 to PAYU for ACT Fibernet bill. -HDFC' },
+    );
     const t = buildLedger(input([sms], { rules })).transactions[0];
-    expect(t).toMatchObject({ categoryId: 'bills', ruleProvenance: 'Your rule · /act\\s*fibernet/ → Bills & utilities' });
+    expect(t).toMatchObject({
+      categoryId: 'bills',
+      ruleProvenance: 'Your rule · /act\\s*fibernet/ → Bills & utilities',
+    });
   });
 
   it('person names go to people at low confidence → review', () => {
     const t = one('RAHUL SHARMA');
-    expect(t).toMatchObject({ categoryId: 'people', confidence: 60, ruleProvenance: 'Guess · looks like a person', needsReview: true });
+    expect(t).toMatchObject({
+      categoryId: 'people',
+      confidence: 60,
+      ruleProvenance: 'Guess · looks like a person',
+      needsReview: true,
+    });
     expect(looksLikePerson(undefined, '9876543210@ybl')).toBe(true);
     expect(looksLikePerson('SRI KRISHNA STORES', undefined)).toBe(false);
   });
@@ -55,13 +87,10 @@ describe('categorize', () => {
     expect(40).toBeLessThan(REVIEW_THRESHOLD);
   });
 
-  it('LLM rule fills gaps but still asks for review', () => {
-    const t = one('QX7 VENTURES 22', {}, [{ id: 'l1', pattern: 'qx7', field: 'counterparty', categoryId: 'shopping', priority: 1, source: 'llm' }]);
-    expect(t).toMatchObject({ categoryId: 'shopping', confidence: 70, needsReview: true });
-  });
-
   it('bank charges are fees and count as spent', () => {
-    const ledger = buildLedger(input([hdfc('2026-10-05 12:00', { amount: rs(17.7), counterparty: 'SMS CHARGES', balance: rs(982.3) })]));
+    const ledger = buildLedger(
+      input([hdfc('2026-10-05 12:00', { amount: rs(17.7), counterparty: 'SMS CHARGES', balance: rs(982.3) })]),
+    );
     const t = ledger.transactions[0];
     expect(t).toMatchObject({ kind: 'fee', categoryId: 'fees', needsReview: false });
     const c = dailyClose(ledger, '2026-10-05', 'hdfc-1234');
@@ -72,7 +101,12 @@ describe('categorize', () => {
   it('credits are income; salary hint → Salary', () => {
     const ledger = buildLedger(
       input([
-        hdfc('2026-10-01 09:00', { direction: 'credit', amount: rs(85000), counterparty: 'ACME TECH', hints: { isSalary: true } }),
+        hdfc('2026-10-01 09:00', {
+          direction: 'credit',
+          amount: rs(85000),
+          counterparty: 'ACME TECH',
+          hints: { isSalary: true },
+        }),
         hdfc('2026-10-02 09:00', { direction: 'credit', amount: rs(1200), counterparty: 'AMIT VERMA' }),
       ]),
     );
@@ -91,10 +125,20 @@ describe('categorize', () => {
 
 describe('review queue and search', () => {
   const sources = [
-    hdfc('2026-10-05 12:00', { amount: rs(300), counterparty: 'RAHUL SHARMA', vpa: 'rahul.s@okaxis', refs: { upi: '612345678901' } }),
+    hdfc('2026-10-05 12:00', {
+      amount: rs(300),
+      counterparty: 'RAHUL SHARMA',
+      vpa: 'rahul.s@okaxis',
+      refs: { upi: '612345678901' },
+    }),
     hdfc('2026-10-06 12:00', { amount: rs(120), counterparty: 'QX7 VENTURES 22' }),
     hdfc('2026-10-07 12:00', { amount: rs(349), counterparty: 'SWIGGY' }),
-    hdfc('2026-10-07 13:00', { amount: rs(500), counterparty: 'ZOMATO', status: 'failed', parserId: 'hdfc-upi-failed' }),
+    hdfc('2026-10-07 13:00', {
+      amount: rs(500),
+      counterparty: 'ZOMATO',
+      status: 'failed',
+      parserId: 'hdfc-upi-failed',
+    }),
   ];
   const ledger = buildLedger(input(sources));
 

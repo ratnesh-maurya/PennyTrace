@@ -90,6 +90,24 @@ export class BankOfBarodaParser extends BaseIndianBankParser {
       return name === 'redacted' ? 'UPI Payment' : this.cleanMerchantName(name);
     }
 
+    // PennyTrace: "Your VPA me@okhdfcbank linked to your a/c … is debited for Rs. 136.0 and
+    // credited to VPA kureelarun@okicici": the payee is the VPA after "credited to".
+    // "Rs 99.99 debited from A/C XXXXXX1234 and credited to someone@okhdfcbank (UPI Ref No …)".
+    const creditedToHandle = find(/debited[\s\S]*?credited\s+to\s+([a-zA-Z0-9][a-zA-Z0-9._-]*)@[a-zA-Z]/i, message);
+    if (creditedToHandle) {
+      return this.cleanMerchantName(gv(creditedToHandle, 1));
+    }
+    // Some of these SMS lose the "@": "credited to VPA billdesk.electricity icici".
+    const creditedTo = find(/credited\s+to\s+VPA\s+([^\s@]+)(?:@|\s)/i, message);
+    if (creditedTo) {
+      return this.cleanMerchantName(gv(creditedTo, 1));
+    }
+    // "… is debited for Rs.X and credited to a/c no. XXXXXX7881": a payment into another account.
+    const toAccount = find(/debited[\s\S]*?credited\s+to\s+a\/c\s+no\.?\s*[X*]*(\d{4})\b/i, message);
+    if (toAccount) {
+      return `A/c ••${gv(toAccount, 1)}`;
+    }
+
     // Pattern 3: IMPS by Name of Person
     const imps = find(/IMPS\/[\d]+\s+by\s+([^.]+?)(?:\s*\.|$)/i, message);
     if (imps) {

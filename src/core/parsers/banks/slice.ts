@@ -32,7 +32,12 @@ export class SliceParser extends BankParser {
   private isSuccessMessage(message: string): boolean {
     const lower = message.toLowerCase();
     // Use word boundaries to avoid matching "unsuccessful"
-    return test(/\bsuccessful\b/, lower) || test(/\bsuccess\b/, lower) || lower.includes('approved') || lower.includes('confirmed');
+    return (
+      test(/\bsuccessful\b/, lower) ||
+      test(/\bsuccess\b/, lower) ||
+      lower.includes('approved') ||
+      lower.includes('confirmed')
+    );
   }
 
   private isFailureMessage(message: string): boolean {
@@ -65,7 +70,11 @@ export class SliceParser extends BankParser {
 
     // UPI AutoPay mandate lifecycle notices ("... is revoked", "is paused",
     // "is suspended") are not money movements.
-    if (lowerMessage.includes('revoked') || lowerMessage.includes('is paused') || lowerMessage.includes('is suspended')) {
+    if (
+      lowerMessage.includes('revoked') ||
+      lowerMessage.includes('is paused') ||
+      lowerMessage.includes('is suspended')
+    ) {
       return false;
     }
 
@@ -75,6 +84,13 @@ export class SliceParser extends BankParser {
     // by the base class below (it rejects "collect request" / "payment
     // request" / "has requested" / "have received payment" etc.).
     if (lowerMessage.includes('sent')) {
+      return true;
+    }
+
+    // PennyTrace: "Rs. 11,000 is successfully added to your slice savings account. Your
+    // updated balance is Rs. 12,900.15" is a top-up, and the only message that prints the
+    // savings balance.
+    if (/\badded\s+to\s+your\s+slice\b/.test(lowerMessage)) {
       return true;
     }
 
@@ -191,6 +207,11 @@ export class SliceParser extends BankParser {
     if (sliceBal) {
       return toPaise(gv(sliceBal, 1));
     }
+    // PennyTrace: "Your updated balance is Rs. 12,900.15".
+    const updated = find(/updated\s+balance\s+is\s+(?:Rs\.?|INR|₹)\s*([0-9,]+(?:\.\d{1,2})?)/i, message);
+    if (updated) {
+      return toPaise(gv(updated, 1));
+    }
     return super.extractBalance(message);
   }
 
@@ -236,6 +257,8 @@ export class SliceParser extends BankParser {
     if (lowerMessage.includes('received')) return TransactionType.INCOME;
     if (lowerMessage.includes('cashback')) return TransactionType.INCOME;
     if (lowerMessage.includes('refund')) return TransactionType.INCOME;
+    // PennyTrace: "is successfully added to your slice savings account" (a top-up).
+    if (/\badded\s+to\s+your\s+slice\b/.test(lowerMessage)) return TransactionType.INCOME;
 
     // Slice payments/debits.
     // After RBI's 2022 PPI guidelines, Slice pivoted from a credit-card

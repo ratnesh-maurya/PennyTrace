@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bob-pt-upi-debit-vp",
+    "address": "VD-BOBSMS",
+    "body": "Your VPA ratnesh2311 okhdfcbank linked to your a/c no. XXXXXX1234 is debited for Rs. 125.0 and credited to VPA billdesk.electricity icici UPI Ref no. 612300000002.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 12500,
+    "direction": "debit",
+    "accountLast4": "1234",
+    "counterparty": "billdesk.electricity"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: payee of a BoB 'Your VPA … linked to your a/c' debit",
+  "source": "pennytrace"
+}

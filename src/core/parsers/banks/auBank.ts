@@ -192,7 +192,16 @@ export class AuBankParser extends BaseIndianBankParser {
     }
 
     // Check for AU Bank specific transaction keywords
-    const auBankKeywords = ['credited inr', 'debited inr', 'withdrawn inr', 'dr inr', 'cr inr', 'bal inr', 'ref upi', 'spent'];
+    const auBankKeywords = [
+      'credited inr',
+      'debited inr',
+      'withdrawn inr',
+      'dr inr',
+      'cr inr',
+      'bal inr',
+      'ref upi',
+      'spent',
+    ];
 
     // If any AU Bank specific pattern is found, it's likely a transaction
     if (auBankKeywords.some(it => lowerMessage.includes(it))) {

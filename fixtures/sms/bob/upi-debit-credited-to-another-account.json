@@ -1,0 +1,18 @@
+{
+  "sms": {
+    "id": "bob-pt-upi-debit-cr",
+    "address": "VD-BOBSMS",
+    "body": "Your VPA ratnesh2311@okhdfcbank linked to your a/c no. XXXXXX1234 is debited for Rs. 2000.0 and credited to a/c no. XXXXXX7881 UPI Ref no. 612300000003.",
+    "date": 1768458600000
+  },
+  "expected": {
+    "kind": "transaction",
+    "amount": 200000,
+    "direction": "debit",
+    "accountLast4": "1234",
+    "counterparty": "A/c ••7881"
+  },
+  "expectedStatus": "parsed",
+  "note": "PennyTrace: payee of a BoB 'Your VPA … linked to your a/c' debit",
+  "source": "pennytrace"
+}

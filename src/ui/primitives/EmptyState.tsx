@@ -15,12 +15,7 @@ interface EmptyStateProps {
 export function EmptyState({ icon, message, framed = 'dashed', iconColor = 'accent' }: EmptyStateProps) {
   const { c } = useTheme();
   return (
-    <View
-      style={
-        framed === 'dashed'
-          ? [styles.dashed, { borderColor: c.line2 }]
-          : styles.plain
-      }>
+    <View style={framed === 'dashed' ? [styles.dashed, { borderColor: c.line2 }] : styles.plain}>
       <Icon name={icon} size={framed === 'dashed' ? 28 : 26} color={c[iconColor]} />
       <Text variant="label" weight={400} color="ink3" align="center">
         {message}

@@ -5,7 +5,7 @@
  * refund) and never go to review. For spend, fee and in:
  *   user override → user rules → (fee / salary / investment hints) →
  *   seed rules (input `seed` rules, then the built-in merchant list) →
- *   LLM-suggested rules → "looks like a person" → Other.
+ *   "looks like a person" → Other.
  * Confidence below REVIEW_THRESHOLD sets `needsReview`.
  */
 import { CATEGORY_BY_ID } from '../categories';
@@ -30,7 +30,6 @@ export const CONFIDENCE = {
   hint: 90,
   seed: 85,
   income: 80,
-  llmRule: 70,
   person: 60,
   other: 40,
 } as const;
@@ -45,13 +44,19 @@ const MOVEMENT_CATEGORY: Partial<Record<TxnKind, CategoryId>> = {
   liability: 'card_payment',
   cash: 'cash',
   refund: 'refund',
+  invest: 'investments',
 };
 
 export function isMovementKind(kind: TxnKind): boolean {
   return MOVEMENT_CATEGORY[kind] !== undefined;
 }
 
-const METHOD_LABEL = { ref: 'matched by reference', alias: 'matched to your account', amount_time: 'matched by amount and time', user: 'linked by you' } as const;
+const METHOD_LABEL = {
+  ref: 'matched by reference',
+  alias: 'matched to your account',
+  amount_time: 'matched by amount and time',
+  user: 'linked by you',
+} as const;
 
 function movementProvenance(d: Draft): string {
   switch (d.kind) {
@@ -63,18 +68,25 @@ function movementProvenance(d: Draft): string {
       return d.linkedTxnId ? 'Card bill payment · matched' : 'Card bill payment';
     case 'cash':
       return 'ATM withdrawal';
+    case 'invest':
+      return 'Investment · not counted as spending';
     case 'refund':
-      return d.reversal ? (d.linkedTxnId ? 'Reversal · linked to original' : 'Reversal') : d.linkedTxnId ? 'Refund · linked to original' : 'Refund';
+      return d.reversal
+        ? d.linkedTxnId
+          ? 'Reversal · linked to original'
+          : 'Reversal'
+        : d.linkedTxnId
+        ? 'Refund · linked to original'
+        : 'Refund';
     default:
       return '';
   }
 }
 
-/** Compiled rule list: user rules first, then seed rules from input, then LLM rules. */
+/** Compiled rule list: user rules first, then seed rules from input. */
 export interface RuleSet {
   user: CompiledRule[];
   seed: CompiledRule[];
-  llm: CompiledRule[];
 }
 
 interface CompiledRule {
@@ -102,7 +114,6 @@ export function compileRules(rules: readonly CategoryRule[]): RuleSet {
   return {
     user: valid.filter(r => r.source === 'user').map(compile),
     seed: valid.filter(r => r.source === 'seed').map(compile),
-    llm: valid.filter(r => r.source === 'llm').map(compile),
   };
 }
 
@@ -114,7 +125,8 @@ function firstMatch(list: CompiledRule[], d: Draft): CompiledRule | undefined {
   });
 }
 
-const BUSINESS_WORDS = /\b(pvt|private|ltd|limited|llp|store|stores|mart|shop|enterprises?|traders?|services|solutions|technologies|tech|india|retail|foods?|restaurant|hotel|hospital|pharma|medical|bank|payments?|merchant|online|digital|agency|centre|center|co|company|corp|inc|bazaar|express|motors|fuels?|station|cafe|clinic)\b/i;
+const BUSINESS_WORDS =
+  /\b(pvt|private|ltd|limited|llp|store|stores|mart|shop|enterprises?|traders?|services|solutions|technologies|tech|india|retail|foods?|restaurant|hotel|hospital|pharma|medical|bank|payments?|merchant|online|digital|agency|centre|center|co|company|corp|inc|bazaar|express|motors|fuels?|station|cafe|clinic)\b/i;
 
 /** P2P guess: a short alphabetic name, or a phone-number VPA. */
 export function looksLikePerson(counterparty: string | undefined, vpa: string | undefined): boolean {
@@ -129,7 +141,12 @@ export function looksLikePerson(counterparty: string | undefined, vpa: string | 
   return !!vpa && /^(\+?91)?[6-9]\d{9}@/.test(vpa);
 }
 
-export function categorize(d: Draft, rules: RuleSet, override: UserOverride | undefined): CategoryResult {
+export function categorize(
+  d: Draft,
+  rules: RuleSet,
+  override: UserOverride | undefined,
+  isFamily: (counterparty: string | undefined) => boolean = () => false,
+): CategoryResult {
   const kind = d.kind!;
   const reviewable = !isMovementKind(kind) && !isVoid(d);
   const result = (categoryId: CategoryId, confidence: number, ruleProvenance: string): CategoryResult => ({
@@ -150,7 +167,11 @@ export function categorize(d: Draft, rules: RuleSet, override: UserOverride | un
 
   const user = firstMatch(rules.user, d);
   if (user) {
-    return result(user.rule.categoryId, CONFIDENCE.userRule, `Your rule · ${user.rule.pattern} → ${categoryName(user.rule.categoryId)}`);
+    return result(
+      user.rule.categoryId,
+      CONFIDENCE.userRule,
+      `Your rule · ${user.rule.pattern} → ${categoryName(user.rule.categoryId)}`,
+    );
   }
   if (kind === 'fee') {
     return result('fees', CONFIDENCE.hint, 'Bank charge');
@@ -167,15 +188,22 @@ export function categorize(d: Draft, rules: RuleSet, override: UserOverride | un
 
   const seed = firstMatch(rules.seed, d);
   if (seed) {
-    return result(seed.rule.categoryId, CONFIDENCE.seed, `Merchant list · ${seed.rule.pattern} → ${categoryName(seed.rule.categoryId)}`);
+    return result(
+      seed.rule.categoryId,
+      CONFIDENCE.seed,
+      `Merchant list · ${seed.rule.pattern} → ${categoryName(seed.rule.categoryId)}`,
+    );
   }
   const builtin = matchSeed(d.counterparty) ?? matchSeed(vpaHandleWords(d.vpa));
   if (builtin) {
-    return result(builtin.rule.categoryId, CONFIDENCE.seed, `Merchant list · ${name} → ${categoryName(builtin.rule.categoryId)}`);
+    return result(
+      builtin.rule.categoryId,
+      CONFIDENCE.seed,
+      `Merchant list · ${name} → ${categoryName(builtin.rule.categoryId)}`,
+    );
   }
-  const llm = firstMatch(rules.llm, d);
-  if (llm) {
-    return result(llm.rule.categoryId, CONFIDENCE.llmRule, `On-device AI · ${llm.rule.pattern} → ${categoryName(llm.rule.categoryId)}`);
+  if (kind === 'spend' && isFamily(d.counterparty)) {
+    return result('family', CONFIDENCE.seed, `Same surname as you · ${name} → Sent home`);
   }
   if (looksLikePerson(d.counterparty, d.vpa)) {
     return result('people', CONFIDENCE.person, 'Guess · looks like a person');

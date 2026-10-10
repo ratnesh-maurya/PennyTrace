@@ -29,9 +29,25 @@ const arbSource = fc.record({
   status: fc.constantFrom<TxnStatus>('success', 'success', 'success', 'pending', 'failed', 'reversed'),
   minute: fc.integer({ min: 0, max: 4 * 24 * 60 }),
   ref: fc.option(fc.constantFrom('411100000001', '411100000002', '411100000003'), { nil: undefined }),
-  counterparty: fc.option(fc.constantFrom('SWIGGY', 'Ratnesh Maurya', 'RAHUL SHARMA', 'DMART AVENUE', 'ICICI CARD'), { nil: undefined }),
-  balance: fc.option(fc.integer({ min: 0, max: 2000 }).map(r => rs(r)), { nil: undefined }),
-  flavour: fc.constantFrom('plain', 'plain', 'plain', 'refund', 'reversal', 'atm', 'cardbill', 'self', 'balance', 'alt-template'),
+  counterparty: fc.option(fc.constantFrom('SWIGGY', 'Ratnesh Maurya', 'RAHUL SHARMA', 'DMART AVENUE', 'ICICI CARD'), {
+    nil: undefined,
+  }),
+  balance: fc.option(
+    fc.integer({ min: 0, max: 2000 }).map(r => rs(r)),
+    { nil: undefined },
+  ),
+  flavour: fc.constantFrom(
+    'plain',
+    'plain',
+    'plain',
+    'refund',
+    'reversal',
+    'atm',
+    'cardbill',
+    'self',
+    'balance',
+    'alt-template',
+  ),
 });
 
 type Gen = typeof arbSource extends fc.Arbitrary<infer T> ? T : never;
@@ -85,14 +101,21 @@ function toSource(g: Gen, i: number): SourceEvent {
 
 /** The same SMS seen again (rescan / second delivery): same fingerprint, new row id, later. */
 function redelivered(s: SourceEvent, k: number): SourceEvent {
-  return { ...s, id: `${s.id}:again${k}`, externalId: `${s.externalId}9${k}`, receivedAt: s.receivedAt + 60_000 * (k + 1) };
+  return {
+    ...s,
+    id: `${s.id}:again${k}`,
+    externalId: `${s.externalId}9${k}`,
+    receivedAt: s.receivedAt + 60_000 * (k + 1),
+  };
 }
 
 function build(sources: SourceEvent[], base: Partial<LedgerInput> = {}): Ledger {
   return buildLedger(
     input(sources, {
       accountEdits: [{ id: 'hdfc-1234', upiIds: ['ratnesh@okhdfcbank'] }],
-      rules: [{ id: 'u1', pattern: 'DMART', field: 'counterparty', categoryId: 'groceries', priority: 1, source: 'user' }],
+      rules: [
+        { id: 'u1', pattern: 'DMART', field: 'counterparty', categoryId: 'groceries', priority: 1, source: 'user' },
+      ],
       ...base,
     }),
   );
@@ -104,7 +127,12 @@ describe('ledger properties', () => {
   it('shuffled input → identical ledger', () => {
     fc.assert(
       fc.property(
-        arbScenario.chain(sources => fc.tuple(fc.constant(sources), fc.shuffledSubarray(sources, { minLength: sources.length, maxLength: sources.length }))),
+        arbScenario.chain(sources =>
+          fc.tuple(
+            fc.constant(sources),
+            fc.shuffledSubarray(sources, { minLength: sources.length, maxLength: sources.length }),
+          ),
+        ),
         ([sources, shuffled]) => {
           expect(build(shuffled)).toEqual(build(sources));
         },
@@ -119,7 +147,10 @@ describe('ledger properties', () => {
         arbScenario.chain(sources =>
           fc.subarray(sources).chain(sub => {
             const all = [...sources, ...sub.map((s, k) => redelivered(s, k))];
-            return fc.tuple(fc.constant(sources), fc.shuffledSubarray(all, { minLength: all.length, maxLength: all.length }));
+            return fc.tuple(
+              fc.constant(sources),
+              fc.shuffledSubarray(all, { minLength: all.length, maxLength: all.length }),
+            );
           }),
         ),
         ([sources, all]) => {
@@ -165,28 +196,68 @@ describe('ledger properties', () => {
   it('realistic mixed month: shuffle + rescan give the same ledger', () => {
     const pool = [
       hdfc('2026-10-05 08:00', { kind: 'balance', parserId: 'hdfc-balance', amount: 0, balance: rs(52000) }),
-      hdfc('2026-10-05 13:02', { amount: rs(349), counterparty: 'SWIGGY', refs: { upi: '527700000001' }, balance: rs(51651) }),
-      src(GPAY, '2026-10-05 13:02', { bank: 'axis', parserId: 'gpay-upi-debit', amount: rs(349), counterparty: 'Swiggy', refs: { upi: '527700000001' } }),
+      hdfc('2026-10-05 13:02', {
+        amount: rs(349),
+        counterparty: 'SWIGGY',
+        refs: { upi: '527700000001' },
+        balance: rs(51651),
+      }),
+      src(GPAY, '2026-10-05 13:02', {
+        bank: 'axis',
+        parserId: 'gpay-upi-debit',
+        amount: rs(349),
+        counterparty: 'Swiggy',
+        refs: { upi: '527700000001' },
+      }),
       hdfc('2026-10-05 19:40', { amount: rs(420), counterparty: 'UBER', refs: { upi: '527700000002' } }),
-      hdfc('2026-10-06 09:30', { parserId: 'hdfc-imps-debit', amount: rs(5000), refs: { utr: '627900000001' }, hints: { counterAccountLast4: '8821' } }),
-      sbi('2026-10-06 14:30', { direction: 'credit', amount: rs(5000), refs: { utr: '627900000001' }, balance: rs(25000) }),
+      hdfc('2026-10-06 09:30', {
+        parserId: 'hdfc-imps-debit',
+        amount: rs(5000),
+        refs: { utr: '627900000001' },
+        hints: { counterAccountLast4: '8821' },
+      }),
+      sbi('2026-10-06 14:30', {
+        direction: 'credit',
+        amount: rs(5000),
+        refs: { utr: '627900000001' },
+        balance: rs(25000),
+      }),
       hdfc('2026-10-06 18:02', { parserId: 'hdfc-pos', amount: rs(500), counterparty: 'DMART AVENUE' }),
       hdfc('2026-10-06 18:05', { parserId: 'hdfc-pos', amount: rs(500), counterparty: 'DMART AVENUE' }),
       icici('2026-10-07 21:00', { amount: rs(2400), counterparty: 'BOOKMYSHOW', availableLimit: rs(97600) }),
       hdfc('2026-10-08 09:00', { amount: rs(15000), hints: { isCardBillPayment: true }, counterparty: 'CRED' }),
       icici('2026-10-08 12:00', { direction: 'credit', parserId: 'icici-card-payment', amount: rs(15000) }),
       hdfc('2026-10-08 19:00', { amount: rs(2000), hints: { isAtmWithdrawal: true } }),
-      hdfc('2026-10-09 10:00', { direction: 'credit', amount: rs(349), counterparty: 'SWIGGY', hints: { isRefund: true } }),
-      sbi('2026-10-09 11:00', { amount: rs(1840), counterparty: 'BESCOM', status: 'failed', parserId: 'sbi-upi-failed' }),
-      sbi('2026-10-09 11:05', { amount: rs(1840), counterparty: 'BESCOM', refs: { upi: '527700000009' }, balance: rs(23160) }),
+      hdfc('2026-10-09 10:00', {
+        direction: 'credit',
+        amount: rs(349),
+        counterparty: 'SWIGGY',
+        hints: { isRefund: true },
+      }),
+      sbi('2026-10-09 11:00', {
+        amount: rs(1840),
+        counterparty: 'BESCOM',
+        status: 'failed',
+        parserId: 'sbi-upi-failed',
+      }),
+      sbi('2026-10-09 11:05', {
+        amount: rs(1840),
+        counterparty: 'BESCOM',
+        refs: { upi: '527700000009' },
+        balance: rs(23160),
+      }),
     ];
     const overrides = [{ stableKey: 'hdfc-1234|ref:527700000002', categoryId: 'travel' }];
     const reference = build(pool, { overrides });
     fc.assert(
-      fc.property(fc.shuffledSubarray(pool, { minLength: pool.length, maxLength: pool.length }), fc.subarray(pool), (shuffled, again) => {
-        const withRescan = [...shuffled, ...again.map((s, k) => redelivered(s, k))];
-        expect(build(withRescan, { overrides })).toEqual(reference);
-      }),
+      fc.property(
+        fc.shuffledSubarray(pool, { minLength: pool.length, maxLength: pool.length }),
+        fc.subarray(pool),
+        (shuffled, again) => {
+          const withRescan = [...shuffled, ...again.map((s, k) => redelivered(s, k))];
+          expect(build(withRescan, { overrides })).toEqual(reference);
+        },
+      ),
       { numRuns: 100 },
     );
     expect(reference.transactions).toHaveLength(13);

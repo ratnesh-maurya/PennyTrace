@@ -521,7 +521,9 @@ export class FederalBankParser extends BaseIndianBankParser {
   isDeclinedMandatePayment(message: string): boolean {
     const lowerMessage = message.toLowerCase();
 
-    return (lowerMessage.includes('e-mandate') || lowerMessage.includes('payment of')) && lowerMessage.includes('declined');
+    return (
+      (lowerMessage.includes('e-mandate') || lowerMessage.includes('payment of')) && lowerMessage.includes('declined')
+    );
   }
 
   parseEMandateSubscription(message: string): FederalEMandateInfo | null {

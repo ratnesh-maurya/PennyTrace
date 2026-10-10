@@ -8,6 +8,8 @@ export interface CategoryDef {
   color: string;
   /** Counts as spending when used on a `spend` transaction. */
   group: 'expense' | 'income' | 'movement';
+  /** Created by the user in the app. */
+  custom?: boolean;
 }
 
 /** Seed categories. Colors for the first seven come from the Ledger design palette. */
@@ -27,6 +29,7 @@ export const CATEGORIES: readonly CategoryDef[] = [
   { id: 'investments', name: 'Investments', icon: 'trending_up', color: '#2B8A3E', group: 'movement' },
   { id: 'gift', name: 'Gift', icon: 'redeem', color: '#D6336C', group: 'expense' },
   { id: 'people', name: 'Sent to people', icon: 'person', color: '#6A4FA3', group: 'expense' },
+  { id: 'family', name: 'Sent home', icon: 'family_home', color: '#F08C00', group: 'expense' },
   { id: 'fees', name: 'Fees & charges', icon: 'receipt', color: '#868E96', group: 'expense' },
   { id: 'salary', name: 'Salary', icon: 'payments', color: '#0EA371', group: 'income' },
   { id: 'income', name: 'Money received', icon: 'south_west', color: '#0EA371', group: 'income' },
@@ -37,8 +40,44 @@ export const CATEGORIES: readonly CategoryDef[] = [
   { id: 'other', name: 'Other', icon: 'more_horiz', color: '#8790A5', group: 'expense' },
 ] as const;
 
-export const CATEGORY_BY_ID: Readonly<Record<CategoryId, CategoryDef>> = Object.fromEntries(
-  CATEGORIES.map(c => [c.id, c]),
-);
+const registry: Record<CategoryId, CategoryDef> = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
+let custom: CategoryDef[] = [];
+
+/** Built-in categories plus the user's own (see `setCustomCategories`). */
+export const CATEGORY_BY_ID: Readonly<Record<CategoryId, CategoryDef>> = registry;
+
+/**
+ * Registers the user's own categories (replacing the previous set). Called by `buildLedger` with
+ * its input and by the app after loading, so rules, corrections and screens all know them.
+ * Ids that clash with a built-in category are ignored.
+ */
+export function setCustomCategories(defs: readonly CategoryDef[]): void {
+  for (const c of custom) {
+    delete registry[c.id];
+  }
+  custom = defs.filter(d => !CATEGORIES.some(b => b.id === d.id)).map(d => ({ ...d, custom: true }));
+  for (const c of custom) {
+    registry[c.id] = c;
+  }
+}
+
+/** Built-in categories, then the user's own. */
+export function allCategories(): readonly CategoryDef[] {
+  return [...CATEGORIES, ...custom];
+}
+
+/** Id for a new category named by the user: `custom-<slug>` (a counter keeps it unique). */
+export function customCategoryId(name: string, taken: readonly CategoryId[]): CategoryId {
+  const slug =
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '') || 'category';
+  let id = `custom-${slug}`;
+  for (let n = 2; taken.includes(id); n++) {
+    id = `custom-${slug}-${n}`;
+  }
+  return id;
+}
 
 export const UNCATEGORIZED: CategoryId = 'other';

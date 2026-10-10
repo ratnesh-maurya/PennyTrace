@@ -75,20 +75,6 @@ export interface SourcesStatus {
   discardRaw: boolean;
 }
 
-export type ModelState = 'absent' | 'downloading' | 'verifying' | 'ready' | 'error';
-
-export interface ModelStatus {
-  state: ModelState;
-  name: string;
-  /** Download size in bytes. */
-  sizeBytes: number;
-  license: string;
-  /** 0–1 while downloading / verifying. */
-  progress: number;
-  wifiOnly: boolean;
-  error?: string;
-}
-
 export type ScanState = 'idle' | 'scanning' | 'done';
 
 export interface ScanStatus {
@@ -97,11 +83,4 @@ export interface ScanStatus {
   depthMonths: number;
   scanned: number;
   total: number;
-}
-
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'assistant';
-  text: string;
-  at: EpochMs;
 }
